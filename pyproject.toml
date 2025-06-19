@@ -1,0 +1,36 @@
+[project]
+name = "email-creator"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Krisztian Nagy", email = "kris.nagy98@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "django (>=5.2.3,<6.0.0)",
+    "djangorestframework (>=3.16.0,<4.0.0)",
+    "gunicorn (>=23.0.0,<24.0.0)",
+    "pytz (>=2025.2,<2026.0)",
+    "python-json-logger (>=3.3.0,<4.0.0)",
+    "psycopg2-binary (>=2.9.10,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+python-dotenv = "^1.1.0"
+pytest-django = "^4.11.1"
+pytest-watch = "^4.2.0"
+pytest-sugar = "^1.0.0"
+pytest-dotenv = "^0.5.2"
+black = "^25.1.0"
+pyright = "^1.1.402"
+pylint = "^3.3.7"
+
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "backend.settings"
