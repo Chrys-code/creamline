@@ -1,0 +1,94 @@
+@import url("./fonts.scss");
+@import url("./animation.scss");
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	font-family: "Open Sans", sans-serif;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+button {
+	padding: 0;
+	border: none;
+	border-radius: 0;
+	background-color: transparent;
+}
+
+.small-text {
+	font-size: var(--fs-small-text);
+}
+
+span {
+	font-size: inherit;
+}
+
+.fs-i {
+	font-style: italic;
+}
+
+.fw-b {
+	font-weight: bold;
+}
+
+.fs-s {
+	font-size: var(--fs-body-s);
+}
+
+.fs-r {
+	font-size: var(--fs-body-r);
+}
+
+.fs-l {
+	font-size: var(--fs-body-l);
+}
+
+input,
+textarea,
+select {
+	font-size: var(--fs-body-r);
+}
+
+hr,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+	color: var(--color-font-dark);
+}
+
+p {
+	font-size: var(--fs-body-r);
+}
+
+h5 {
+	font-size: var(--fs-h5);
+}
+
+h4 {
+	font-size: var(--fs-h4);
+}
+
+h3 {
+	font-size: var(--fs-h3);
+}
+
+h2 {
+	font-size: var(--fs-h2);
+}
+
+h1 {
+	font-size: var(--fs-h1);
+}

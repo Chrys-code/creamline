@@ -1,0 +1,29 @@
+/* For browsers that support clamp  */
+@supports (font-size: clamp(1rem, 1vi, 1rem)) {
+	:root {
+		--fs-small-text: clamp(0.75rem, 0.02vi + 0.75rem, 0.75rem);
+		--fs-body-s: clamp(0.9375rem, 0.08vi + 0.91rem, 0.9375rem);
+		--fs-body-r: clamp(1rem, 0.18vi + 0.96rem, 1.13rem);
+		--fs-body-l: clamp(1.07rem, 0.28vi + 1.01rem, 1.27rem);
+		--fs-h5: clamp(1.14rem, 0.41vi + 1.06rem, 1.42rem);
+		--fs-h4: clamp(1.21rem, 0.55vi + 1.1rem, 1.6rem);
+		--fs-h3: clamp(1.3rem, 0.72vi + 1.15rem, 1.8rem);
+		--fs-h2: clamp(1.38rem, 0.92vi + 1.2rem, 2.03rem);
+		--fs-h1: clamp(1.48rem, 1.15vi + 1.25rem, 2.28rem);
+	}
+}
+
+/* For browsers that don't support clamp */
+@supports not (font-size: clamp(1rem, 1vi, 1rem)) {
+	:root {
+		--fs-small-text: 0.75rem;
+		--fs-body-s: 0.9375rem;
+		--fs-body-r: 1.13rem;
+		--fs-body-l: 1.27rem;
+		--fs-h5: 1.42rem;
+		--fs-h4: 1.6rem;
+		--fs-h3: 1.8rem;
+		--fs-h2: 2.03rem;
+		--fs-h1: 2.28rem;
+	}
+}

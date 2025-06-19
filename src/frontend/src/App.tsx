@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
+import { DiMaterializecss } from "react-icons/di";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,8 +22,9 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+        <DiMaterializecss size={"2rem"} />
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          Edit <code>src/App.tsx</code> and save to test HMfhdghR
         </p>
       </div>
       <p className="read-the-docs">
