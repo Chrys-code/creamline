@@ -1,24 +1,26 @@
-**/.dockerignore
-**/docker-compose*
-**/Dockerfile*
-**/.env
-**/.git
-**/.gitignore
-**/.vs
-**/.vscode
-**/node_modules
 LICENSE
-README.md
-src/frontend/node_modules/**
-!src/frontend/dist/
-!src/frontend/dist/**
-!**/.gitignore
-!.git/HEAD
-!.git/config
-!.git/packed-refs
-!.git/refs/heads/**
+
+# Ignore all node_modules and Python cache
+**/node_modules/
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+# Ignore local env
 .venv/
+**/.env
+
+# Ignore VCS and IDE files
+.git/
+.gitignore
+.vscode/
+.vs/
+
+# Ignore docker and compose config
+.dockerignore
+docker-compose*
+Dockerfile*
+
+# Allow dist folder for frontend
+!src/frontend/dist/

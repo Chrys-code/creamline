@@ -49,7 +49,7 @@ COPY --from=builder /src/dist /app/src/frontend/dist
 EXPOSE 8080
 
 # Collect static files (WhiteNoise or nginx)
-# RUN poetry run python3 src/manage.py collectstatic --noinput
+# python3 src/manage.py collectstatic --noinput
 
 # Run Django app
 CMD ["python3", "src/manage.py", "runserver", "0.0.0.0:8080"]

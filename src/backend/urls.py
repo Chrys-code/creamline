@@ -19,7 +19,8 @@ from django.contrib import admin
 from django.urls import path, re_path
 from serve_frontend.views import frontend_index
 
+
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    re_path(r"^.*$", frontend_index, name="frontend"),
+    path("api/admin/", admin.site.urls),
+    re_path(r"^(?!admin/|api/).*", frontend_index, name="frontend"),
 ]

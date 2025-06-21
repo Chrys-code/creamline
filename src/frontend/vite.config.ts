@@ -8,10 +8,24 @@ export default defineConfig(() => {
     build: {
       outDir: 'dist'
     },
+    server: {
+      proxy: {
+        "/api": {
+          target: "http://localhost:8080", // Local only
+          secure: false,
+          changeOrigin: true
+        },
+        "/auth": {
+          target: "http://localhost:8080", // Local only
+          secure: false,
+          changeOrigin: true
+        },
+      },
+    },
     test: {
-			globals: true,
-			environment: "jsdom",
-			setupFiles: "./setupTests.ts",
-		}
+      globals: true,
+      environment: "jsdom",
+      setupFiles: "./setupTests.ts",
+    },
   })
 })
