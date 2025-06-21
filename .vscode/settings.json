@@ -1,0 +1,21 @@
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.insertSpaces": false,
+	"prettier.useTabs": true,
+	"editor.tabSize": 4,
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true,
+	"eslint.format.enable": true,
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[scss]": {
+		"editor.defaultFormatter": "vscode.css-language-features"
+	}
+}
