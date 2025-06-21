@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG_MODE")
 
 ALLOWED_HOSTS = [os.getenv("ALLOWED_HOST", "localhost")]
 
@@ -33,6 +33,17 @@ CSRF_TRUSTED_ORIGINS = [
     f"https://{os.getenv("ALLOWED_HOST")}",
     f"https://www.{os.getenv("ALLOWED_HOST")}",
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+SESSION_COOKIE_SAMESITE = "Lax"  # or "None" if using HTTPS + cross-domain
+SESSION_COOKIE_SECURE = False if os.getenv("ENV") == "development" else True
 
 # Application definition
 
@@ -45,7 +56,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "users",
-    "serve_frontend"
+    "serve_frontend",
+	"authentication"
 ]
 
 MIDDLEWARE = [
@@ -64,7 +76,8 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            BASE_DIR / "frontend" / "dist"
+			BASE_DIR / "templates",
+            BASE_DIR / "frontend" / "dist",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -85,17 +98,17 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-        # "ENGINE": "django.db.backends.postgresql",
-        # "NAME": os.getenv("POSTGRES_DB"),
-        # "USER": os.getenv("POSTGRES_USER"),
-        # "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
-        # "HOST": os.getenv("POSTGRES_HOST"),
-        # "POST": os.getenv("POSTGRES_PORT"),
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": os.getenv("POSTGRES_HOST"),
+        "POST": os.getenv("POSTGRES_PORT"),
     }
 }
 
+
+LOGIN_REDIRECT_URL = "http://localhost:3000" if os.getenv("ENV") == "development" else "/"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -115,6 +128,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
 AUTH_USER_MODEL = "users.CustomUser"
 

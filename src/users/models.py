@@ -30,9 +30,14 @@ class UserManager(BaseUserManager):
         user.is_superuser = True
         user.save(using=self._db)
         return user
+    
+    def get_by_natural_key(self, email):
+        return self.get(email=email)
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    objects = UserManager()
+    
     email = models.EmailField(
         verbose_name="email address",
         max_length=255,

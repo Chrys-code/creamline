@@ -17,10 +17,15 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, re_path
+from django.contrib.auth.views import LoginView
+from authentication.views import SignUpView
+
 from serve_frontend.views import frontend_index
 
 
 urlpatterns = [
+    path("auth/login/", LoginView.as_view(), name="login"),
+	path('auth/signup/', SignUpView.as_view(), name='signup'),
     path("api/admin/", admin.site.urls),
-    re_path(r"^(?!admin/|api/).*", frontend_index, name="frontend"),
+    re_path(r"^(?!admin/|api/|auth/).*", frontend_index, name="frontend"),
 ]
