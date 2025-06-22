@@ -11,14 +11,14 @@ export default defineConfig(() => {
     server: {
       proxy: {
         "/api": {
-          target: "http://localhost:8080", // Local only
+          target: "http://email-creator-app-1:8080", // Local only
           secure: false,
-          changeOrigin: true
+          changeOrigin: true,
         },
         "/auth": {
-          target: "http://localhost:8080", // Local only
+          target: "http://email-creator-app-1:8080", // Local only
           secure: false,
-          changeOrigin: true
+          changeOrigin: true,
         },
       },
     },

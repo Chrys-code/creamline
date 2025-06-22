@@ -1,11 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
 import { DiMaterializecss } from "react-icons/di";
+import { logout } from './api/auth/logout';
+import { user } from './api/auth/user';
 
 function App() {
   const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    user()
+  }, [])
 
   return (
     <>
@@ -17,11 +23,16 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Vite + REACT</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+
+        <button onClick={() => logout()}>
+          log out 2x
+        </button>
+
         <DiMaterializecss size={"2rem"} />
         <p>
           Edit <code>src/App.tsx</code> and save to test HMfhdghR

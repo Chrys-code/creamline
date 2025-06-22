@@ -1,15 +1,15 @@
 import { getCookie } from "../helpers/cookie";
 
-export const api_client = ({
+export const api_client = async ({
 	endpoint,
 	method,
 	payload
 }: {
 	endpoint: string,
 	method: "GET" | "POST" | "PATCH" | "DELETE",
-	payload: any
-}) => {
-	fetch(`/api/v1/${endpoint}/`, {
+	payload: BodyInit | null | undefined
+}): Promise<any> => {
+	const response = await fetch(`/${endpoint}`, {
 		method,
 		headers: {
 			'Content-Type': 'application/json',
@@ -18,4 +18,6 @@ export const api_client = ({
 		credentials: 'include',
 		body: JSON.stringify(payload),
 	});
+
+	return response
 }

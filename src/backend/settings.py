@@ -29,18 +29,19 @@ DEBUG = os.getenv("DEBUG_MODE")
 
 ALLOWED_HOSTS = [os.getenv("ALLOWED_HOST", "localhost")]
 
+CORS_ALLOWED_ORIGINS = []
+
 CSRF_TRUSTED_ORIGINS = [
     f"https://{os.getenv("ALLOWED_HOST")}",
     f"https://www.{os.getenv("ALLOWED_HOST")}",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+# Development env settings
+if os.getenv("ENV") == "development":
+    ALLOWED_HOSTS.append("email-creator-app-1")
+    CSRF_TRUSTED_ORIGINS.append("http://localhost:3000")
+    CORS_ALLOWED_ORIGINS.append("http://localhost:3000")
 
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
-]
 
 SESSION_COOKIE_SAMESITE = "Lax"  # or "None" if using HTTPS + cross-domain
 SESSION_COOKIE_SECURE = False if os.getenv("ENV") == "development" else True
@@ -109,6 +110,7 @@ DATABASES = {
 
 
 LOGIN_REDIRECT_URL = "http://localhost:3000" if os.getenv("ENV") == "development" else "/"
+LOGOUT_REDIRECT_URL = "/auth/login/"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

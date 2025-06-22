@@ -29,3 +29,10 @@ build-fe:
 
 start-fe:
 	docker-compose -f docker-compose.frontend.yml -p email-creator-fe up -d
+
+#  Connect docker container networks to proxy requests from frontend to backend
+setup-dev-network:
+	-docker network create email-creator-network 2>/dev/null || true && \ 
+	docker network connect email-creator-network email-creator-app-1 && \
+	docker network connect email-creator-network email-creator-fe-frontend-1
+
