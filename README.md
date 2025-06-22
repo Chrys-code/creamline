@@ -32,8 +32,6 @@ Ideally you can just use localhost:3000.
 Shared container network & Vite frontend setup should take care of the routes and proxying requests.
 Development container stack also provides hot reload and better error feedback.
 
----
-
 
 #### Start development container stack
 ```bash
@@ -52,15 +50,13 @@ make start
 Ideally you can just use localhost. No ports. 
 Nginx should take care of the routes and proxying requests.
 
----
-
 #### Start production container stack:
 ```bash
 # Start Docker Desktop
 make setup
 
 # Build frontend
-cd src/frontend && npm ci --silent && npm run dev
+cd src/frontend && npm ci --silent && npm run build
 
 # Build container stack
 make build-prod
