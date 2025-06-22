@@ -29,6 +29,8 @@ function App() {
           count is {count}
         </button>
 
+        <h1>{process.env.RANDOM}</h1>
+
         <button onClick={() => logout()}>
           log out 2x
         </button>
