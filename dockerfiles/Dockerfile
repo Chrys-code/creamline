@@ -21,8 +21,6 @@ RUN apk add --no-cache \
     curl \
     git
 
-USER app
-
 # Install pip deps
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
@@ -38,18 +36,22 @@ RUN npm ci --silent
 RUN npm run build
 
 # ------------------------
-# Final Django runtime stage
+# Nginx stage
+# ------------------------
+FROM nginx:alpine
+COPY --from=builder /src/dist /usr/share/nginx/html    
+
+# ------------------------
+# Django stage
 # ------------------------
 FROM base AS final
 
-COPY --chown=app:app src/backend /app/src/backend
-COPY --from=builder /src/dist /app/src/frontend/dist
+WORKDIR /app
 
-# Expose ports
-EXPOSE 8080
+RUN apk add --no-cache nginx
 
-# Collect static files (WhiteNoise or nginx)
-# python3 src/manage.py collectstatic --noinput
+COPY src /app/src
 
-# Run Django app
-CMD ["python3", "src/manage.py", "runserver", "0.0.0.0:8080"]
+RUN python3 /app/src/manage.py collectstatic --noinput
+
+CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8080"]

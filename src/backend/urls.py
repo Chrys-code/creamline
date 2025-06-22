@@ -12,5 +12,5 @@ urlpatterns = [
 	path("auth/user/", current_user, name="current_user"),
 	path("auth/logout/", LogoutView.as_view(), name="logout"),
     path("api/admin/", admin.site.urls),
-    re_path(r"^(?!admin/|api/|auth/).*", frontend_index, name="frontend"),
+    re_path(r"^(?!admin/|api/|auth/|assets/).*", frontend_index, name="frontend"),
 ]

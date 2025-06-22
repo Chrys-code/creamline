@@ -1,14 +1,14 @@
 services:
   app:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ../.
+      dockerfile: dockerfiles/Dockerfile.dev
     ports:
       - "8080:8080"
     volumes:
-      - .:/app
+      - ../.:/app
     env_file:
-      - .env
+      - ../.env
     depends_on:
       - db
     

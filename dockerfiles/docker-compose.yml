@@ -1,0 +1,35 @@
+services:
+  app:
+    build:
+      context: ../.
+      dockerfile: dockerfiles/Dockerfile
+    expose:
+     - "8080"
+    env_file:
+      - ../.env
+    command: gunicorn src.backend.wsgi:application --bind 0.0.0.0:8080
+    depends_on:
+      - db
+    
+  nginx:
+    build:
+      context: ../.
+      dockerfile: dockerfiles/Dockerfile.nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+  static_volume:
+  media_volume:

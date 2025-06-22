@@ -4,19 +4,19 @@ setup:
 	fi
 	echo "Make sure you have the correct values in the .env file!"
 
-# App commands
+# DEV App commands
 
 build:
-	docker-compose build --no-cache 
+	docker-compose -f dockerfiles/docker-compose.dev.yml  build --no-cache 
 
 start:
-	docker-compose up -d
+	docker-compose -f dockerfiles/docker-compose.dev.yml -p email-creator-be up -d
 
 make-migrations:
-	docker-compose exec app src/manage.py makemigrations
+	docker-compose -f dockerfiles/docker-compose.dev.yml -p email-creator-be  exec app src/manage.py makemigrations
 
 migrate:
-	docker-compose exec app src/manage.py migrate
+	docker-compose -f dockerfiles/docker-compose.dev.yml -p email-creator-be  exec app src/manage.py migrate
 
 deps-export:
 	poetry export --with dev --without-hashes -f requirements.txt -o requirements.txt
@@ -25,14 +25,27 @@ deps-export:
 # Front end commands
 
 build-fe:
-	docker-compose -f docker-compose.frontend.yml build --no-cache 
+	docker-compose -f dockerfiles/docker-compose.dev.frontend.yml build --no-cache 
 
 start-fe:
-	docker-compose -f docker-compose.frontend.yml -p email-creator-fe up -d
+	docker-compose -f dockerfiles/docker-compose.dev.frontend.yml -p email-creator-fe up -d
+
 
 #  Connect docker container networks to proxy requests from frontend to backend
+
 setup-dev-network:
 	-docker network create email-creator-network 2>/dev/null || true && \ 
-	docker network connect email-creator-network email-creator-app-1 && \
+	docker network connect email-creator-network email-creator-be-app-1 && \
 	docker network connect email-creator-network email-creator-fe-frontend-1
 
+
+# PROD App commands
+
+build-prod:
+	docker-compose -f dockerfiles/docker-compose.yml -p email-creator-prod build --no-cache 
+
+start-prod:
+	docker-compose -f dockerfiles/docker-compose.yml -p email-creator-prod up -d
+
+migrate-prod:
+	docker-compose -f dockerfiles/docker-compose.yml -p email-creator-prod exec app src/manage.py migrate

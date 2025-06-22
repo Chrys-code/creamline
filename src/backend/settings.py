@@ -38,7 +38,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 # Development env settings
 if os.getenv("ENV") == "development":
-    ALLOWED_HOSTS.append("email-creator-app-1")
+    ALLOWED_HOSTS.append("email-creator-be-app-1")
     CSRF_TRUSTED_ORIGINS.append("http://localhost:3000")
     CORS_ALLOWED_ORIGINS.append("http://localhost:3000")
 
@@ -170,8 +170,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = "/assets/"
-# STATIC_ROOT = os.path.join(BASE_DIR, "frontend", "dist", "assets")
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [
     BASE_DIR / "frontend" / "dist" / "assets",
 ]

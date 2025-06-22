@@ -32,7 +32,7 @@ function App() {
         <h1>{process.env.RANDOM}</h1>
 
         <button onClick={() => logout()}>
-          log out 2x
+          lTHIS IS A NEW BUILD LOGOUT !
         </button>
 
         <DiMaterializecss size={"2rem"} />
