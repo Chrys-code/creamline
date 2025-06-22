@@ -2,14 +2,12 @@
 
 A block-based email template editor. Email templates are built on a block-by-block basis, supporting various block types such as rich text, images, and complex layouts. Features include ordering, image sizing, color selection, and more.
 
----
 
 ## Requirements
 
 - Docker desktop
 - Poetry
 
----
 
 ## Overview
 
@@ -18,7 +16,6 @@ There are two main build:
 - **Production Backend app**: Django backend & Nginx that serves the frontend and assets.
 - **Development Backend app & Frontend app**: Django backend & React frontend app with hot-reload support for development.
 
----
 
 ## Installation & Setup
 
@@ -67,7 +64,6 @@ make migrate-prod
 This setup does not provide hot reload.
 Frontend production build is required before build.
 
----
 
 ## Migration:
 
@@ -77,7 +73,6 @@ Follow the commands in terminal:
 - make make-migrations
 - make migrate
 
----
 
 ## Commands Reference
 
