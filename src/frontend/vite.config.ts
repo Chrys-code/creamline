@@ -22,12 +22,12 @@ export default defineConfig(({ mode }) => {
     baseConfig["server"] = {
       proxy: {
         "/api": {
-          target: "http://email-creator-be-app-1:8080", // Local only
+          target: "http://email-creator-dev-app-1:8000", // Local only
           secure: false,
           changeOrigin: true,
         },
         "/auth": {
-          target: "http://email-creator-be-app-1:8080", // Local only
+          target: "http://email-creator-dev-app-1:8000", // Local only
           secure: false,
           changeOrigin: true,
         },

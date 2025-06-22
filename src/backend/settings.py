@@ -38,7 +38,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 # Development env settings
 if os.getenv("ENV") == "development":
-    ALLOWED_HOSTS.append("email-creator-be-app-1")
+    ALLOWED_HOSTS.append("email-creator-dev-app-1")
     CSRF_TRUSTED_ORIGINS.append("http://localhost:3000")
     CORS_ALLOWED_ORIGINS.append("http://localhost:3000")
 

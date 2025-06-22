@@ -13,56 +13,63 @@ A block-based email template editor. Email templates are built on a block-by-blo
 
 ## Overview
 
-There are two main apps:
+There are two main build:
 
-- **Backend ("app")**: Django backend that serves the frontend build from `./src/frontend/dist`.
-- **Frontend ("frontend")**: React frontend app with hot-reload support for development.
-
-In development, the backend serves the built frontend (`dist`), but to use hot reload, the frontend runs separately in its own container.
+- **Production Backend app**: Django backend & Nginx that serves the frontend and assets.
+- **Development Backend app & Frontend app**: Django backend & React frontend app with hot-reload support for development.
 
 ---
 
 ## Installation & Setup
 
-### Notes
 
-- In development, backend and frontend run in separate Docker containers with hot reload enabled.
-- Both containers **must be on the same Docker network** to allow API proxying from frontend to backend.
-- Backend serves frontend directly in production.
+### Development environment
+- Development build is exposed at:
+	- Backend: 8000
+	- Frontend: 3000	
+
+Ideally you can just use localhost:3000. 
+Shared container network & Vite frontend setup should take care of the routes and proxying requests.
+Development container stack also provides hot reload and better error feedback.
 
 ---
 
-### Steps
 
-#### 1. Start Backend
+#### Start development container stack
 ```bash
 # Start Docker Desktop
+make setup
 
-make build
 make start
-make migrate
 ```
 
-- This builds and starts the backend container
-- Runs database migrations
+### Production environment
+- Development build is exposed at:
+	- Backend: 8080 (internally)
+	- Frontend: 3000 (internally)
+	- Nginx: 80
 
-#### Starting frontend separately:
+Ideally you can just use localhost. No ports. 
+Nginx should take care of the routes and proxying requests.
+
+---
+
+#### Start production container stack:
 ```bash
-# Depends on "Starting the app"
+# Start Docker Desktop
+make setup
 
-make build-fe
-make start-fe
-make setup-dev-network
+# Build frontend
+cd src/frontend && npm ci --silent && npm run dev
+
+# Build container stack
+make build-prod
+make start-prod
+make migrate-prod
 ```
 
-- Builds and starts the frontend container separately.
-- Connects frontend and backend containers to the same Docker network for API proxying.
-
-#### Notes on development
-- To see frontend changes in the app (not the separate frontend), you must build the frontend (`cd src/frontend && npm run build`) and refresh the page
-- Backend listens on port 8080
-- Frontend listens on port 3000
-- Network setup allows frontend at localhost:3000 to proxy API requests to backend at localhost:8080
+This setup does not provide hot reload.
+Frontend production build is required before build.
 
 ---
 
@@ -81,11 +88,9 @@ Follow the commands in terminal:
 | Command               | Description                                          |
 |-----------------------|------------------------------------------------------|
 | `make setup`          | Create `.env` file from example if not present       |
-| `make build`          | Build backend Docker container with no cache         |
-| `make start`          | Start backend container                               |
-| `make make-migrations`| Generate Django migrations                            |
-| `make migrate`        | Apply Django migrations                               |
+| `make start`          | Start & build backend & front end Docker container with hot reload        |
+| `make make-migrations`| Generate Django migrations                           |
+| `make migrate`        | Apply Django migrations                              |
 | `make deps-export`    | Export Poetry dependencies to `requirements.txt`     |
-| `make build-fe`       | Build frontend Docker container with no cache        |
-| `make start-fe`       | Start frontend container                              |
-| `make setup-dev-network` | Connect backend and frontend containers to same Docker network |
+| `make build-prod`     | Build backend Docker container with Nginx            |
+| `make start-prod`     | Start backend container with Nginx                   |

@@ -1,16 +1,41 @@
 services:
   app:
-    build:
-      context: ../.
-      dockerfile: dockerfiles/Dockerfile.dev
+    image: python:3.13-alpine
+    working_dir: /app
+    command: |
+      sh -c "
+      pip install --root-user-action=ignore -r requirements.txt &&
+      python src/manage.py migrate &&
+      python src/manage.py runserver 0.0.0.0:8000
+      "    
     ports:
-      - "8080:8080"
+      - "8000:8000"
     volumes:
       - ../.:/app
     env_file:
       - ../.env
+    environment:
+      - DEBUG=True
+      - ENV=development
     depends_on:
       - db
+
+  frontend:
+    image: node:24.2-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
+    volumes:
+      - ../src/frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    env_file:
+      - ../src/frontend/.env
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - ENV=development
+    depends_on:
+      - app
     
   db:
     image: postgres:17
