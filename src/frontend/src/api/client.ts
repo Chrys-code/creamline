@@ -1,4 +1,4 @@
-import { getCookie } from "../helpers/cookie";
+import { getCookie } from "../lib/helpers/cookie";
 
 export const api_client = async ({
 	endpoint,
