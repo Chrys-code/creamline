@@ -28,20 +28,29 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 DEBUG = os.getenv("DEBUG_MODE")
 
 ALLOWED_HOSTS = [os.getenv("ALLOWED_HOST", "localhost")]
-
 CORS_ALLOWED_ORIGINS = []
+CSRF_TRUSTED_ORIGINS = []
 
-CSRF_TRUSTED_ORIGINS = [
-    f"https://{os.getenv("ALLOWED_HOST")}",
-    f"https://www.{os.getenv("ALLOWED_HOST")}",
-]
-
-# Development env settings
 if os.getenv("ENV") == "development":
-    ALLOWED_HOSTS.append("email-creator-dev-app-1")
-    CSRF_TRUSTED_ORIGINS.append("http://localhost:3000")
-    CORS_ALLOWED_ORIGINS.append("http://localhost:3000")
+    ALLOWED_HOSTS += ["content-creator-dev-backend-1"]
+    CSRF_TRUSTED_ORIGINS += ["http://localhost:3000"]
+    CORS_ALLOWED_ORIGINS += ["http://localhost:3000"]
 
+if os.getenv("ENV") == "production":
+    ALLOWED_HOSTS += [
+        "email-creator.x.com",
+        "article-creator.x.com"
+    ]
+    CSRF_TRUSTED_ORIGINS += [
+        "https://email-creator.x.com",
+        "https://article-creator.x.com"
+    ]
+    CORS_ALLOWED_ORIGINS += [
+        "https://email-creator.x.com",
+        "https://article-creator.x.com"
+    ]
+    SESSION_COOKIE_DOMAIN = ".x.com"
+    CSRF_COOKIE_DOMAIN = ".x.com"
 
 SESSION_COOKIE_SAMESITE = "Lax"  # or "None" if using HTTPS + cross-domain
 SESSION_COOKIE_SECURE = False if os.getenv("ENV") == "development" else True
@@ -57,7 +66,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "users",
-    "serve_frontend",
 	"authentication"
 ]
 
@@ -77,8 +85,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-			BASE_DIR / "templates",
-            BASE_DIR / "frontend" / "dist",
+            BASE_DIR / "templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -172,9 +179,6 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_DIRS = [
-    BASE_DIR / "frontend" / "dist" / "assets",
-]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

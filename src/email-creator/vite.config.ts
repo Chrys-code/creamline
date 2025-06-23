@@ -12,22 +12,22 @@ export default defineConfig(({ mode }) => {
       outDir: 'dist'
     },
     define: {
-      "process.env": {
-        "RANDOM": env.VITE_RANDOM
+      'process.env': {
+        'RANDOM': env.VITE_RANDOM
       }
     },
   }
 
-  if (env.ENV == "development") {
-    baseConfig["server"] = {
+  if (env.ENV == 'development') {
+    baseConfig['server'] = {
       proxy: {
-        "/api": {
-          target: "http://email-creator-dev-app-1:8000", // Local only
+        '/api': {
+          target: 'http://content-creator-dev-backend-1:8000', // Local only
           secure: false,
           changeOrigin: true,
         },
-        "/auth": {
-          target: "http://email-creator-dev-app-1:8000", // Local only
+        '/auth': {
+          target: 'http://content-creator-dev-backend-1:8000', // Local only
           secure: false,
           changeOrigin: true,
         },
@@ -39,8 +39,8 @@ export default defineConfig(({ mode }) => {
   return {
     ...baseConfig, test: {
       globals: true,
-      environment: "jsdom",
-      setupFiles: "./setupTests.ts",
+      environment: 'jsdom',
+      setupFiles: './setupTests.ts',
     },
   }
 })

@@ -10,25 +10,25 @@ build:
 	docker-compose -f dockerfiles/docker-compose.dev.yml  build --no-cache 
 
 start:
-	docker-compose -f dockerfiles/docker-compose.dev.yml -p email-creator-dev up -d
+	docker-compose -f dockerfiles/docker-compose.dev.yml -p content-creator-dev up -d
 
 make-migrations:
-	docker-compose -f dockerfiles/docker-compose.dev.yml -p email-creator-dev exec app src/manage.py makemigrations
+	docker-compose -f dockerfiles/docker-compose.dev.yml -p content-creator-dev exec backend python3 manage.py makemigrations
 
 migrate:
-	docker-compose -f dockerfiles/docker-compose.dev.yml -p email-creator-dev exec app src/manage.py migrate
+	docker-compose -f dockerfiles/docker-compose.dev.yml -p content-creator-dev exec backend python3 manage.py migrate
 
 deps-export:
-	poetry export --with dev --without-hashes -f requirements.txt -o requirements.txt
+	cd src/services && poetry export --with dev --without-hashes -f requirements.txt -o requirements.txt
 
 
 # PROD App commands
 
 build-prod:
-	docker-compose -f dockerfiles/docker-compose.yml -p email-creator build --no-cache 
+	docker-compose -f dockerfiles/docker-compose.yml -p content-creator build --no-cache 
 
 start-prod:
-	docker-compose -f dockerfiles/docker-compose.yml -p email-creator up -d
+	docker-compose -f dockerfiles/docker-compose.yml -p content-creator up -d
 
 migrate-prod:
-	docker-compose -f dockerfiles/docker-compose.yml -p email-creator exec app src/manage.py migrate
+	docker-compose -f dockerfiles/docker-compose.yml -p content-creator exec backend python3 src/manage.py migrate

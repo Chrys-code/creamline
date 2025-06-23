@@ -1,12 +1,15 @@
 services:
-  app:
+  backend:
     build:
       context: ../.
       dockerfile: dockerfiles/Dockerfile
     expose:
      - "8080"
     env_file:
-      - ../.env
+      - ../src/services/.env
+    environment:
+      - ENV=production
+      - DEBUG=False
     command: gunicorn src.backend.wsgi:application --bind 0.0.0.0:8080
     depends_on:
       - db
@@ -18,7 +21,7 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - app
+      - backend
 
   db:
     image: postgres:17

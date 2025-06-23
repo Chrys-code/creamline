@@ -36,24 +36,46 @@ Development container stack also provides hot reload and better error feedback.
 make setup
 
 make start
+make migrate
 ```
 
 ### Production environment
 - Development build is exposed at:
 	- Backend: 8080 (internally)
-	- Frontend: 3000 (internally)
-	- Nginx: 80
+	- Nginx: 80 - serves frontend(s)
 
-Ideally you can just use localhost. No ports. 
-Nginx should take care of the routes and proxying requests.
+#### Steps:
 
-#### Start production container stack:
+##### 1. Map localhost to the app you want to check on
+
+This is required as apps are set up to be exposed on subdomains by Nginx.
+
+List of [appname]:
+- email-creator
+- article-creator
+
+Alternatively check on root/dockerfiles/docker-compose.yml and look for a service name you want to check out in production environment.
+
+In terminal:
+```bash
+sudo nano /etc/hosts
+
+127.0.0.1 localhost => 127.0.0.1 [appname].x.com
+```
+
+##### 2. Set cookies to allow unsafe
+
+This is required to share cookies on http
+
+```bash
+# root/src/services/settings.py
+SESSION_COOKIE_SECURE = False
+```
+
+##### 3. Start production container stack:
 ```bash
 # Start Docker Desktop
 make setup
-
-# Build frontend
-cd src/frontend && npm ci --silent && npm run build
 
 # Build container stack
 make build-prod
@@ -62,7 +84,6 @@ make migrate-prod
 ```
 
 This setup does not provide hot reload.
-Frontend production build is required before build.
 
 
 ## Migration:
@@ -85,3 +106,4 @@ Follow the commands in terminal:
 | `make deps-export`    | Export Poetry dependencies to `requirements.txt`     |
 | `make build-prod`     | Build backend Docker container with Nginx            |
 | `make start-prod`     | Start backend container with Nginx                   |
+| `make migrate-prod`   | Apply Django migrations                              |

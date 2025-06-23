@@ -1,9 +1,7 @@
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from authentication.views import SignUpView, current_user
-
-from serve_frontend.views import frontend_index
 
 
 urlpatterns = [
@@ -12,5 +10,4 @@ urlpatterns = [
 	path("auth/user/", current_user, name="current_user"),
 	path("auth/logout/", LogoutView.as_view(), name="logout"),
     path("api/admin/", admin.site.urls),
-    re_path(r"^(?!admin/|api/|auth/|assets/).*", frontend_index, name="frontend"),
 ]

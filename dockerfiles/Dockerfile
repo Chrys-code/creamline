@@ -22,24 +22,8 @@ RUN apk add --no-cache \
     git
 
 # Install pip deps
-COPY requirements.txt .
+COPY src/services/requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
-
-# ------------------------
-# Frontend build stage
-# ------------------------
-FROM node:24.2-alpine AS builder
-
-WORKDIR /src
-COPY src/frontend/. .
-RUN npm ci --silent
-RUN npm run build
-
-# ------------------------
-# Nginx stage
-# ------------------------
-FROM nginx:alpine
-COPY --from=builder /src/dist /usr/share/nginx/html    
 
 # ------------------------
 # Django stage
@@ -48,9 +32,7 @@ FROM base AS final
 
 WORKDIR /app
 
-RUN apk add --no-cache nginx
-
-COPY src /app/src
+COPY src/services/ /app/src
 
 RUN python3 /app/src/manage.py collectstatic --noinput
 

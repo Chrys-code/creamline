@@ -1,4 +1,4 @@
-import { getCookie } from "../lib/helpers/cookie";
+import { getCookie } from '../lib/helpers/cookie';
 
 export const api_client = async ({
 	endpoint,
@@ -6,7 +6,7 @@ export const api_client = async ({
 	payload
 }: {
 	endpoint: string,
-	method: "GET" | "POST" | "PATCH" | "DELETE",
+	method: 'GET' | 'POST' | 'PATCH' | 'DELETE',
 	payload: BodyInit | null | undefined
 }): Promise<any> => {
 	const response = await fetch(`/${endpoint}`, {
@@ -16,6 +16,7 @@ export const api_client = async ({
 			'X-CSRFToken': getCookie('csrftoken'),
 		},
 		credentials: 'include',
+		redirect: 'follow',
 		body: JSON.stringify(payload),
 	});
 
