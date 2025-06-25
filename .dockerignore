@@ -24,3 +24,7 @@ Dockerfile*
 
 # Allow dist folder for frontend
 !src/frontend/dist/
+
+# React router framework specific
+.react-router
+

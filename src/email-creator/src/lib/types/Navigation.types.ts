@@ -1,3 +1,3 @@
-export type NavigationOptions = NavigationOption[];
+export type NavigationItems = NavigationItem[];
 
-export type NavigationOption = { title: string; href: string; query?: string };
+export type NavigationItem = { title: string; href: string; query?: string };

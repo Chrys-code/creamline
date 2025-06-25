@@ -1,9 +1,9 @@
-import type { NavigationOptions } from "../lib/types/Navigation.types";
+import type { NavigationItems } from "../lib/types/Navigation.types";
 
-export const navOptions: NavigationOptions = [
+export const navItems: NavigationItems = [
 	{
-		title: "Articles",
-		href: "/articles",
+		title: "Emails",
+		href: "/emails",
 		query: "?rowsPerPage=25&page=1"
 	},
 ];

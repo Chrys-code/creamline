@@ -24,7 +24,7 @@ services:
     image: node:24.2-alpine
     working_dir: /app
     command: sh -c "
-      npm install && npm run dev
+      npm ci --silent && npm run dev
       "
     volumes:
       - ../src/email-creator:/app
