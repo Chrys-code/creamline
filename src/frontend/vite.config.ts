@@ -21,12 +21,7 @@ export default defineConfig(({ mode }) => {
     baseConfig['server'] = {
       proxy: {
         '/api': {
-          target: 'http://content-creator-dev-backend-1:8000', // Local only
-          secure: false,
-          changeOrigin: true,
-        },
-        '/auth': {
-          target: 'http://content-creator-dev-backend-1:8000', // Local only
+          target: 'http://hivefive-dev-backend-1:8000', // Local only
           secure: false,
           changeOrigin: true,
         },

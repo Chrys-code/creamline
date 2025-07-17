@@ -32,21 +32,21 @@ CORS_ALLOWED_ORIGINS = []
 CSRF_TRUSTED_ORIGINS = []
 
 if os.getenv("ENV") == "development":
-    ALLOWED_HOSTS += ["content-creator-dev-backend-1"]
+    ALLOWED_HOSTS += ["hivefive-dev-backend-1"]
     CSRF_TRUSTED_ORIGINS += ["http://localhost:3000"]
     CORS_ALLOWED_ORIGINS += ["http://localhost:3000"]
 
 if os.getenv("ENV") == "production":
     ALLOWED_HOSTS += [
-        "email-creator.x.com",
+        "app.hivefive.com",
         "article-creator.x.com"
     ]
     CSRF_TRUSTED_ORIGINS += [
-        "https://email-creator.x.com",
+        "https://app.hivefive.com",
         "https://article-creator.x.com"
     ]
     CORS_ALLOWED_ORIGINS += [
-        "https://email-creator.x.com",
+        "https://app.hivefive.com",
         "https://article-creator.x.com"
     ]
     SESSION_COOKIE_DOMAIN = ".x.com"

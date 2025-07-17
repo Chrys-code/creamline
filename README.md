@@ -1,4 +1,4 @@
-# Email Creator
+# HiveFive
 
 A block-based email template editor. Email templates are built on a block-by-block basis, supporting various block types such as rich text, images, and complex layouts. Features include ordering, image sizing, color selection, and more.
 
@@ -51,8 +51,7 @@ make migrate
 This is required as apps are set up to be exposed on subdomains by Nginx.
 
 List of [appname]:
-- email-creator
-- article-creator
+- HiveFive
 
 Alternatively check on root/dockerfiles/docker-compose.yml and look for a service name you want to check out in production environment.
 

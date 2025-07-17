@@ -1,8 +1,28 @@
 services:
+  nginx:
+    build:
+      context: ../.
+      dockerfile: dockerfiles/Dockerfile.nginx
+    ports:
+      - "80:80"
+    volumes: 
+      - static_volume:/app/staticfiles
+    networks:
+      - hive-net
+    depends_on:
+      - backend
+
+
   backend:
     build:
       context: ../.
       dockerfile: dockerfiles/Dockerfile
+    command: |
+      sh -c "
+      python manage.py migrate &&
+      python3 manage.py collectstatic --noinput &&
+      gunicorn backend.wsgi:application --bind 0.0.0.0:8080
+      "
     expose:
      - "8080"
     env_file:
@@ -10,18 +30,12 @@ services:
     environment:
       - ENV=production
       - DEBUG=False
-    command: gunicorn src.backend.wsgi:application --bind 0.0.0.0:8080
+    volumes: 
+      - static_volume:/app/staticfiles
+    networks:
+      - hive-net
     depends_on:
-      - db
-    
-  nginx:
-    build:
-      context: ../.
-      dockerfile: dockerfiles/Dockerfile.nginx
-    ports:
-      - "80:80"
-    depends_on:
-      - backend
+      - db    
 
   db:
     image: postgres:17
@@ -31,8 +45,12 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - hive-net
 
 volumes:
   pgdata:
   static_volume:
-  media_volume:
+
+networks:
+  hive-net:
