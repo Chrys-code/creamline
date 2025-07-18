@@ -1,37 +1,55 @@
-from django.contrib.auth import logout
-from django.http import JsonResponse
-from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
-
-
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from rest_framework import views, status
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 
-from .forms import CustomUserCreationForm
+User = get_user_model()
 
-class SignUpView(CreateView):
-    form_class = CustomUserCreationForm
-    success_url = reverse_lazy("login")
-    template_name = "registration/signup.html"
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def api_logout(request):
-    logout(request)
-    return Response({"detail": "Logged out successfully"})
+class SignupView(views.APIView):
+    permission_classes = [AllowAny]
 
-def ajax_login_required(view_func):
-    def wrapper(request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return JsonResponse({"detail": "Unauthorized"}, status=401)
-        return view_func(request, *args, **kwargs)
-    return wrapper
+    def post(self, request):
+        email = request.data.get('email')
+        password = request.data.get('password')
 
-@ajax_login_required
-def current_user(request):
-    user = request.user
-    return JsonResponse({
-        "id": user.id,
-        "email": user.email,
-    })
+        if not email or not password:
+            return Response({"detail": "email and password are required"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if User.objects.filter(email=email).exists():
+            return Response({"detail": "email already taken"}, status=status.HTTP_400_BAD_REQUEST)
+
+        user = User.objects.create_user( email=email, password=password)
+        user.save()
+
+        return Response({"detail": "User created successfully"}, status=status.HTTP_201_CREATED)
+
+
+class LoginView(views.APIView):
+    permission_classes = [AllowAny]
+	
+    def post(self, request):
+        email = request.data.get("email")
+        password = request.data.get("password")
+        user = authenticate(request, email=email, password=password)
+
+        if user:
+            login(request, user)
+            return Response({"detail": "Logged in"})
+        
+        return Response({"detail": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+    
+
+class LogoutView(views.APIView):
+    def post(self, request):
+        logout(request)
+        return Response({"detail": "Logged out"})
+    
+
+class MeView(views.APIView):
+    def get(self, request):
+        user = request.user
+        if user.is_authenticated:
+            return Response({"email": user.email})
+        
+        return Response({"detail": "Unauthorized"}, status=status.HTTP_401_UNAUTHORIZED)

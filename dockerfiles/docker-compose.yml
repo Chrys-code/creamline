@@ -5,6 +5,8 @@ services:
       dockerfile: dockerfiles/Dockerfile.nginx
     ports:
       - "80:80"
+      # Remove when used live
+      # - "443:443"
     volumes: 
       - static_volume:/app/staticfiles
     networks:
@@ -35,7 +37,7 @@ services:
     networks:
       - hive-net
     depends_on:
-      - db    
+      - db   
 
   db:
     image: postgres:17

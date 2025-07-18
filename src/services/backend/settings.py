@@ -35,25 +35,34 @@ if os.getenv("ENV") == "development":
     ALLOWED_HOSTS += ["hivefive-dev-backend-1"]
     CSRF_TRUSTED_ORIGINS += ["http://localhost:3000"]
     CORS_ALLOWED_ORIGINS += ["http://localhost:3000"]
+    SESSION_COOKIE_SECURE = False
+    SESSION_COOKIE_SAMESITE = "Lax"
+    CSRF_COOKIE_SECURE = False
+    CSRF_COOKIE_SAMESITE = "Lax"
+
 
 if os.getenv("ENV") == "production":
     ALLOWED_HOSTS += [
-        "app.hivefive.com",
-        "article-creator.x.com"
+        "hivefive.work",
+        "app.hivefive.work",
     ]
     CSRF_TRUSTED_ORIGINS += [
-        "https://app.hivefive.com",
-        "https://article-creator.x.com"
+        "https://hivefive.work",
+        "https://app.hivefive.work",
     ]
     CORS_ALLOWED_ORIGINS += [
-        "https://app.hivefive.com",
-        "https://article-creator.x.com"
+        "https://hivefive.work",
+        "https://app.hivefive.work",
     ]
-    SESSION_COOKIE_DOMAIN = ".x.com"
-    CSRF_COOKIE_DOMAIN = ".x.com"
+    CSRF_COOKIE_DOMAIN = ".hivefive.work"
+    CSRF_COOKIE_SAMESITE = "None"
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_DOMAIN = ".hivefive.work"
+    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_SAMESITE = "None"
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-SESSION_COOKIE_SAMESITE = "Lax"  # or "None" if using HTTPS + cross-domain
-SESSION_COOKIE_SECURE = False if os.getenv("ENV") == "development" else True
+
 
 # Application definition
 

@@ -16,10 +16,18 @@ const router = createBrowserRouter([
     errorElement: <h1>UH, oh, a bee has far gone from its hive :(</h1>,
   },
   {
-    path: "/emails",
+    path: "/signup",
     lazy: {
       Component: async () =>
-        (await import("./pages/emails/Emails")).default,
+        (await import("./pages/signup/Signup")).default,
+    },
+    errorElement: <h1>UH, oh, a bee has far gone from its hive :(</h1>,
+  },
+  {
+    path: "/login",
+    lazy: {
+      Component: async () =>
+        (await import("./pages/login/Login")).default,
     },
   },
 ]);

@@ -17,6 +17,9 @@ __pycache__/
 .vscode/
 .vs/
 
+# Ignore ssl (testing prod setup)
+ssl
+
 # Ignore docker and compose config
 .dockerignore
 docker-compose*

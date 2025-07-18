@@ -1,9 +1,4 @@
 import { api_client } from "../client"
 
-export const logout = async () => {
-	const response = await api_client({ endpoint: "auth/logout/", method: "POST", payload: null })
-
-	if (response.redirected) {
-		window.location.href = response.url;
-	}
-}
+export const logout = async () =>
+	await api_client({ endpoint: "api/logout/", method: "POST", payload: null })

@@ -7,7 +7,7 @@ export const api_client = async ({
 }: {
 	endpoint: string,
 	method: 'GET' | 'POST' | 'PATCH' | 'DELETE',
-	payload: BodyInit | null | undefined
+	payload: any
 }): Promise<any> => {
 	const response = await fetch(`/${endpoint}`, {
 		method,
