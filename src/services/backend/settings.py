@@ -32,7 +32,7 @@ CORS_ALLOWED_ORIGINS = []
 CSRF_TRUSTED_ORIGINS = []
 
 if os.getenv("ENV") == "development":
-    ALLOWED_HOSTS += ["hivefive-dev-backend-1"]
+    ALLOWED_HOSTS += ["creamline-dev-backend-1"]
     CSRF_TRUSTED_ORIGINS += ["http://localhost:3000"]
     CORS_ALLOWED_ORIGINS += ["http://localhost:3000"]
     SESSION_COOKIE_SECURE = False
@@ -43,21 +43,18 @@ if os.getenv("ENV") == "development":
 
 if os.getenv("ENV") == "production":
     ALLOWED_HOSTS += [
-        "hivefive.work",
-        "app.hivefive.work",
+        "creamline.com",
     ]
     CSRF_TRUSTED_ORIGINS += [
-        "https://hivefive.work",
-        "https://app.hivefive.work",
+        "https://creamline.com",
     ]
     CORS_ALLOWED_ORIGINS += [
-        "https://hivefive.work",
-        "https://app.hivefive.work",
+        "https://creamline.com",
     ]
-    CSRF_COOKIE_DOMAIN = ".hivefive.work"
+    CSRF_COOKIE_DOMAIN = ".creamline.com"
     CSRF_COOKIE_SAMESITE = "None"
     CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_DOMAIN = ".hivefive.work"
+    SESSION_COOKIE_DOMAIN = ".creamline.com"
     SESSION_COOKIE_SECURE = True
     SESSION_COOKIE_SAMESITE = "None"
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

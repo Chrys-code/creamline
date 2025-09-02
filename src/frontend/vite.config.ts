@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
     baseConfig['server'] = {
       proxy: {
         '/api': {
-          target: 'http://hivefive-dev-backend-1:8000', // Local only
+          target: 'http://creamline-dev-backend-1:8000', // Local only
           secure: false,
           changeOrigin: true,
         },

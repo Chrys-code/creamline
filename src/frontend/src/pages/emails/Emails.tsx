@@ -1,8 +1,6 @@
 const Emails: React.FC = () => {
 	return (
-		<>Emails
-			<hr />
-		</>
+		<>Emails<hr /></>
 	)
 }
 
