@@ -11,7 +11,7 @@
 
 html,
 body {
-	font-family: "__Inter_aaf875", "__Inter_Fallback_aaf875";
+	font-family: "Work Sans";
 	margin: 0;
 }
 
@@ -78,6 +78,7 @@ h5 {
 	color: var(--color-font-500);
 }
 
+p,
 input,
 textarea,
 label,
@@ -87,14 +88,24 @@ select {
 
 h3 {
 	font-size: var(--fs-h3);
+	font-weight: 600;
 }
 
 h2 {
 	font-size: var(--fs-h2);
+	font-weight: 600;
 }
 
 h1 {
 	font-size: var(--fs-h1);
+	font-weight: 600;
+}
+
+p,
+h3,
+h2,
+h1 {
+	margin: 0;
 }
 
 

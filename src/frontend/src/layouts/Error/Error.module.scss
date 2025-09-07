@@ -1,0 +1,18 @@
+.container {
+	display: block;
+	width: fit-content;
+	margin: auto;
+
+	border: 2px solid var(--color-primary-500);
+	border-radius: var(--border-container-radius);
+
+	padding: 2rem;
+
+	h1 {
+		margin-bottom: .5rem;
+	}
+
+	p {
+		margin-bottom: 2rem;
+	}
+}

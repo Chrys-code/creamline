@@ -1,19 +1,38 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import "../src/styles/globals.scss"
+import "../src/styles/globals.scss";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 
 import {
   createBrowserRouter,
+  redirect,
   RouterProvider,
 } from "react-router";
+
 import Home from './pages/home/Home';
+import Error from './layouts/Error';
 
+import { user } from "./api/auth/user";
 
-const router = createBrowserRouter([
+async function requireAuth() {
+  const response = await user()
+
+  if (!response.ok) {
+    return redirect("/login")
+  }
+
+  const userData: { email: string } = await response.json()
+  // also check for props like user id
+
+  return { user: userData }
+}
+
+const appRouter = createBrowserRouter([
   {
+    id: "appRoot",
     path: "/",
     element: <Home />,
-    errorElement: <h1>UH, oh, a bee has far gone from its hive :(</h1>,
+    loader: requireAuth,
+    errorElement: <Error />,
   },
   {
     path: "/signup",
@@ -21,7 +40,7 @@ const router = createBrowserRouter([
       Component: async () =>
         (await import("./pages/signup/Signup")).default,
     },
-    errorElement: <h1>UH, oh, a bee has far gone from its hive :(</h1>,
+    errorElement: <Error />
   },
   {
     path: "/login",
@@ -29,12 +48,12 @@ const router = createBrowserRouter([
       Component: async () =>
         (await import("./pages/login/Login")).default,
     },
-    errorElement: <h1>UH, oh, a bee has far gone from its hive :(</h1>,
-  },
+    errorElement: <Error />
+  }
 ]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={appRouter} />
   </StrictMode>,
 )

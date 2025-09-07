@@ -1,17 +1,17 @@
-import InputField from "../../components/InputField"
-import { user } from "../../api/auth/user"
+import { useLoaderData } from "react-router";
+import Header from "../../layouts/Header"
+
 
 const home: React.FC = () => {
-	const handleClick = () => {
-		user()
-	}
+	const data = useLoaderData();
 
 	return (
 		<>
-			<>HOME</>
-			<button onClick={handleClick} >ME!</button>
-			<hr/>
-			<InputField id="1" name="email" type="text" label='Labelled:' info="Optional" error='My error text'  />
+			<Header />
+			<main>
+				<h1>Szia, {data.user.email}</h1>
+				<p>Mit csinálunk ma?</p>
+			</main>
 		</>
 	)
 }

@@ -79,14 +79,16 @@ const Login: React.FC = () => {
 		<>
 			<Header />
 			<main>
-				<Form onSubmit={handleSubmit}>
-					<InputField id={uuidv4()} name={formData.email.fieldName} label="Email:" type="text" onChange={resetMessage} error={formData.email.message} />
-					<InputField id={uuidv4()} name={formData.password.fieldName} label="Jelszó:" type="password" onChange={resetMessage} error={formData.password.message} />
-					<div className={styles.formActions}>
-						{formData.formMessage && <span className={styles.errorMessage}>{formData.formMessage}</span>}
-						<Button type="primary">Bejelentkezés</Button>
-					</div>
-				</Form>
+				<div className={styles.container}>
+					<Form onSubmit={handleSubmit}>
+						<InputField id={uuidv4()} name={formData.email.fieldName} label="Email:" type="text" onChange={resetMessage} error={formData.email.message} />
+						<InputField id={uuidv4()} name={formData.password.fieldName} label="Jelszó:" type="password" onChange={resetMessage} error={formData.password.message} />
+						<div className={styles.formActions}>
+							{formData.formMessage && <span className={styles.errorMessage}>{formData.formMessage}</span>}
+							<Button type="primary">Bejelentkezés</Button>
+						</div>
+					</Form>
+				</div>
 			</main>
 		</>
 	);
