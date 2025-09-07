@@ -1,7 +1,7 @@
 # ------------------------
 # Base Python stage
 # ------------------------
-FROM python:3.13-alpine3.21
+FROM python:3.13
 
 WORKDIR /app
 
@@ -9,15 +9,15 @@ WORKDIR /app
 ENV PYTHONPATH=/app
 
 # Install Python and Postgres build deps
-RUN apk add --no-cache \
-    build-base \
-    libpq \
+RUN apt-get update && apt-get install -y \
+    build-essential \
     libpq-dev \
     python3-dev \
     musl-dev \
     curl \
-    git
-
+    git \
+    gettext
+    
 # Install pip deps
 COPY /src/services/requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt

@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: .25rem;
+}
+
+.container>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.container span {
+    font-size: var(--fs-caption);
+}
+
+.container input {
+    border: 1px solid gray;
+    border-radius: .5rem;
+    height: 2.5rem;
+    padding: .5rem;
+    width: 100%;
+}
+
+
+.container>span {
+    color: var(--color-system-error);
+}

@@ -1,0 +1,19 @@
+.container {
+	width: 100%;
+	position: fixed;
+	top: 0;
+	height: var(--header-height);
+	background-color: var(--color-primary-500);
+	padding: 1rem;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.container menu {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

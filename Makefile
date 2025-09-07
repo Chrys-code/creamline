@@ -21,6 +21,15 @@ migrate:
 deps-export:
 	cd src/services && poetry export --with dev --without-hashes -f requirements.txt -o requirements.txt
 
+make-translations:
+	@read -p "Enter app folder (e.g., authentication): " APP; \
+	docker-compose -f dockerfiles/docker-compose.dev.yml -p creamline-dev exec backend \
+	sh -c "cd $$APP && django-admin makemessages -l hu"
+
+compile-translations:
+	@read -p "Enter app folder (e.g., authentication): " APP; \
+	docker-compose -f dockerfiles/docker-compose.dev.yml -p creamline-dev exec backend \
+	sh -c "cd $$APP && django-admin compilemessages"
 
 # PROD App commands
 

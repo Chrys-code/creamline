@@ -13,6 +13,7 @@ export const api_client = async ({
 		method,
 		headers: {
 			'Content-Type': 'application/json',
+			'Accept-Language': 'hu',
 			'X-CSRFToken': getCookie('csrftoken'),
 		},
 		credentials: 'include',

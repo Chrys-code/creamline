@@ -1,3 +1,4 @@
+@import url("./colors.scss");
 @import url("./fonts.scss");
 @import url("./animation.scss");
 @import url("./layouts.scss");
@@ -10,7 +11,18 @@
 
 html,
 body {
-	font-family: "Open Sans", sans-serif;
+	font-family: "__Inter_aaf875", "__Inter_Fallback_aaf875";
+	margin: 0;
+}
+
+main {
+	margin: 0px .5rem;
+	margin-top: var(--header-height);
+	padding: 2rem 0.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
 }
 
 a {
@@ -25,10 +37,6 @@ button {
 	background-color: transparent;
 }
 
-.small-text {
-	font-size: var(--fs-small-text);
-}
-
 span {
 	font-size: inherit;
 }
@@ -39,6 +47,10 @@ span {
 
 .fw-b {
 	font-weight: bold;
+}
+
+.fs-caption {
+	font-size: var(--fs-caption);
 }
 
 .fs-s {
@@ -53,33 +65,24 @@ span {
 	font-size: var(--fs-body-l);
 }
 
-input,
-textarea,
-select {
-	font-size: var(--fs-body-r);
-}
 
 hr,
 span,
+label,
 p,
 h1,
 h2,
 h3,
 h4,
 h5 {
-	color: var(--color-font-dark);
+	color: var(--color-font-500);
 }
 
-p {
+input,
+textarea,
+label,
+select {
 	font-size: var(--fs-body-r);
-}
-
-h5 {
-	font-size: var(--fs-h5);
-}
-
-h4 {
-	font-size: var(--fs-h4);
 }
 
 h3 {
@@ -92,4 +95,51 @@ h2 {
 
 h1 {
 	font-size: var(--fs-h1);
+}
+
+
+/* Scale site */
+/* 2000px */
+@media only screen and (min-width: 125rem) {
+
+	html,
+	body {
+		font-size: 105%;
+	}
+}
+
+/* 2400px */
+@media only screen and (min-width: 150rem) {
+
+	html,
+	body {
+		font-size: 110%;
+	}
+}
+
+/* 2800px */
+@media only screen and (min-width: 175rem) {
+
+	html,
+	body {
+		font-size: 115%;
+	}
+}
+
+/* 3200px */
+@media only screen and (min-width: 200rem) {
+
+	html,
+	body {
+		font-size: 120%;
+	}
+}
+
+/* 3600px */
+@media only screen and (min-width: 225rem) {
+
+	html,
+	body {
+		font-size: 125%;
+	}
 }

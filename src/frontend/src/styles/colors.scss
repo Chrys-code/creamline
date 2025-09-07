@@ -1,47 +1,30 @@
 :root {
 	// Branded Colors
-	--color-brand-white: #ffffff;
-	--color-brand-black: #000000;
-	--color-brand-dark-purple: #410099;
-	--color-brand-pale-purple: #B7B3F5;
+	--color-primary-700: #7E43CB;
+	--color-primary-500: #9A67DD;
+	--color-primary-100: #E1C8FF;
+	--color-primary-50: #F9F5FF;
 
 	// Neutral Colors
-	--color-neutral-smoke: #cdcdcd;
-	--color-neutral-cloud: #e2e2e2;
-	--color-neutral-pearl: #f1f1f1;
-    
-	// Text colors
-    --color-font-dark: #202020;
-	--color-placeholder-text: #53504E;
+	--color-neutral-700: #000000;
+	--color-neutral-500: #e2e2e2;
+	--color-neutral-100: #DDDDDD;
+	--color-neutral-50: #F3F3F3;
+	--color-neutral-0: #FFFFFF;
 
-	// Form Colors
-	--color-form-input-border: #B9B7B5;
-
-	// Link Colors
-	--color-link-dark: #006eb8;
-	--cc-color-link-dark: #006eb8;
-	--cc-color-link-dark-hover: #002e88;
-	--cc-color-link-dark-visited: #82368c;
-	--color-link-light: #00a1ff;
+	// Text Colors
+	--color-font-700: #302C3D;
+	--color-font-500: #504B5E;
+	--color-font-100: #AAA5B1;
 
 	// System Colors
-	--color-system-error: #8E010F;
-	--color-system-success: #00864e;
-	--color-system-banana: #ffbe2c;
-	--color-system-purple: #410099;
+	--color-system-error: #E27B66;
+	--color-system-success: #75DAD1;
+	--color-system-warning: #CBB16F;
 
-	// Box shadow
-	--color-brand-black-20: #00000020;
-	--color-brand-black-10: #00000010;
+	// Background Colors
+	--color-background-white: #FFFFFF;
 
-	// Modal background
-	--color-brand-black-60: #00000060;
-
-    // Code presentation
-	--color-code-block-background: #f4f4f4;
-	--color-code-block-border: #dddddd;
-
-	// Alerts & Toasts
-	--color-alert-error: #DE0A14;
-	--color-alert-success-50: #36B37E;
+	// Shadow Colors
+	--color-shadow: #00000010;
 }

@@ -1,3 +1,4 @@
+import InputField from "../../components/InputField"
 import { user } from "../../api/auth/user"
 
 const home: React.FC = () => {
@@ -9,6 +10,8 @@ const home: React.FC = () => {
 		<>
 			<>HOME</>
 			<button onClick={handleClick} >ME!</button>
+			<hr/>
+			<InputField id="1" name="email" type="text" label='Labelled:' info="Optional" error='My error text'  />
 		</>
 	)
 }
