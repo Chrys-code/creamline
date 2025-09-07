@@ -16,7 +16,7 @@
     font-size: var(--fs-caption);
 }
 
-.container input {
+.input {
     border: 1px solid gray;
     border-radius: .5rem;
     height: 2.5rem;
@@ -27,4 +27,13 @@
 
 .container>span {
     color: var(--color-system-error);
+}
+
+.error {
+    border-color: var(--color-system-error);
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: .5;
 }

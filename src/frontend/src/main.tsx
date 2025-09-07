@@ -29,6 +29,7 @@ const router = createBrowserRouter([
       Component: async () =>
         (await import("./pages/login/Login")).default,
     },
+    errorElement: <h1>UH, oh, a bee has far gone from its hive :(</h1>,
   },
 ]);
 
