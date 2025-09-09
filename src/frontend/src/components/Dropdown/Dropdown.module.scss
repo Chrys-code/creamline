@@ -1,0 +1,43 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: .25rem;
+}
+
+.container>div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.container span {
+	font-size: var(--fs-caption);
+}
+
+.input {
+	border: 1px solid gray;
+	border-radius: .5rem;
+	height: 2.5rem;
+	padding: .5rem;
+	width: 100%;
+
+	.initialOption {
+		color: var(--color-font-100) !important;
+	}
+}
+
+
+.container>span {
+	color: var(--color-system-error);
+}
+
+.error {
+	border-color: var(--color-system-error);
+}
+
+.disabled {
+	pointer-events: none;
+	opacity: .5;
+}

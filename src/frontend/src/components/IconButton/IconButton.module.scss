@@ -1,0 +1,57 @@
+.container {
+	cursor: pointer;
+	position: relative;
+	width: fit-content;
+	height: fit-content;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: .5rem;
+	border-radius: var(--border-wrapper-radius);
+
+	transition: background-color var(--animation-duration) var(--animation-timing);
+
+	svg {
+		transition: fill var(--animation-duration) var(--animation-timing), color var(--animation-duration) var(--animation-timing);
+	}
+}
+
+.primary {
+	@extend .container;
+	background-color: var(--color-primary-500);
+
+	svg {
+		fill: var(--color-neutral-50);
+		color: var(--color-neutral-50);
+	}
+
+	&:hover {
+		background-color: var(--color-primary-700);
+	}
+}
+
+.secondary {
+	@extend .container;
+	background-color: var(--color-primary-50);
+
+	svg {
+		fill: var(--color-primary-500);
+		color: var(--color-primary-500);
+	}
+
+	&:hover {
+		background-color: var(--color-primary-100);
+
+		svg {
+			fill: var(--color-primary-700);
+			color: var(--color-primary-700);
+		}
+	}
+}
+
+.disabled {
+	cursor: default;
+	pointer-events: none;
+	opacity: .5;
+}

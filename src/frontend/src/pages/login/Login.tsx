@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { v4 as uuidv4 } from "uuid";
 
-import Header from "../../layouts/Header";
+import AuthLayout from "../../layouts/AuthLayout";
 import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 import Form from "../../components/Form";
@@ -16,7 +16,7 @@ import { login } from "../../api/auth/login";
 const Login: React.FC = () => {
 	const navigate = useNavigate();
 
-	const [formData, setFormData] = useState<FormData>({
+	const [formFieldState, setFormFieldState] = useState<FormData>({
 		email: {
 			fieldName: "email",
 			message: null,
@@ -29,9 +29,14 @@ const Login: React.FC = () => {
 	});
 
 
-	const handleSubmit = async (e: React.FormEvent): Promise<void> => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
 		// @ts-ignore
-		const response = await login({ email: e.target.elements[0].value, password: e.target.elements[1].value });
+		const formData = new FormData(e.target);
+
+		const email = formData.get("email") as string;
+		const password = formData.get("password") as string;
+
+		const response = await login({ email: email, password: password });
 
 		if (!response.ok) {
 			const responseData = await response.json();
@@ -40,13 +45,13 @@ const Login: React.FC = () => {
 			const passwordMessage = responseData.password ? responseData.password[0] : null;
 			const formMessage = responseData.message ? responseData.message : null;
 
-			setFormData({
+			setFormFieldState({
 				email: {
-					...formData.email,
+					...formFieldState.email,
 					message: emailMessage
 				},
 				password: {
-					...formData.password,
+					...formFieldState.password,
 					message: passwordMessage
 				},
 				formMessage: formMessage
@@ -54,7 +59,6 @@ const Login: React.FC = () => {
 		};
 
 		if (response.ok && response.status == 200) {
-			console.log("RUNS")
 			navigate("/");
 		};
 	}
@@ -62,35 +66,40 @@ const Login: React.FC = () => {
 	const resetMessage = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const fieldName = e.target.name;
 
-		setFormData({
+		setFormFieldState({
 			email: {
-				...formData.email,
-				message: fieldName == "email" ? null : formData.email.message
+				...formFieldState.email,
+				message: fieldName == "email" ? null : formFieldState.email.message
 			},
 			password: {
-				...formData.password,
-				message: fieldName == "password" ? null : formData.password.message
+				...formFieldState.password,
+				message: fieldName == "password" ? null : formFieldState.password.message
 			},
 			formMessage: null
 		});
 	};
 
+	const renderFormActions = () => {
+		return (
+			<div className={styles.formActions}>
+				{formFieldState.formMessage && <span className={styles.errorMessage}>{formFieldState.formMessage}</span>}
+				<Button style="primary" type="submit">Bejelentkezés</Button>
+			</div>
+		)
+	}
+
 	return (
-		<>
-			<Header />
-			<main>
-				<div className={styles.container}>
-					<Form onSubmit={handleSubmit}>
-						<InputField id={uuidv4()} name={formData.email.fieldName} label="Email:" type="text" onChange={resetMessage} error={formData.email.message} />
-						<InputField id={uuidv4()} name={formData.password.fieldName} label="Jelszó:" type="password" onChange={resetMessage} error={formData.password.message} />
-						<div className={styles.formActions}>
-							{formData.formMessage && <span className={styles.errorMessage}>{formData.formMessage}</span>}
-							<Button type="primary">Bejelentkezés</Button>
-						</div>
-					</Form>
-				</div>
-			</main>
-		</>
+		<AuthLayout>
+			<div className={styles.container}>
+				<Form onSubmit={handleSubmit} actionElements={renderFormActions()}>
+					<h1>Bejelentkezés</h1>
+					<section>
+						<InputField id={uuidv4()} name={formFieldState.email.fieldName} label="Email:" type="text" onChange={resetMessage} error={formFieldState.email.message} />
+						<InputField id={uuidv4()} name={formFieldState.password.fieldName} label="Jelszó:" type="password" onChange={resetMessage} error={formFieldState.password.message} />
+					</section>
+				</Form>
+			</div>
+		</AuthLayout>
 	);
 };
 

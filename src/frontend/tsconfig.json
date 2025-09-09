@@ -16,11 +16,6 @@
     "rootDirs": [
       ".",
     ],
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    },
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
     "noEmit": true,

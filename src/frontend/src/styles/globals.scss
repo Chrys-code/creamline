@@ -15,16 +15,6 @@ body {
 	margin: 0;
 }
 
-main {
-	margin: 0px .5rem;
-	margin-top: var(--header-height);
-	padding: 2rem 0.5rem;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: flex-start;
-}
-
 a {
 	color: inherit;
 	text-decoration: none;

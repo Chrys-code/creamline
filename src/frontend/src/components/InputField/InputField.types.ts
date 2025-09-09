@@ -6,8 +6,11 @@ export interface InputFieldProps {
 
     label?: string;
     info?: string;
+    placeholder?: string;
     error?: string | null;
     disabled?: boolean;
+
+    step?: string; // only for number type
 
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

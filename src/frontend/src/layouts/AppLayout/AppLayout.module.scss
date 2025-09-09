@@ -1,0 +1,23 @@
+.container {
+	height: calc(100vh - (var(--mobile-footer-nav-height) + var(--header-height)));
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	margin: 0px .5rem;
+	margin-top: var(--header-height); // Because header is fixed position
+	padding: 2rem 0.5rem;
+	gap: 2rem;
+
+	overflow-x: scroll;
+
+	/* For WebKit browsers (Chrome, Safari, Edge) */
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* For Firefox */
+
+	scrollbar-width: none;
+	/* hides scrollbar but still scrollable */
+}

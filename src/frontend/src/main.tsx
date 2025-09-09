@@ -2,18 +2,22 @@ import "../src/styles/globals.scss";
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
+import type { AppLoaderData } from "./lib/types/AppLoaderData";
+
+
+import ErrorLayout from './layouts/ErrorLayout';
+import AppLayout from "./layouts/AppLayout";
+import Dashboard from "./pages/Dashboard/Dashboard";
+
 import {
   createBrowserRouter,
   redirect,
   RouterProvider,
 } from "react-router";
 
-import Home from './pages/home/Home';
-import Error from './layouts/Error';
-
 import { user } from "./api/auth/user";
 
-async function requireAuth() {
+const requireAuth = async () => {
   const response = await user()
 
   if (!response.ok) {
@@ -23,33 +27,46 @@ async function requireAuth() {
   const userData: { email: string } = await response.json()
   // also check for props like user id
 
-  return { user: userData }
+  return { user: userData } as AppLoaderData
 }
 
 const appRouter = createBrowserRouter([
   {
-    id: "appRoot",
+    id: "app",
     path: "/",
-    element: <Home />,
-    loader: requireAuth,
-    errorElement: <Error />,
+    element: <AppLayout />,
+    loader: async () => await requireAuth(),
+    errorElement: <AppLayout ><ErrorLayout /></AppLayout>,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: "milk-collection",
+        lazy: {
+          Component: async () =>
+            (await import("./pages/MilkCollection/MilkCollection")).default,
+        },
+      }
+    ]
   },
   {
     path: "/signup",
     lazy: {
       Component: async () =>
-        (await import("./pages/signup/Signup")).default,
+        (await import("./pages/Signup/Signup")).default,
     },
-    errorElement: <Error />
+    errorElement: <ErrorLayout />
   },
   {
     path: "/login",
     lazy: {
       Component: async () =>
-        (await import("./pages/login/Login")).default,
+        (await import("./pages/Login/Login")).default,
     },
-    errorElement: <Error />
-  }
+    errorElement: <ErrorLayout />
+  },
 ]);
 
 createRoot(document.getElementById('root')!).render(

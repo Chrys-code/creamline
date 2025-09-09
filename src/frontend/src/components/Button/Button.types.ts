@@ -1,8 +1,9 @@
 export interface ButtonProps {
-	type: ButtonType;
+	type: "submit" | "button";
+	style?: ButtonStyle;
 	disabled?: boolean;
 	children?: React.ReactNode;
 	onClick?: (e: React.MouseEvent) => void;
 }
 
-type ButtonType = "primary" | "secondary";
+type ButtonStyle = "primary" | "secondary";
