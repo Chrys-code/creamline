@@ -15,19 +15,20 @@ import {
   RouterProvider,
 } from "react-router";
 
-import { user } from "./api/auth/user";
+import { session } from "./api/auth";
+import { getProfile } from "./api/profile";
 
 const requireAuth = async () => {
-  const response = await user()
+  const getSessionResponse = await session();
+  if (!getSessionResponse.ok) return redirect("/login");
 
-  if (!response.ok) {
+  const getProfileResponse = await getProfile();
+  if (!getProfileResponse.ok) {
     return redirect("/login")
   }
 
-  const userData: { email: string } = await response.json()
-  // also check for props like user id
-
-  return { user: userData } as AppLoaderData
+  const profileData: {uuid: string, email:string, profile_image:string, first_name: string, last_name: string} = await getProfileResponse.json();
+  return { userProfile: profileData } as AppLoaderData
 }
 
 const appRouter = createBrowserRouter([

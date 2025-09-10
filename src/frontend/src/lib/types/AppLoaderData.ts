@@ -1,6 +1,10 @@
 
 export interface AppLoaderData {
-	user: {
+	userProfile: {
+		uuid:string;
 		email: string;
-	};
+		profile_image: string;
+		first_name: string;
+		last_name:string;
+	}
 };

@@ -9,10 +9,14 @@ const Dashboard: React.FC = () => {
 	const data = useRouteLoaderData('app') as AppLoaderData;
 	const navigate = useNavigate();
 
+	const name = `${data.userProfile.first_name} ${data.userProfile.last_name}`;
+	const profileHasName = !!name.replaceAll(" ", "");
+	const displayName = profileHasName ? name : data.userProfile.email;
+
 	return (
 		<>
 			<div>
-				<h1>Szia, {data.user.email}</h1>
+				<h1>Szia, {displayName}</h1>
 				<p>Mit csinálunk ma?</p>
 			</div>
 

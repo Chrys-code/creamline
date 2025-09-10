@@ -1,10 +1,11 @@
+import uuid
+
 from django.contrib.auth.models import (
     BaseUserManager,
     AbstractBaseUser,
     PermissionsMixin
 )
 from django.utils.translation import gettext_lazy as _
-
 from django.db import models
 
 
@@ -38,6 +39,11 @@ class UserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
+    
+    uuid = models.UUIDField(
+        default=uuid.uuid4, unique=True, editable=False, primary_key=False
+    )
+
     
     email = models.EmailField(
         verbose_name="email",

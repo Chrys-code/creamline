@@ -10,7 +10,7 @@ import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 import Form from "../../components/Form";
 
-import { login } from "../../api/auth/login";
+import { login } from "../../api/auth";
 
 
 const Login: React.FC = () => {

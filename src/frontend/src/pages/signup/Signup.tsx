@@ -1,4 +1,4 @@
-import { signup } from "../../api/auth/signup"
+import {signup} from "../../api/auth";
 
 const Signup: React.FC = () => {
 	const handleSubmit = (e: React.FormEvent) => {
