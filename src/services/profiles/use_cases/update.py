@@ -17,7 +17,7 @@ def update_profile(
         profile: Profile,
         validated_data: Dict
 ) -> Profile:
-    for field, value in validated_data.item():
+    for field, value in validated_data.items():
         setattr(profile, field, value)
 
     updated_profile = _update(profile=profile)

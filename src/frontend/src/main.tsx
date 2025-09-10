@@ -44,6 +44,13 @@ const appRouter = createBrowserRouter([
         element: <Dashboard />,
       },
       {
+        path: "profile",
+        lazy: {
+          Component: async () =>
+            (await import("./pages/Profile/Profile")).default,
+        },
+      },
+      {
         path: "milk-collection",
         lazy: {
           Component: async () =>

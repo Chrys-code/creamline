@@ -13,9 +13,9 @@ const MobileFooterNav: React.FC<MobileFooterNavProps> = ({ }: MobileFooterNavPro
 		<nav className={styles.container}>
 			<ul>
 				<li>
-					<NavLink to="milk-collection-list" className={({ isActive }) => (isActive ? styles.active : undefined)}>
+					<NavLink to="/" className={({ isActive }) => (isActive ? styles.active : undefined)}>
 						<MdListAlt size="2rem" />
-						<span>Kollekció</span>
+						<span>Főoldal</span>
 					</NavLink>
 				</li>
 				<li>

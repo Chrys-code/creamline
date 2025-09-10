@@ -6,6 +6,7 @@ export interface InputFieldProps {
 
     label?: string;
     info?: string;
+    defaultValue?: string;
     placeholder?: string;
     error?: string | null;
     disabled?: boolean;
