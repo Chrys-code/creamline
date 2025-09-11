@@ -74,7 +74,8 @@ INSTALLED_APPS = [
     "users",
 	"authentication",
     "profiles",
-    "producers"
+    "producers",
+    "milk"
 ]
 
 MIDDLEWARE = [

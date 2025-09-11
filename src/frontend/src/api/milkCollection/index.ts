@@ -1,12 +1,12 @@
 import { api_client } from "../client"
 
-export const milkCollection = async (payload: {
+export const createMilk = async (payload: {
 	producer: string,
-	amountLire: number,
-	amountKg: number,
+	volume_liters: number,
+	volume_kg: number,
 	temperature: number,
-	limitter: string,
-	aflatoxin: string,
-	acidlevel: number
+	inhibitory_residue: boolean,
+	aflatoxin: boolean,
+	acid_content: number
 }) =>
-	await api_client({ endpoint: "api/milk-collection/", method: "POST", payload: payload })
+	await api_client({ endpoint: "api/v1/milk/", method: "POST", payload: payload })
