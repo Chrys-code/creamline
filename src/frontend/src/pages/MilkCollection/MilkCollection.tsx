@@ -46,8 +46,8 @@ const MilkCollection: React.FC = () => {
 		const volumeLire = Number(formData.get("volume-litre") as string);
 		const volumeKg = Number(formData.get("volume-kg") as string);
 		const temperature = Number(formData.get("temperature") as string);
-		const inhibitoryResidue = formData.get("inhibitory-residue") as string == "true" ? true : false;
-		const aflatoxin = formData.get("aflatoxin") as string == "false" ? false : true;
+		const inhibitoryResidue = !!formData.get("inhibitory-residue") ? formData.get("inhibitory-residue") as string == "true" ? true : false : null;
+		const aflatoxin = !!formData.get("aflatoxin") ? formData.get("aflatoxin") as string == "true" ? true : false : null;
 		const acidContent = Number(formData.get("acid_content") as string);
 
 		const response = await createMilk({
