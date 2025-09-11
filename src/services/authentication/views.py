@@ -23,7 +23,7 @@ class SignupView(generics.CreateAPIView):
         user = serializer.save()
 
         Profile.objects.create(
-            account_id=user,
+            created_by=user,
             email=user.email
         )
 

@@ -8,19 +8,19 @@ logger = logging.getLogger(__name__)
 
 
 def _update(
-    profile: Profile
+    instance: Profile
 ) -> Profile:
-    profile.save()
-    return profile
+    instance.save()
+    return instance
 
 def update_profile(
-        profile: Profile,
+        instance: Profile,
         validated_data: Dict
 ) -> Profile:
     for field, value in validated_data.items():
-        setattr(profile, field, value)
+        setattr(instance, field, value)
 
-    updated_profile = _update(profile=profile)
+    updated_profile = _update(instance=instance)
 
     logger.info(
         "profile-updated",

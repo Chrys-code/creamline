@@ -1,47 +1,39 @@
-import React from "react";
+import type { RequireProducersLoaderData } from "../../routes/loaders/types";
 import styles from "./MilkCollection.module.scss";
-import Dropdown from "../../components/Dropdown";
-import InputField from "../../components/InputField";
-import PageHeader from "../../layouts/PageHeader";
 
+import React from "react";
+import { useLoaderData, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
-import Button from "../../components/Button";
-import Form from "../../components/Form";
-import IconButton from "../../components/IconButton";
-import { useNavigate } from "react-router";
-import { milkCollection } from "../../api/milkCollection";
 
+import PageHeader from "../../layouts/PageHeader";
+import Form from "../../components/Form";
+import InputField from "../../components/InputField";
+import Dropdown from "../../components/Dropdown";
+import Button from "../../components/Button";
+import IconButton from "../../components/IconButton";
+
+import { milkCollection } from "../../api/milkCollection";
 const MdOutlineAddCircleOutline = React.lazy(() => import("react-icons/md").then(mod => ({ default: mod.MdOutlineAddCircleOutline })));
 
 
 const MilkCollection: React.FC = () => {
+	const data: RequireProducersLoaderData = useLoaderData();
 	const navigate = useNavigate();
 
+	const producerOptions = data.producers.map(producer => ({ id: producer.uuid, value: producer.name }));
+
 	const booleanOptions = [
-		{ id: uuid(), value: "Igen" },
-		{ id: uuid(), value: "Nem" },
+		{ id: "true", value: "Igen" },
+		{ id: "false", value: "Nem" },
 	]
-
-	const testOptions = [
-		{ id: uuid(), value: "somebody1 from kalocsa" },
-		{ id: uuid(), value: "somebody2 from kalocsa" }
-	]
-
-	const renderFormActions = () => {
-		return (
-			<>
-				<Button type="button" style="secondary" onClick={() => navigate(-1)}>Vissza</Button>
-				<Button type="submit">Mentés</Button>
-			</>
-		)
-	}
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
 
 		// @ts-ignore
 		const formData = new FormData(e.target);
 
-		const source = formData.get("source") as string;
+		const producer = formData.get("producer") as string;
 		const amountLire = Number(formData.get("amount-litre") as string);
 		const amountKg = Number(formData.get("amount-kg") as string);
 
@@ -51,7 +43,7 @@ const MilkCollection: React.FC = () => {
 		const acidlevel = Number(formData.get("acidlevel") as string);
 
 		const response = await milkCollection({
-			source,
+			producer,
 			amountLire,
 			amountKg,
 			temperature,
@@ -69,10 +61,22 @@ const MilkCollection: React.FC = () => {
 		}
 
 		if (response.ok && response.status == 201) {
-			// @ts-ignore
-			// e.target.reset();
-			// show toast
+			toast.success("Tejátvátel sikeresen elmentve!");
+			navigate("dashboard");
 		};
+	};
+
+	const handleAddProducerClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+		navigate("/add-producer");
+	};
+
+	const renderFormActions = () => {
+		return (
+			<>
+				<Button type="button" style="secondary" onClick={() => navigate(-1)}>Vissza</Button>
+				<Button type="submit">Mentés</Button>
+			</>
+		)
 	}
 
 	return (
@@ -80,10 +84,10 @@ const MilkCollection: React.FC = () => {
 			<PageHeader title="Tejátvétel" />
 			<Form onSubmit={handleSubmit} actionElements={renderFormActions()}>
 				<section>
-					<h2>Beszállító:</h2>
+					<h2>Termelő:</h2>
 					<div className={styles.sourceWrapper}>
-						<Dropdown id={uuid()} name="source" options={testOptions} />
-						<IconButton type="button" ><MdOutlineAddCircleOutline size="1.5rem" /></IconButton>
+						<Dropdown id={uuid()} name="producer" options={producerOptions} />
+						<IconButton type="button" onClick={handleAddProducerClick}><MdOutlineAddCircleOutline size="1.5rem" /></IconButton>
 					</div>
 
 					<div className={styles.amountWrapper}>

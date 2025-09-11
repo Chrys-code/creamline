@@ -3,4 +3,5 @@ export interface IconButtonProps {
 	type?: "button" | "submit";
 	disabled?: boolean;
 	children: React.ReactNode;
+	onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }

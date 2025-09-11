@@ -1,14 +1,14 @@
 import type { FormData } from "./Login.types";
 import styles from "./Login.module.scss";
 
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import { v4 as uuidv4 } from "uuid";
-
 import AuthLayout from "../../layouts/AuthLayout";
 import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 import Form from "../../components/Form";
+
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { v4 as uuidv4 } from "uuid";
 
 import { login } from "../../api/auth";
 

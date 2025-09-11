@@ -1,7 +1,7 @@
 import { api_client } from "../client"
 
 export const milkCollection = async (payload: {
-	source: string,
+	producer: string,
 	amountLire: number,
 	amountKg: number,
 	temperature: number,

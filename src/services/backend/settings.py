@@ -73,7 +73,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "users",
 	"authentication",
-    "profiles"
+    "profiles",
+    "producers"
 ]
 
 MIDDLEWARE = [

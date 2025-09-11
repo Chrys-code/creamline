@@ -11,31 +11,30 @@ from profiles.models import Profile
 from profiles.use_cases.delete import delete_profile
 
 
-
 class ProfileDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.ProfileSerializer
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
         try:
-            return Profile.objects.get(account_id=self.request.user, deleted_at__isnull=True)
+            return Profile.objects.get(created_by=self.request.user, deleted_at__isnull=True)
         except Profile.DoesNotExist:
             return None
         
     def destroy(self, request, *args, **kwargs):
-        profile = self.get_object()
-        if profile is None:
+        instance = self.get_object()
+        if instance is None:
             return Response(
                 {"detail": _("Profile not found.")},
                 status=status.HTTP_404_NOT_FOUND,
             )
 
-        if profile.deleted_at is not None:
+        if instance.deleted_at is not None:
             return Response(
                 {"detail": _("Profile already deleted.")},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        delete_profile(profile=profile, deleted_by=self.request.user)
+        delete_profile(instance=instance, deleted_by=self.request.user)
 
         return Response(status=status.HTTP_204_NO_CONTENT)

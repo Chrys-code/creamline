@@ -5,19 +5,19 @@ from django.db import models
 
 User = get_user_model()
 
-class Profile(models.Model):
+class Producer(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4, unique=True, editable=False, primary_key=False
     )
-    email = models.EmailField(max_length=255, blank=True, null=True)
-    profile_image = models.CharField(max_length=256, blank=True, null=True)
-    first_name = models.CharField(max_length=100, blank=True)
-    last_name = models.CharField(max_length=100, blank=True)
+
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=100)
+    contact_email = models.EmailField(max_length=256, blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(
+    created_by =  models.ForeignKey(
         User,
-        related_name="created_profile",
+        related_name="created_producers",
         on_delete=models.SET_NULL,
         editable=False,
         null=True,
@@ -27,7 +27,7 @@ class Profile(models.Model):
     deleted_at = models.DateTimeField(null=True, blank=True, editable=False)
     deleted_by =  models.ForeignKey(
         User,
-        related_name="deleted_profile",
+        related_name="deleted_producers",
         on_delete=models.SET_NULL,
         editable=False,
         null=True,
