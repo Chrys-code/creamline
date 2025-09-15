@@ -21,6 +21,10 @@ migrate:
 deps-export:
 	cd src/services && poetry export --with dev --without-hashes -f requirements.txt -o requirements.txt
 
+start-app:
+	@read -p "Enter app name (e.g., authentication): " APP; \
+	docker-compose -f dockerfiles/docker-compose.dev.yml -p creamline-dev exec backend python3 manage.py startapp $$APP
+
 make-translations:
 	@read -p "Enter app folder (e.g., authentication): " APP; \
 	docker-compose -f dockerfiles/docker-compose.dev.yml -p creamline-dev exec backend \

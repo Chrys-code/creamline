@@ -75,7 +75,10 @@ INSTALLED_APPS = [
 	"authentication",
     "profiles",
     "producers",
-    "milk"
+    "milk",
+    "storages",
+    "pasteurs",
+    "pasteurised_milk"
 ]
 
 MIDDLEWARE = [
