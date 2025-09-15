@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { PageHeaderProps } from './PageHeader.types.ts'
+import type { PageHeaderProps } from './PageHeader.types.js'
 import styles from './PageHeader.module.scss';
 import { useNavigate } from 'react-router';
 

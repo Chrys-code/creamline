@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { v4 as uuid } from "uuid";
 
-import PageHeader from '../../layouts/PageHeader';
+import PageHeader from '../../components/PageHeader';
 import Form from '../../components/Form';
 import InputField from '../../components/InputField';
 import Button from '../../components/Button';
@@ -18,8 +18,8 @@ const AddProducer: React.FC = () => {
 		name: { message: null },
 		address: { message: null },
 		contactEmail: { message: null },
-		formMessage: null
 	})
+
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		// @ts-ignore
@@ -27,7 +27,7 @@ const AddProducer: React.FC = () => {
 
 		const name = formData.get("name") as string;
 		const address = formData.get("address") as string;
-		const contactEmail = formData.get("contact-email") as string;
+		const contactEmail = formData.get("contactEmail") as string;
 
 		const response = await createProducer({ name, address, contact_email: contactEmail });
 
@@ -37,13 +37,11 @@ const AddProducer: React.FC = () => {
 			const nameMessage = responseData.name ? responseData.name[0] : null;
 			const addressMessage = responseData.address ? responseData.address[0] : null;
 			const contactEmailMessage = responseData.contact_email ? responseData.contact_email[0] : null;
-			const formMessage = responseData.message ? responseData.message : null;
 
 			setFormFieldState({
 				name: { message: nameMessage },
 				address: { message: addressMessage },
 				contactEmail: { message: contactEmailMessage },
-				formMessage: formMessage
 			});
 		}
 
@@ -56,19 +54,10 @@ const AddProducer: React.FC = () => {
 
 	const resetMessage = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		const fieldName = e.target.name;
-
 		setFormFieldState({
-			name: {
-				message: fieldName == "name" ? null : formFieldState.name.message
-			},
-			address: {
-				message: fieldName == "address" ? null : formFieldState.address.message
-			},
-			contactEmail: {
-				message: fieldName == "contact-email" ? null : formFieldState.contactEmail.message
-			},
-			formMessage: null
-		});
+			...formFieldState,
+			[fieldName]: { message: null }
+		})
 	};
 
 
@@ -84,11 +73,12 @@ const AddProducer: React.FC = () => {
 	return (
 		<>
 			<PageHeader title="Új termelő" />
-			<Form title="Termelő adatai:" onSubmit={handleSubmit} actionElements={renderFormActions()}>
+			<Form onSubmit={handleSubmit} actionElements={renderFormActions()}>
 				<section>
+					<h2>Termelő adatai:</h2>
 					<InputField id={uuid()} label="Termelő neve:" name="name" type="text" error={formFieldState.name.message} onChange={resetMessage} />
 					<InputField id={uuid()} label="Termelő székhelye:" name="address" type="text" error={formFieldState.address.message} onChange={resetMessage} />
-					<InputField id={uuid()} label="Kapcsolattartó email:" info="Opcionális" name="contact-email" type="text" error={formFieldState.contactEmail.message} onChange={resetMessage} />
+					<InputField id={uuid()} label="Kapcsolattartó email:" info="Opcionális" name="contactEmail" type="text" error={formFieldState.contactEmail.message} onChange={resetMessage} />
 				</section>
 			</Form>
 		</>
