@@ -78,7 +78,8 @@ INSTALLED_APPS = [
     "milk",
     "storages",
     "pasteurs",
-    "pasteurised_milk"
+    "pasteurised_milk",
+    "products"
 ]
 
 MIDDLEWARE = [

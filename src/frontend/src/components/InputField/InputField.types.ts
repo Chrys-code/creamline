@@ -26,4 +26,5 @@ type InputFieldTypes =
     | "time"
     | "date"
     | "month"
-    | "week";
+    | "week"
+    | "hidden";

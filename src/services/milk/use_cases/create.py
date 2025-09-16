@@ -1,6 +1,7 @@
 import logging
 from typing import TypedDict, TYPE_CHECKING
 
+from storages.models import Storage
 from milk.models import Milk
 from producers.models import Producer
 
@@ -12,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 class CreateMilkData(TypedDict):
     producer: Producer
+    storage: Storage
     volume_kg: float
     volume_liters: float
     acid_content: float
@@ -23,6 +25,12 @@ class CreateMilkData(TypedDict):
 
 def _create(
     producer: Producer,
+    producer_uuid: str,
+    producer_name: str,
+    storage: Storage,
+    storage_uuid: str,
+    storage_name: str,
+    storage_type: str,
     volume_kg: float,
     volume_liters: float,
     acid_content: float,
@@ -33,6 +41,12 @@ def _create(
 ) -> Milk:
     milk = Milk.objects.create(
         producer=producer,
+        producer_uuid=producer_uuid,
+        producer_name=producer_name,
+        storage=storage,
+        storage_uuid=storage_uuid,
+        storage_name=storage_name,
+        storage_type=storage_type,
         volume_kg=volume_kg,
         volume_liters=volume_liters,
         acid_content=acid_content,
@@ -49,10 +63,22 @@ def create_milk(
     validated_data: CreateMilkData,
     created_by: "CustomUser"        
 ) -> Milk:
+    producer=validated_data["producer"]
+    storage=validated_data["storage"]
+
     created_milk = _create(
-        producer=validated_data["producer"],
+        producer=producer,
+        producer_uuid=producer.uuid,
+        producer_name=producer.name,
+
+        storage=storage,
+        storage_uuid=storage.uuid,
+        storage_name=storage.name,
+        storage_type=storage.type,
+
         volume_kg=validated_data["volume_kg"],
         volume_liters=validated_data["volume_liters"],
+
         acid_content=validated_data["acid_content"],
         aflatoxin=validated_data["aflatoxin"],
         inhibitory_residue=validated_data["inhibitory_residue"],

@@ -4,8 +4,10 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import AppLayout from "../layouts/AppLayout";
 import ErrorLayout from "../layouts/ErrorLayout";
 
-import requireAuth from "./loaders/requireAuth";
+import requireAuth, { type RequireAuthData } from "./loaders/requireAuth";
 import requireProducers from "./loaders/requireProducers";
+import requireStorages from "./loaders/requireStorages";
+import type { MilkCollectionLoaderData, RootLoaderData } from "./loaders/types";
 
 
 const appRouter = createBrowserRouter([
@@ -13,7 +15,7 @@ const appRouter = createBrowserRouter([
 		id: "app",
 		path: "/",
 		element: <AppLayout />,
-		loader: async () => await requireAuth(),
+		loader: async (): Promise<RootLoaderData> => ({ profile: await requireAuth() as RequireAuthData }),
 		errorElement: <AppLayout ><ErrorLayout /></AppLayout>,
 		children: [
 			{
@@ -33,7 +35,15 @@ const appRouter = createBrowserRouter([
 					Component: async () =>
 						(await import("../pages/MilkCollection/MilkCollection")).default,
 				},
-				loader: async () => await requireProducers(),
+				loader: async (): Promise<MilkCollectionLoaderData> => ({producers: await requireProducers() || [], storages: await requireStorages() || [] }),
+			},
+			{
+				path: "pasteur",
+				lazy: {
+					Component: async () =>
+						(await import("../pages/Pasteur/Pasteur")).default,
+				},
+				loader: async (): Promise<MilkCollectionLoaderData> => ({producers: await requireProducers() || [], storages: await requireStorages() || [] }),
 			},
 			{
 				path: "add-producer",

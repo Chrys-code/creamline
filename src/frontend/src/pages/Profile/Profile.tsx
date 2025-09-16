@@ -1,4 +1,3 @@
-import type { AppLoaderData } from '../../lib/types/AppLoaderData';
 import styles from './Profile.module.scss';
 
 import { useState } from 'react';
@@ -9,10 +8,11 @@ import Button from '../../components/Button';
 import Form from '../../components/Form';
 import InputField from '../../components/InputField';
 import { updateProfile } from '../../api/profile';
+import type { RootLoaderData } from '../../routes/loaders/types';
 
 
 const Profile: React.FC = () => {
-	const data = useRouteLoaderData('app') as AppLoaderData;
+	const data = useRouteLoaderData('app') as RootLoaderData;
     const revalidator = useRevalidator();
     const [isEditing, setIsEditing] = useState(false);
 
@@ -55,11 +55,11 @@ const Profile: React.FC = () => {
             <div className={styles.profileImage}></div>
             <Form actionElements={renderFormActions()} onSubmit={handleSubmit}>
                 <section>
-                    <InputField id={uuid()} name="first_name" type="text" label="Vezetéknév:" defaultValue={data.userProfile.first_name} disabled={!isEditing}/>
-                    <InputField id={uuid()} name="last_name" type="text" label="Családnév:"  defaultValue={data.userProfile.last_name} disabled={!isEditing}/>
+                    <InputField id={uuid()} name="first_name" type="text" label="Vezetéknév:" defaultValue={data.profile.first_name} disabled={!isEditing}/>
+                    <InputField id={uuid()} name="last_name" type="text" label="Családnév:"  defaultValue={data.profile.last_name} disabled={!isEditing}/>
                     {!isEditing &&
                     <>
-                        <InputField id={uuid()} name="name" type="text" label="Email:" defaultValue={data.userProfile.email} disabled={!isEditing}/>
+                        <InputField id={uuid()} name="name" type="text" label="Email:" defaultValue={data.profile.email} disabled={!isEditing}/>
                         <div className={styles.actions}>
                             <span></span>
                             <Button style="secondary" type="button" onClick={handleEditClick}>Szerkesztés</Button>

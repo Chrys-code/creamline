@@ -4,6 +4,7 @@ from django.core.validators import MinValueValidator
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from storages.models import Storage
 from producers.models import Producer
 User = get_user_model()
 
@@ -19,13 +20,27 @@ class Milk(models.Model):
         editable=False,
         null=False
     )
+    producer_uuid = models.CharField(max_length=255, editable=False)
+    producer_name = models.CharField(max_length=255, editable=False)
+
     volume_kg = models.FloatField(validators=[MinValueValidator(1.00)])
     volume_liters = models.FloatField(validators=[MinValueValidator(1.00)])
 
-    acid_content = models.FloatField(validators=[MinValueValidator(0.00)])
-    aflatoxin = models.BooleanField()
-    inhibitory_residue = models.BooleanField()
-    temperature = models.FloatField(validators=[MinValueValidator(-273.15)])
+    storage = models.ForeignKey(
+            Storage,
+            related_name="stored_milk",
+            on_delete=models.PROTECT,
+            editable=False,
+            null=False
+    )
+    storage_uuid = models.CharField(max_length=255, editable=False)
+    storage_name = models.CharField(max_length=255, editable=False)
+    storage_type = models.CharField(choices=Storage.StorageType.choices, blank=True)
+
+    acid_content = models.FloatField(validators=[MinValueValidator(0.00)], blank=True)
+    aflatoxin = models.BooleanField(blank=True)
+    inhibitory_residue = models.BooleanField(blank=True)
+    temperature = models.FloatField(validators=[MinValueValidator(-273.15)], blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(
@@ -49,3 +64,5 @@ class Milk(models.Model):
 
     objects = models.Manager()
 
+    def __str__(self):
+        return f"{self.producer.name} - {self.uuid}"

@@ -1,4 +1,4 @@
-import type { RequireProducersLoaderData } from "../../routes/loaders/types";
+import type { MilkCollectionLoaderData } from "../../routes/loaders/types";
 import type { FormFieldState } from "./MilkCollection.types";
 import styles from "./MilkCollection.module.scss";
 
@@ -20,13 +20,14 @@ const MdOutlineAddCircleOutline = React.lazy(() => import("react-icons/md").then
 
 
 const MilkCollection: React.FC = () => {
-	const data: RequireProducersLoaderData = useLoaderData();
+	const data: MilkCollectionLoaderData = useLoaderData();
 	const navigate = useNavigate();
 
 	const [formFieldState, setFormFieldState] = useState<FormFieldState>({
 		producer: { message: null },
 		volumeLiter: { message: null },
 		volumeKg: { message: null },
+		storage: { message: null },
 		temperature: { message: null },
 		inhibitoryResidue: { message: null },
 		aflatoxin: { message: null },
@@ -34,6 +35,7 @@ const MilkCollection: React.FC = () => {
 	});
 
 	const producerOptions = data.producers.map(producer => ({ id: producer.uuid, value: producer.name }));
+	const storageOptions = data.storages.map(storage => ({ id: storage.uuid, value: storage.name }));
 	const booleanOptions = [
 		{ id: "true", value: "Igen" },
 		{ id: "false", value: "Nem" },
@@ -46,25 +48,33 @@ const MilkCollection: React.FC = () => {
 		const producer = formData.get("producer") as string;
 		const volumeLier = Number(formData.get("volumeLiter") as string);
 		const volumeKg = Number(formData.get("volumeKg") as string);
+
+		const storage = formData.get("storage") as string;
+
 		const temperature = Number(formData.get("temperature") as string);
-		const inhibitoryResidue = !!formData.get("inhibitoryResidue") ? formData.get("inhibitoryResidue") as string == "true" ? true : false : null;
-		const aflatoxin = !!formData.get("aflatoxin") ? formData.get("aflatoxin") as string == "true" ? true : false : null;
+		const inhibitoryResidue = !!formData.get("inhibitoryResidue") ? formData.get("inhibitoryResidue") as string == "true" ? true : false : undefined;
+		const aflatoxin = !!formData.get("aflatoxin") ? formData.get("aflatoxin") as string == "true" ? true : false : undefined;
 		const acidContent = Number(formData.get("acidContent") as string);
 
 		const response = await createMilk({
 			producer: producer,
 			volume_liters: volumeLier,
 			volume_kg: volumeKg,
+			storage: storage,
 			temperature: temperature,
-			// @ts-ignore
 			inhibitory_residue: inhibitoryResidue,
-			// @ts-ignore
 			aflatoxin: aflatoxin,
 			acid_content: acidContent
 		})
 
 		if (!response.ok) {
 			const responseData = await response.json();
+
+			if (responseData.message) {
+				toast.success(responseData.message);
+				return;
+			}
+
 			const producerMessage = responseData.producer ? responseData.producer[0] : null;
 			const volumeLireMessage = responseData.volume_liters ? responseData.volume_liters[0] : null;
 			const volumeKgMessage = responseData.volume_kg ? responseData.volume_kg[0] : null;
@@ -72,11 +82,13 @@ const MilkCollection: React.FC = () => {
 			const inhibitoryResidueMessage = responseData.inhibitory_residue ? responseData.inhibitory_residue[0] : null;
 			const aflatoxinMessage = responseData.aflatoxin ? responseData.aflatoxin[0] : null;
 			const acidContentMessage = responseData.acid_content ? responseData.acid_content[0] : null;
+			const storageMessage = responseData.storage ? responseData.storage[0] : null;
 
 			setFormFieldState({
 				producer: { message: producerMessage },
 				volumeLiter: { message: volumeLireMessage },
 				volumeKg: { message: volumeKgMessage },
+				storage: { message: storageMessage },
 				temperature: { message: temperatureMessage },
 				inhibitoryResidue: { message: inhibitoryResidueMessage },
 				aflatoxin: { message: aflatoxinMessage },
@@ -143,6 +155,7 @@ const MilkCollection: React.FC = () => {
 						<Dropdown id={uuid()} name="producer" options={producerOptions} error={formFieldState.producer.message} onChange={resetMessage} />
 						<IconButton type="button" onClick={handleAddProducerClick}><MdOutlineAddCircleOutline size="1.5rem" /></IconButton>
 					</div>
+					<Dropdown id={uuid()} name="storage" label="Raktár:" options={storageOptions} error={formFieldState.storage.message} onChange={resetMessage} />
 					<div className={styles.amountWrapper}>
 						<InputField id={uuid()} name="volumeLiter" type="number" step="0.1" label="Mennyiség" info="LITER" error={formFieldState.volumeLiter.message} onChange={handleVolumeChange} />
 						<InputField id={uuid()} name="volumeKg" type="number" step="0.1" label="Mennyiség" info="KG" error={formFieldState.volumeKg.message} onChange={handleVolumeChange} />

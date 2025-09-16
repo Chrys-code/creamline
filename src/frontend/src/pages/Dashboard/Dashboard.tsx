@@ -1,17 +1,17 @@
 import { useNavigate, useRouteLoaderData } from "react-router";
 
-import type { AppLoaderData } from "../../lib/types/AppLoaderData";
 import styles from "./Dashboard.module.scss";
 
 import Button from "../../components/Button";
+import type { RootLoaderData } from "../../routes/loaders/types";
 
 const Dashboard: React.FC = () => {
-	const data = useRouteLoaderData('app') as AppLoaderData;
+	const data = useRouteLoaderData('app') as RootLoaderData;
 	const navigate = useNavigate();
 
-	const name = `${data.userProfile.first_name} ${data.userProfile.last_name}`;
+	const name = `${data.profile.first_name} ${data.profile.last_name}`;
 	const profileHasName = !!name.replaceAll(" ", "");
-	const displayName = profileHasName ? name : data.userProfile.email;
+	const displayName = profileHasName ? name : data.profile.email;
 
 	return (
 		<>
@@ -24,7 +24,7 @@ const Dashboard: React.FC = () => {
 				<h2>Feladatok:</h2>
 				<div>
 					<Button style="secondary" type="button" onClick={() => navigate("/milk-collection")}>Tejátvétel</Button>
-					<Button style="secondary" type="button">Pasztőr</Button>
+					<Button style="secondary" type="button" onClick={() => navigate("/pasteur")}>Pasztőr</Button>
 				</div>
 			</section>
 		</>

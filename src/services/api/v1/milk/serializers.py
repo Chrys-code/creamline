@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from storages.models import Storage
 from producers.models import Producer
 
 from milk.models import Milk
@@ -12,14 +13,33 @@ class MilkSerializer(serializers.ModelSerializer):
         slug_field="uuid",
         queryset=Producer.objects.all()
     )
+    producer_uuid = serializers.CharField(required=False)
+    producer_name = serializers.CharField(required=False)
+
+    storage = serializers.SlugRelatedField(
+        slug_field="uuid",
+        queryset=Storage.objects.all()
+    )
+    storage_uuid = serializers.CharField(required=False)
+    storage_name = serializers.CharField(required=False)
+    storage_type = serializers.CharField(required=False)
      
     class Meta:
         model = Milk
         fields = [
             "uuid", 
-            "producer", 
+            "producer",
+            "producer_uuid",
+            "producer_name",
+
+            "storage",
+            "storage_uuid",
+            "storage_name",
+            "storage_type",
+
             "volume_kg", 
             "volume_liters",
+            
             "acid_content",
             "aflatoxin",
             "inhibitory_residue",
