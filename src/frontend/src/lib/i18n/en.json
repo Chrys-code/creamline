@@ -1,0 +1,26 @@
+{
+  "login": {
+    "title": "Login",
+    "submit": "Login",
+    "input_email_label": "Email:",
+    "input_email_invalid": "Invalid email address",
+    "input_password_label": "Password:",
+    "input_password_required": "Please enter your password"
+  },
+  "add_producer": {
+    "page_title": "New producer",
+    "form_title": "Producer details:",
+    "input_name_label": "Producer name:",
+    "input_name_required": "Please enter producer name",
+    "input_address_label": "Producer address:",
+    "input_address_required": "Please enter producer address",
+    "input_contact_email_label": "Contact email:",
+    "input_email_invalid": "Invalid email address",
+    "notification_message": "New producer added!" 
+  },
+  "common": {
+    "save": "Save",
+    "back": "Back",
+    "optional": "Optional"
+  }
+}

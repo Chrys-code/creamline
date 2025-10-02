@@ -5,6 +5,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 from storages.models import Storage
+from pasteurs.models import Pasteur
+from product_definitions.models import ProductDefinition
 
 User = get_user_model()
 
@@ -13,20 +15,16 @@ class PasteurisedMilk(models.Model):
         default=uuid.uuid4, unique=True, editable=False, primary_key=False
     )
 
+    pasteur = models.ForeignKey(
+        Pasteur,
+        related_name="pasteurised_milk",
+        on_delete=models.SET_NULL,
+        editable=False,
+        null=True,
+        blank=True
+    )
     pasteur_uuid = models.CharField(max_length=255, editable=False)
     pasteur_name = models.CharField(max_length=255, editable=False)
-
-    # product = models.ForeignKey(
-    #     Product,
-    #     related_name="pasteurised_milk",
-    #     on_delete=models.SET_NULL,
-    #     editable=False,
-    #     null=True,
-    #     blank=True
-    # )
-    # product_uuid = models.CharField(choices=Product.ProductTypes.choices, editable=False)
-    # product_name = models.CharField(choices=Product.ProductTypes.choices, editable=False)
-    # product_type = models.CharField(choices=Product.ProductTypes.choices, editable=False)
 
     source_storage = models.ForeignKey(
         Storage,
@@ -51,6 +49,18 @@ class PasteurisedMilk(models.Model):
     target_storage_uuid = models.CharField(max_length=255, editable=False)
     target_storage_name = models.CharField(max_length=255, editable=False)
     target_storage_type = models.CharField(choices=Storage.StorageType.choices, max_length=100, editable=False)
+
+    product_definition = models.ForeignKey(
+        ProductDefinition,
+        related_name="pasteurised_milk",
+        on_delete=models.SET_NULL,
+        editable=False,
+        null=True,
+        blank=True
+    )
+    product_definition_name = models.CharField(max_length=255, editable=False)
+    product_definition_type = models.CharField(choices=ProductDefinition.ProductDefinitionTypes.choices, max_length=255, editable=False)
+
 
     volume_kg = models.FloatField(validators=[MinValueValidator(1.00)])
     volume_liters = models.FloatField(validators=[MinValueValidator(1.00)])

@@ -2,7 +2,7 @@ import { api_client } from "../client"
 
 export const createPasteurisedMilk = async (payload: {
     pasteur: string,
-    product: string,
+    product_definition: string,
     temperature: string,
     source_storage: string,
     target_storage: string,

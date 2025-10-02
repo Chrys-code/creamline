@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Producer",
+            name="ProductDefinition",
             fields=[
                 (
                     "id",
@@ -32,10 +32,16 @@ class Migration(migrations.Migration):
                     models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
                 ),
                 ("name", models.CharField(max_length=255)),
-                ("address", models.CharField(max_length=100)),
                 (
-                    "contact_email",
-                    models.EmailField(blank=True, max_length=256, null=True),
+                    "type",
+                    models.CharField(
+                        choices=[
+                            ("CREAM", "cream"),
+                            ("WHOLE MILK", "whole milk"),
+                            ("SKIMMED MILK", "skimmed milk"),
+                        ],
+                        max_length=255,
+                    ),
                 ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
@@ -50,7 +56,7 @@ class Migration(migrations.Migration):
                         editable=False,
                         null=True,
                         on_delete=django.db.models.deletion.SET_NULL,
-                        related_name="created_producers",
+                        related_name="created_product_definitions",
                         to=settings.AUTH_USER_MODEL,
                     ),
                 ),
@@ -61,10 +67,46 @@ class Migration(migrations.Migration):
                         editable=False,
                         null=True,
                         on_delete=django.db.models.deletion.SET_NULL,
-                        related_name="deleted_producers",
+                        related_name="deleted_product_definitions",
                         to=settings.AUTH_USER_MODEL,
                     ),
                 ),
             ],
+        ),
+        migrations.CreateModel(
+            name="CreamProductDefinition",
+            fields=[],
+            options={
+                "verbose_name": "Cream product definition",
+                "verbose_name_plural": "Cream product definitions",
+                "proxy": True,
+                "indexes": [],
+                "constraints": [],
+            },
+            bases=("product_definitions.productdefinition",),
+        ),
+        migrations.CreateModel(
+            name="SkimmedMilkProductDefinition",
+            fields=[],
+            options={
+                "verbose_name": "Skimmed milk product definition",
+                "verbose_name_plural": "Skimmed milk product definitions",
+                "proxy": True,
+                "indexes": [],
+                "constraints": [],
+            },
+            bases=("product_definitions.productdefinition",),
+        ),
+        migrations.CreateModel(
+            name="WholeMilkMilkProductDefinition",
+            fields=[],
+            options={
+                "verbose_name": "While milk product definition",
+                "verbose_name_plural": "While milk product definitions",
+                "proxy": True,
+                "indexes": [],
+                "constraints": [],
+            },
+            bases=("product_definitions.productdefinition",),
         ),
     ]

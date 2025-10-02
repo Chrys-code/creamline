@@ -12,16 +12,15 @@ export interface RequireAuthData {
 }
 
 const requireAuth = async (): Promise<Response | RequireAuthData> => {
-	const getSessionResponse = await session();
-	if (!getSessionResponse.ok) return redirect("/login");
-
-	const getProfileResponse = await getProfile();
-	if (!getProfileResponse.ok) {
-		return redirect("/login")
+	try {
+		await session();
+		const getProfileResponse = await getProfile();
+		const profileResponseData = await getProfileResponse.response.json()
+		const profileData: { uuid: string, email: string, profile_image: string, first_name: string, last_name: string } = profileResponseData;
+		return profileData
+	} catch {
+		throw redirect("/login")
 	}
-
-	const profileData: { uuid: string, email: string, profile_image: string, first_name: string, last_name: string } = await getProfileResponse.json();
-	return profileData
 }
 
 export default requireAuth;

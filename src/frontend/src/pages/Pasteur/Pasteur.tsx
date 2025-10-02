@@ -2,7 +2,7 @@ import type { FormFieldState } from "./Pasteur.types.ts";
 import styles from "./Pasteur.module.scss";
 
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 
@@ -14,13 +14,19 @@ import Button from "../../components/Button";
 
 import { createPasteurisedMilk } from "../../api/pasteurisedMilk";
 import convertMilkLiterAndKg from "../../lib/helpers/litreToKg";
+import type { PasteurLoaderData } from "../../routes/loaders/types.js";
 
 
 const Pasteur: React.FC = () => {
+    const data: PasteurLoaderData = useLoaderData();
+    const pasteurOptions = data.pasteurs?.map(pasteur => ({id: pasteur.uuid, value: pasteur.name})) || [];
+    const storageOptions = data.storages?.map(storage => ({id: storage.uuid, value: storage.name})) || [];
+    const productDefinitionOptions = data.productDefinitions?.map(productDefinition => ({id: productDefinition.uuid, value: productDefinition.name})) || [];
+
     const navigate = useNavigate();
     const [formFieldState, setFormFieldState] = useState<FormFieldState>({
         pasteur: {message: null},
-        product: {message: null},
+        productDefinition: {message: null},
         temperature: {message: null},
         sourceStorage: {message: null},
         targetStorage: {message: null},
@@ -35,7 +41,7 @@ const Pasteur: React.FC = () => {
         const formData = new FormData(e.target);
 
         const pasteur = formData.get("pasteur") as string;
-        const product = formData.get("product") as string;
+        const productDefinition = formData.get("productDefinition") as string;
         const temperature = formData.get("temperature") as string;
 
         const sourceStorage = formData.get("sourceStorage") as string;
@@ -48,7 +54,7 @@ const Pasteur: React.FC = () => {
         
         const response = await createPasteurisedMilk({
             pasteur: pasteur,
-            product: product,
+            product_definition: productDefinition,
             temperature: temperature,
             source_storage: sourceStorage,
             target_storage: targetStorage,
@@ -124,15 +130,15 @@ const Pasteur: React.FC = () => {
 			<Form onSubmit={handleSubmit} actionElements={renderFormActions()}>
 				<section>
 					<h2>Adatok:</h2>
-						<Dropdown id={uuid()} name="pasteur" label="Pasztőr:" options={[]} error={formFieldState.pasteur.message} onChange={resetMessage} />
-						<Dropdown id={uuid()} name="product" label="Céltermék:" options={[]} error={formFieldState.product.message} onChange={resetMessage} />
+						<Dropdown id={uuid()} name="pasteur" label="Pasztőr:" options={pasteurOptions} error={formFieldState.pasteur.message} onChange={resetMessage} />
+						<Dropdown id={uuid()} name="productDefinition" label="Céltermék:" options={productDefinitionOptions} error={formFieldState.productDefinition.message} onChange={resetMessage} />
                         <InputField id={uuid()} name="temperature" type="number" step="0.1" label="Hőfok:" info="CELSIUS" defaultValue="0" error={formFieldState.temperature.message} onChange={resetMessage} />
 				</section>
 				<section>
 					<h2>Útvonal:</h2>
                     <div className={styles.sideBySideWrapper}>
-						<Dropdown id={uuid()} name="sourceStorage" label="Honnan:" options={[]} error={formFieldState.sourceStorage.message} onChange={resetMessage} />
-						<Dropdown id={uuid()} name="targetStorage" label="Hová:" options={[]} error={formFieldState.product.message} onChange={resetMessage} />
+						<Dropdown id={uuid()} name="sourceStorage" label="Honnan:" options={storageOptions} error={formFieldState.sourceStorage.message} onChange={resetMessage} />
+						<Dropdown id={uuid()} name="targetStorage" label="Hová:" options={storageOptions} error={formFieldState.targetStorage.message} onChange={resetMessage} />
                     </div>
                     <div className={styles.sideBySideWrapper}>
                         <InputField id={uuid()} name="volumeLiter" type="number" step="0.1" label="Mennyiség" info="LITER" error={formFieldState.volumeLiter.message} onChange={handleVolumeChange} />

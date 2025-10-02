@@ -9,13 +9,16 @@ export interface RequireStoragesData {
 }
 
 const requireStorages = async (): Promise<RequireStoragesData[]> => {
-    const getStoragesResponse = await getStorages();
-    if (!getStoragesResponse.ok) {
-        toast.error("Termelők betöltése sikertelen.");
+    try {
+        const getStoragesResponse = await getStorages();
+        if (!getStoragesResponse.response.ok) {
+            toast.error("Termelők betöltése sikertelen.");
+        }
+        const StoragesData = await getStoragesResponse.response.json();
+        return StoragesData
+    } catch {
+        throw toast.error("Termelők betöltése sikertelen.");
     }
-
-    const StoragesData = await getStoragesResponse.json();
-    return StoragesData
 }
 
 export default requireStorages;

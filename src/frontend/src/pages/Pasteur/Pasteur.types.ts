@@ -1,6 +1,6 @@
 export interface FormFieldState {
     pasteur: {message: string | null},
-    product: {message: string | null},
+    productDefinition: {message: string | null},
     temperature: {message: string | null},
     sourceStorage: {message: string | null},
     targetStorage: {message: string | null},

@@ -10,13 +10,17 @@ export interface RequireProducersData {
 }
 
 const requireProducers = async (): Promise<RequireProducersData[]> => {
-	const getProducersResponse = await getProducers();
-	if (!getProducersResponse.ok) {
-		toast.error("Termelők betöltése sikertelen.");
-	}
+	try {
+		const getProducersResponse = await getProducers();
+		if (!getProducersResponse.response.ok) {
+			toast.error("Termelők betöltése sikertelen.");
+		}
 
-	const producersData = await getProducersResponse.json();
-	return producersData
+		const producersData = await getProducersResponse.response.json();
+		return producersData
+	} catch {
+		throw toast.error("Termelők betöltése sikertelen.");
+	}
 }
 
 export default requireProducers;

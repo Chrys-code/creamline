@@ -9,6 +9,8 @@ import {
 import appRouter from "./routes/router";
 import { ToastContainer } from "react-toastify";
 
+import "./configs/i18n";
+
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

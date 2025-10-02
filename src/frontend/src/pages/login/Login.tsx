@@ -1,4 +1,4 @@
-import type { FormData } from "./Login.types";
+import type { z } from "zod";
 import styles from "./Login.module.scss";
 
 import AuthLayout from "../../layouts/AuthLayout";
@@ -6,84 +6,53 @@ import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 import Form from "../../components/Form";
 
-import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuidv4 } from "uuid";
 
-import { login } from "../../api/auth";
+import { api } from "../../api/axios";
+import { schemas } from "../../lib/schemas/schemas";
+import { useTranslation } from "react-i18next";
+
+
+const LoginSchema = schemas.Login;
+type LoginFormData = z.infer<typeof LoginSchema>;
 
 
 const Login: React.FC = () => {
+	const { t } = useTranslation();
 	const navigate = useNavigate();
 
-	const [formFieldState, setFormFieldState] = useState<FormData>({
-		email: {
-			fieldName: "email",
-			message: null,
-		},
-		password: {
-			fieldName: "password",
-			message: null,
-		},
-		formMessage: null
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isSubmitting },
+		setError,
+		clearErrors
+	} = useForm<LoginFormData>({
+		resolver: zodResolver(LoginSchema),
 	});
 
-
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-		// @ts-ignore
-		const formData = new FormData(e.target);
-
-		const email = formData.get("email") as string;
-		const password = formData.get("password") as string;
-
-		const response = await login({ email: email, password: password });
-
-		if (!response.ok) {
-			const responseData = await response.json();
-
-			const emailMessage = responseData.email ? responseData.email[0] : null;
-			const passwordMessage = responseData.password ? responseData.password[0] : null;
-			const formMessage = responseData.message ? responseData.message : null;
-
-			setFormFieldState({
-				email: {
-					...formFieldState.email,
-					message: emailMessage
-				},
-				password: {
-					...formFieldState.password,
-					message: passwordMessage
-				},
-				formMessage: formMessage
-			});
-		};
-
-		if (response.ok && response.status == 200) {
+	const onSubmit = async (formData: LoginFormData) => {
+		try {
+			await api.post("/api/login/", formData);
 			navigate("/");
-		};
-	}
-
-	const resetMessage = (e: React.ChangeEvent<HTMLInputElement>): void => {
-		const fieldName = e.target.name;
-
-		setFormFieldState({
-			email: {
-				...formFieldState.email,
-				message: fieldName == "email" ? null : formFieldState.email.message
-			},
-			password: {
-				...formFieldState.password,
-				message: fieldName == "password" ? null : formFieldState.password.message
-			},
-			formMessage: null
-		});
+		} catch (err: any) {
+			if (err.response?.data) {
+				const responseData = err.response.data;
+				if (responseData.email) setError("email", { message: responseData.email[0] });
+				if (responseData.password) setError("password", { message: responseData.password[0] });
+				if (responseData.message) setError("formMessage", { message: responseData.message });
+			}
+		}
 	};
 
 	const renderFormActions = () => {
 		return (
 			<div className={styles.formActions}>
-				{formFieldState.formMessage && <span className={styles.errorMessage}>{formFieldState.formMessage}</span>}
-				<Button style="primary" type="submit">Bejelentkezés</Button>
+				{errors.formMessage && <span className={styles.errorMessage}>{errors.formMessage.message}</span>}
+				<Button style="primary" type="submit" disabled={isSubmitting}>{t("login.submit")}</Button>
 			</div>
 		)
 	}
@@ -91,11 +60,11 @@ const Login: React.FC = () => {
 	return (
 		<AuthLayout>
 			<div className={styles.container}>
-				<Form onSubmit={handleSubmit} actionElements={renderFormActions()}>
-					<h1>Bejelentkezés</h1>
+				<Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
+					<h1>{t("login.title")}</h1>
 					<section>
-						<InputField id={uuidv4()} name={formFieldState.email.fieldName} label="Email:" type="text" onChange={resetMessage} error={formFieldState.email.message} />
-						<InputField id={uuidv4()} name={formFieldState.password.fieldName} label="Jelszó:" type="password" onChange={resetMessage} error={formFieldState.password.message} />
+						<InputField id={uuidv4()} {...register("email", { onChange: () => clearErrors("email") })} label={t("login.input_email_label")} type="text" error={errors.email?.message} />
+						<InputField id={uuidv4()} {...register("password", { onChange: () => clearErrors("password") })} label={t("login.input_password_label")} type="password" error={errors.password?.message} />
 					</section>
 				</Form>
 			</div>

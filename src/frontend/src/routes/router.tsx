@@ -1,3 +1,4 @@
+import type { MilkCollectionLoaderData, PasteurLoaderData, RootLoaderData } from "./loaders/types";
 import { createBrowserRouter } from "react-router";
 
 import Dashboard from "../pages/Dashboard/Dashboard";
@@ -7,7 +8,8 @@ import ErrorLayout from "../layouts/ErrorLayout";
 import requireAuth, { type RequireAuthData } from "./loaders/requireAuth";
 import requireProducers from "./loaders/requireProducers";
 import requireStorages from "./loaders/requireStorages";
-import type { MilkCollectionLoaderData, RootLoaderData } from "./loaders/types";
+import requirePasteurs from "./loaders/requirePasteurs";
+import requireProductDefinitions from "./loaders/requireProductDefinitions";
 
 
 const appRouter = createBrowserRouter([
@@ -43,7 +45,7 @@ const appRouter = createBrowserRouter([
 					Component: async () =>
 						(await import("../pages/Pasteur/Pasteur")).default,
 				},
-				loader: async (): Promise<MilkCollectionLoaderData> => ({producers: await requireProducers() || [], storages: await requireStorages() || [] }),
+				loader: async (): Promise<PasteurLoaderData> => ({pasteurs: await requirePasteurs(), storages: await requireStorages(), productDefinitions: await requireProductDefinitions()}),
 			},
 			{
 				path: "add-producer",

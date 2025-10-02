@@ -8,14 +8,14 @@ export const api_client = async ({
 	endpoint: string,
 	method: "GET" | "POST" | "PATCH" | "DELETE",
 	payload: any
-}): Promise<any> => {
+}): Promise<{ response: any, controller: AbortController }> => {
+	const controller = new AbortController();
 
 	const unsafeRequests = ["POST", "PATCH", "DELETE"];
 	const methodIsUnsafe = unsafeRequests.includes(method);
 
 	const headers = {
 		"Content-Type": "application/json",
-		"Accept-Language": "hu"
 	}
 
 	if (methodIsUnsafe) {
@@ -29,7 +29,8 @@ export const api_client = async ({
 		credentials: "include",
 		redirect: "follow",
 		body: JSON.stringify(payload),
+		signal: controller.signal
 	});
 
-	return response
+	return { response, controller }
 }

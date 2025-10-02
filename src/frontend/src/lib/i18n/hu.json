@@ -1,0 +1,26 @@
+{
+  "login": {
+    "title": "Bejelentkezés",
+    "submit": "Bejelentkezés",
+    "input_email_label": "Email:",
+    "input_email_invalid": "Hibás email cím",
+    "input_password_label": "Jelszó:",
+    "input_password_required": "Adja meg a jelszót"
+  },
+  "add_producer": {
+    "page_title": "Új termelő",
+    "form_title": "Termelő adatai:",
+    "input_name_label": "Termelő neve:",
+    "input_name_required": "Adja meg a termelő nevét",
+    "input_address_label": "Termelő székhelye:",
+    "input_address_required": "Adja meg a termelő székhelyét",
+    "input_contact_email_label": "Kapcsolattartó email:",
+    "input_email_invalid": "Érvénytelen email cím",
+    "notification_message": "Új termelő hozzáadva!" 
+  },
+  "common": {
+    "save": "Mentés",
+    "back": "Vissza",
+    "optional": "Opcionális"
+  }
+}

@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "drf_spectacular",
     "users",
 	"authentication",
     "profiles",
@@ -79,7 +80,7 @@ INSTALLED_APPS = [
     "storages",
     "pasteurs",
     "pasteurised_milk",
-    "products"
+    "product_definitions"
 ]
 
 MIDDLEWARE = [
@@ -158,6 +159,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 AUTH_USER_MODEL = "users.CustomUser"
