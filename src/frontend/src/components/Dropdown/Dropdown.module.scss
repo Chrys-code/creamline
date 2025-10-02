@@ -16,6 +16,10 @@
 	font-size: var(--fs-caption);
 }
 
+.container > div > span {
+    text-transform: uppercase;
+}
+
 .input {
 	border: 1px solid gray;
 	border-radius: .5rem;

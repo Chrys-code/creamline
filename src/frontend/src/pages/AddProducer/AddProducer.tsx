@@ -62,14 +62,30 @@ const AddProducer: React.FC = () => {
 	return (
 		<>
 			<PageHeader title={t("add_producer.page_title")} />
-			<Form onSubmit={handleSubmit(onSubmit, (invalidData) => {
-				console.error("❌ Validation failed", invalidData, errors);
-			})} actionElements={renderFormActions()}>
+			<Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
 				<section>
 					<h2>{t("add_producer.form_title")}</h2>
-					<InputField id={uuid()} {...register("name", { onChange: () => clearErrors("name") })} label={t("add_producer.input_name_label")} type="text" error={errors.name?.message} />
-					<InputField id={uuid()} {...register("address", { onChange: () => clearErrors("address") })} label={t("add_producer.input_address_label")} type="text" error={errors.address?.message} />
-					<InputField id={uuid()} {...register("contact_email", { onChange: () => clearErrors("contact_email") })} label={t("add_producer.input_contact_email_label")} info={t("common.optional")} type="text" error={errors.contact_email?.message} />
+					<InputField
+						id={uuid()}
+						{...register("name", { onChange: () => clearErrors("name") })}
+						label={t("add_producer.input_name_label")}
+						type="text"
+						error={errors.name?.message} />
+					<InputField
+						id={uuid()}
+						{...register("address", { onChange: () => clearErrors("address") })}
+						label={t("add_producer.input_address_label")}
+						type="text"
+						error={errors.address?.message}
+					/>
+					<InputField
+						id={uuid()}
+						{...register("contact_email", { onChange: () => clearErrors("contact_email") })}
+						label={t("add_producer.input_contact_email_label")}
+						info={t("common.optional")}
+						type="text"
+						error={errors.contact_email?.message}
+					/>
 				</section>
 			</Form>
 		</>

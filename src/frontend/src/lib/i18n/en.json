@@ -1,26 +1,56 @@
 {
+  "utilities": {
+    "storage": "Storage",
+    "volume": "Volume"
+  },
+  "qualities": {
+    "temperature": "Temperature",
+    "inhibitory_residue": "Inhibitory Residue",
+    "aflatoxin": "Aflatoxin",
+    "acid_level": "Acid level"
+  },
+  "units": {
+    "kg_short": "kg",
+    "liter": "liter(s)",
+    "celsius": "celsius",
+    "positive_or_negative": "positive / negative",
+    "acid_level": "SH⁰",
+    "more_or_less_than_50": "more or less than 50"
+  },
+  "common": {
+    "save": "Save",
+    "back": "Back",
+    "select": "Select",
+    "optional": "Optional",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "common_validation": {
+    "input_gte_0": "Volume must be above 0",
+    "input_select_required": "Please select"
+  },
   "login": {
     "title": "Login",
     "submit": "Login",
-    "input_email_label": "Email:",
+    "input_email_label": "Email",
     "input_email_invalid": "Invalid email address",
-    "input_password_label": "Password:",
+    "input_password_label": "Password",
     "input_password_required": "Please enter your password"
   },
   "add_producer": {
     "page_title": "New producer",
     "form_title": "Producer details:",
-    "input_name_label": "Producer name:",
+    "input_name_label": "Producer name",
     "input_name_required": "Please enter producer name",
-    "input_address_label": "Producer address:",
+    "input_address_label": "Producer address",
     "input_address_required": "Please enter producer address",
-    "input_contact_email_label": "Contact email:",
+    "input_contact_email_label": "Contact email",
     "input_email_invalid": "Invalid email address",
     "notification_message": "New producer added!" 
   },
-  "common": {
-    "save": "Save",
-    "back": "Back",
-    "optional": "Optional"
+  "milk_collection": {
+    "page_title": "Milk collection",
+    "producer_section_title": "Producer",
+    "qualities_section_title": "Qualities"
   }
 }

@@ -1,10 +1,12 @@
+import type { z } from "zod";
 import type { MilkCollectionLoaderData } from "../../routes/loaders/types";
-import type { FormFieldState } from "./MilkCollection.types";
 import styles from "./MilkCollection.module.scss";
 
-import React, { useState } from "react";
+import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
 
 import PageHeader from "../../components/PageHeader";
@@ -15,158 +17,179 @@ import Button from "../../components/Button";
 import IconButton from "../../components/IconButton";
 
 import convertMilkLiterAndKg from "../../lib/helpers/litreToKg";
-import { createMilk } from "../../api/milkCollection";
+
+import { api } from "../../api/axios";
+import { schemas } from "../../lib/schemas/schemas";
+import { useTranslation } from "react-i18next";
+
+
+const MilkSchema = schemas.Milk;
+type MilkFormData = z.infer<typeof MilkSchema>;
+
 const MdOutlineAddCircleOutline = React.lazy(() => import("react-icons/md").then(mod => ({ default: mod.MdOutlineAddCircleOutline })));
 
 
 const MilkCollection: React.FC = () => {
 	const data: MilkCollectionLoaderData = useLoaderData();
+	const { t } = useTranslation();
 	const navigate = useNavigate();
 
-	const [formFieldState, setFormFieldState] = useState<FormFieldState>({
-		producer: { message: null },
-		volumeLiter: { message: null },
-		volumeKg: { message: null },
-		storage: { message: null },
-		temperature: { message: null },
-		inhibitoryResidue: { message: null },
-		aflatoxin: { message: null },
-		acidContent: { message: null },
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isSubmitting },
+		setValue,
+		setError,
+		clearErrors
+	} = useForm<MilkFormData>({
+		resolver: zodResolver(MilkSchema),
+		defaultValues: {
+			volume_kg: 0,
+			volume_liters: 0,
+			temperature: 0,
+			acid_content: 0,
+			aflatoxin: false,
+			inhibitory_residue: false,
+		}
 	});
 
 	const producerOptions = data.producers.map(producer => ({ id: producer.uuid, value: producer.name }));
 	const storageOptions = data.storages.map(storage => ({ id: storage.uuid, value: storage.name }));
 	const booleanOptions = [
-		{ id: "true", value: "Igen" },
-		{ id: "false", value: "Nem" },
+		{ id: "true", value: t("common.yes") },
+		{ id: "false", value: t("common.no") },
 	]
 
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-		// @ts-ignore
-		const formData = new FormData(e.target);
-
-		const producer = formData.get("producer") as string;
-		const volumeLier = Number(formData.get("volumeLiter") as string);
-		const volumeKg = Number(formData.get("volumeKg") as string);
-
-		const storage = formData.get("storage") as string;
-
-		const temperature = Number(formData.get("temperature") as string);
-		const inhibitoryResidue = !!formData.get("inhibitoryResidue") ? formData.get("inhibitoryResidue") as string == "true" ? true : false : undefined;
-		const aflatoxin = !!formData.get("aflatoxin") ? formData.get("aflatoxin") as string == "true" ? true : false : undefined;
-		const acidContent = Number(formData.get("acidContent") as string);
-
-		const response = await createMilk({
-			producer: producer,
-			volume_liters: volumeLier,
-			volume_kg: volumeKg,
-			storage: storage,
-			temperature: temperature,
-			inhibitory_residue: inhibitoryResidue,
-			aflatoxin: aflatoxin,
-			acid_content: acidContent
-		})
-
-		if (!response.ok) {
-			const responseData = await response.json();
-
-			if (responseData.message) {
-				toast.success(responseData.message);
-				return;
-			}
-
-			const producerMessage = responseData.producer ? responseData.producer[0] : null;
-			const volumeLireMessage = responseData.volume_liters ? responseData.volume_liters[0] : null;
-			const volumeKgMessage = responseData.volume_kg ? responseData.volume_kg[0] : null;
-			const temperatureMessage = responseData.temperature ? responseData.temperature[0] : null;
-			const inhibitoryResidueMessage = responseData.inhibitory_residue ? responseData.inhibitory_residue[0] : null;
-			const aflatoxinMessage = responseData.aflatoxin ? responseData.aflatoxin[0] : null;
-			const acidContentMessage = responseData.acid_content ? responseData.acid_content[0] : null;
-			const storageMessage = responseData.storage ? responseData.storage[0] : null;
-
-			setFormFieldState({
-				producer: { message: producerMessage },
-				volumeLiter: { message: volumeLireMessage },
-				volumeKg: { message: volumeKgMessage },
-				storage: { message: storageMessage },
-				temperature: { message: temperatureMessage },
-				inhibitoryResidue: { message: inhibitoryResidueMessage },
-				aflatoxin: { message: aflatoxinMessage },
-				acidContent: { message: acidContentMessage },
-			})
-
-		}
-
-		if (response.ok && response.status == 201) {
-			toast.success("Tejátvátel sikeresen elmentve!");
+	const onSubmit = async (formData: MilkFormData): Promise<void> => {
+		try {
+			await api.post("/api/v1/milk/", formData);
+			toast.success(t("add_producer.notification_message"));
 			navigate("/");
-		};
-	};
-
-	const handleAddProducerClick = (): void => {
-		navigate("/add-producer");
-	};
-
-	const resetMessage = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
-		const fieldName = e.target.name;
-		setFormFieldState({
-			...formFieldState,
-			[fieldName]: { message: null }
-		})
+		} catch (err: any) {
+			if (err.response?.data) {
+				const responseData = err.response.data;
+				if (responseData.producer) setError("producer", { message: responseData.producer[0] })
+				if (responseData.storage) setError("storage", { message: responseData.storage[0] })
+				if (responseData.volume_kg) setError("volume_kg", { message: responseData.volume_kg[0] })
+				if (responseData.volume_liters) setError("volume_liters", { message: responseData.volume_liters[0] })
+				if (responseData.acid_content) setError("acid_content", { message: responseData.acid_content[0] })
+				if (responseData.aflatoxin) setError("aflatoxin", { message: responseData.aflatoxin[0] })
+				if (responseData.inhibitory_residue) setError("inhibitory_residue", { message: responseData.inhibitory_residue[0] })
+				if (responseData.temperature) setError("temperature", { message: responseData.temperature[0] })
+			}
+		}
 	};
 
 	const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const target = e.target;
 
-		if (target.name == "volumeLiter") {
+		if (target.name == "volume_liters") {
 			const value = convertMilkLiterAndKg({ liters: Number(target.value), kg: undefined });
-			const volumeKgInput: HTMLInputElement | null = document.querySelector("input[name=volumeKg]");
-			if (volumeKgInput) volumeKgInput.value = value
+			setValue("volume_kg", Number(value));
 		}
 
-		if (target.name == "volumeKg") {
+		if (target.name == "volume_kg") {
 			const value = convertMilkLiterAndKg({ liters: undefined, kg: Number(target.value) });
-			const volumeLiterInput: HTMLInputElement | null = document.querySelector("input[name=volumeLiter]");
-			if (volumeLiterInput) volumeLiterInput.value = value
+			setValue("volume_liters", Number(value));
 		}
-
-		// reset messages
-		setFormFieldState({
-			...formFieldState,
-			volumeLiter: { message: null },
-			volumeKg: { message: null },
-		})
 	}
 
 	const renderFormActions = (): React.ReactNode => (
 		<>
-			<Button type="button" style="secondary" onClick={() => navigate(-1)}>Vissza</Button>
-			<Button type="submit">Mentés</Button>
+			<Button type="button" style="secondary" onClick={() => navigate(-1)}>{t("common.back")}</Button>
+			<Button type="submit" disabled={isSubmitting}>{t("common.save")}</Button>
 		</>
 	)
 
 	return (
 		<>
-			<PageHeader title="Tejátvétel" />
-			<Form onSubmit={handleSubmit} actionElements={renderFormActions()}>
+			<PageHeader title={t("milk_collection.page_title")} />
+			<Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
 				<section>
-					<h2>Termelő:</h2>
+					<h2>{t("milk_collection.producer_section_title")}</h2>
 					<div className={styles.sourceWrapper}>
-						<Dropdown id={uuid()} name="producer" options={producerOptions} error={formFieldState.producer.message} onChange={resetMessage} />
-						<IconButton type="button" onClick={handleAddProducerClick}><MdOutlineAddCircleOutline size="1.5rem" /></IconButton>
+						<Dropdown
+							id={uuid()}
+							{...register("producer", { onChange: () => clearErrors("producer") })}
+							placeholder={t("common.select")}
+							options={producerOptions}
+							error={errors.producer?.message}
+						/>
+						<IconButton
+							type="button"
+							onClick={() => navigate("/add-producer")}>
+							<MdOutlineAddCircleOutline size="1.5rem" />
+						</IconButton>
 					</div>
-					<Dropdown id={uuid()} name="storage" label="Raktár:" options={storageOptions} error={formFieldState.storage.message} onChange={resetMessage} />
+					<Dropdown
+						id={uuid()}
+						{...register("storage", { onChange: () => clearErrors("storage") })}
+						label={t("utilities.storage")}
+						placeholder={t("common.select")}
+						options={storageOptions}
+						error={errors.storage?.message}
+					/>
 					<div className={styles.amountWrapper}>
-						<InputField id={uuid()} name="volumeLiter" type="number" step="0.1" label="Mennyiség" info="LITER" error={formFieldState.volumeLiter.message} onChange={handleVolumeChange} />
-						<InputField id={uuid()} name="volumeKg" type="number" step="0.1" label="Mennyiség" info="KG" error={formFieldState.volumeKg.message} onChange={handleVolumeChange} />
+						<InputField
+							id={uuid()}
+							{...register("volume_liters", { valueAsNumber: true, onChange: (e) => { clearErrors(["volume_liters", "volume_kg"]), handleVolumeChange(e) } })}
+							type="number"
+							step="0.01"
+							label={t("utilities.volume")}
+							info={t("units.liter")}
+							error={errors.volume_liters?.message}
+							onChange={handleVolumeChange}
+						/>
+						<InputField
+							id={uuid()}
+							{...register("volume_kg", { valueAsNumber: true, onChange: (e) => { clearErrors(["volume_kg", "volume_liters"]), handleVolumeChange(e) } })}
+							type="number"
+							step="0.01"
+							label={t("utilities.volume")}
+							info={t("units.kg_short")}
+							error={errors.volume_kg?.message}
+							onChange={handleVolumeChange}
+						/>
 					</div>
 				</section>
 				<section>
-					<h2>Beltartalmi értékek:</h2>
-					<InputField id={uuid()} name="temperature" type="number" step="0.1" label="Hőfok" info="CELSIUS" error={formFieldState.temperature.message} onChange={resetMessage} />
-					<Dropdown id={uuid()} name="inhibitoryResidue" options={booleanOptions} label="Gátló" info="POZITÍV / NEGATÍV" error={formFieldState.inhibitoryResidue.message} onChange={resetMessage} />
-					<Dropdown id={uuid()} name="aflatoxin" options={booleanOptions} label="Aflatoxin" info="TÖBB / KEVESEBB MINT 50" error={formFieldState.aflatoxin.message} onChange={resetMessage} />
-					<InputField id={uuid()} name="acidContent" type="number" step="0.1" label="Savfok" info="SH⁰" error={formFieldState.acidContent.message} onChange={resetMessage} />
+					<h2>{t("milk_collection.qualities_section_title")}</h2>
+					<InputField
+						id={uuid()}
+						{...register("temperature", { valueAsNumber: true, onChange: () => clearErrors("temperature") })}
+						type="number"
+						step="0.1"
+						label={t("qualities.temperature")}
+						info={t("units.celsius")}
+						error={errors.temperature?.message}
+					/>
+					<Dropdown
+						id={uuid()}
+						{...register("inhibitory_residue", { onChange: () => clearErrors("inhibitory_residue") })}
+						placeholder={t("common.select")}
+						options={booleanOptions}
+						label={t("qualities.inhibitory_residue")}
+						info={t("units.positive_or_negative")}
+						error={errors.inhibitory_residue?.message}
+					/>
+					<Dropdown
+						id={uuid()}
+						{...register("aflatoxin", { onChange: () => clearErrors("aflatoxin") })}
+						placeholder={t("common.select")}
+						options={booleanOptions}
+						label={t("qualities.aflatoxin")}
+						info={t("units.more_or_less_than_50")}
+						error={errors.aflatoxin?.message}
+					/>
+					<InputField
+						id={uuid()}
+						{...register("acid_content", { valueAsNumber: true, onChange: () => clearErrors("acid_content") })}
+						type="number"
+						step="0.1"
+						label={t("qualities.acid_level")}
+						info={t("units.acid_level")}
+						error={errors.acid_content?.message}
+					/>
 				</section>
 			</Form>
 		</>

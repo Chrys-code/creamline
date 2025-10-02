@@ -63,8 +63,19 @@ const Login: React.FC = () => {
 				<Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
 					<h1>{t("login.title")}</h1>
 					<section>
-						<InputField id={uuidv4()} {...register("email", { onChange: () => clearErrors("email") })} label={t("login.input_email_label")} type="text" error={errors.email?.message} />
-						<InputField id={uuidv4()} {...register("password", { onChange: () => clearErrors("password") })} label={t("login.input_password_label")} type="password" error={errors.password?.message} />
+						<InputField
+							id={uuidv4()}
+							{...register("email", { onChange: () => clearErrors("email") })}
+							label={t("login.input_email_label")}
+							type="text"
+							error={errors.email?.message} />
+						<InputField
+							id={uuidv4()}
+							{...register("password", { onChange: () => clearErrors("password") })}
+							label={t("login.input_password_label")}
+							type="password"
+							error={errors.password?.message}
+						/>
 					</section>
 				</Form>
 			</div>

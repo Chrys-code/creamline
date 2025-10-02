@@ -15,23 +15,23 @@ const Signup = z
 
 const Milk = z
   .object({
-    uuid: z.string().uuid(),
-    producer: z.string().uuid(),
-    producer_uuid: z.string().optional(),
-    producer_name: z.string().optional(),
-    storage: z.string().uuid(),
-    storage_uuid: z.string().optional(),
-    storage_name: z.string().optional(),
-    storage_type: z.string().optional(),
-    volume_kg: z.number().gte(1),
-    volume_liters: z.number().gte(1),
+    // uuid: z.string().uuid(),
+    producer: z.string().uuid({ message: i18n.t("common_validation.input_select_required") }),
+    // producer_uuid: z.string().optional(),
+    // producer_name: z.string().optional(),
+    storage: z.string().uuid({ message: i18n.t("common_validation.input_select_required") }),
+    // storage_uuid: z.string().optional(),
+    // storage_name: z.string().optional(),
+    // storage_type: z.string().optional(),
+    volume_kg: z.number().gte(1, { message: i18n.t("common_validation.input_gte_0") }),
+    volume_liters: z.number().gte(1, { message: i18n.t("common_validation.input_gte_0") }),
     acid_content: z.number().gte(0).optional(),
-    aflatoxin: z.boolean().optional(),
-    inhibitory_residue: z.boolean().optional(),
+    inhibitory_residue: z.coerce.boolean().optional(),
+    aflatoxin: z.coerce.boolean().optional(),
     temperature: z.number().gte(-273.15).optional(),
-    created_at: z.string().datetime({ offset: true }),
-    updated_at: z.string().datetime({ offset: true }),
-    deleted_at: z.string().datetime({ offset: true }).nullable(),
+    // created_at: z.string().datetime({ offset: true }),
+    // updated_at: z.string().datetime({ offset: true }),
+    // deleted_at: z.string().datetime({ offset: true }).nullable(),
   })
   .passthrough();
 
@@ -70,13 +70,13 @@ const Pasteur = z
 
 const Producer = z
   .object({
-    uuid: z.string().uuid().optional(),
+    // uuid: z.string().uuid(),
     name: z.string().max(255).min(1, { message: i18n.t("add_producer.input_name_required") }),
     address: z.string().min(1, { message: i18n.t("add_producer.input_address_required") }).max(100),
     contact_email: z.string().max(256).email({ message: i18n.t("add_producer.input_email_invalid") }).or(z.literal("")).nullish(),
-    created_at: z.string().datetime({ offset: true }).optional(),
-    updated_at: z.string().datetime({ offset: true }).optional(),
-    deleted_at: z.string().datetime({ offset: true }).nullable().optional(),
+    // created_at: z.string().datetime({ offset: true }),
+    // updated_at: z.string().datetime({ offset: true }),
+    // deleted_at: z.string().datetime({ offset: true }).nullable(),
   })
   .passthrough();
 
