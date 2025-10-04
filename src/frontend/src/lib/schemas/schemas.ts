@@ -15,82 +15,52 @@ const Signup = z
 
 const Milk = z
   .object({
-    // uuid: z.string().uuid(),
     producer: z.string().uuid({ message: i18n.t("common_validation.input_select_required") }),
-    // producer_uuid: z.string().optional(),
-    // producer_name: z.string().optional(),
     storage: z.string().uuid({ message: i18n.t("common_validation.input_select_required") }),
-    // storage_uuid: z.string().optional(),
-    // storage_name: z.string().optional(),
-    // storage_type: z.string().optional(),
     volume_kg: z.number().gte(1, { message: i18n.t("common_validation.input_gte_0") }),
     volume_liters: z.number().gte(1, { message: i18n.t("common_validation.input_gte_0") }),
     acid_content: z.number().gte(0).optional(),
     inhibitory_residue: z.coerce.boolean().optional(),
     aflatoxin: z.coerce.boolean().optional(),
-    temperature: z.number().gte(-273.15).optional(),
-    // created_at: z.string().datetime({ offset: true }),
-    // updated_at: z.string().datetime({ offset: true }),
-    // deleted_at: z.string().datetime({ offset: true }).nullable(),
+    temperature: z.number().gte(-273.15, { message: i18n.t("common_validation.input_gte_absolute_zero") }).optional(),
   })
-  .passthrough();
-
-const PatchedMilk = z
-  .object({
-    uuid: z.string().uuid(),
-    producer: z.string().uuid(),
-    producer_uuid: z.string(),
-    producer_name: z.string(),
-    storage: z.string().uuid(),
-    storage_uuid: z.string(),
-    storage_name: z.string(),
-    storage_type: z.string(),
-    volume_kg: z.number().gte(1),
-    volume_liters: z.number().gte(1),
-    acid_content: z.number().gte(0),
-    aflatoxin: z.boolean(),
-    inhibitory_residue: z.boolean(),
-    temperature: z.number().gte(-273.15),
-    created_at: z.string().datetime({ offset: true }),
-    updated_at: z.string().datetime({ offset: true }),
-    deleted_at: z.string().datetime({ offset: true }).nullable(),
-  })
-  .partial()
   .passthrough();
 
 const Pasteur = z
   .object({
     uuid: z.string().uuid(),
     name: z.string().max(255),
-    created_at: z.string().datetime({ offset: true }),
-    updated_at: z.string().datetime({ offset: true }),
-    deleted_at: z.string().datetime({ offset: true }).nullable(),
+  })
+  .passthrough();
+
+const PasteurisedMilk = z
+  .object({
+    pasteur: z.string().uuid({ message: i18n.t("common_validation.input_select_required") }),
+    product_definition: z.string().uuid({ message: i18n.t("common_validation.input_select_required") }),
+    source_storage: z.string().uuid({ message: i18n.t("common_validation.input_select_required") }),
+    target_storage: z.string().uuid({ message: i18n.t("common_validation.input_select_required") }),
+    volume_kg: z.number({ message: i18n.t("common_validation.input_is_required") }).gte(1, { message: i18n.t("common_validation.input_gte_0") }),
+    volume_liters: z.number({ message: i18n.t("common_validation.input_is_required") }).gte(1, { message: i18n.t("common_validation.input_gte_0") }),
+    temperature: z.number({ message: i18n.t("common_validation.input_is_required") }).gte(-273.15, { message: i18n.t("common_validation.input_gte_absolute_zero") }),
+    // Preprocessor casts uknown to value causing TS error
+    start_date: z.preprocess(
+      (val): string => typeof val === "string" ? new Date(val).toISOString() : val as string,
+      z.string({ message: i18n.t("common_validation.input_is_required") }).datetime({ offset: true, message: i18n.t("common_validation.input_gte_absolute_zero") })
+    ),
+    // Preprocessor casts uknown to value causing TS error
+    end_date: z.preprocess(
+      (val): string => typeof val === "string" ? new Date(val).toISOString() : val as string,
+      z.string({ message: i18n.t("common_validation.input_is_required") }).datetime({ offset: true, message: i18n.t("common_validation.input_gte_absolute_zero") })
+    ),
   })
   .passthrough();
 
 const Producer = z
   .object({
-    // uuid: z.string().uuid(),
     name: z.string().max(255).min(1, { message: i18n.t("add_producer.input_name_required") }),
     address: z.string().min(1, { message: i18n.t("add_producer.input_address_required") }).max(100),
     contact_email: z.string().max(256).email({ message: i18n.t("add_producer.input_email_invalid") }).or(z.literal("")).nullish(),
-    // created_at: z.string().datetime({ offset: true }),
-    // updated_at: z.string().datetime({ offset: true }),
-    // deleted_at: z.string().datetime({ offset: true }).nullable(),
   })
-  .passthrough();
-
-const PatchedProducer = z
-  .object({
-    uuid: z.string().uuid(),
-    name: z.string().max(255),
-    address: z.string().max(100),
-    contact_email: z.string().max(256).email().nullable(),
-    created_at: z.string().datetime({ offset: true }),
-    updated_at: z.string().datetime({ offset: true }),
-    deleted_at: z.string().datetime({ offset: true }).nullable(),
-  })
-  .partial()
   .passthrough();
 
 const ProductDefinitionTypeEnum = z.enum([
@@ -104,9 +74,6 @@ const ProductDefinition = z
     uuid: z.string().uuid(),
     name: z.string().max(255),
     type: ProductDefinitionTypeEnum,
-    created_at: z.string().datetime({ offset: true }),
-    updated_at: z.string().datetime({ offset: true }),
-    deleted_at: z.string().datetime({ offset: true }).nullable(),
   })
   .passthrough();
 
@@ -117,9 +84,6 @@ const Profile = z
     profile_image: z.string().max(256).nullish(),
     first_name: z.string().max(100).optional(),
     last_name: z.string().max(100).optional(),
-    created_at: z.string().datetime({ offset: true }),
-    updated_at: z.string().datetime({ offset: true }),
-    deleted_at: z.string().datetime({ offset: true }).nullable(),
   })
   .passthrough();
 
@@ -130,9 +94,6 @@ const PatchedProfile = z
     profile_image: z.string().max(256).nullable(),
     first_name: z.string().max(100),
     last_name: z.string().max(100),
-    created_at: z.string().datetime({ offset: true }),
-    updated_at: z.string().datetime({ offset: true }),
-    deleted_at: z.string().datetime({ offset: true }).nullable(),
   })
   .partial()
   .passthrough();
@@ -143,39 +104,22 @@ const Storage = z
     uuid: z.string().uuid(),
     name: z.string().max(255),
     type: StorageTypeEnum,
-    created_at: z.string().datetime({ offset: true }),
-    updated_at: z.string().datetime({ offset: true }),
-    deleted_at: z.string().datetime({ offset: true }).nullable(),
   })
-  .passthrough();
-
-const PatchedStorage = z
-  .object({
-    uuid: z.string().uuid(),
-    name: z.string().max(255),
-    type: StorageTypeEnum,
-    created_at: z.string().datetime({ offset: true }),
-    updated_at: z.string().datetime({ offset: true }),
-    deleted_at: z.string().datetime({ offset: true }).nullable(),
-  })
-  .partial()
   .passthrough();
 
 export const schemas = {
   Login,
   Signup,
   Milk,
-  PatchedMilk,
   Pasteur,
   Producer,
-  PatchedProducer,
+  PasteurisedMilk,
   ProductDefinitionTypeEnum,
   ProductDefinition,
   Profile,
   PatchedProfile,
   StorageTypeEnum,
   Storage,
-  PatchedStorage,
 };
 
 const endpoints = makeApi([
@@ -299,25 +243,6 @@ const endpoints = makeApi([
     response: Milk,
   },
   {
-    method: "patch",
-    path: "/api/v1/milk/:id/",
-    alias: "v1_milk_partial_update",
-    requestFormat: "json",
-    parameters: [
-      {
-        name: "body",
-        type: "Body",
-        schema: PatchedMilk,
-      },
-      {
-        name: "id",
-        type: "Path",
-        schema: z.number().int(),
-      },
-    ],
-    response: Milk,
-  },
-  {
     method: "delete",
     path: "/api/v1/milk/:id/",
     alias: "v1_milk_destroy",
@@ -351,6 +276,60 @@ const endpoints = makeApi([
       },
     ],
     response: Pasteur,
+  },
+  {
+    method: "get",
+    path: "/api/v1/pasteurised-milk/",
+    alias: "v1_pasteurised_milk_list",
+    requestFormat: "json",
+    response: z.array(PasteurisedMilk),
+  },
+  {
+    method: "post",
+    path: "/api/v1/pasteurised-milk/",
+    alias: "v1_pasteurised_milk_create",
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "body",
+        type: "Body",
+        schema: PasteurisedMilk,
+      },
+    ],
+    response: PasteurisedMilk,
+  },
+  {
+    method: "get",
+    path: "/api/v1/pasteurised-milk/:id/",
+    alias: "v1_pasteurised_milk_retrieve",
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "id",
+        type: "Path",
+        schema: z.number().int(),
+      },
+    ],
+    response: PasteurisedMilk,
+  },
+  {
+    method: "put",
+    path: "/api/v1/pasteurised-milk/:id/",
+    alias: "v1_pasteurised_milk_update",
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "body",
+        type: "Body",
+        schema: PasteurisedMilk,
+      },
+      {
+        name: "id",
+        type: "Path",
+        schema: z.number().int(),
+      },
+    ],
+    response: PasteurisedMilk,
   },
   {
     method: "get",
@@ -397,25 +376,6 @@ const endpoints = makeApi([
         name: "body",
         type: "Body",
         schema: Producer,
-      },
-      {
-        name: "id",
-        type: "Path",
-        schema: z.number().int(),
-      },
-    ],
-    response: Producer,
-  },
-  {
-    method: "patch",
-    path: "/api/v1/producer/:id/",
-    alias: "v1_producer_partial_update",
-    requestFormat: "json",
-    parameters: [
-      {
-        name: "body",
-        type: "Body",
-        schema: PatchedProducer,
       },
       {
         name: "id",
@@ -547,25 +507,6 @@ const endpoints = makeApi([
         name: "body",
         type: "Body",
         schema: Storage,
-      },
-      {
-        name: "id",
-        type: "Path",
-        schema: z.number().int(),
-      },
-    ],
-    response: Storage,
-  },
-  {
-    method: "patch",
-    path: "/api/v1/storage/:id/",
-    alias: "v1_storage_partial_update",
-    requestFormat: "json",
-    parameters: [
-      {
-        name: "body",
-        type: "Body",
-        schema: PatchedStorage,
       },
       {
         name: "id",

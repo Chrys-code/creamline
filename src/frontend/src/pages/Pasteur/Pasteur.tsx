@@ -1,9 +1,10 @@
-import type { FormFieldState } from "./Pasteur.types.ts";
+import type { z } from "zod";
 import styles from "./Pasteur.module.scss";
 
-import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
 
 import PageHeader from "../../components/PageHeader";
@@ -12,145 +13,179 @@ import Dropdown from "../../components/Dropdown";
 import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 
-import { createPasteurisedMilk } from "../../api/pasteurisedMilk";
 import convertMilkLiterAndKg from "../../lib/helpers/litreToKg";
 import type { PasteurLoaderData } from "../../routes/loaders/types.js";
+
+import { api } from "../../api/axios";
+import { schemas } from "../../lib/schemas/schemas";
+import { useTranslation } from "react-i18next";
+
+
+const PasteurisedMilkSchema = schemas.PasteurisedMilk;
+type PasteurisedMilkFormData = z.infer<typeof PasteurisedMilkSchema>;
 
 
 const Pasteur: React.FC = () => {
     const data: PasteurLoaderData = useLoaderData();
-    const pasteurOptions = data.pasteurs?.map(pasteur => ({id: pasteur.uuid, value: pasteur.name})) || [];
-    const storageOptions = data.storages?.map(storage => ({id: storage.uuid, value: storage.name})) || [];
-    const productDefinitionOptions = data.productDefinitions?.map(productDefinition => ({id: productDefinition.uuid, value: productDefinition.name})) || [];
-
+    const { t } = useTranslation();
     const navigate = useNavigate();
-    const [formFieldState, setFormFieldState] = useState<FormFieldState>({
-        pasteur: {message: null},
-        productDefinition: {message: null},
-        temperature: {message: null},
-        sourceStorage: {message: null},
-        targetStorage: {message: null},
-        volumeLiter: {message: null},
-        volumeKg: {message: null},
-        startTime: {message: null},
-        enTime: {message: null},
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+        setValue,
+        setError,
+        clearErrors
+    } = useForm<PasteurisedMilkFormData>({
+        // @ts-ignore
+        resolver: zodResolver(PasteurisedMilkSchema),
+        mode: "onChange",
+        defaultValues: {
+            volume_kg: 0,
+            volume_liters: 0,
+            temperature: 0,
+            start_date: new Date().toISOString().slice(0, 16),
+            end_date: new Date().toISOString().slice(0, 16),
+        }
     });
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-        // @ts-ignore
-        const formData = new FormData(e.target);
+    const pasteurOptions = data.pasteurs?.map(pasteur => ({ id: pasteur.uuid, value: pasteur.name })) || [];
+    const storageOptions = data.storages?.map(storage => ({ id: storage.uuid, value: storage.name })) || [];
+    const productDefinitionOptions = data.productDefinitions?.map(productDefinition => ({ id: productDefinition.uuid, value: productDefinition.name })) || [];
 
-        const pasteur = formData.get("pasteur") as string;
-        const productDefinition = formData.get("productDefinition") as string;
-        const temperature = formData.get("temperature") as string;
 
-        const sourceStorage = formData.get("sourceStorage") as string;
-        const targetStorage = formData.get("targetStorage") as string;
-        const volumeLiter = Number(formData.get("volumeLiter"));
-        const volumeKg = Number(formData.get("volumeKg"));
-
-        const startTime = formData.get("startTime") as string;
-        const endTime = formData.get("endTime") as string;
-        
-        const response = await createPasteurisedMilk({
-            pasteur: pasteur,
-            product_definition: productDefinition,
-            temperature: temperature,
-            source_storage: sourceStorage,
-            target_storage: targetStorage,
-            volume_liter: volumeLiter,
-            volume_kg: volumeKg,
-            start_time: startTime,
-            end_time: endTime
-        })
-
-        if (!response.ok) {
-            const responseData = await response.json();
-
-            if (responseData.message) {
-                toast.success(responseData.message);
-                return;
-            }
-
-            const pasteurMessage = responseData.pasteur ? responseData.pasteur[0] : null;
-			const volumeLireMessage = responseData.volume_liters ? responseData.volume_liters[0] : null;
-			const volumeKgMessage = responseData.volume_kg ? responseData.volume_kg[0] : null;
-			const temperatureMessage = responseData.temperature ? responseData.temperature[0] : null;
-
-        }
-
-        if (response.ok && response.status == 201) {
+    const onSubmit = async (formData: PasteurisedMilkFormData): Promise<void> => {
+        try {
+            await api.post("/api/v1/pasteurised-milk/", formData);
             toast.success("Pasztőr sikeresen elmentve!");
             navigate("/");
-        };
+        } catch (err: any) {
+            if (err.response?.data) {
+                const responseData = err.response.data;
+                if (responseData.pasteur) setError("pasteur", { message: responseData.pasteur[0] })
+                if (responseData.storage) setError("storage", { message: responseData.storage[0] })
+                if (responseData.volume_kg) setError("volume_kg", { message: responseData.volume_kg[0] })
+                if (responseData.volume_liters) setError("volume_liters", { message: responseData.volume_liters[0] })
+                if (responseData.temperature) setError("temperature", { message: responseData.temperature[0] })
+            }
+        }
     };
 
 
     const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const target = e.target;
+        const target = e.target;
 
-		if (target.name == "volumeLiter") {
-			const value = convertMilkLiterAndKg({ liters: Number(target.value), kg: undefined });
-			const volumeKgInput: HTMLInputElement | null = document.querySelector("input[name=volumeKg]");
-			if (volumeKgInput) volumeKgInput.value = value
-		}
+        if (target.name == "volume_liters") {
+            const value = convertMilkLiterAndKg({ liters: Number(target.value), kg: undefined });
+            setValue("volume_kg", Number(value))
+        }
 
-		if (target.name == "volumeKg") {
-			const value = convertMilkLiterAndKg({ liters: undefined, kg: Number(target.value) });
-			const volumeLiterInput: HTMLInputElement | null = document.querySelector("input[name=volumeLiter]");
-			if (volumeLiterInput) volumeLiterInput.value = value
-		}
-
-		// reset messages
-		setFormFieldState({
-			...formFieldState,
-			volumeLiter: { message: null },
-			volumeKg: { message: null },
-		})
-	}
-
-    const resetMessage = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
-        const fieldName = e.target.name;
-        setFormFieldState({
-            ...formFieldState,
-            [fieldName]: { message: null }
-        })
-    };
+        if (target.name == "volume_kg") {
+            const value = convertMilkLiterAndKg({ liters: undefined, kg: Number(target.value) });
+            setValue("volume_liters", Number(value))
+        }
+    }
 
     const renderFormActions = (): React.ReactNode => (
-		<>
-			<Button type="button" style="secondary" onClick={() => navigate(-1)}>Vissza</Button>
-			<Button type="submit">Mentés</Button>
-		</>
-	);
+        <>
+            <Button type="button" style="secondary" onClick={() => navigate(-1)}>{t("common.back")}</Button>
+            <Button type="submit" disabled={isSubmitting}>{t("common.save")}</Button>
+        </>
+    );
 
     return (
         <>
-        	<PageHeader title="Pasztőr" />
-			<Form onSubmit={handleSubmit} actionElements={renderFormActions()}>
-				<section>
-					<h2>Adatok:</h2>
-						<Dropdown id={uuid()} name="pasteur" label="Pasztőr:" options={pasteurOptions} error={formFieldState.pasteur.message} onChange={resetMessage} />
-						<Dropdown id={uuid()} name="productDefinition" label="Céltermék:" options={productDefinitionOptions} error={formFieldState.productDefinition.message} onChange={resetMessage} />
-                        <InputField id={uuid()} name="temperature" type="number" step="0.1" label="Hőfok:" info="CELSIUS" defaultValue="0" error={formFieldState.temperature.message} onChange={resetMessage} />
-				</section>
-				<section>
-					<h2>Útvonal:</h2>
+            <PageHeader title="Pasztőr" />
+            <Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
+                <section>
+                    <h2>Adatok:</h2>
+                    <Dropdown
+                        id={uuid()}
+                        {...register("pasteur", { onChange: () => clearErrors("pasteur") })}
+                        label="Pasztőr:"
+                        placeholder={t("common.select")}
+                        options={pasteurOptions}
+                        error={errors.pasteur?.message}
+                    />
+                    <Dropdown
+                        id={uuid()}
+                        {...register("product_definition", { onChange: () => clearErrors("product_definition") })}
+                        label="Céltermék:"
+                        placeholder={t("common.select")}
+                        options={productDefinitionOptions}
+                        error={errors.product_definition?.message}
+                    />
+                    <InputField
+                        id={uuid()}
+                        {...register("temperature", { valueAsNumber: true, onChange: () => clearErrors("temperature") })}
+                        type="number"
+                        step="0.1"
+                        label="Hőfok:"
+                        info="CELSIUS"
+                        defaultValue="0"
+                        error={errors.temperature?.message}
+                    />
+                </section>
+                <section>
+                    <h2>Útvonal:</h2>
                     <div className={styles.sideBySideWrapper}>
-						<Dropdown id={uuid()} name="sourceStorage" label="Honnan:" options={storageOptions} error={formFieldState.sourceStorage.message} onChange={resetMessage} />
-						<Dropdown id={uuid()} name="targetStorage" label="Hová:" options={storageOptions} error={formFieldState.targetStorage.message} onChange={resetMessage} />
+                        <Dropdown
+                            id={uuid()}
+                            {...register("source_storage", { onChange: () => clearErrors("source_storage") })}
+                            label="Honnan:"
+                            placeholder={t("common.select")}
+                            options={storageOptions}
+                            error={errors.source_storage?.message}
+                        />
+                        <Dropdown
+                            id={uuid()}
+                            {...register("target_storage", { onChange: () => clearErrors("target_storage") })}
+                            label="Hová:"
+                            placeholder={t("common.select")}
+                            options={storageOptions}
+                            error={errors.target_storage?.message}
+                        />
                     </div>
                     <div className={styles.sideBySideWrapper}>
-                        <InputField id={uuid()} name="volumeLiter" type="number" step="0.1" label="Mennyiség" info="LITER" error={formFieldState.volumeLiter.message} onChange={handleVolumeChange} />
-						<InputField id={uuid()} name="volumeKg" type="number" step="0.1" label="Mennyiség" info="KG" error={formFieldState.volumeKg.message} onChange={handleVolumeChange} />
+                        <InputField
+                            id={uuid()}
+                            {...register("volume_liters", { valueAsNumber: true, onChange: (e) => { clearErrors(["volume_liters", "volume_kg"]), handleVolumeChange(e) } })}
+                            type="number"
+                            step="0.01"
+                            label="Mennyiség"
+                            info="LITER"
+                            error={errors.volume_liters?.message}
+                        />
+                        <InputField
+                            id={uuid()}
+                            {...register("volume_kg", { valueAsNumber: true, onChange: (e) => { clearErrors(["volume_kg", "volume_liters"]), handleVolumeChange(e) } })}
+                            type="number"
+                            step="0.01"
+                            label="Mennyiség"
+                            info="KG"
+                            error={errors.volume_kg?.message}
+                        />
                     </div>
-				</section>
-				<section>
-					<h2>Időtartam:</h2>
-                        <InputField id={uuid()} name="startTime" type="time" label="Pasztőrőzés kezdete:" error={formFieldState.volumeLiter.message} onChange={handleVolumeChange} />
-						<InputField id={uuid()} name="endTime" type="time" label="Pasztőrőzés vége:" error={formFieldState.volumeKg.message} onChange={handleVolumeChange} />
-				</section>
-			</Form>
+                </section>
+                <section>
+                    <h2>Időtartam:</h2>
+                    <InputField
+                        id={uuid()}
+                        {...register("start_date", { onChange: (e) => clearErrors("start_date") })}
+                        type="datetime-local"
+                        label="Pasztőrőzés kezdete:"
+                        error={errors.start_date?.message}
+                    />
+                    <InputField
+                        id={uuid()}
+                        {...register("end_date", { onChange: () => clearErrors("end_date") })}
+                        type="datetime-local"
+                        label="Pasztőrőzés vége:"
+                        error={errors.end_date?.message}
+                    />
+                </section>
+            </Form>
         </>
     )
 }

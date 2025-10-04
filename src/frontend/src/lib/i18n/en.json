@@ -27,6 +27,8 @@
   },
   "common_validation": {
     "input_gte_0": "Volume must be above 0",
+    "input_gte_absolute_zero": "Value must be more than absolute zero",
+    "input_is_required": "This field is required",
     "input_select_required": "Please select"
   },
   "login": {

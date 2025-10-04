@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import include, path
 
+from drf_spectacular.views import SpectacularAPIView
 from authentication.views import SignupView, LoginView, LogoutView, SessionCheckView
 
-from drf_spectacular.views import SpectacularAPIView
 
 urlpatterns = [
 	path("api/signup/", SignupView.as_view()),
