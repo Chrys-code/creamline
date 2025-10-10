@@ -51,9 +51,9 @@ const appRouter = createBrowserRouter([
 					Component: async () => (await import("../pages/Pasteur/Pasteur")).default,
 				},
 				loader: async () => ({
-					pasteurs: await requirePasteurs(),
-					storages: await requireStorages(),
-					productDefinitions: await requireProductDefinitions(),
+					pasteurs: (await requirePasteurs()) || [],
+					storages: (await requireStorages()) || [],
+					productDefinitions: (await requireProductDefinitions()) || [],
 				}),
 			},
 			{
