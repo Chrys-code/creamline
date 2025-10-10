@@ -1,12 +1,14 @@
-import { useNavigate, useRouteLoaderData } from "react-router";
-
+import type React from "react";
 import styles from "./Dashboard.module.scss";
 
 import Button from "../../components/Button";
 import type { RootLoaderData } from "../../routes/loaders/types";
 
+import { useNavigate, useRouteLoaderData } from "react-router";
+
+
 const Dashboard: React.FC = () => {
-	const data = useRouteLoaderData('app') as RootLoaderData;
+	const data = useRouteLoaderData("app") as RootLoaderData;
 	const navigate = useNavigate();
 
 	const name = `${data.profile.first_name} ${data.profile.last_name}`;
@@ -28,7 +30,7 @@ const Dashboard: React.FC = () => {
 				</div>
 			</section>
 		</>
-	)
-}
+	);
+};
 
-export default Dashboard
+export default Dashboard;

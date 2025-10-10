@@ -1,19 +1,20 @@
+import type React from "react";
 import type { z } from "zod";
 
-import { useNavigate } from 'react-router';
+import PageHeader from "../../components/PageHeader";
+import Form from "../../components/Form";
+import InputField from "../../components/InputField";
+import Button from "../../components/Button";
+
+import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
-import { toast } from 'react-toastify';
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
 
-import PageHeader from '../../components/PageHeader';
-import Form from '../../components/Form';
-import InputField from '../../components/InputField';
-import Button from '../../components/Button';
-
 import { api } from "../../api/axios";
 import { schemas } from "../../lib/schemas/schemas";
-import { useTranslation } from "react-i18next";
 
 
 const ProducerSchema = schemas.Producer;
@@ -47,7 +48,7 @@ const AddProducer: React.FC = () => {
 				if (responseData.contactEmail) setError("contact_email", { message: responseData.contactEmail[0] });
 			}
 		}
-	}
+	};
 
 
 	const renderFormActions = (): React.ReactNode => {
@@ -56,8 +57,8 @@ const AddProducer: React.FC = () => {
 				<Button type="button" style="secondary" onClick={() => navigate(-1)}>{t("common.back")}</Button>
 				<Button type="submit" disabled={isSubmitting}>{t("common.save")}</Button>
 			</>
-		)
-	}
+		);
+	};
 
 	return (
 		<>
@@ -89,7 +90,7 @@ const AddProducer: React.FC = () => {
 				</section>
 			</Form>
 		</>
-	)
-}
+	);
+};
 
-export default AddProducer
+export default AddProducer;

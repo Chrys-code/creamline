@@ -1,6 +1,7 @@
-import type { FormProps } from './Form.types.ts';
+import type React from "react";
+import type { FormProps } from "./Form.types.ts";
 
-import styles from './Form.module.scss';
+import styles from "./Form.module.scss";
 
 
 const Form: React.FC<FormProps> = ({ title, children, actionElements, onSubmit }: FormProps) => {
@@ -12,7 +13,7 @@ const Form: React.FC<FormProps> = ({ title, children, actionElements, onSubmit }
 				{actionElements}
 			</div>
 		</form>
-	)
-}
+	);
+};
 
-export default Form
+export default Form;

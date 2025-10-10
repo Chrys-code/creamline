@@ -15,10 +15,10 @@ const requireProductDefinitions = async (): Promise<RequireProductDefinitionsDat
         }
 
         const ProductDefinitionsData = await getProductDefinitionsResponse.response.json();
-        return ProductDefinitionsData
+        return ProductDefinitionsData;
     } catch {
         throw toast.error("Termékminták betöltése sikertelen.");
     }
-}
+};
 
 export default requireProductDefinitions;

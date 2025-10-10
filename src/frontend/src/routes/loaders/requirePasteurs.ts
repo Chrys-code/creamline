@@ -15,10 +15,10 @@ const requirePasteurs = async (): Promise<RequirePasteursData[]> => {
         }
 
         const PasteursData = await getPasteursResponse.response.json();
-        return PasteursData
+        return PasteursData;
     } catch {
         throw toast.error("Pasztőrök betöltése sikertelen.");
     }
-}
+};
 
 export default requirePasteurs;

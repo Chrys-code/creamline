@@ -10,5 +10,8 @@
 			"path": "src/services"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"editor.formatOnPaste": true,
+		"eslint.format.enable": true
+	}
 }

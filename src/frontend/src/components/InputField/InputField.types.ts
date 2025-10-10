@@ -1,3 +1,5 @@
+import type React from "react";
+
 export interface InputFieldProps {
     id: string;
     name: string;
@@ -13,7 +15,7 @@ export interface InputFieldProps {
 
     step?: string; // only for number type
 
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (_e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 type InputFieldTypes =

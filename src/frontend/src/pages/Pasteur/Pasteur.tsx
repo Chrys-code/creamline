@@ -1,11 +1,7 @@
+import type React from "react";
+import type { PasteurLoaderData } from "../../routes/loaders/types.js";
 import type { z } from "zod";
 import styles from "./Pasteur.module.scss";
-
-import { useLoaderData, useNavigate } from "react-router";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { v4 as uuid } from "uuid";
 
 import PageHeader from "../../components/PageHeader";
 import Form from "../../components/Form";
@@ -13,13 +9,17 @@ import Dropdown from "../../components/Dropdown";
 import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 
-import convertMilkLiterAndKg from "../../lib/helpers/litreToKg";
-import type { PasteurLoaderData } from "../../routes/loaders/types.js";
+import { useLoaderData, useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { v4 as uuid } from "uuid";
 
 import { api } from "../../api/axios";
 import { schemas } from "../../lib/schemas/schemas";
-import { useTranslation } from "react-i18next";
 
+import convertMilkLiterAndKg from "../../lib/helpers/litreToKg";
 
 const PasteurisedMilkSchema = schemas.PasteurisedMilk;
 type PasteurisedMilkFormData = z.infer<typeof PasteurisedMilkSchema>;
@@ -38,7 +38,7 @@ const Pasteur: React.FC = () => {
         setError,
         clearErrors
     } = useForm<PasteurisedMilkFormData>({
-        // @ts-ignore
+        // @ts-expect-error local-datetime conversion issue
         resolver: zodResolver(PasteurisedMilkSchema),
         mode: "onChange",
         defaultValues: {
@@ -63,11 +63,11 @@ const Pasteur: React.FC = () => {
         } catch (err: any) {
             if (err.response?.data) {
                 const responseData = err.response.data;
-                if (responseData.pasteur) setError("pasteur", { message: responseData.pasteur[0] })
-                if (responseData.storage) setError("storage", { message: responseData.storage[0] })
-                if (responseData.volume_kg) setError("volume_kg", { message: responseData.volume_kg[0] })
-                if (responseData.volume_liters) setError("volume_liters", { message: responseData.volume_liters[0] })
-                if (responseData.temperature) setError("temperature", { message: responseData.temperature[0] })
+                if (responseData.pasteur) setError("pasteur", { message: responseData.pasteur[0] });
+                if (responseData.storage) setError("storage", { message: responseData.storage[0] });
+                if (responseData.volume_kg) setError("volume_kg", { message: responseData.volume_kg[0] });
+                if (responseData.volume_liters) setError("volume_liters", { message: responseData.volume_liters[0] });
+                if (responseData.temperature) setError("temperature", { message: responseData.temperature[0] });
             }
         }
     };
@@ -78,14 +78,14 @@ const Pasteur: React.FC = () => {
 
         if (target.name == "volume_liters") {
             const value = convertMilkLiterAndKg({ liters: Number(target.value), kg: undefined });
-            setValue("volume_kg", Number(value))
+            setValue("volume_kg", Number(value));
         }
 
         if (target.name == "volume_kg") {
             const value = convertMilkLiterAndKg({ liters: undefined, kg: Number(target.value) });
-            setValue("volume_liters", Number(value))
+            setValue("volume_liters", Number(value));
         }
-    }
+    };
 
     const renderFormActions = (): React.ReactNode => (
         <>
@@ -97,6 +97,7 @@ const Pasteur: React.FC = () => {
     return (
         <>
             <PageHeader title="Pasztőr" />
+            {/*  @ts-expect-error local-datetime conversion issue  */}
             <Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
                 <section>
                     <h2>Adatok:</h2>
@@ -150,7 +151,7 @@ const Pasteur: React.FC = () => {
                     <div className={styles.sideBySideWrapper}>
                         <InputField
                             id={uuid()}
-                            {...register("volume_liters", { valueAsNumber: true, onChange: (e) => { clearErrors(["volume_liters", "volume_kg"]), handleVolumeChange(e) } })}
+                            {...register("volume_liters", { valueAsNumber: true, onChange: (e) => { clearErrors(["volume_liters", "volume_kg"]); handleVolumeChange(e); } })}
                             type="number"
                             step="0.01"
                             label="Mennyiség"
@@ -159,7 +160,7 @@ const Pasteur: React.FC = () => {
                         />
                         <InputField
                             id={uuid()}
-                            {...register("volume_kg", { valueAsNumber: true, onChange: (e) => { clearErrors(["volume_kg", "volume_liters"]), handleVolumeChange(e) } })}
+                            {...register("volume_kg", { valueAsNumber: true, onChange: (e) => { clearErrors(["volume_kg", "volume_liters"]); handleVolumeChange(e); } })}
                             type="number"
                             step="0.01"
                             label="Mennyiség"
@@ -172,7 +173,7 @@ const Pasteur: React.FC = () => {
                     <h2>Időtartam:</h2>
                     <InputField
                         id={uuid()}
-                        {...register("start_date", { onChange: (e) => clearErrors("start_date") })}
+                        {...register("start_date", { onChange: () => clearErrors("start_date") })}
                         type="datetime-local"
                         label="Pasztőrőzés kezdete:"
                         error={errors.start_date?.message}
@@ -187,7 +188,7 @@ const Pasteur: React.FC = () => {
                 </section>
             </Form>
         </>
-    )
-}
+    );
+};
 
-export default Pasteur
+export default Pasteur;

@@ -2,13 +2,6 @@ import type { z } from "zod";
 import type { MilkCollectionLoaderData } from "../../routes/loaders/types";
 import styles from "./MilkCollection.module.scss";
 
-import React from "react";
-import { useLoaderData, useNavigate } from "react-router";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { v4 as uuid } from "uuid";
-
 import PageHeader from "../../components/PageHeader";
 import Form from "../../components/Form";
 import InputField from "../../components/InputField";
@@ -16,12 +9,18 @@ import Dropdown from "../../components/Dropdown";
 import Button from "../../components/Button";
 import IconButton from "../../components/IconButton";
 
-import convertMilkLiterAndKg from "../../lib/helpers/litreToKg";
+import React from "react";
+import { useLoaderData, useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { v4 as uuid } from "uuid";
 
 import { api } from "../../api/axios";
 import { schemas } from "../../lib/schemas/schemas";
 import { useTranslation } from "react-i18next";
 
+import convertMilkLiterAndKg from "../../lib/helpers/litreToKg";
 
 const MilkSchema = schemas.Milk;
 type MilkFormData = z.infer<typeof MilkSchema>;
@@ -58,7 +57,7 @@ const MilkCollection: React.FC = () => {
 	const booleanOptions = [
 		{ id: "true", value: t("common.yes") },
 		{ id: "false", value: t("common.no") },
-	]
+	];
 
 	const onSubmit = async (formData: MilkFormData): Promise<void> => {
 		try {
@@ -68,14 +67,14 @@ const MilkCollection: React.FC = () => {
 		} catch (err: any) {
 			if (err.response?.data) {
 				const responseData = err.response.data;
-				if (responseData.producer) setError("producer", { message: responseData.producer[0] })
-				if (responseData.storage) setError("storage", { message: responseData.storage[0] })
-				if (responseData.volume_kg) setError("volume_kg", { message: responseData.volume_kg[0] })
-				if (responseData.volume_liters) setError("volume_liters", { message: responseData.volume_liters[0] })
-				if (responseData.acid_content) setError("acid_content", { message: responseData.acid_content[0] })
-				if (responseData.aflatoxin) setError("aflatoxin", { message: responseData.aflatoxin[0] })
-				if (responseData.inhibitory_residue) setError("inhibitory_residue", { message: responseData.inhibitory_residue[0] })
-				if (responseData.temperature) setError("temperature", { message: responseData.temperature[0] })
+				if (responseData.producer) setError("producer", { message: responseData.producer[0] });
+				if (responseData.storage) setError("storage", { message: responseData.storage[0] });
+				if (responseData.volume_kg) setError("volume_kg", { message: responseData.volume_kg[0] });
+				if (responseData.volume_liters) setError("volume_liters", { message: responseData.volume_liters[0] });
+				if (responseData.acid_content) setError("acid_content", { message: responseData.acid_content[0] });
+				if (responseData.aflatoxin) setError("aflatoxin", { message: responseData.aflatoxin[0] });
+				if (responseData.inhibitory_residue) setError("inhibitory_residue", { message: responseData.inhibitory_residue[0] });
+				if (responseData.temperature) setError("temperature", { message: responseData.temperature[0] });
 			}
 		}
 	};
@@ -92,14 +91,14 @@ const MilkCollection: React.FC = () => {
 			const value = convertMilkLiterAndKg({ liters: undefined, kg: Number(target.value) });
 			setValue("volume_liters", Number(value));
 		}
-	}
+	};
 
 	const renderFormActions = (): React.ReactNode => (
 		<>
 			<Button type="button" style="secondary" onClick={() => navigate(-1)}>{t("common.back")}</Button>
 			<Button type="submit" disabled={isSubmitting}>{t("common.save")}</Button>
 		</>
-	)
+	);
 
 	return (
 		<>
@@ -132,7 +131,7 @@ const MilkCollection: React.FC = () => {
 					<div className={styles.amountWrapper}>
 						<InputField
 							id={uuid()}
-							{...register("volume_liters", { valueAsNumber: true, onChange: (e) => { clearErrors(["volume_liters", "volume_kg"]), handleVolumeChange(e) } })}
+							{...register("volume_liters", { valueAsNumber: true, onChange: (e) => { clearErrors(["volume_liters", "volume_kg"]); handleVolumeChange(e); } })}
 							type="number"
 							step="0.01"
 							label={t("utilities.volume")}
@@ -142,7 +141,7 @@ const MilkCollection: React.FC = () => {
 						/>
 						<InputField
 							id={uuid()}
-							{...register("volume_kg", { valueAsNumber: true, onChange: (e) => { clearErrors(["volume_kg", "volume_liters"]), handleVolumeChange(e) } })}
+							{...register("volume_kg", { valueAsNumber: true, onChange: (e) => { clearErrors(["volume_kg", "volume_liters"]); handleVolumeChange(e); } })}
 							type="number"
 							step="0.01"
 							label={t("utilities.volume")}
@@ -193,7 +192,7 @@ const MilkCollection: React.FC = () => {
 				</section>
 			</Form>
 		</>
-	)
-}
+	);
+};
 
-export default MilkCollection
+export default MilkCollection;

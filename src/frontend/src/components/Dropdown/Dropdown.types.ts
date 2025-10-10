@@ -1,3 +1,5 @@
+import type React from "react";
+
 export interface DropdownProps {
 	id: string;
 	name: string;
@@ -10,5 +12,5 @@ export interface DropdownProps {
 	disabled?: boolean;
 	defaultValue?: string;
 
-	onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+	onChange?: (_e: React.ChangeEvent<HTMLSelectElement>) => void;
 }

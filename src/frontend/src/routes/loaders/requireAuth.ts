@@ -15,12 +15,12 @@ const requireAuth = async (): Promise<Response | RequireAuthData> => {
 	try {
 		await session();
 		const getProfileResponse = await getProfile();
-		const profileResponseData = await getProfileResponse.response.json()
+		const profileResponseData = await getProfileResponse.response.json();
 		const profileData: { uuid: string, email: string, profile_image: string, first_name: string, last_name: string } = profileResponseData;
-		return profileData
+		return profileData;
 	} catch {
-		throw redirect("/login")
+		throw redirect("/login");
 	}
-}
+};
 
 export default requireAuth;

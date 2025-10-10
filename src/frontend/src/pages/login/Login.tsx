@@ -1,3 +1,4 @@
+import type React from "react";
 import type { z } from "zod";
 import styles from "./Login.module.scss";
 
@@ -54,8 +55,8 @@ const Login: React.FC = () => {
 				{errors.formMessage && <span className={styles.errorMessage}>{errors.formMessage.message}</span>}
 				<Button style="primary" type="submit" disabled={isSubmitting}>{t("login.submit")}</Button>
 			</div>
-		)
-	}
+		);
+	};
 
 	return (
 		<AuthLayout>

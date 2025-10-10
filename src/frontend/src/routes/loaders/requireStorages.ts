@@ -15,10 +15,10 @@ const requireStorages = async (): Promise<RequireStoragesData[]> => {
             toast.error("Termelők betöltése sikertelen.");
         }
         const StoragesData = await getStoragesResponse.response.json();
-        return StoragesData
+        return StoragesData;
     } catch {
         throw toast.error("Termelők betöltése sikertelen.");
     }
-}
+};
 
 export default requireStorages;

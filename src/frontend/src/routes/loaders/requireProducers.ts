@@ -17,10 +17,10 @@ const requireProducers = async (): Promise<RequireProducersData[]> => {
 		}
 
 		const producersData = await getProducersResponse.response.json();
-		return producersData
+		return producersData;
 	} catch {
 		throw toast.error("Termelők betöltése sikertelen.");
 	}
-}
+};
 
 export default requireProducers;

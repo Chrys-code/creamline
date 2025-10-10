@@ -1,5 +1,6 @@
-import type { DropdownProps } from './Dropdown.types.ts'
-import styles from './Dropdown.module.scss';
+import type React from "react";
+import type { DropdownProps } from "./Dropdown.types.ts";
+import styles from "./Dropdown.module.scss";
 
 
 const Dropdown: React.FC<DropdownProps> = ({ id, options, info, label, error, disabled, placeholder, defaultValue = "init", ...props}: DropdownProps) => {
@@ -19,7 +20,7 @@ const Dropdown: React.FC<DropdownProps> = ({ id, options, info, label, error, di
 			</select>
 			{error && <span>{error}</span>}
 		</div>
-	)
-}
+	);
+};
 
-export default Dropdown
+export default Dropdown;
