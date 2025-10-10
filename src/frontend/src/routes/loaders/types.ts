@@ -18,4 +18,3 @@ export interface PasteurLoaderData {
 	storages: RequireStoragesData[];
 	productDefinitions: RequireProductDefinitionsData[];
 }
-

@@ -1,6 +1,6 @@
-import type { AuthLayoutProps } from './AuthLayout.types.js'
-
-import styles from './AuthLayout.module.scss';
+import type React from "react";
+import type { AuthLayoutProps } from "./AuthLayout.types.js";
+import styles from "./AuthLayout.module.scss";
 
 const AuthLayout: React.FC<AuthLayoutProps> = ({ children }: AuthLayoutProps) => {
 	return (
@@ -8,7 +8,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }: AuthLayoutProps) =>
 			<div className={styles.header}></div>
 			<main className={styles.container}>{children}</main>
 		</>
-	)
-}
+	);
+};
 
-export default AuthLayout
+export default AuthLayout;

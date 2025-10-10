@@ -1,4 +1,18 @@
-import { api_client } from "../client"
+import {
+	ListStorageEndpoint,
+	GetStorageEndpoint,
+	CreateStorageEndpoint,
+	UpdateStorageEndpoint,
+	DeleteStorageEndpoint,
+} from "./endpoint";
+import { StorageSchema, StorageTypeEnum } from "./schema";
 
-export const getStorages = async () =>
-    await api_client({ endpoint: "api/v1/storage/", method: "GET", payload: undefined })
+export {
+	ListStorageEndpoint,
+	GetStorageEndpoint,
+	CreateStorageEndpoint,
+	UpdateStorageEndpoint,
+	DeleteStorageEndpoint,
+	StorageSchema,
+	StorageTypeEnum,
+};

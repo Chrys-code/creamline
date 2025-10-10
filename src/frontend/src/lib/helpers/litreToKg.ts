@@ -1,5 +1,4 @@
-
-function convertMilkLiterAndKg({ liters, kg }: { liters?: number, kg?: number }): string {
+function convertMilkLiterAndKg({ liters, kg }: { liters?: number; kg?: number }): string {
 	if (liters) {
 		return milkLitersToKg(liters);
 	}
@@ -15,7 +14,6 @@ function milkLitersToKg(liters: number): string {
 	const density = 1.03; // density of milk (kg/L)
 	return (liters * density).toFixed(2);
 }
-
 
 function milkKgToLiters(kg: number): string {
 	const density = 1.03; // density of milk (L/kg)

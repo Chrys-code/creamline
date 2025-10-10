@@ -1,17 +1,24 @@
-import type { HeaderProps } from './Header.types.ts'
-import styles from './Header.module.scss';
-import React from 'react';
+import styles from "./Header.module.scss";
+import React from "react";
 
-const MdCheckBoxOutlineBlank = React.lazy(() => import("react-icons/md").then(mod => ({ default: mod.MdCheckBoxOutlineBlank })));
-const MdOutlineMenu = React.lazy(() => import("react-icons/md").then(mod => ({ default: mod.MdOutlineMenu })));
+const MdCheckBoxOutlineBlank = React.lazy(() =>
+	import("react-icons/md").then((mod) => ({
+		default: mod.MdCheckBoxOutlineBlank,
+	}))
+);
+const MdOutlineMenu = React.lazy(() =>
+	import("react-icons/md").then((mod) => ({ default: mod.MdOutlineMenu }))
+);
 
-const Header: React.FC<HeaderProps> = ({ }: HeaderProps) => {
+const Header: React.FC = () => {
 	return (
 		<div className={styles.container}>
-			<MdCheckBoxOutlineBlank size="3rem" fill='white' />
-			<menu><MdOutlineMenu size="2rem" fill='white' /></menu>
+			<MdCheckBoxOutlineBlank size="3rem" fill="white" />
+			<menu>
+				<MdOutlineMenu size="2rem" fill="white" />
+			</menu>
 		</div>
-	)
-}
+	);
+};
 
-export default Header
+export default Header;

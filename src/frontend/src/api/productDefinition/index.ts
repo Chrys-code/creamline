@@ -1,4 +1,9 @@
-import { api_client } from "../client"
+import { ListProductDefinition, GetProductDefinition } from "./endpoint";
+import { ProductDefinitionSchema, ProductDefinitionTypeEnum } from "./schema";
 
-export const getProductDefinitions = async () =>
-    await api_client({ endpoint: "api/v1/product-definition/", method: "GET", payload: undefined })
+export {
+	ListProductDefinition,
+	GetProductDefinition,
+	ProductDefinitionSchema,
+	ProductDefinitionTypeEnum,
+};

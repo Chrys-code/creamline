@@ -14,12 +14,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
 
 import { api } from "../../api/axios";
-import { schemas } from "../../lib/schemas/schemas";
+import { schemas } from "../../api/schemas";
 
-
-const ProducerSchema = schemas.Producer;
+const ProducerSchema = schemas.ProducerSchema;
 type ProducerFormData = z.infer<typeof ProducerSchema>;
-
 
 const AddProducer: React.FC = () => {
 	const { t } = useTranslation();
@@ -30,9 +28,9 @@ const AddProducer: React.FC = () => {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		setError,
-		clearErrors
+		clearErrors,
 	} = useForm<ProducerFormData>({
-		resolver: zodResolver(ProducerSchema)
+		resolver: zodResolver(ProducerSchema),
 	});
 
 	const onSubmit = async (formData: ProducerFormData) => {
@@ -45,17 +43,21 @@ const AddProducer: React.FC = () => {
 				const responseData = err.response.data;
 				if (responseData.name) setError("name", { message: responseData.name[0] });
 				if (responseData.address) setError("address", { message: responseData.address[0] });
-				if (responseData.contactEmail) setError("contact_email", { message: responseData.contactEmail[0] });
+				if (responseData.contactEmail)
+					setError("contact_email", { message: responseData.contactEmail[0] });
 			}
 		}
 	};
 
-
 	const renderFormActions = (): React.ReactNode => {
 		return (
 			<>
-				<Button type="button" style="secondary" onClick={() => navigate(-1)}>{t("common.back")}</Button>
-				<Button type="submit" disabled={isSubmitting}>{t("common.save")}</Button>
+				<Button type="button" style="secondary" onClick={() => navigate(-1)}>
+					{t("common.back")}
+				</Button>
+				<Button type="submit" disabled={isSubmitting}>
+					{t("common.save")}
+				</Button>
 			</>
 		);
 	};
@@ -71,7 +73,8 @@ const AddProducer: React.FC = () => {
 						{...register("name", { onChange: () => clearErrors("name") })}
 						label={t("add_producer.input_name_label")}
 						type="text"
-						error={errors.name?.message} />
+						error={errors.name?.message}
+					/>
 					<InputField
 						id={uuid()}
 						{...register("address", { onChange: () => clearErrors("address") })}
@@ -81,7 +84,9 @@ const AddProducer: React.FC = () => {
 					/>
 					<InputField
 						id={uuid()}
-						{...register("contact_email", { onChange: () => clearErrors("contact_email") })}
+						{...register("contact_email", {
+							onChange: () => clearErrors("contact_email"),
+						})}
 						label={t("add_producer.input_contact_email_label")}
 						info={t("common.optional")}
 						type="text"

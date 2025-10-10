@@ -11,14 +11,19 @@ import requireStorages from "./loaders/requireStorages";
 import requirePasteurs from "./loaders/requirePasteurs";
 import requireProductDefinitions from "./loaders/requireProductDefinitions";
 
-
 const appRouter = createBrowserRouter([
 	{
 		id: "app",
 		path: "/",
 		element: <AppLayout />,
-		loader: async (): Promise<RootLoaderData> => ({ profile: await requireAuth() as RequireAuthData }),
-		errorElement: <AppLayout ><ErrorLayout /></AppLayout>,
+		loader: async (): Promise<RootLoaderData> => ({
+			profile: (await requireAuth()) as RequireAuthData,
+		}),
+		errorElement: (
+			<AppLayout>
+				<ErrorLayout />
+			</AppLayout>
+		),
 		children: [
 			{
 				index: true,
@@ -27,8 +32,7 @@ const appRouter = createBrowserRouter([
 			{
 				path: "profile",
 				lazy: {
-					Component: async () =>
-						(await import("../pages/Profile/Profile")).default,
+					Component: async () => (await import("../pages/Profile/Profile")).default,
 				},
 			},
 			{
@@ -37,15 +41,21 @@ const appRouter = createBrowserRouter([
 					Component: async () =>
 						(await import("../pages/MilkCollection/MilkCollection")).default,
 				},
-				loader: async (): Promise<MilkCollectionLoaderData> => ({producers: await requireProducers() || [], storages: await requireStorages() || [] }),
+				loader: async (): Promise<MilkCollectionLoaderData> => ({
+					producers: (await requireProducers()) || [],
+					storages: (await requireStorages()) || [],
+				}),
 			},
 			{
 				path: "pasteur",
 				lazy: {
-					Component: async () =>
-						(await import("../pages/Pasteur/Pasteur")).default,
+					Component: async () => (await import("../pages/Pasteur/Pasteur")).default,
 				},
-				loader: async (): Promise<PasteurLoaderData> => ({pasteurs: await requirePasteurs(), storages: await requireStorages(), productDefinitions: await requireProductDefinitions()}),
+				loader: async (): Promise<PasteurLoaderData> => ({
+					pasteurs: await requirePasteurs(),
+					storages: await requireStorages(),
+					productDefinitions: await requireProductDefinitions(),
+				}),
 			},
 			{
 				path: "add-producer",
@@ -53,24 +63,15 @@ const appRouter = createBrowserRouter([
 					Component: async () =>
 						(await import("../pages/AddProducer/AddProducer")).default,
 				},
-			}
-		]
-	},
-	{
-		path: "/signup",
-		lazy: {
-			Component: async () =>
-				(await import("../pages/Signup/Signup")).default,
-		},
-		errorElement: <ErrorLayout />
+			},
+		],
 	},
 	{
 		path: "/login",
 		lazy: {
-			Component: async () =>
-				(await import("../pages/Login/Login")).default,
+			Component: async () => (await import("../pages/Login/Login")).default,
 		},
-		errorElement: <ErrorLayout />
+		errorElement: <ErrorLayout />,
 	},
 ]);
 

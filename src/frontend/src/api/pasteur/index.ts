@@ -1,4 +1,4 @@
-import { api_client } from "../client"
+import { ListPasteurEndpoint, GetPasteurEndpoint } from "./endpoint";
+import PasteurSchema from "./schema";
 
-export const getPasteurs = async () =>
-    await api_client({ endpoint: "api/v1/pasteur/", method: "GET", payload: undefined })
+export { ListPasteurEndpoint, GetPasteurEndpoint, PasteurSchema };

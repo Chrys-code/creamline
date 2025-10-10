@@ -1,7 +1,5 @@
 import { redirect } from "react-router";
-
-import { session } from "../../api/auth";
-import { getProfile } from "../../api/profile";
+import { api } from "../../api/axios";
 
 export interface RequireAuthData {
 	uuid: string;
@@ -13,10 +11,9 @@ export interface RequireAuthData {
 
 const requireAuth = async (): Promise<Response | RequireAuthData> => {
 	try {
-		await session();
-		const getProfileResponse = await getProfile();
-		const profileResponseData = await getProfileResponse.response.json();
-		const profileData: { uuid: string, email: string, profile_image: string, first_name: string, last_name: string } = profileResponseData;
+		await api.get("/api/session/");
+		const profileResponse = await api.get("/api/v1/profile/");
+		const profileData = profileResponse;
 		return profileData;
 	} catch {
 		throw redirect("/login");

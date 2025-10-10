@@ -3,7 +3,7 @@ import type React from "react";
 export interface DropdownProps {
 	id: string;
 	name: string;
-	options: { id: string | number, value: string }[];
+	options: { id: string | number; value: string }[];
 
 	placeholder: string;
 	label?: string;

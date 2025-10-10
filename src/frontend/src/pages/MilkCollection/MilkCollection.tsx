@@ -17,16 +17,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
 
 import { api } from "../../api/axios";
-import { schemas } from "../../lib/schemas/schemas";
+import { schemas } from "../../api/schemas";
 import { useTranslation } from "react-i18next";
 
 import convertMilkLiterAndKg from "../../lib/helpers/litreToKg";
 
-const MilkSchema = schemas.Milk;
+const MilkSchema = schemas.MilkSchema;
 type MilkFormData = z.infer<typeof MilkSchema>;
 
-const MdOutlineAddCircleOutline = React.lazy(() => import("react-icons/md").then(mod => ({ default: mod.MdOutlineAddCircleOutline })));
-
+const MdOutlineAddCircleOutline = React.lazy(() =>
+	import("react-icons/md").then((mod) => ({
+		default: mod.MdOutlineAddCircleOutline,
+	}))
+);
 
 const MilkCollection: React.FC = () => {
 	const data: MilkCollectionLoaderData = useLoaderData();
@@ -39,7 +42,7 @@ const MilkCollection: React.FC = () => {
 		formState: { errors, isSubmitting },
 		setValue,
 		setError,
-		clearErrors
+		clearErrors,
 	} = useForm<MilkFormData>({
 		resolver: zodResolver(MilkSchema),
 		defaultValues: {
@@ -49,11 +52,17 @@ const MilkCollection: React.FC = () => {
 			acid_content: 0,
 			aflatoxin: false,
 			inhibitory_residue: false,
-		}
+		},
 	});
 
-	const producerOptions = data.producers.map(producer => ({ id: producer.uuid, value: producer.name }));
-	const storageOptions = data.storages.map(storage => ({ id: storage.uuid, value: storage.name }));
+	const producerOptions = data.producers.map((producer) => ({
+		id: producer.uuid,
+		value: producer.name,
+	}));
+	const storageOptions = data.storages.map((storage) => ({
+		id: storage.uuid,
+		value: storage.name,
+	}));
 	const booleanOptions = [
 		{ id: "true", value: t("common.yes") },
 		{ id: "false", value: t("common.no") },
@@ -67,14 +76,23 @@ const MilkCollection: React.FC = () => {
 		} catch (err: any) {
 			if (err.response?.data) {
 				const responseData = err.response.data;
-				if (responseData.producer) setError("producer", { message: responseData.producer[0] });
+				if (responseData.producer)
+					setError("producer", { message: responseData.producer[0] });
 				if (responseData.storage) setError("storage", { message: responseData.storage[0] });
-				if (responseData.volume_kg) setError("volume_kg", { message: responseData.volume_kg[0] });
-				if (responseData.volume_liters) setError("volume_liters", { message: responseData.volume_liters[0] });
-				if (responseData.acid_content) setError("acid_content", { message: responseData.acid_content[0] });
-				if (responseData.aflatoxin) setError("aflatoxin", { message: responseData.aflatoxin[0] });
-				if (responseData.inhibitory_residue) setError("inhibitory_residue", { message: responseData.inhibitory_residue[0] });
-				if (responseData.temperature) setError("temperature", { message: responseData.temperature[0] });
+				if (responseData.volume_kg)
+					setError("volume_kg", { message: responseData.volume_kg[0] });
+				if (responseData.volume_liters)
+					setError("volume_liters", { message: responseData.volume_liters[0] });
+				if (responseData.acid_content)
+					setError("acid_content", { message: responseData.acid_content[0] });
+				if (responseData.aflatoxin)
+					setError("aflatoxin", { message: responseData.aflatoxin[0] });
+				if (responseData.inhibitory_residue)
+					setError("inhibitory_residue", {
+						message: responseData.inhibitory_residue[0],
+					});
+				if (responseData.temperature)
+					setError("temperature", { message: responseData.temperature[0] });
 			}
 		}
 	};
@@ -83,20 +101,30 @@ const MilkCollection: React.FC = () => {
 		const target = e.target;
 
 		if (target.name == "volume_liters") {
-			const value = convertMilkLiterAndKg({ liters: Number(target.value), kg: undefined });
+			const value = convertMilkLiterAndKg({
+				liters: Number(target.value),
+				kg: undefined,
+			});
 			setValue("volume_kg", Number(value));
 		}
 
 		if (target.name == "volume_kg") {
-			const value = convertMilkLiterAndKg({ liters: undefined, kg: Number(target.value) });
+			const value = convertMilkLiterAndKg({
+				liters: undefined,
+				kg: Number(target.value),
+			});
 			setValue("volume_liters", Number(value));
 		}
 	};
 
 	const renderFormActions = (): React.ReactNode => (
 		<>
-			<Button type="button" style="secondary" onClick={() => navigate(-1)}>{t("common.back")}</Button>
-			<Button type="submit" disabled={isSubmitting}>{t("common.save")}</Button>
+			<Button type="button" style="secondary" onClick={() => navigate(-1)}>
+				{t("common.back")}
+			</Button>
+			<Button type="submit" disabled={isSubmitting}>
+				{t("common.save")}
+			</Button>
 		</>
 	);
 
@@ -109,14 +137,14 @@ const MilkCollection: React.FC = () => {
 					<div className={styles.sourceWrapper}>
 						<Dropdown
 							id={uuid()}
-							{...register("producer", { onChange: () => clearErrors("producer") })}
+							{...register("producer", {
+								onChange: () => clearErrors("producer"),
+							})}
 							placeholder={t("common.select")}
 							options={producerOptions}
 							error={errors.producer?.message}
 						/>
-						<IconButton
-							type="button"
-							onClick={() => navigate("/add-producer")}>
+						<IconButton type="button" onClick={() => navigate("/add-producer")}>
 							<MdOutlineAddCircleOutline size="1.5rem" />
 						</IconButton>
 					</div>
@@ -131,7 +159,13 @@ const MilkCollection: React.FC = () => {
 					<div className={styles.amountWrapper}>
 						<InputField
 							id={uuid()}
-							{...register("volume_liters", { valueAsNumber: true, onChange: (e) => { clearErrors(["volume_liters", "volume_kg"]); handleVolumeChange(e); } })}
+							{...register("volume_liters", {
+								valueAsNumber: true,
+								onChange: (e) => {
+									clearErrors(["volume_liters", "volume_kg"]);
+									handleVolumeChange(e);
+								},
+							})}
 							type="number"
 							step="0.01"
 							label={t("utilities.volume")}
@@ -141,7 +175,13 @@ const MilkCollection: React.FC = () => {
 						/>
 						<InputField
 							id={uuid()}
-							{...register("volume_kg", { valueAsNumber: true, onChange: (e) => { clearErrors(["volume_kg", "volume_liters"]); handleVolumeChange(e); } })}
+							{...register("volume_kg", {
+								valueAsNumber: true,
+								onChange: (e) => {
+									clearErrors(["volume_kg", "volume_liters"]);
+									handleVolumeChange(e);
+								},
+							})}
 							type="number"
 							step="0.01"
 							label={t("utilities.volume")}
@@ -155,7 +195,10 @@ const MilkCollection: React.FC = () => {
 					<h2>{t("milk_collection.qualities_section_title")}</h2>
 					<InputField
 						id={uuid()}
-						{...register("temperature", { valueAsNumber: true, onChange: () => clearErrors("temperature") })}
+						{...register("temperature", {
+							valueAsNumber: true,
+							onChange: () => clearErrors("temperature"),
+						})}
 						type="number"
 						step="0.1"
 						label={t("qualities.temperature")}
@@ -164,7 +207,9 @@ const MilkCollection: React.FC = () => {
 					/>
 					<Dropdown
 						id={uuid()}
-						{...register("inhibitory_residue", { onChange: () => clearErrors("inhibitory_residue") })}
+						{...register("inhibitory_residue", {
+							onChange: () => clearErrors("inhibitory_residue"),
+						})}
 						placeholder={t("common.select")}
 						options={booleanOptions}
 						label={t("qualities.inhibitory_residue")}
@@ -173,7 +218,9 @@ const MilkCollection: React.FC = () => {
 					/>
 					<Dropdown
 						id={uuid()}
-						{...register("aflatoxin", { onChange: () => clearErrors("aflatoxin") })}
+						{...register("aflatoxin", {
+							onChange: () => clearErrors("aflatoxin"),
+						})}
 						placeholder={t("common.select")}
 						options={booleanOptions}
 						label={t("qualities.aflatoxin")}
@@ -182,7 +229,10 @@ const MilkCollection: React.FC = () => {
 					/>
 					<InputField
 						id={uuid()}
-						{...register("acid_content", { valueAsNumber: true, onChange: () => clearErrors("acid_content") })}
+						{...register("acid_content", {
+							valueAsNumber: true,
+							onChange: () => clearErrors("acid_content"),
+						})}
 						type="number"
 						step="0.1"
 						label={t("qualities.acid_level")}

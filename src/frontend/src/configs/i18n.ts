@@ -4,16 +4,15 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import en from "../lib/i18n/en.json";
 import hu from "../lib/i18n/hu.json";
 
-i18n
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    resources: {
-      en: { translation: en },
-      hu: { translation: hu },
-    },
-    fallbackLng: "en",
-    interpolation: { escapeValue: false },
-  });
+i18n.use(LanguageDetector)
+	.use(initReactI18next)
+	.init({
+		resources: {
+			en: { translation: en },
+			hu: { translation: hu },
+		},
+		fallbackLng: "en",
+		interpolation: { escapeValue: false },
+	});
 
 export default i18n;

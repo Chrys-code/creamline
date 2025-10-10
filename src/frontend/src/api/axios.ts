@@ -1,4 +1,4 @@
-import { createApiClient } from "../lib/schemas/schemas";
+import { createApiClient } from "./endpoints";
 import { getCookie } from "../lib/helpers/cookie";
 
 export const api = createApiClient("/", {

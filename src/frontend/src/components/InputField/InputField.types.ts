@@ -1,32 +1,32 @@
 import type React from "react";
 
 export interface InputFieldProps {
-    id: string;
-    name: string;
+	id: string;
+	name: string;
 
-    type: InputFieldTypes;
+	type: InputFieldTypes;
 
-    label?: string;
-    info?: string;
-    defaultValue?: string;
-    placeholder?: string;
-    error?: string | null;
-    disabled?: boolean;
+	label?: string;
+	info?: string;
+	defaultValue?: string;
+	placeholder?: string;
+	error?: string | null;
+	disabled?: boolean;
 
-    step?: string; // only for number type
+	step?: string; // only for number type
 
-    onChange?: (_e: React.ChangeEvent<HTMLInputElement>) => void;
+	onChange?: (_e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 type InputFieldTypes =
-    | "datetime-local"
-    | "email"
-    | "number"
-    | "password"
-    | "range"
-    | "text"
-    | "time"
-    | "date"
-    | "month"
-    | "week"
-    | "hidden";
+	| "datetime-local"
+	| "email"
+	| "number"
+	| "password"
+	| "range"
+	| "text"
+	| "time"
+	| "date"
+	| "month"
+	| "week"
+	| "hidden";

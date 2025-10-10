@@ -1,13 +1,17 @@
-import { api_client } from "../client"
+import {
+	ListProducerEndpoint,
+	GetProducerEndpoint,
+	CreateProducerEndpoint,
+	UpdateProducerEndpoint,
+	DeleteProducerEndpoint,
+} from "./endpoint";
+import ProducerSchema from "./schema";
 
-export const createProducer = async (payload: {
-	name: string,
-	address: string,
-	contact_email: string
-}) =>
-	await api_client({ endpoint: "api/v1/producer/", method: "POST", payload })
-
-export const getProducers = async () =>
-	await api_client({
-		endpoint: "api/v1/producer/", method: "GET", payload: undefined
-	})
+export {
+	ListProducerEndpoint,
+	GetProducerEndpoint,
+	CreateProducerEndpoint,
+	UpdateProducerEndpoint,
+	DeleteProducerEndpoint,
+	ProducerSchema,
+};

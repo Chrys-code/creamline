@@ -37,19 +37,21 @@
 }
 
 @font-face {
-	font-family: 'Work Sans';
+	font-family: "Work Sans";
 	font-style: normal;
 	font-weight: 100 900;
-	src: url('/public/fonts/WorkSans-VariableFont_wght.ttf') format('woff'),
-		url('/public/fonts/WorkSans-VariableFont_wght.ttf') format('woff2');
+	src:
+		url("/public/fonts/WorkSans-VariableFont_wght.ttf") format("woff"),
+		url("/public/fonts/WorkSans-VariableFont_wght.ttf") format("woff2");
 	font-display: swap;
 }
 
 @font-face {
-	font-family: 'Work Sans';
+	font-family: "Work Sans";
 	font-style: italic;
 	font-weight: 100 900;
-	src: url('/public/fonts/WorkSans-Italic-VariableFont_wght.ttf') format('woff'),
-		url('/public/fonts/WorkSans-Italic-VariableFont_wght.ttf') format('woff2');
+	src:
+		url("/public/fonts/WorkSans-Italic-VariableFont_wght.ttf") format("woff"),
+		url("/public/fonts/WorkSans-Italic-VariableFont_wght.ttf") format("woff2");
 	font-display: swap;
 }

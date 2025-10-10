@@ -12,6 +12,7 @@
 	],
 	"settings": {
 		"editor.formatOnPaste": true,
-		"eslint.format.enable": true
+		"eslint.format.enable": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
 }

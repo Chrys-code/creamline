@@ -7,13 +7,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: .5rem;
+	padding: 0.5rem;
 	border-radius: var(--border-wrapper-radius);
 
 	transition: background-color var(--animation-duration) var(--animation-timing);
 
 	svg {
-		transition: fill var(--animation-duration) var(--animation-timing), color var(--animation-duration) var(--animation-timing);
+		transition:
+			fill var(--animation-duration) var(--animation-timing),
+			color var(--animation-duration) var(--animation-timing);
 	}
 }
 
@@ -53,5 +55,5 @@
 .disabled {
 	cursor: default;
 	pointer-events: none;
-	opacity: .5;
+	opacity: 0.5;
 }

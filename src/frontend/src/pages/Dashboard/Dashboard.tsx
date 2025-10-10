@@ -6,7 +6,6 @@ import type { RootLoaderData } from "../../routes/loaders/types";
 
 import { useNavigate, useRouteLoaderData } from "react-router";
 
-
 const Dashboard: React.FC = () => {
 	const data = useRouteLoaderData("app") as RootLoaderData;
 	const navigate = useNavigate();
@@ -25,8 +24,16 @@ const Dashboard: React.FC = () => {
 			<section className={styles.tasks}>
 				<h2>Feladatok:</h2>
 				<div>
-					<Button style="secondary" type="button" onClick={() => navigate("/milk-collection")}>Tejátvétel</Button>
-					<Button style="secondary" type="button" onClick={() => navigate("/pasteur")}>Pasztőr</Button>
+					<Button
+						style="secondary"
+						type="button"
+						onClick={() => navigate("/milk-collection")}
+					>
+						Tejátvétel
+					</Button>
+					<Button style="secondary" type="button" onClick={() => navigate("/pasteur")}>
+						Pasztőr
+					</Button>
 				</div>
 			</section>
 		</>

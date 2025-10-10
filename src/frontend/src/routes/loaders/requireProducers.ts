@@ -1,6 +1,5 @@
 import { toast } from "react-toastify";
-import { getProducers } from "../../api/producer";
-
+import { api } from "../../api/axios";
 
 export interface RequireProducersData {
 	uuid: string;
@@ -11,13 +10,8 @@ export interface RequireProducersData {
 
 const requireProducers = async (): Promise<RequireProducersData[]> => {
 	try {
-		const getProducersResponse = await getProducers();
-		if (!getProducersResponse.response.ok) {
-			toast.error("Termelők betöltése sikertelen.");
-		}
-
-		const producersData = await getProducersResponse.response.json();
-		return producersData;
+		const producerResponse = await api.get("/api/v1/producer/");
+		return producerResponse;
 	} catch {
 		throw toast.error("Termelők betöltése sikertelen.");
 	}

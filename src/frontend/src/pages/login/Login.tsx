@@ -13,13 +13,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuidv4 } from "uuid";
 
 import { api } from "../../api/axios";
-import { schemas } from "../../lib/schemas/schemas";
+import { schemas } from "../../api/schemas";
 import { useTranslation } from "react-i18next";
 
-
-const LoginSchema = schemas.Login;
+const LoginSchema = schemas.LoginSchema;
 type LoginFormData = z.infer<typeof LoginSchema>;
-
 
 const Login: React.FC = () => {
 	const { t } = useTranslation();
@@ -30,7 +28,7 @@ const Login: React.FC = () => {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		setError,
-		clearErrors
+		clearErrors,
 	} = useForm<LoginFormData>({
 		resolver: zodResolver(LoginSchema),
 	});
@@ -43,8 +41,10 @@ const Login: React.FC = () => {
 			if (err.response?.data) {
 				const responseData = err.response.data;
 				if (responseData.email) setError("email", { message: responseData.email[0] });
-				if (responseData.password) setError("password", { message: responseData.password[0] });
-				if (responseData.message) setError("formMessage", { message: responseData.message });
+				if (responseData.password)
+					setError("password", { message: responseData.password[0] });
+				if (responseData.message)
+					setError("formMessage", { message: responseData.message });
 			}
 		}
 	};
@@ -52,8 +52,12 @@ const Login: React.FC = () => {
 	const renderFormActions = () => {
 		return (
 			<div className={styles.formActions}>
-				{errors.formMessage && <span className={styles.errorMessage}>{errors.formMessage.message}</span>}
-				<Button style="primary" type="submit" disabled={isSubmitting}>{t("login.submit")}</Button>
+				{errors.formMessage && (
+					<span className={styles.errorMessage}>{errors.formMessage.message}</span>
+				)}
+				<Button style="primary" type="submit" disabled={isSubmitting}>
+					{t("login.submit")}
+				</Button>
 			</div>
 		);
 	};
@@ -69,10 +73,13 @@ const Login: React.FC = () => {
 							{...register("email", { onChange: () => clearErrors("email") })}
 							label={t("login.input_email_label")}
 							type="text"
-							error={errors.email?.message} />
+							error={errors.email?.message}
+						/>
 						<InputField
 							id={uuidv4()}
-							{...register("password", { onChange: () => clearErrors("password") })}
+							{...register("password", {
+								onChange: () => clearErrors("password"),
+							})}
 							label={t("login.input_password_label")}
 							type="password"
 							error={errors.password?.message}
