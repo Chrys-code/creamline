@@ -12,8 +12,6 @@ const ProfileSchema = z
 
 const PatchedProfileSchema = z
 	.object({
-		uuid: z.string().uuid(),
-		email: z.string().max(255).email().nullable(),
 		profile_image: z.string().max(256).nullable(),
 		first_name: z.string().max(100),
 		last_name: z.string().max(100),

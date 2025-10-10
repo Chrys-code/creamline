@@ -1,4 +1,14 @@
 {
+	"common": {
+		"save": "Mentés",
+		"back": "Vissza",
+		"select": "Válasszon",
+		"cancel": "Mégse",
+		"edit": "Szerkesztés",
+		"optional": "Opcionális",
+		"yes": "Igen",
+		"no": "Nem"
+	},
 	"utilities": {
 		"storage": "Raktár",
 		"volume": "Mennyiség"
@@ -23,13 +33,10 @@
 		"input_is_required": "A mező kitöltése kötelező",
 		"input_select_required": "Kérem válasszon"
 	},
-	"common": {
-		"save": "Mentés",
-		"back": "Vissza",
-		"select": "Válasszon",
-		"optional": "Opcionális",
-		"yes": "Igen",
-		"no": "Nem"
+	"profile": {
+		"input_first_name_label": "Vezetéknév",
+		"input_last_name_label": "Családnév",
+		"notification_message": "Profil frissítve!"
 	},
 	"login": {
 		"title": "Bejelentkezés",

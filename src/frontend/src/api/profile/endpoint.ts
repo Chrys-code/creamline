@@ -1,6 +1,6 @@
 import { makeEndpoint } from "@zodios/core";
 
-import { ProfileSchema } from "./schema";
+import { ProfileSchema, PatchedProfileSchema } from "./schema";
 import z from "zod";
 
 export const GetProfileEndpoint = makeEndpoint({
@@ -20,7 +20,7 @@ export const UpdateProfileEndpoint = makeEndpoint({
 		{
 			name: "body",
 			type: "Body",
-			schema: ProfileSchema,
+			schema: PatchedProfileSchema,
 		},
 	],
 	response: ProfileSchema,

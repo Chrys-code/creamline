@@ -1,4 +1,14 @@
 {
+	"common": {
+		"save": "Save",
+		"back": "Back",
+		"select": "Select",
+		"cancel": "Cancel",
+		"edit": "Edit",
+		"optional": "Optional",
+		"yes": "Yes",
+		"no": "No"
+	},
 	"utilities": {
 		"storage": "Storage",
 		"volume": "Volume"
@@ -17,14 +27,6 @@
 		"acid_level": "SH⁰",
 		"more_or_less_than_50": "more or less than 50"
 	},
-	"common": {
-		"save": "Save",
-		"back": "Back",
-		"select": "Select",
-		"optional": "Optional",
-		"yes": "Yes",
-		"no": "No"
-	},
 	"common_validation": {
 		"input_gte_0": "Volume must be above 0",
 		"input_gte_absolute_zero": "Value must be more than absolute zero",
@@ -38,6 +40,11 @@
 		"input_email_invalid": "Invalid email address",
 		"input_password_label": "Password",
 		"input_password_required": "Please enter your password"
+	},
+	"profile": {
+		"input_first_name_label": "Firstname",
+		"input_last_name_label": "Lastname",
+		"notification_message": "Profile updated!"
 	},
 	"add_producer": {
 		"page_title": "New producer",

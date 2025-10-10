@@ -1,5 +1,6 @@
 import type React from "react";
 import type { RootLoaderData } from "../../routes/loaders/types";
+import type z from "zod";
 import styles from "./Profile.module.scss";
 
 import Button from "../../components/Button";
@@ -9,31 +10,47 @@ import InputField from "../../components/InputField";
 import { useState } from "react";
 import { useRouteLoaderData, useRevalidator } from "react-router";
 import { v4 as uuid } from "uuid";
-import { updateProfile } from "../../api/profile";
+import { useTranslation } from "react-i18next";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { schemas } from "../../api/schemas";
+import { api } from "../../api/axios";
+import { toast } from "react-toastify";
+
+type ProfileFormData = z.infer<typeof schemas.PatchedProfileSchema>;
 
 const Profile: React.FC = () => {
+	const { t } = useTranslation();
 	const data = useRouteLoaderData("app") as RootLoaderData;
 	const revalidator = useRevalidator();
 	const [isEditing, setIsEditing] = useState(false);
+
+	const {
+			register,
+			handleSubmit,
+			formState: { errors, isSubmitting },
+			setError,
+			clearErrors,
+		} = useForm<ProfileFormData>({
+			resolver: zodResolver(schemas.PatchedProfileSchema),
+		});
 
 	const handleEditClick = () => {
 		setIsEditing(!isEditing);
 	};
 
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		// @ts-expect-error e.target is not available
-		const formData = new FormData(e.target);
+	const onSubmit = async (formData: ProfileFormData) => {
+		try {
+			await api.put("/api/v1/profile/", formData);
+			toast.success(t("profile.notification_message"));
+		} catch (err: any) {
+			if (err.response?.data) {
+				const responseData = err.response.data;
+				if (responseData.first_name) setError("first_name", { message: responseData.first_name[0] });
+				if (responseData.last_name) setError("last_name", { message: responseData.last_name[0] });
+			}
 
-		const first_name = formData.get("first_name") as string;
-		const last_name = formData.get("last_name") as string;
-
-		const response = await updateProfile({
-			first_name: first_name,
-			last_name: last_name,
-		});
-
-		if (!response.response.ok) {
-			//  show notification
 		}
 
 		revalidator.revalidate();
@@ -46,10 +63,10 @@ const Profile: React.FC = () => {
 		return (
 			<div className={styles.actions}>
 				<Button style="secondary" type="button" onClick={handleEditClick}>
-					Vissza
+					{t("common.cancel")}
 				</Button>
-				<Button style="primary" type="submit">
-					Mentés
+				<Button style="primary" type="submit" disabled={isSubmitting}>
+					{t("common.save")}
 				</Button>
 			</div>
 		);
@@ -60,38 +77,40 @@ const Profile: React.FC = () => {
 	return (
 		<div className={containerStyle}>
 			<div className={styles.profileImage}></div>
-			<Form actionElements={renderFormActions()} onSubmit={handleSubmit}>
+			<Form actionElements={renderFormActions()} onSubmit={handleSubmit(onSubmit)}>
 				<section>
 					<InputField
 						id={uuid()}
-						name="first_name"
+						{...register("first_name", { onChange: () => clearErrors("first_name") })}
 						type="text"
-						label="Vezetéknév:"
+						label={t("profile.input_first_name_label")}
 						defaultValue={data.profile.first_name}
+						error={errors.first_name?.message}
 						disabled={!isEditing}
 					/>
 					<InputField
 						id={uuid()}
-						name="last_name"
+						{...register("last_name", { onChange: () => clearErrors("last_name") })}
 						type="text"
-						label="Családnév:"
+						label={t("profile.input_last_name_label")}
 						defaultValue={data.profile.last_name}
+						error={errors.last_name?.message}
+						disabled={!isEditing}
+					/>
+					<InputField
+						id={uuid()}
+						name="name"
+						type="text"
+						label="Email"
+						defaultValue={data.profile.email}
 						disabled={!isEditing}
 					/>
 					{!isEditing && (
 						<>
-							<InputField
-								id={uuid()}
-								name="name"
-								type="text"
-								label="Email:"
-								defaultValue={data.profile.email}
-								disabled={!isEditing}
-							/>
-							<div className={styles.actions}>
+							<div className={styles.editAaction}>
 								<span></span>
 								<Button style="secondary" type="button" onClick={handleEditClick}>
-									Szerkesztés
+									{t("common.edit")}
 								</Button>
 							</div>
 						</>
