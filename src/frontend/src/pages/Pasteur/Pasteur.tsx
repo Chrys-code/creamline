@@ -1,6 +1,6 @@
 import type React from "react";
+import type { PasteurisedMilk } from "../../api/types.js";
 import type { PasteurLoaderData } from "../../routes/loaders/types.js";
-import type { z } from "zod";
 import styles from "./Pasteur.module.scss";
 
 import PageHeader from "../../components/PageHeader";
@@ -19,10 +19,7 @@ import { v4 as uuid } from "uuid";
 import { api } from "../../api/axios";
 import { schemas } from "../../api/schemas.js";
 
-import convertMilkLiterAndKg from "../../lib/helpers/litreToKg";
-
-const PasteurisedMilkSchema = schemas.PasteurisedMilkSchema;
-type PasteurisedMilkFormData = z.infer<typeof PasteurisedMilkSchema>;
+import convertMilkLiterAndKg from "../../lib/helpers/literToKg/literToKg.js";
 
 const Pasteur: React.FC = () => {
 	const data: PasteurLoaderData = useLoaderData();
@@ -36,9 +33,9 @@ const Pasteur: React.FC = () => {
 		setValue,
 		setError,
 		clearErrors,
-	} = useForm<PasteurisedMilkFormData>({
+	} = useForm<PasteurisedMilk>({
 		// @ts-expect-error local-datetime conversion issue
-		resolver: zodResolver(PasteurisedMilkSchema),
+		resolver: zodResolver(schemas.PasteurisedMilkSchema),
 		mode: "onChange",
 		defaultValues: {
 			volume_kg: 0,
@@ -54,18 +51,20 @@ const Pasteur: React.FC = () => {
 			id: pasteur.uuid,
 			value: pasteur.name,
 		})) || [];
+
 	const storageOptions =
 		data.storages?.map((storage) => ({
 			id: storage.uuid,
 			value: storage.name,
 		})) || [];
+
 	const productDefinitionOptions =
 		data.productDefinitions?.map((productDefinition) => ({
 			id: productDefinition.uuid,
 			value: productDefinition.name,
 		})) || [];
 
-	const onSubmit = async (formData: PasteurisedMilkFormData): Promise<void> => {
+	const onSubmit = async (formData: PasteurisedMilk): Promise<void> => {
 		try {
 			await api.post("/api/v1/pasteurised-milk/", formData);
 			toast.success("Pasztőr sikeresen elmentve!");
@@ -88,7 +87,7 @@ const Pasteur: React.FC = () => {
 	const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const target = e.target;
 
-		if (target.name == "volume_liters") {
+		if (target.name === "volume_liters") {
 			const value = convertMilkLiterAndKg({
 				liters: Number(target.value),
 				kg: undefined,
@@ -96,7 +95,7 @@ const Pasteur: React.FC = () => {
 			setValue("volume_kg", Number(value));
 		}
 
-		if (target.name == "volume_kg") {
+		if (target.name === "volume_kg") {
 			const value = convertMilkLiterAndKg({
 				liters: undefined,
 				kg: Number(target.value),

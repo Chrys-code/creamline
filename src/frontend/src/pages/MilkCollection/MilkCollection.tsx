@@ -1,4 +1,4 @@
-import type { z } from "zod";
+import type { Milk } from "../../api/types";
 import type { MilkCollectionLoaderData } from "../../routes/loaders/types";
 import styles from "./MilkCollection.module.scss";
 
@@ -20,10 +20,7 @@ import { api } from "../../api/axios";
 import { schemas } from "../../api/schemas";
 import { useTranslation } from "react-i18next";
 
-import convertMilkLiterAndKg from "../../lib/helpers/litreToKg";
-
-const MilkSchema = schemas.MilkSchema;
-type MilkFormData = z.infer<typeof MilkSchema>;
+import convertMilkLiterAndKg from "../../lib/helpers/literToKg/literToKg";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -43,8 +40,8 @@ const MilkCollection: React.FC = () => {
 		setValue,
 		setError,
 		clearErrors,
-	} = useForm<MilkFormData>({
-		resolver: zodResolver(MilkSchema),
+	} = useForm<Milk>({
+		resolver: zodResolver(schemas.MilkSchema),
 		defaultValues: {
 			volume_kg: 0,
 			volume_liters: 0,
@@ -68,7 +65,7 @@ const MilkCollection: React.FC = () => {
 		{ id: "false", value: t("common.no") },
 	];
 
-	const onSubmit = async (formData: MilkFormData): Promise<void> => {
+	const onSubmit = async (formData: Milk): Promise<void> => {
 		try {
 			await api.post("/api/v1/milk/", formData);
 			toast.success(t("add_producer.notification_message"));
@@ -100,7 +97,7 @@ const MilkCollection: React.FC = () => {
 	const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const target = e.target;
 
-		if (target.name == "volume_liters") {
+		if (target.name === "volume_liters") {
 			const value = convertMilkLiterAndKg({
 				liters: Number(target.value),
 				kg: undefined,
@@ -108,7 +105,7 @@ const MilkCollection: React.FC = () => {
 			setValue("volume_kg", Number(value));
 		}
 
-		if (target.name == "volume_kg") {
+		if (target.name === "volume_kg") {
 			const value = convertMilkLiterAndKg({
 				liters: undefined,
 				kg: Number(target.value),

@@ -1,11 +1,10 @@
-import type { MilkCollectionLoaderData, PasteurLoaderData, RootLoaderData } from "./loaders/types";
 import { createBrowserRouter } from "react-router";
 
 import Dashboard from "../pages/Dashboard/Dashboard";
 import AppLayout from "../layouts/AppLayout";
 import ErrorLayout from "../layouts/ErrorLayout";
 
-import requireAuth, { type RequireAuthData } from "./loaders/requireAuth";
+import requireAuth from "./loaders/requireAuth";
 import requireProducers from "./loaders/requireProducers";
 import requireStorages from "./loaders/requireStorages";
 import requirePasteurs from "./loaders/requirePasteurs";
@@ -16,8 +15,8 @@ const appRouter = createBrowserRouter([
 		id: "app",
 		path: "/",
 		element: <AppLayout />,
-		loader: async (): Promise<RootLoaderData> => ({
-			profile: (await requireAuth()) as RequireAuthData,
+		loader: async () => ({
+			profile: await requireAuth(),
 		}),
 		errorElement: (
 			<AppLayout>
@@ -41,7 +40,7 @@ const appRouter = createBrowserRouter([
 					Component: async () =>
 						(await import("../pages/MilkCollection/MilkCollection")).default,
 				},
-				loader: async (): Promise<MilkCollectionLoaderData> => ({
+				loader: async () => ({
 					producers: (await requireProducers()) || [],
 					storages: (await requireStorages()) || [],
 				}),
@@ -51,7 +50,7 @@ const appRouter = createBrowserRouter([
 				lazy: {
 					Component: async () => (await import("../pages/Pasteur/Pasteur")).default,
 				},
-				loader: async (): Promise<PasteurLoaderData> => ({
+				loader: async () => ({
 					pasteurs: await requirePasteurs(),
 					storages: await requireStorages(),
 					productDefinitions: await requireProductDefinitions(),

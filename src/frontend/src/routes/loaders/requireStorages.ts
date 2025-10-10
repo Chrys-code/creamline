@@ -1,13 +1,9 @@
+import type { Storage } from "../../api/types";
+
 import { toast } from "react-toastify";
 import { api } from "../../api/axios";
 
-export interface RequireStoragesData {
-	uuid: string;
-	name: string;
-	type: string;
-}
-
-const requireStorages = async (): Promise<RequireStoragesData[]> => {
+const requireStorages = async (): Promise<Storage[]> => {
 	try {
 		const storageResponse = await api.get("/api/v1/storage/");
 		return storageResponse;

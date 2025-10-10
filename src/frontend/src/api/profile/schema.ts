@@ -3,7 +3,7 @@ import z from "zod";
 const ProfileSchema = z
 	.object({
 		uuid: z.string().uuid(),
-		email: z.string().max(255).email().nullish(),
+		email: z.string().max(255).email(),
 		profile_image: z.string().max(256).nullish(),
 		first_name: z.string().max(100).optional(),
 		last_name: z.string().max(100).optional(),

@@ -3,6 +3,7 @@ import i18n from "../../configs/i18n";
 
 const ProducerSchema = z
 	.object({
+		uuid: z.string().uuid().optional(),
 		name: z
 			.string()
 			.max(255)

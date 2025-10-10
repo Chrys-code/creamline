@@ -1,5 +1,4 @@
 import type React from "react";
-import type { z } from "zod";
 
 import PageHeader from "../../components/PageHeader";
 import Form from "../../components/Form";
@@ -15,9 +14,7 @@ import { v4 as uuid } from "uuid";
 
 import { api } from "../../api/axios";
 import { schemas } from "../../api/schemas";
-
-const ProducerSchema = schemas.ProducerSchema;
-type ProducerFormData = z.infer<typeof ProducerSchema>;
+import type { Producer } from "../../api/types";
 
 const AddProducer: React.FC = () => {
 	const { t } = useTranslation();
@@ -29,11 +26,11 @@ const AddProducer: React.FC = () => {
 		formState: { errors, isSubmitting },
 		setError,
 		clearErrors,
-	} = useForm<ProducerFormData>({
-		resolver: zodResolver(ProducerSchema),
+	} = useForm<Producer>({
+		resolver: zodResolver(schemas.ProducerSchema),
 	});
 
-	const onSubmit = async (formData: ProducerFormData) => {
+	const onSubmit = async (formData: Producer) => {
 		try {
 			await api.post("/api/v1/producer/", formData);
 			toast.success(t("add_producer.notification_message"));

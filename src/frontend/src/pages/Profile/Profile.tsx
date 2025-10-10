@@ -1,6 +1,6 @@
 import type React from "react";
+import type { PatchedProfile, Profile } from "../../api/types";
 import type { RootLoaderData } from "../../routes/loaders/types";
-import type z from "zod";
 import styles from "./Profile.module.scss";
 
 import Button from "../../components/Button";
@@ -18,8 +18,6 @@ import { schemas } from "../../api/schemas";
 import { api } from "../../api/axios";
 import { toast } from "react-toastify";
 
-type ProfileFormData = z.infer<typeof schemas.PatchedProfileSchema>;
-
 const Profile: React.FC = () => {
 	const { t } = useTranslation();
 	const data = useRouteLoaderData("app") as RootLoaderData;
@@ -27,30 +25,31 @@ const Profile: React.FC = () => {
 	const [isEditing, setIsEditing] = useState(false);
 
 	const {
-			register,
-			handleSubmit,
-			formState: { errors, isSubmitting },
-			setError,
-			clearErrors,
-		} = useForm<ProfileFormData>({
-			resolver: zodResolver(schemas.PatchedProfileSchema),
-		});
+		register,
+		handleSubmit,
+		formState: { errors, isSubmitting },
+		setError,
+		clearErrors,
+	} = useForm<PatchedProfile>({
+		resolver: zodResolver(schemas.PatchedProfileSchema),
+	});
 
 	const handleEditClick = () => {
 		setIsEditing(!isEditing);
 	};
 
-	const onSubmit = async (formData: ProfileFormData) => {
+	const onSubmit = async (formData: PatchedProfile) => {
 		try {
 			await api.put("/api/v1/profile/", formData);
 			toast.success(t("profile.notification_message"));
 		} catch (err: any) {
 			if (err.response?.data) {
 				const responseData = err.response.data;
-				if (responseData.first_name) setError("first_name", { message: responseData.first_name[0] });
-				if (responseData.last_name) setError("last_name", { message: responseData.last_name[0] });
+				if (responseData.first_name)
+					setError("first_name", { message: responseData.first_name[0] });
+				if (responseData.last_name)
+					setError("last_name", { message: responseData.last_name[0] });
 			}
-
 		}
 
 		revalidator.revalidate();
@@ -77,7 +76,10 @@ const Profile: React.FC = () => {
 	return (
 		<div className={containerStyle}>
 			<div className={styles.profileImage}></div>
-			<Form actionElements={renderFormActions()} onSubmit={handleSubmit(onSubmit)}>
+			<Form
+				actionElements={renderFormActions()}
+				onSubmit={handleSubmit(onSubmit, (err) => console.log({ err }))}
+			>
 				<section>
 					<InputField
 						id={uuid()}
@@ -99,11 +101,11 @@ const Profile: React.FC = () => {
 					/>
 					<InputField
 						id={uuid()}
-						name="name"
+						name="email"
 						type="text"
 						label="Email"
 						defaultValue={data.profile.email}
-						disabled={!isEditing}
+						disabled={true}
 					/>
 					{!isEditing && (
 						<>

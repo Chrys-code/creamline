@@ -1,5 +1,5 @@
 import type React from "react";
-import type { z } from "zod";
+import type { Login } from "../../api/types";
 import styles from "./Login.module.scss";
 
 import AuthLayout from "../../layouts/AuthLayout";
@@ -16,9 +16,6 @@ import { api } from "../../api/axios";
 import { schemas } from "../../api/schemas";
 import { useTranslation } from "react-i18next";
 
-const LoginSchema = schemas.LoginSchema;
-type LoginFormData = z.infer<typeof LoginSchema>;
-
 const Login: React.FC = () => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
@@ -29,22 +26,28 @@ const Login: React.FC = () => {
 		formState: { errors, isSubmitting },
 		setError,
 		clearErrors,
-	} = useForm<LoginFormData>({
-		resolver: zodResolver(LoginSchema),
+	} = useForm<Login>({
+		resolver: zodResolver(schemas.LoginSchema),
 	});
 
-	const onSubmit = async (formData: LoginFormData) => {
+	const onSubmit = async (formData: Login) => {
 		try {
 			await api.post("/api/login/", formData);
 			navigate("/");
 		} catch (err: any) {
 			if (err.response?.data) {
 				const responseData = err.response.data;
-				if (responseData.email) setError("email", { message: responseData.email[0] });
-				if (responseData.password)
+				if (responseData.email) {
+					setError("email", { message: responseData.email[0] });
+				}
+
+				if (responseData.password) {
 					setError("password", { message: responseData.password[0] });
-				if (responseData.message)
+				}
+
+				if (responseData.message) {
 					setError("formMessage", { message: responseData.message });
+				}
 			}
 		}
 	};

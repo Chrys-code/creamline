@@ -1,5 +1,5 @@
 import { createApiClient } from "./endpoints";
-import { getCookie } from "../lib/helpers/cookie";
+import { getCookie } from "../lib/helpers/getCookie/getCookie";
 
 export const api = createApiClient("/", {
 	axiosConfig: {
@@ -8,8 +8,8 @@ export const api = createApiClient("/", {
 });
 
 api.axios.interceptors.request.use((config: any) => {
-	const csrfToken = getCookie("csrftoken");
-	if (csrfToken && ["post", "patch", "delete"].includes(config.method || "")) {
+	const csrfToken = getCookie({ name: "csrftoken", cookies: document.cookie });
+	if (csrfToken && ["post", "patch", "put", "delete"].includes(config.method || "")) {
 		config.headers["X-CSRFToken"] = csrfToken;
 	}
 	return config;

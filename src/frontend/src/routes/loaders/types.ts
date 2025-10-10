@@ -1,20 +1,16 @@
-import type { RequireAuthData } from "./requireAuth";
-import type { RequirePasteursData } from "./requirePasteurs";
-import type { RequireProducersData } from "./requireProducers";
-import type { RequireProductDefinitionsData } from "./requireProductDefinitions";
-import type { RequireStoragesData } from "./requireStorages";
+import type { Pasteur, Producer, ProductDefinition, Profile } from "../../api/types";
 
 export interface RootLoaderData {
-	profile: RequireAuthData;
+	profile: Profile;
 }
 
 export interface MilkCollectionLoaderData {
-	producers: RequireProducersData[];
-	storages: RequireStoragesData[];
+	producers: Producer[];
+	storages: Storage[];
 }
 
 export interface PasteurLoaderData {
-	pasteurs: RequirePasteursData[];
-	storages: RequireStoragesData[];
-	productDefinitions: RequireProductDefinitionsData[];
+	pasteurs: Pasteur[];
+	storages: Storage[];
+	productDefinitions: ProductDefinition[];
 }

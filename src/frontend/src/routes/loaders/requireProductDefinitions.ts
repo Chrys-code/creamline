@@ -1,12 +1,9 @@
+import type { ProductDefinition } from "../../api/types";
+
 import { toast } from "react-toastify";
 import { api } from "../../api/axios";
 
-export interface RequireProductDefinitionsData {
-	uuid: string;
-	name: string;
-}
-
-const requireProductDefinitions = async (): Promise<RequireProductDefinitionsData[]> => {
+const requireProductDefinitions = async (): Promise<ProductDefinition[]> => {
 	try {
 		const productDefinitionResponse = await api.get("/api/v1/product-definition/");
 		return productDefinitionResponse;

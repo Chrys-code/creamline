@@ -1,8 +1,8 @@
 import type React from "react";
+import type { RootLoaderData } from "../../routes/loaders/types";
 import styles from "./Dashboard.module.scss";
 
 import Button from "../../components/Button";
-import type { RootLoaderData } from "../../routes/loaders/types";
 
 import { useNavigate, useRouteLoaderData } from "react-router";
 
