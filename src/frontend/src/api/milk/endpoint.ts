@@ -1,6 +1,26 @@
 import { makeEndpoint } from "@zodios/core";
 import z from "zod";
-import MilkSchema from "./schema";
+import { PaginatedMilkListSchema, GetMilkSchema, CreateUpdateMilkSchema } from "./schema";
+
+export const ListMilkEndpoint = makeEndpoint({
+	method: "get",
+	path: "/api/v1/milk/",
+	alias: "v1_milk_list",
+	requestFormat: "json",
+	parameters: [
+		{
+			name: "page",
+			type: "Query",
+			schema: z.number().int().optional(),
+		},
+		{
+			name: "page_size",
+			type: "Query",
+			schema: z.number().int().optional(),
+		},
+	],
+	response: PaginatedMilkListSchema,
+});
 
 export const GetMilkEndpoint = makeEndpoint({
 	method: "get",
@@ -14,15 +34,7 @@ export const GetMilkEndpoint = makeEndpoint({
 			schema: z.number().int(),
 		},
 	],
-	response: MilkSchema,
-});
-
-export const ListMilkEndpoint = makeEndpoint({
-	method: "get",
-	path: "/api/v1/milk/",
-	alias: "v1_milk_list",
-	requestFormat: "json",
-	response: z.array(MilkSchema),
+	response: GetMilkSchema,
 });
 
 export const CreateMilkEndpoint = makeEndpoint({
@@ -34,10 +46,10 @@ export const CreateMilkEndpoint = makeEndpoint({
 		{
 			name: "body",
 			type: "Body",
-			schema: MilkSchema,
+			schema: CreateUpdateMilkSchema,
 		},
 	],
-	response: MilkSchema,
+	response: GetMilkSchema,
 });
 
 export const UpdateMilkEndpoint = makeEndpoint({
@@ -49,7 +61,7 @@ export const UpdateMilkEndpoint = makeEndpoint({
 		{
 			name: "body",
 			type: "Body",
-			schema: MilkSchema,
+			schema: CreateUpdateMilkSchema,
 		},
 		{
 			name: "id",
@@ -57,5 +69,5 @@ export const UpdateMilkEndpoint = makeEndpoint({
 			schema: z.number().int(),
 		},
 	],
-	response: MilkSchema,
+	response: GetMilkSchema,
 });

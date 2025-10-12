@@ -10,14 +10,9 @@ export default defineConfig(({ mode }) => {
 			outDir: "dist",
 			target: "esnext",
 		},
-		define: {
-			"process.env": {
-				RANDOM: env.VITE_RANDOM,
-			},
-		},
 	};
 
-	if (env.ENV == "development") {
+	if (env.ENV === "development") {
 		baseConfig["server"] = {
 			proxy: {
 				"/api": {

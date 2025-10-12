@@ -1,0 +1,10 @@
+.floatingMenu {
+	position: fixed;
+	left: 0rem;
+	right: 0rem;
+	bottom: var(--mobile-footer-nav-height);
+
+	padding: 1rem 2rem;
+	background-color: var(--color-neutral-0);
+	z-index: 90;
+}

@@ -61,5 +61,8 @@
 		"page_title": "Tejátvétel",
 		"producer_section_title": "Termelő",
 		"qualities_section_title": "Beltartalmi értékek"
+	},
+	"milk_collection_list": {
+		"page_title": "Tejátvételek"
 	}
 }

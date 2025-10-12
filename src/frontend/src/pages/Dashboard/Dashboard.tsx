@@ -1,5 +1,5 @@
 import type React from "react";
-import type { RootLoaderData } from "../../routes/loaders/types";
+import type { DashboardProps } from "./Dashboard.types";
 import styles from "./Dashboard.module.scss";
 
 import Button from "../../components/Button";
@@ -7,12 +7,12 @@ import Button from "../../components/Button";
 import { useNavigate, useRouteLoaderData } from "react-router";
 
 const Dashboard: React.FC = () => {
-	const data = useRouteLoaderData("app") as RootLoaderData;
+	const data = useRouteLoaderData<DashboardProps>("app");
 	const navigate = useNavigate();
 
-	const name = `${data.profile.first_name} ${data.profile.last_name}`;
+	const name = `${data?.profile?.first_name} ${data?.profile?.last_name}`;
 	const profileHasName = !!name.replaceAll(" ", "");
-	const displayName = profileHasName ? name : data.profile.email;
+	const displayName = profileHasName ? name : data?.profile?.email;
 
 	return (
 		<>

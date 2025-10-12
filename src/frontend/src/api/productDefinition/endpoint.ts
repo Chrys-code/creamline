@@ -1,13 +1,13 @@
 import { makeEndpoint } from "@zodios/core";
 import z from "zod";
-import { ProductDefinitionSchema } from "./schema";
+import { GetProductDefinitionSchema } from "./schema";
 
 export const ListProductDefinition = makeEndpoint({
 	method: "get",
 	path: "/api/v1/product-definition/",
 	alias: "v1_product_definition_list",
 	requestFormat: "json",
-	response: z.array(ProductDefinitionSchema),
+	response: z.array(GetProductDefinitionSchema),
 });
 
 export const GetProductDefinition = makeEndpoint({
@@ -22,5 +22,5 @@ export const GetProductDefinition = makeEndpoint({
 			schema: z.number().int(),
 		},
 	],
-	response: ProductDefinitionSchema,
+	response: GetProductDefinitionSchema,
 });

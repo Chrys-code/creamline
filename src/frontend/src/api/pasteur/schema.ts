@@ -1,10 +1,13 @@
 import { z } from "zod";
 
-const PasteurSchema = z
-	.object({
-		uuid: z.string().uuid(),
-		name: z.string().max(255),
-	})
-	.passthrough();
+const BasePasteurSchema = z.object({
+	name: z.string().max(255),
+});
 
-export default PasteurSchema;
+export const CreateUpdatePasteurSchema = BasePasteurSchema.extend({
+	uuid: z.string().uuid().optional(),
+});
+
+export const GetPasteurSchema = BasePasteurSchema.extend({
+	uuid: z.string().uuid(),
+}).passthrough();

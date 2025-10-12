@@ -1,5 +1,5 @@
 import z from "zod";
-import { StorageSchema } from "./schema";
+import { CreateUpdateStorageSchema, GetStorageSchema } from "./schema";
 import { makeEndpoint } from "@zodios/core";
 
 export const ListStorageEndpoint = makeEndpoint({
@@ -7,7 +7,7 @@ export const ListStorageEndpoint = makeEndpoint({
 	path: "/api/v1/storage/",
 	alias: "v1_storage_list",
 	requestFormat: "json",
-	response: z.array(StorageSchema),
+	response: z.array(GetStorageSchema),
 });
 
 export const CreateStorageEndpoint = makeEndpoint({
@@ -19,10 +19,10 @@ export const CreateStorageEndpoint = makeEndpoint({
 		{
 			name: "body",
 			type: "Body",
-			schema: StorageSchema,
+			schema: CreateUpdateStorageSchema,
 		},
 	],
-	response: StorageSchema,
+	response: GetStorageSchema,
 });
 
 export const GetStorageEndpoint = makeEndpoint({
@@ -37,7 +37,7 @@ export const GetStorageEndpoint = makeEndpoint({
 			schema: z.number().int(),
 		},
 	],
-	response: StorageSchema,
+	response: GetStorageSchema,
 });
 
 export const UpdateStorageEndpoint = makeEndpoint({
@@ -49,7 +49,7 @@ export const UpdateStorageEndpoint = makeEndpoint({
 		{
 			name: "body",
 			type: "Body",
-			schema: StorageSchema,
+			schema: CreateUpdateStorageSchema,
 		},
 		{
 			name: "id",
@@ -57,7 +57,7 @@ export const UpdateStorageEndpoint = makeEndpoint({
 			schema: z.number().int(),
 		},
 	],
-	response: StorageSchema,
+	response: GetStorageSchema,
 });
 
 export const DeleteStorageEndpoint = makeEndpoint({

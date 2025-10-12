@@ -1,5 +1,5 @@
 import z from "zod";
-import ProducerSchema from "./schema";
+import { CreateUpdateProducerSchema, GetProducerSchema } from "./schema";
 import { makeEndpoint } from "@zodios/core";
 
 export const ListProducerEndpoint = makeEndpoint({
@@ -7,7 +7,7 @@ export const ListProducerEndpoint = makeEndpoint({
 	path: "/api/v1/producer/",
 	alias: "v1_producer_list",
 	requestFormat: "json",
-	response: z.array(ProducerSchema),
+	response: z.array(GetProducerSchema),
 });
 
 export const GetProducerEndpoint = makeEndpoint({
@@ -22,7 +22,7 @@ export const GetProducerEndpoint = makeEndpoint({
 			schema: z.number().int(),
 		},
 	],
-	response: ProducerSchema,
+	response: GetProducerSchema,
 });
 
 export const CreateProducerEndpoint = makeEndpoint({
@@ -34,10 +34,10 @@ export const CreateProducerEndpoint = makeEndpoint({
 		{
 			name: "body",
 			type: "Body",
-			schema: ProducerSchema,
+			schema: CreateUpdateProducerSchema,
 		},
 	],
-	response: ProducerSchema,
+	response: GetProducerSchema,
 });
 
 export const UpdateProducerEndpoint = makeEndpoint({
@@ -49,7 +49,7 @@ export const UpdateProducerEndpoint = makeEndpoint({
 		{
 			name: "body",
 			type: "Body",
-			schema: ProducerSchema,
+			schema: CreateUpdateProducerSchema,
 		},
 		{
 			name: "id",
@@ -57,7 +57,7 @@ export const UpdateProducerEndpoint = makeEndpoint({
 			schema: z.number().int(),
 		},
 	],
-	response: ProducerSchema,
+	response: GetProducerSchema,
 });
 
 export const DeleteProducerEndpoint = makeEndpoint({

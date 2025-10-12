@@ -61,5 +61,8 @@
 		"page_title": "Milk collection",
 		"producer_section_title": "Producer",
 		"qualities_section_title": "Qualities"
+	},
+	"milk_collection_list": {
+		"page_title": "Milk collections"
 	}
 }

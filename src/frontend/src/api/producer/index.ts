@@ -5,7 +5,7 @@ import {
 	UpdateProducerEndpoint,
 	DeleteProducerEndpoint,
 } from "./endpoint";
-import ProducerSchema from "./schema";
+import { CreateUpdateProducerSchema, GetProducerSchema } from "./schema";
 
 export {
 	ListProducerEndpoint,
@@ -13,5 +13,6 @@ export {
 	CreateProducerEndpoint,
 	UpdateProducerEndpoint,
 	DeleteProducerEndpoint,
-	ProducerSchema,
+	CreateUpdateProducerSchema,
+	GetProducerSchema,
 };

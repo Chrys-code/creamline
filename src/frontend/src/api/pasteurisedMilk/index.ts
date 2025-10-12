@@ -4,12 +4,18 @@ import {
 	CreatePasteurisedMilk,
 	UpdatePasteurisedMilk,
 } from "./endpoints";
-import PasteurisedMilkSchema from "./schema";
+import {
+	CreateUpdatePasteurisedMilkSchema,
+	GetPasteurisedMilkSchema,
+	PaginatedPasteurisedMilkSchema,
+} from "./schema";
 
 export {
 	ListPasteurisedMilk,
 	GetPasteurisedMilk,
 	CreatePasteurisedMilk,
 	UpdatePasteurisedMilk,
-	PasteurisedMilkSchema,
+	CreateUpdatePasteurisedMilkSchema,
+	GetPasteurisedMilkSchema,
+	PaginatedPasteurisedMilkSchema,
 };

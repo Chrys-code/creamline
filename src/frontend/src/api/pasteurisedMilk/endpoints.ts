@@ -1,13 +1,29 @@
-import { makeEndpoint } from "@zodios/core";
 import z from "zod";
-import PasteurisedMilkSchema from "./schema";
+import { makeEndpoint } from "@zodios/core";
+import {
+	CreateUpdatePasteurisedMilkSchema,
+	GetPasteurisedMilkSchema,
+	PaginatedPasteurisedMilkSchema,
+} from "./schema";
 
 export const ListPasteurisedMilk = makeEndpoint({
 	method: "get",
 	path: "/api/v1/pasteurised-milk/",
 	alias: "v1_pasteurised_milk_list",
 	requestFormat: "json",
-	response: z.array(PasteurisedMilkSchema),
+	parameters: [
+		{
+			name: "page",
+			type: "Query",
+			schema: z.number().int().optional(),
+		},
+		{
+			name: "page_size",
+			type: "Query",
+			schema: z.number().int().optional(),
+		},
+	],
+	response: PaginatedPasteurisedMilkSchema,
 });
 
 export const GetPasteurisedMilk = makeEndpoint({
@@ -22,7 +38,7 @@ export const GetPasteurisedMilk = makeEndpoint({
 			schema: z.number().int(),
 		},
 	],
-	response: PasteurisedMilkSchema,
+	response: GetPasteurisedMilkSchema,
 });
 
 export const CreatePasteurisedMilk = makeEndpoint({
@@ -34,10 +50,10 @@ export const CreatePasteurisedMilk = makeEndpoint({
 		{
 			name: "body",
 			type: "Body",
-			schema: PasteurisedMilkSchema,
+			schema: CreateUpdatePasteurisedMilkSchema,
 		},
 	],
-	response: PasteurisedMilkSchema,
+	response: GetPasteurisedMilkSchema,
 });
 
 export const UpdatePasteurisedMilk = makeEndpoint({
@@ -49,7 +65,7 @@ export const UpdatePasteurisedMilk = makeEndpoint({
 		{
 			name: "body",
 			type: "Body",
-			schema: PasteurisedMilkSchema,
+			schema: CreateUpdatePasteurisedMilkSchema,
 		},
 		{
 			name: "id",
@@ -57,5 +73,5 @@ export const UpdatePasteurisedMilk = makeEndpoint({
 			schema: z.number().int(),
 		},
 	],
-	response: PasteurisedMilkSchema,
+	response: GetPasteurisedMilkSchema,
 });

@@ -1,4 +1,4 @@
 import { ListPasteurEndpoint, GetPasteurEndpoint } from "./endpoint";
-import PasteurSchema from "./schema";
+import { CreateUpdatePasteurSchema, GetPasteurSchema } from "./schema";
 
-export { ListPasteurEndpoint, GetPasteurEndpoint, PasteurSchema };
+export { ListPasteurEndpoint, GetPasteurEndpoint, CreateUpdatePasteurSchema, GetPasteurSchema };

@@ -1,13 +1,13 @@
 import { makeEndpoint } from "@zodios/core";
 import { z } from "zod";
-import PasteurSchema from "./schema";
+import { GetPasteurSchema } from "./schema";
 
 const ListPasteurEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/pasteur/",
 	alias: "v1_pasteur_list",
 	requestFormat: "json",
-	response: z.array(PasteurSchema),
+	response: z.array(GetPasteurSchema),
 });
 
 const GetPasteurEndpoint = makeEndpoint({
@@ -22,7 +22,7 @@ const GetPasteurEndpoint = makeEndpoint({
 			schema: z.number().int(),
 		},
 	],
-	response: PasteurSchema,
+	response: GetPasteurSchema,
 });
 
 export { ListPasteurEndpoint, GetPasteurEndpoint };

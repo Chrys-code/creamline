@@ -1,6 +1,6 @@
 import type React from "react";
 import type { PatchedProfile, Profile } from "../../api/types";
-import type { RootLoaderData } from "../../routes/loaders/types";
+import type { ProfileProps } from "./Profile.types";
 import styles from "./Profile.module.scss";
 
 import Button from "../../components/Button";
@@ -20,7 +20,7 @@ import { toast } from "react-toastify";
 
 const Profile: React.FC = () => {
 	const { t } = useTranslation();
-	const data = useRouteLoaderData("app") as RootLoaderData;
+	const data = useRouteLoaderData("app") as ProfileProps;
 	const revalidator = useRevalidator();
 	const [isEditing, setIsEditing] = useState(false);
 

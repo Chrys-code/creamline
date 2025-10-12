@@ -5,7 +5,7 @@ import {
 	UpdateStorageEndpoint,
 	DeleteStorageEndpoint,
 } from "./endpoint";
-import { StorageSchema, StorageTypeEnum } from "./schema";
+import { StorageTypeEnum, CreateUpdateStorageSchema, GetStorageSchema } from "./schema";
 
 export {
 	ListStorageEndpoint,
@@ -13,6 +13,7 @@ export {
 	CreateStorageEndpoint,
 	UpdateStorageEndpoint,
 	DeleteStorageEndpoint,
-	StorageSchema,
 	StorageTypeEnum,
+	CreateUpdateStorageSchema,
+	GetStorageSchema,
 };

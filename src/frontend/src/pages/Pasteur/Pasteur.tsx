@@ -1,6 +1,6 @@
 import type React from "react";
-import type { PasteurisedMilk } from "../../api/types.js";
-import type { PasteurLoaderData } from "../../routes/loaders/types.js";
+import type { PasteurProps } from "./Pasteur.types.js";
+import type { CreateUpdatePasteurisedMilkFormData } from "../../api/types.js";
 import styles from "./Pasteur.module.scss";
 
 import PageHeader from "../../components/PageHeader";
@@ -22,7 +22,7 @@ import { schemas } from "../../api/schemas.js";
 import convertMilkLiterAndKg from "../../lib/helpers/literToKg/literToKg.js";
 
 const Pasteur: React.FC = () => {
-	const data: PasteurLoaderData = useLoaderData();
+	const { pasteurs, storages, productDefinitions } = useLoaderData<PasteurProps>();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 
@@ -33,9 +33,9 @@ const Pasteur: React.FC = () => {
 		setValue,
 		setError,
 		clearErrors,
-	} = useForm<PasteurisedMilk>({
+	} = useForm<CreateUpdatePasteurisedMilkFormData>({
 		// @ts-expect-error local-datetime conversion issue
-		resolver: zodResolver(schemas.PasteurisedMilkSchema),
+		resolver: zodResolver(schemas.CreateUpdatePasteurisedMilkSchema),
 		mode: "onChange",
 		defaultValues: {
 			volume_kg: 0,
@@ -47,24 +47,24 @@ const Pasteur: React.FC = () => {
 	});
 
 	const pasteurOptions =
-		data.pasteurs?.map((pasteur) => ({
+		pasteurs?.map((pasteur) => ({
 			id: pasteur.uuid,
 			value: pasteur.name,
 		})) || [];
 
 	const storageOptions =
-		data.storages?.map((storage) => ({
+		storages?.map((storage) => ({
 			id: storage.uuid,
 			value: storage.name,
 		})) || [];
 
 	const productDefinitionOptions =
-		data.productDefinitions?.map((productDefinition) => ({
+		productDefinitions?.map((productDefinition) => ({
 			id: productDefinition.uuid,
 			value: productDefinition.name,
 		})) || [];
 
-	const onSubmit = async (formData: PasteurisedMilk): Promise<void> => {
+	const onSubmit = async (formData: CreateUpdatePasteurisedMilkFormData): Promise<void> => {
 		try {
 			await api.post("/api/v1/pasteurised-milk/", formData);
 			toast.success("Pasztőr sikeresen elmentve!");
@@ -73,7 +73,10 @@ const Pasteur: React.FC = () => {
 			if (err.response?.data) {
 				const responseData = err.response.data;
 				if (responseData.pasteur) setError("pasteur", { message: responseData.pasteur[0] });
-				if (responseData.storage) setError("storage", { message: responseData.storage[0] });
+				if (responseData.target_storage)
+					setError("target_storage", { message: responseData.source_storage[0] });
+				if (responseData.source_storage)
+					setError("source_storage", { message: responseData.source_storage[0] });
 				if (responseData.volume_kg)
 					setError("volume_kg", { message: responseData.volume_kg[0] });
 				if (responseData.volume_liters)

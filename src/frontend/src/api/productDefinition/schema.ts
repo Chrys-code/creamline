@@ -1,13 +1,16 @@
 import z from "zod";
 
-const ProductDefinitionTypeEnum = z.enum(["CREAM", "WHOLE MILK", "SKIMMED MILK"]);
+export const ProductDefinitionTypeEnum = z.enum(["CREAM", "WHOLE MILK", "SKIMMED MILK"]);
 
-const ProductDefinitionSchema = z
-	.object({
-		uuid: z.string().uuid(),
-		name: z.string().max(255),
-		type: ProductDefinitionTypeEnum,
-	})
-	.passthrough();
+const BaseProductDefinitionSchema = z.object({
+	name: z.string().max(255),
+	type: ProductDefinitionTypeEnum,
+});
 
-export { ProductDefinitionSchema, ProductDefinitionTypeEnum };
+export const CreateUpdateProductDefinitionSchema = BaseProductDefinitionSchema.extend({
+	uuid: z.string().uuid().optional(),
+});
+
+export const GetProductDefinitionSchema = BaseProductDefinitionSchema.extend({
+	uuid: z.string().uuid(),
+});

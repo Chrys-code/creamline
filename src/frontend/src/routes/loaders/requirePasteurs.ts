@@ -1,11 +1,14 @@
-import type { Pasteur } from "../../api/types";
+import z from "zod";
 
 import { api } from "../../api/axios";
+import { schemas } from "../../api/schemas";
 
-const requirePasteurs = async (): Promise<Pasteur[]> => {
+const requirePasteurs = async () => {
 	try {
+		const PasteurListSchema = z.array(schemas.GetPasteurSchema);
 		const pasteursResponse = await api.get("/api/v1/pasteur/");
-		return pasteursResponse;
+		const parsed = PasteurListSchema.parse(pasteursResponse);
+		return parsed;
 	} catch {
 		throw new Error();
 	}

@@ -1,9 +1,14 @@
 import { ListProductDefinition, GetProductDefinition } from "./endpoint";
-import { ProductDefinitionSchema, ProductDefinitionTypeEnum } from "./schema";
+import {
+	ProductDefinitionTypeEnum,
+	CreateUpdateProductDefinitionSchema,
+	GetProductDefinitionSchema,
+} from "./schema";
 
 export {
 	ListProductDefinition,
 	GetProductDefinition,
-	ProductDefinitionSchema,
 	ProductDefinitionTypeEnum,
+	CreateUpdateProductDefinitionSchema,
+	GetProductDefinitionSchema,
 };

@@ -4,6 +4,14 @@ import {
 	CreateMilkEndpoint,
 	UpdateMilkEndpoint,
 } from "./endpoint";
-import MilkSchema from "./schema";
+import { PaginatedMilkListSchema, CreateUpdateMilkSchema, GetMilkSchema } from "./schema";
 
-export { ListMilkEndpoint, GetMilkEndpoint, CreateMilkEndpoint, UpdateMilkEndpoint, MilkSchema };
+export {
+	ListMilkEndpoint,
+	GetMilkEndpoint,
+	CreateMilkEndpoint,
+	UpdateMilkEndpoint,
+	PaginatedMilkListSchema,
+	CreateUpdateMilkSchema,
+	GetMilkSchema,
+};

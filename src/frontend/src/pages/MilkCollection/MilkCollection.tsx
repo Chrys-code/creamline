@@ -1,5 +1,5 @@
-import type { Milk } from "../../api/types";
-import type { MilkCollectionLoaderData } from "../../routes/loaders/types";
+import type { MilkCollectionProps } from "./MilkCollection.types";
+import type { CreateUpdateMilkFormData } from "../../api/types";
 import styles from "./MilkCollection.module.scss";
 
 import PageHeader from "../../components/PageHeader";
@@ -29,7 +29,7 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 );
 
 const MilkCollection: React.FC = () => {
-	const data: MilkCollectionLoaderData = useLoaderData();
+	const data = useLoaderData<MilkCollectionProps>();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 
@@ -40,8 +40,8 @@ const MilkCollection: React.FC = () => {
 		setValue,
 		setError,
 		clearErrors,
-	} = useForm<Milk>({
-		resolver: zodResolver(schemas.MilkSchema),
+	} = useForm<CreateUpdateMilkFormData>({
+		resolver: zodResolver(schemas.CreateUpdateMilkSchema),
 		defaultValues: {
 			volume_kg: 0,
 			volume_liters: 0,
@@ -65,7 +65,7 @@ const MilkCollection: React.FC = () => {
 		{ id: "false", value: t("common.no") },
 	];
 
-	const onSubmit = async (formData: Milk): Promise<void> => {
+	const onSubmit = async (formData: CreateUpdateMilkFormData): Promise<void> => {
 		try {
 			await api.post("/api/v1/milk/", formData);
 			toast.success(t("add_producer.notification_message"));

@@ -9,6 +9,7 @@ import requireProducers from "./loaders/requireProducers";
 import requireStorages from "./loaders/requireStorages";
 import requirePasteurs from "./loaders/requirePasteurs";
 import requireProductDefinitions from "./loaders/requireProductDefinitions";
+import requirePaginatedMilkList from "./loaders/requirePaginatedMilkList";
 
 const appRouter = createBrowserRouter([
 	{
@@ -44,6 +45,14 @@ const appRouter = createBrowserRouter([
 					producers: (await requireProducers()) || [],
 					storages: (await requireStorages()) || [],
 				}),
+			},
+			{
+				path: "milk-collection-list",
+				lazy: {
+					Component: async () =>
+						(await import("../pages/MilkCollectionList/MilkCollectionList")).default,
+				},
+				loader: requirePaginatedMilkList,
 			},
 			{
 				path: "pasteur",
