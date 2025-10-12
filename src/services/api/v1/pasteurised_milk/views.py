@@ -13,4 +13,4 @@ class PasteurisedMilkViewSet(viewsets.ModelViewSet):
     pagination_class = StandardPagePagination
 
     def get_queryset(self):
-        return PasteurisedMilk.objects.all()
+        return PasteurisedMilk.objects.all().order_by("-created_at")

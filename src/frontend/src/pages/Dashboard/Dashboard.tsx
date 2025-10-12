@@ -29,10 +29,14 @@ const Dashboard: React.FC = () => {
 						type="button"
 						onClick={() => navigate("/milk-collection")}
 					>
-						Tejátvétel
+						Tejátvételek
 					</Button>
-					<Button style="secondary" type="button" onClick={() => navigate("/pasteur")}>
-						Pasztőr
+					<Button
+						style="secondary"
+						type="button"
+						onClick={() => navigate("/pasteurised-milk")}
+					>
+						Pasztőrözések
 					</Button>
 				</div>
 			</section>

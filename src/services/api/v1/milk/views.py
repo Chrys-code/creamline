@@ -13,4 +13,4 @@ class MilkViewSet(viewsets.ModelViewSet):
     pagination_class = StandardPagePagination
 
     def get_queryset(self):
-        return Milk.objects.all()
+        return Milk.objects.all().order_by("-created_at")

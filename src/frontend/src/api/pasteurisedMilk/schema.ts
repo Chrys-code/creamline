@@ -41,6 +41,14 @@ export const CreateUpdatePasteurisedMilkSchema = BasePasteurisedMilkSchema.exten
 
 export const GetPasteurisedMilkSchema = BasePasteurisedMilkSchema.extend({
 	uuid: z.string().uuid(),
+	pasteur_name: z.string(),
+	product_definition_name: z.string(),
+	source_storage_name: z.string(),
+	target_storage_name: z.string(),
+
+	created_at: z.string(),
+	updated_at: z.string(),
+	deleted_at: z.string().nullish(),
 }).passthrough();
 
 export const PaginatedPasteurisedMilkSchema = z

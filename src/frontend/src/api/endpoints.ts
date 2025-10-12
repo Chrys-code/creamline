@@ -1,30 +1,39 @@
 import { makeApi, Zodios, type ZodiosOptions } from "@zodios/core";
 import z from "zod";
 import { LoginEndpoint, LogoutEndpoint, SessionEndpoint, SignupEndpoint } from "./auth";
-import { CreateMilkEndpoint, GetMilkEndpoint, ListMilkEndpoint, UpdateMilkEndpoint } from "./milk";
-import { GetPasteurEndpoint, ListPasteurEndpoint } from "./pasteur";
+import {
+	CreateMilkEndpoint,
+	GetMilkEndpoint,
+	ListMilkEndpoint,
+	UpdateMilkEndpoint,
+} from "./milk/endpoint";
+import { GetPasteurEndpoint, ListPasteurEndpoint } from "./pasteur/endpoint";
 import {
 	CreateStorageEndpoint,
 	DeleteStorageEndpoint,
 	GetStorageEndpoint,
 	ListStorageEndpoint,
 	UpdateStorageEndpoint,
-} from "./storage";
+} from "./storage/endpoint";
 import {
 	CreatePasteurisedMilk,
 	GetPasteurisedMilk,
 	ListPasteurisedMilk,
 	UpdatePasteurisedMilk,
-} from "./pasteurisedMilk";
+} from "./pasteurisedMilk/endpoints";
 import {
 	CreateProducerEndpoint,
 	DeleteProducerEndpoint,
 	GetProducerEndpoint,
 	ListProducerEndpoint,
 	UpdateProducerEndpoint,
-} from "./producer";
-import { GetProductDefinition, ListProductDefinition } from "./productDefinition";
-import { DeleteProfileEndpoint, GetProfileEndpoint, UpdateProfileEndpoint } from "./profile";
+} from "./producer/endpoint";
+import { GetProductDefinition, ListProductDefinition } from "./productDefinition/endpoint";
+import {
+	DeleteProfileEndpoint,
+	GetProfileEndpoint,
+	UpdateProfileEndpoint,
+} from "./profile/endpoint";
 
 const endpoints = makeApi([
 	// Auth Endpoints

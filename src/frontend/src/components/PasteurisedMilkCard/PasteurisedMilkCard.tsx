@@ -5,17 +5,22 @@ import styles from "./PasteurisedMilkCard.module.scss";
 
 const PasteurisedMilkCard: React.FC<PasteurisedMilkCardProps> = ({
 	title,
-	storages,
+	source_storage,
+	target_storage,
 	datetime,
 	temperature,
 }: PasteurisedMilkCardProps) => {
 	return (
 		<div className={styles.container}>
+			<p>{title}</p>
 			<div>
-				<h3>{title}</h3> <span>{datetime}</span>
+				<p>{source_storage}</p> <p>{target_storage}</p>
 			</div>
 			<div>
-				<p>{storages}</p> <span>{temperature}</span>
+				<p>{datetime}</p>
+				<p>
+					{temperature} <sup>o</sup>C
+				</p>
 			</div>
 		</div>
 	);

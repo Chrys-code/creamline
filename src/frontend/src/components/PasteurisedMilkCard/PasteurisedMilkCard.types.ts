@@ -1,6 +1,7 @@
 export interface PasteurisedMilkCardProps {
 	title: string;
-	storages: string;
+	source_storage: string;
+	target_storage: string;
 	datetime: string;
-	temperature: string;
+	temperature: number;
 }

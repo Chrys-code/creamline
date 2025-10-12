@@ -1,6 +1,6 @@
 import z from "zod";
 import i18n from "../../configs/i18n";
-import { StorageTypeEnum } from "../storage";
+import { StorageTypeEnum } from "../storage/schema";
 
 const MilkBaseSchema = z.object({
 	producer: z.string().uuid({ message: i18n.t("common_validation.input_select_required") }),

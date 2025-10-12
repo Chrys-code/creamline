@@ -13,7 +13,7 @@ const MdOutlineMenu = React.lazy(() =>
 const Header: React.FC = () => {
 	return (
 		<div className={styles.container}>
-			<MdCheckBoxOutlineBlank size="3rem" fill="white" />
+			<MdCheckBoxOutlineBlank size="2rem" fill="white" />
 			<menu>
 				<MdOutlineMenu size="2rem" fill="white" />
 			</menu>

@@ -1,9 +1,9 @@
-import type { MilkCollectionListProps } from "./MilkCollectionList.types";
-import styles from "./MilkCollectionList.module.scss";
+import type { PasteurisedMilkListProps } from "./PasteurisedMilkList.types.js";
+import styles from "./PasteurisedMilkList.module.scss";
 
 import PageHeader from "../../components/PageHeader";
 import Pagination from "../../components/Pagination/Pagination";
-import MilkCard from "../../components/MilkCard";
+import PasteurisedMilkCard from "../../components/PasteurisedMilkCard/PasteurisedMilkCard.js";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -16,11 +16,11 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 	}))
 );
 
-const MilkCollectionList: React.FC = () => {
+const PasteurisedMilkList: React.FC = () => {
 	const navigation = useNavigation();
 	const navigate = useNavigate();
 	const { t } = useTranslation();
-	const { data, page } = useLoaderData<MilkCollectionListProps>();
+	const { data, page } = useLoaderData<PasteurisedMilkListProps>();
 
 	const headerActionElement = (
 		<IconButton onClick={() => navigate("new")}>
@@ -28,12 +28,14 @@ const MilkCollectionList: React.FC = () => {
 		</IconButton>
 	);
 
-	const milkListItems = data.results.map((result) => (
+	const pasteurisedMilkListItems = data.results.map((result) => (
 		<li key={result.uuid}>
-			<MilkCard
-				title={result.producer_name}
-				storages={result.storage_name}
+			<PasteurisedMilkCard
+				title={result.pasteur_name}
+				source_storage={result.source_storage_name}
+				target_storage={result.target_storage_name}
 				datetime={new Date(result.created_at).toLocaleString()}
+				temperature={result.temperature}
 			/>
 		</li>
 	));
@@ -49,12 +51,12 @@ const MilkCollectionList: React.FC = () => {
 	return (
 		<>
 			<PageHeader
-				title={t("milk_collection_list.page_title")}
+				title={t("pasteurised_milk_list.page_title")}
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>
 			{isLoading && <p>Loading ...</p>}
-			<ul className={styles.list}>{milkListItems}</ul>
+			<ul className={styles.list}>{pasteurisedMilkListItems}</ul>
 			<div className={styles.floatingMenu}>
 				<Pagination
 					isFirst={data.previous === null}
@@ -71,4 +73,4 @@ const MilkCollectionList: React.FC = () => {
 	);
 };
 
-export default MilkCollectionList;
+export default PasteurisedMilkList;

@@ -10,6 +10,7 @@ import requireStorages from "./loaders/requireStorages";
 import requirePasteurs from "./loaders/requirePasteurs";
 import requireProductDefinitions from "./loaders/requireProductDefinitions";
 import requirePaginatedMilkList from "./loaders/requirePaginatedMilkList";
+import requirePaginatedPasteurisedMilkList from "./loaders/requirePaginatedPasteurisedMilkList";
 
 const appRouter = createBrowserRouter([
 	{
@@ -39,6 +40,14 @@ const appRouter = createBrowserRouter([
 				path: "milk-collection",
 				lazy: {
 					Component: async () =>
+						(await import("../pages/MilkCollectionList/MilkCollectionList")).default,
+				},
+				loader: requirePaginatedMilkList,
+			},
+			{
+				path: "milk-collection/new",
+				lazy: {
+					Component: async () =>
 						(await import("../pages/MilkCollection/MilkCollection")).default,
 				},
 				loader: async () => ({
@@ -47,15 +56,37 @@ const appRouter = createBrowserRouter([
 				}),
 			},
 			{
-				path: "milk-collection-list",
+				path: "milk-collection/:id",
 				lazy: {
 					Component: async () =>
-						(await import("../pages/MilkCollectionList/MilkCollectionList")).default,
+						(await import("../pages/MilkCollection/MilkCollection")).default,
 				},
-				loader: requirePaginatedMilkList,
+				loader: async () => ({
+					producers: (await requireProducers()) || [],
+					storages: (await requireStorages()) || [],
+				}),
 			},
 			{
-				path: "pasteur",
+				path: "pasteurised-milk",
+				lazy: {
+					Component: async () =>
+						(await import("../pages/PasteurisedMilkList/PasteurisedMilkList")).default,
+				},
+				loader: requirePaginatedPasteurisedMilkList,
+			},
+			{
+				path: "pasteurised-milk/new",
+				lazy: {
+					Component: async () => (await import("../pages/Pasteur/Pasteur")).default,
+				},
+				loader: async () => ({
+					pasteurs: (await requirePasteurs()) || [],
+					storages: (await requireStorages()) || [],
+					productDefinitions: (await requireProductDefinitions()) || [],
+				}),
+			},
+			{
+				path: "pasteurised-milk/:id",
 				lazy: {
 					Component: async () => (await import("../pages/Pasteur/Pasteur")).default,
 				},

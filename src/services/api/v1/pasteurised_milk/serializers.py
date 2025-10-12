@@ -14,56 +14,66 @@ class PasteurisedMilkSerializer(serializers.ModelSerializer):
         slug_field="uuid",
         queryset=Pasteur.objects.all()
     )
+    pasteur_uuid = serializers.CharField(required=False)
+    pasteur_name = serializers.CharField(required=False)
+
     product_definition = serializers.SlugRelatedField(
         slug_field="uuid",
         queryset=ProductDefinition.objects.all()
     )
+    product_definition_uuid = serializers.CharField(required=False)
+    product_definition_name = serializers.CharField(required=False)
+
     source_storage = serializers.SlugRelatedField(
         slug_field="uuid",
         queryset=Storage.objects.all()
     )
+    source_storage_uuid = serializers.CharField(required=False)
+    source_storage_name = serializers.CharField(required=False)
+    source_storage_type = serializers.CharField(required=False)
+
     target_storage = serializers.SlugRelatedField(
         slug_field="uuid",
         queryset=Storage.objects.all()
     )
+    target_storage_uuid = serializers.CharField(required=False)
+    target_storage_name = serializers.CharField(required=False)
+    target_storage_type = serializers.CharField(required=False)
 
 
     class Meta:
         model = PasteurisedMilk
         fields = [
             "uuid",
+
             "pasteur",
+            "pasteur_uuid",
+            "pasteur_name",
+
             "product_definition",
+            "product_definition_uuid",
+            "product_definition_name",
+
             "source_storage",
+            "source_storage_name",
+            "source_storage_uuid",
+            "source_storage_type",
+
             "target_storage",
+            "target_storage_name",
+            "target_storage_uuid",
+            "target_storage_type",
 
             "volume_kg",
             "volume_liters",
             "temperature",
             "start_date",
             "end_date",
-        ]
-
-        read_only_fields = [
-            "pasteur_uuid",
-            "pasteur_name",
-
-            "product_definition_uuid",
-            "product_definition_name",
-
-            "source_storage_name",
-            "source_storage_uuid",
-            "source_storage_type",
-
-            "target_storage_name",
-            "target_storage_uuid",
-            "target_storage_type",
 
             "created_at", 
             "updated_at", 
             "deleted_at"
         ]
-
 
     def create(self, validated_data):
         pasteurised_milk = create_pasteurised_milk(validated_data=validated_data, created_by=self.context["request"].user)

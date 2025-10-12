@@ -8,7 +8,11 @@ const MdChevronLeft = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({ default: mod.MdChevronLeft }))
 );
 
-const PageHeader: React.FC<PageHeaderProps> = ({ title, onNavigateBack }: PageHeaderProps) => {
+const PageHeader: React.FC<PageHeaderProps> = ({
+	title,
+	onNavigateBack,
+	actionElement,
+}: PageHeaderProps) => {
 	const navigate = useNavigate();
 
 	const handleNavigateBack = () => {
@@ -21,8 +25,9 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, onNavigateBack }: PageHe
 
 	return (
 		<div className={styles.container}>
-			<MdChevronLeft size="2.5rem" onClick={() => handleNavigateBack()} />
+			<MdChevronLeft size="2rem" onClick={() => handleNavigateBack()} />
 			<h1>{title}</h1>
+			{actionElement && <div>{actionElement}</div>}
 		</div>
 	);
 };
