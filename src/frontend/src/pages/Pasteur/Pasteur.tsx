@@ -22,7 +22,7 @@ import { schemas } from "../../api/schemas.js";
 import convertMilkLiterAndKg from "../../lib/helpers/literToKg/literToKg.js";
 
 const Pasteur: React.FC = () => {
-	const { pasteurs, storages, productDefinitions } = useLoaderData<PasteurProps>();
+	const { pasteurs, storages, productDefinitions, selectedItem } = useLoaderData<PasteurProps>();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 
@@ -38,11 +38,19 @@ const Pasteur: React.FC = () => {
 		resolver: zodResolver(schemas.CreateUpdatePasteurisedMilkSchema),
 		mode: "onChange",
 		defaultValues: {
-			volume_kg: 0,
-			volume_liters: 0,
-			temperature: 0,
-			start_date: new Date().toISOString().slice(0, 16),
-			end_date: new Date().toISOString().slice(0, 16),
+			pasteur: selectedItem?.pasteur || undefined,
+			product_definition: selectedItem?.product_definition || undefined,
+			source_storage: selectedItem?.source_storage || undefined,
+			target_storage: selectedItem?.target_storage || undefined,
+			volume_kg: selectedItem?.volume_kg ?? 0,
+			volume_liters: selectedItem?.volume_liters ?? 0,
+			temperature: selectedItem?.temperature,
+			start_date: selectedItem?.start_date
+				? new Date(selectedItem.start_date).toISOString().slice(0, 16)
+				: new Date().toISOString().slice(0, 16),
+			end_date: selectedItem?.end_date
+				? new Date(selectedItem.end_date).toISOString().slice(0, 16)
+				: new Date().toISOString().slice(0, 16),
 		},
 	});
 
@@ -107,20 +115,39 @@ const Pasteur: React.FC = () => {
 		}
 	};
 
-	const renderFormActions = (): React.ReactNode => (
-		<>
-			<Button type="button" style="secondary" onClick={() => navigate(-1)}>
-				{t("common.back")}
-			</Button>
-			<Button type="submit" disabled={isSubmitting}>
-				{t("common.save")}
-			</Button>
-		</>
-	);
+	const renderFormActions = (): React.ReactNode => {
+		if (selectedItem) {
+			return (
+				<Button
+					type="button"
+					style="secondary"
+					onClick={() => navigate("/pasteurised-milk")}
+				>
+					{t("common.back")}
+				</Button>
+			);
+		}
+
+		return (
+			<>
+				<Button type="button" style="secondary" onClick={() => navigate(-1)}>
+					{t("common.back")}
+				</Button>
+				<Button type="submit" disabled={isSubmitting}>
+					{t("common.save")}
+				</Button>
+			</>
+		);
+	};
 
 	return (
 		<>
-			<PageHeader title="Pasztőr" />
+			<PageHeader
+				title="Pasztőr"
+				onNavigateBack={() =>
+					selectedItem ? navigate("/pasteurised-milk/") : navigate(-1)
+				}
+			/>
 			{/*  @ts-expect-error local-datetime conversion issue  */}
 			<Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
 				<section>
@@ -132,6 +159,7 @@ const Pasteur: React.FC = () => {
 						placeholder={t("common.select")}
 						options={pasteurOptions}
 						error={errors.pasteur?.message}
+						disabled={!!selectedItem}
 					/>
 					<Dropdown
 						id={uuid()}
@@ -142,6 +170,7 @@ const Pasteur: React.FC = () => {
 						placeholder={t("common.select")}
 						options={productDefinitionOptions}
 						error={errors.product_definition?.message}
+						disabled={!!selectedItem}
 					/>
 					<InputField
 						id={uuid()}
@@ -155,6 +184,7 @@ const Pasteur: React.FC = () => {
 						info="CELSIUS"
 						defaultValue="0"
 						error={errors.temperature?.message}
+						disabled={!!selectedItem}
 					/>
 				</section>
 				<section>
@@ -169,6 +199,7 @@ const Pasteur: React.FC = () => {
 							placeholder={t("common.select")}
 							options={storageOptions}
 							error={errors.source_storage?.message}
+							disabled={!!selectedItem}
 						/>
 						<Dropdown
 							id={uuid()}
@@ -179,6 +210,7 @@ const Pasteur: React.FC = () => {
 							placeholder={t("common.select")}
 							options={storageOptions}
 							error={errors.target_storage?.message}
+							disabled={!!selectedItem}
 						/>
 					</div>
 					<div className={styles.sideBySideWrapper}>
@@ -196,6 +228,7 @@ const Pasteur: React.FC = () => {
 							label="Mennyiség"
 							info="LITER"
 							error={errors.volume_liters?.message}
+							disabled={!!selectedItem}
 						/>
 						<InputField
 							id={uuid()}
@@ -211,6 +244,7 @@ const Pasteur: React.FC = () => {
 							label="Mennyiség"
 							info="KG"
 							error={errors.volume_kg?.message}
+							disabled={!!selectedItem}
 						/>
 					</div>
 				</section>
@@ -224,6 +258,7 @@ const Pasteur: React.FC = () => {
 						type="datetime-local"
 						label="Pasztőrőzés kezdete:"
 						error={errors.start_date?.message}
+						disabled={!!selectedItem}
 					/>
 					<InputField
 						id={uuid()}
@@ -233,6 +268,7 @@ const Pasteur: React.FC = () => {
 						type="datetime-local"
 						label="Pasztőrőzés vége:"
 						error={errors.end_date?.message}
+						disabled={!!selectedItem}
 					/>
 				</section>
 			</Form>

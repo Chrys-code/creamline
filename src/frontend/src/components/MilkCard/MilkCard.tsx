@@ -3,9 +3,14 @@ import type { MilkCardProps } from "./MilkCard.types.js";
 
 import styles from "./MilkCard.module.scss";
 
-const MilkCard: React.FC<MilkCardProps> = ({ title, storages, datetime }: MilkCardProps) => {
+const MilkCard: React.FC<MilkCardProps> = ({
+	title,
+	storages,
+	datetime,
+	onClick,
+}: MilkCardProps) => {
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} onClick={onClick}>
 			<p>{title}</p>
 			<div>
 				<p>{storages}</p>

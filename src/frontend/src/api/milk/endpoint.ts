@@ -31,7 +31,7 @@ export const GetMilkEndpoint = makeEndpoint({
 		{
 			name: "id",
 			type: "Path",
-			schema: z.number().int(),
+			schema: z.string(),
 		},
 	],
 	response: GetMilkSchema,

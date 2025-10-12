@@ -36,6 +36,7 @@ const PasteurisedMilkList: React.FC = () => {
 				target_storage={result.target_storage_name}
 				datetime={new Date(result.created_at).toLocaleString()}
 				temperature={result.temperature}
+				onClick={() => navigate(result.uuid)}
 			/>
 		</li>
 	));

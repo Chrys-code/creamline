@@ -11,6 +11,8 @@ import requirePasteurs from "./loaders/requirePasteurs";
 import requireProductDefinitions from "./loaders/requireProductDefinitions";
 import requirePaginatedMilkList from "./loaders/requirePaginatedMilkList";
 import requirePaginatedPasteurisedMilkList from "./loaders/requirePaginatedPasteurisedMilkList";
+import requireMilk from "./loaders/requireMilk";
+import requirePasteurisedMilk from "./loaders/requirePasteurisedMilk";
 
 const appRouter = createBrowserRouter([
 	{
@@ -61,9 +63,10 @@ const appRouter = createBrowserRouter([
 					Component: async () =>
 						(await import("../pages/MilkCollection/MilkCollection")).default,
 				},
-				loader: async () => ({
+				loader: async (args) => ({
 					producers: (await requireProducers()) || [],
 					storages: (await requireStorages()) || [],
+					selectedItem: (await requireMilk(args)) || null,
 				}),
 			},
 			{
@@ -90,10 +93,11 @@ const appRouter = createBrowserRouter([
 				lazy: {
 					Component: async () => (await import("../pages/Pasteur/Pasteur")).default,
 				},
-				loader: async () => ({
+				loader: async (args) => ({
 					pasteurs: (await requirePasteurs()) || [],
 					storages: (await requireStorages()) || [],
 					productDefinitions: (await requireProductDefinitions()) || [],
+					selectedItem: (await requirePasteurisedMilk(args)) || null,
 				}),
 			},
 			{

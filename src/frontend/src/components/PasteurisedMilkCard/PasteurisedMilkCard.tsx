@@ -9,9 +9,10 @@ const PasteurisedMilkCard: React.FC<PasteurisedMilkCardProps> = ({
 	target_storage,
 	datetime,
 	temperature,
+	onClick,
 }: PasteurisedMilkCardProps) => {
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} onClick={onClick}>
 			<p>{title}</p>
 			<div>
 				<p>{source_storage}</p> <p>{target_storage}</p>

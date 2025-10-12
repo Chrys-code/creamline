@@ -34,6 +34,7 @@ const MilkCollectionList: React.FC = () => {
 				title={result.producer_name}
 				storages={result.storage_name}
 				datetime={new Date(result.created_at).toLocaleString()}
+				onClick={() => navigate(result.uuid)}
 			/>
 		</li>
 	));

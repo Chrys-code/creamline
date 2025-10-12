@@ -4,4 +4,5 @@ export interface PasteurisedMilkCardProps {
 	target_storage: string;
 	datetime: string;
 	temperature: number;
+	onClick: () => void;
 }

@@ -29,7 +29,7 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 );
 
 const MilkCollection: React.FC = () => {
-	const data = useLoaderData<MilkCollectionProps>();
+	const { producers, storages, selectedItem } = useLoaderData<MilkCollectionProps>();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 
@@ -43,20 +43,22 @@ const MilkCollection: React.FC = () => {
 	} = useForm<CreateUpdateMilkFormData>({
 		resolver: zodResolver(schemas.CreateUpdateMilkSchema),
 		defaultValues: {
-			volume_kg: 0,
-			volume_liters: 0,
-			temperature: 0,
-			acid_content: 0,
-			aflatoxin: false,
-			inhibitory_residue: false,
+			producer: selectedItem?.producer || undefined,
+			storage: selectedItem?.storage || undefined,
+			volume_kg: selectedItem?.volume_kg ?? 0,
+			volume_liters: selectedItem?.volume_liters ?? 0,
+			temperature: selectedItem?.temperature ?? 0,
+			acid_content: selectedItem?.acid_content ?? 0,
+			aflatoxin: selectedItem?.aflatoxin ?? false,
+			inhibitory_residue: selectedItem?.inhibitory_residue ?? false,
 		},
 	});
 
-	const producerOptions = data.producers.map((producer) => ({
+	const producerOptions = producers.map((producer) => ({
 		id: producer.uuid,
 		value: producer.name,
 	}));
-	const storageOptions = data.storages.map((storage) => ({
+	const storageOptions = storages.map((storage) => ({
 		id: storage.uuid,
 		value: storage.name,
 	}));
@@ -114,20 +116,37 @@ const MilkCollection: React.FC = () => {
 		}
 	};
 
-	const renderFormActions = (): React.ReactNode => (
-		<>
-			<Button type="button" style="secondary" onClick={() => navigate(-1)}>
-				{t("common.back")}
-			</Button>
-			<Button type="submit" disabled={isSubmitting}>
-				{t("common.save")}
-			</Button>
-		</>
-	);
+	const renderFormActions = (): React.ReactNode => {
+		if (selectedItem) {
+			return (
+				<Button
+					type="button"
+					style="secondary"
+					onClick={() => navigate("/milk-collection/")}
+				>
+					{t("common.back")}
+				</Button>
+			);
+		}
+
+		return (
+			<>
+				<Button type="button" style="secondary" onClick={() => navigate(-1)}>
+					{t("common.back")}
+				</Button>
+				<Button type="submit" disabled={isSubmitting}>
+					{t("common.save")}
+				</Button>
+			</>
+		);
+	};
 
 	return (
 		<>
-			<PageHeader title={t("milk_collection.page_title")} />
+			<PageHeader
+				title={t("milk_collection.page_title")}
+				onNavigateBack={() => (selectedItem ? navigate("/milk-collection/") : navigate(-1))}
+			/>
 			<Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
 				<section>
 					<h2>{t("milk_collection.producer_section_title")}</h2>
@@ -140,8 +159,13 @@ const MilkCollection: React.FC = () => {
 							placeholder={t("common.select")}
 							options={producerOptions}
 							error={errors.producer?.message}
+							disabled={!!selectedItem}
 						/>
-						<IconButton type="button" onClick={() => navigate("/add-producer")}>
+						<IconButton
+							type="button"
+							onClick={() => navigate("/add-producer")}
+							disabled={!!selectedItem}
+						>
 							<MdOutlineAddCircleOutline size="1.5rem" />
 						</IconButton>
 					</div>
@@ -152,6 +176,7 @@ const MilkCollection: React.FC = () => {
 						placeholder={t("common.select")}
 						options={storageOptions}
 						error={errors.storage?.message}
+						disabled={!!selectedItem}
 					/>
 					<div className={styles.amountWrapper}>
 						<InputField
@@ -169,6 +194,7 @@ const MilkCollection: React.FC = () => {
 							info={t("units.liter")}
 							error={errors.volume_liters?.message}
 							onChange={handleVolumeChange}
+							disabled={!!selectedItem}
 						/>
 						<InputField
 							id={uuid()}
@@ -185,6 +211,7 @@ const MilkCollection: React.FC = () => {
 							info={t("units.kg_short")}
 							error={errors.volume_kg?.message}
 							onChange={handleVolumeChange}
+							disabled={!!selectedItem}
 						/>
 					</div>
 				</section>
@@ -201,6 +228,7 @@ const MilkCollection: React.FC = () => {
 						label={t("qualities.temperature")}
 						info={t("units.celsius")}
 						error={errors.temperature?.message}
+						disabled={!!selectedItem}
 					/>
 					<Dropdown
 						id={uuid()}
@@ -212,6 +240,7 @@ const MilkCollection: React.FC = () => {
 						label={t("qualities.inhibitory_residue")}
 						info={t("units.positive_or_negative")}
 						error={errors.inhibitory_residue?.message}
+						disabled={!!selectedItem}
 					/>
 					<Dropdown
 						id={uuid()}
@@ -223,6 +252,7 @@ const MilkCollection: React.FC = () => {
 						label={t("qualities.aflatoxin")}
 						info={t("units.more_or_less_than_50")}
 						error={errors.aflatoxin?.message}
+						disabled={!!selectedItem}
 					/>
 					<InputField
 						id={uuid()}
@@ -235,6 +265,7 @@ const MilkCollection: React.FC = () => {
 						label={t("qualities.acid_level")}
 						info={t("units.acid_level")}
 						error={errors.acid_content?.message}
+						disabled={!!selectedItem}
 					/>
 				</section>
 			</Form>

@@ -11,6 +11,7 @@ class MilkViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.MilkSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = StandardPagePagination
+    lookup_field = "uuid"
 
     def get_queryset(self):
         return Milk.objects.all().order_by("-created_at")
