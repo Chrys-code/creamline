@@ -4,11 +4,13 @@ import styles from "./MilkCollectionList.module.scss";
 import PageHeader from "../../components/PageHeader";
 import Pagination from "../../components/Pagination/Pagination";
 import MilkCard from "../../components/MilkCard";
+import IconButton from "../../components/IconButton";
+import Loader from "../../components/Loader";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useLoaderData, useNavigation, useNavigate } from "react-router";
-import IconButton from "../../components/IconButton";
+import { useLoaderData, useNavigate } from "react-router";
+import { useDelayedLoader } from "../../lib/hooks/useDelayedLoader";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -17,10 +19,10 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 );
 
 const MilkCollectionList: React.FC = () => {
-	const navigation = useNavigation();
 	const navigate = useNavigate();
-	const { t } = useTranslation();
+	const { i18n, t } = useTranslation();
 	const { data, page } = useLoaderData<MilkCollectionListProps>();
+	const showLoading = useDelayedLoader(200, 1000);
 
 	const headerActionElement = (
 		<IconButton onClick={() => navigate("new")}>
@@ -33,13 +35,15 @@ const MilkCollectionList: React.FC = () => {
 			<MilkCard
 				title={result.producer_name}
 				storages={result.storage_name}
-				datetime={new Date(result.created_at).toLocaleString()}
+				datetime={new Date(result.created_at).toLocaleString(i18n.language, {
+					year: "numeric",
+					month: "long",
+					day: "numeric",
+				})}
 				onClick={() => navigate(result.uuid)}
 			/>
 		</li>
 	));
-
-	const isLoading = navigation.state === "loading";
 
 	const next = () => navigate(`?page=${page + 1}&page_size=25`);
 	const prev = () => navigate(`?page=${page - 1}&page_size=25`);
@@ -54,8 +58,8 @@ const MilkCollectionList: React.FC = () => {
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>
-			{isLoading && <p>Loading ...</p>}
-			<ul className={styles.list}>{milkListItems}</ul>
+			{showLoading && <Loader />}
+			{!showLoading && <ul className={styles.list}>{milkListItems}</ul>}
 			<div className={styles.floatingMenu}>
 				<Pagination
 					isFirst={data.previous === null}
