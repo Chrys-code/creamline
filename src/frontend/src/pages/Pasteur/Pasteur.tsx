@@ -1,6 +1,6 @@
 import type React from "react";
-import type { PasteurProps } from "./Pasteur.types.js";
 import type { CreateUpdatePasteurisedMilkFormData } from "../../api/types.js";
+import type { PasteurProps } from "./Pasteur.types.js";
 import styles from "./Pasteur.module.scss";
 
 import PageHeader from "../../components/PageHeader";
@@ -143,7 +143,7 @@ const Pasteur: React.FC = () => {
 	return (
 		<>
 			<PageHeader
-				title="Pasztőr"
+				title={t("pasteurised_milk.page_title")}
 				onNavigateBack={() =>
 					selectedItem ? navigate("/pasteurised-milk/") : navigate(-1)
 				}
@@ -151,11 +151,11 @@ const Pasteur: React.FC = () => {
 			{/*  @ts-expect-error local-datetime conversion issue  */}
 			<Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
 				<section>
-					<h2>Adatok:</h2>
+					<h2>{t("pasteurised_milk.data")}</h2>
 					<Dropdown
 						id={uuid()}
 						{...register("pasteur", { onChange: () => clearErrors("pasteur") })}
-						label="Pasztőr:"
+						label={t("pasteurised_milk.input_pasteur_label")}
 						placeholder={t("common.select")}
 						options={pasteurOptions}
 						error={errors.pasteur?.message}
@@ -166,7 +166,7 @@ const Pasteur: React.FC = () => {
 						{...register("product_definition", {
 							onChange: () => clearErrors("product_definition"),
 						})}
-						label="Céltermék:"
+						label={t("pasteurised_milk.input_product_definition_label")}
 						placeholder={t("common.select")}
 						options={productDefinitionOptions}
 						error={errors.product_definition?.message}
@@ -180,22 +180,22 @@ const Pasteur: React.FC = () => {
 						})}
 						type="number"
 						step="0.1"
-						label="Hőfok:"
-						info="CELSIUS"
+						label={t("qualities.temperature")}
+						info={t("units.celsius")}
 						defaultValue="0"
 						error={errors.temperature?.message}
 						disabled={!!selectedItem}
 					/>
 				</section>
 				<section>
-					<h2>Útvonal:</h2>
+					<h2>{t("pasteurised_milk.route")}</h2>
 					<div className={styles.sideBySideWrapper}>
 						<Dropdown
 							id={uuid()}
 							{...register("source_storage", {
 								onChange: () => clearErrors("source_storage"),
 							})}
-							label="Honnan:"
+							label={t("pasteurised_milk.input_source_storage_label")}
 							placeholder={t("common.select")}
 							options={storageOptions}
 							error={errors.source_storage?.message}
@@ -206,7 +206,7 @@ const Pasteur: React.FC = () => {
 							{...register("target_storage", {
 								onChange: () => clearErrors("target_storage"),
 							})}
-							label="Hová:"
+							label={t("pasteurised_milk.input_target_storage_label")}
 							placeholder={t("common.select")}
 							options={storageOptions}
 							error={errors.target_storage?.message}
@@ -225,8 +225,8 @@ const Pasteur: React.FC = () => {
 							})}
 							type="number"
 							step="0.01"
-							label="Mennyiség"
-							info="LITER"
+							label={t("utilities.volume")}
+							info={t("units.liter")}
 							error={errors.volume_liters?.message}
 							disabled={!!selectedItem}
 						/>
@@ -241,22 +241,22 @@ const Pasteur: React.FC = () => {
 							})}
 							type="number"
 							step="0.01"
-							label="Mennyiség"
-							info="KG"
+							label={t("utilities.volume")}
+							info={t("units.kg_short")}
 							error={errors.volume_kg?.message}
 							disabled={!!selectedItem}
 						/>
 					</div>
 				</section>
 				<section>
-					<h2>Időtartam:</h2>
+					<h2>{t("pasteurised_milk.duration")}</h2>
 					<InputField
 						id={uuid()}
 						{...register("start_date", {
 							onChange: () => clearErrors("start_date"),
 						})}
 						type="datetime-local"
-						label="Pasztőrőzés kezdete:"
+						label={t("pasteurised_milk.pasteurisation_start")}
 						error={errors.start_date?.message}
 						disabled={!!selectedItem}
 					/>
@@ -266,7 +266,7 @@ const Pasteur: React.FC = () => {
 							onChange: () => clearErrors("end_date"),
 						})}
 						type="datetime-local"
-						label="Pasztőrőzés vége:"
+						label={t("pasteurised_milk.pasteurisation_end")}
 						error={errors.end_date?.message}
 						disabled={!!selectedItem}
 					/>

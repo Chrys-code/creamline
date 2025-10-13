@@ -33,6 +33,10 @@
 		"input_is_required": "This field is required",
 		"input_select_required": "Please select"
 	},
+	"mobile_navigation": {
+		"home_page": "home",
+		"profile": "profile"
+	},
 	"login": {
 		"title": "Login",
 		"submit": "Login",
@@ -46,9 +50,16 @@
 		"input_last_name_label": "Lastname",
 		"notification_message": "Profile updated!"
 	},
+	"dashboard": {
+		"greet": "Hi",
+		"question": "What are we going to do today?",
+		"tasks": "Tasks",
+		"task_milk_collection": "Milk collection",
+		"task_pasteur": "Pasteurs"
+	},
 	"add_producer": {
 		"page_title": "New producer",
-		"form_title": "Producer details:",
+		"form_title": "Producer details",
 		"input_name_label": "Producer name",
 		"input_name_required": "Please enter producer name",
 		"input_address_label": "Producer address",
@@ -65,7 +76,20 @@
 	"milk_collection_list": {
 		"page_title": "Milk collections"
 	},
+	"pasteurised_milk": {
+		"page_title": "Pasteur",
+		"data": "Data",
+		"input_pasteur_label": "Pasteur",
+		"input_product_definition_label": "Target product",
+		"input_temperature_label": "Temperature",
+		"route": "Route",
+		"input_source_storage_label": "Source storage",
+		"input_target_storage_label": "Target storage",
+		"duration": "Duration",
+		"pasteurisation_start": "Pasteurisation start",
+		"pasteurisation_end": "Pasteurisation end"
+	},
 	"pasteurised_milk_list": {
-		"page_title": "Pasztőrözések"
+		"page_title": "Pasteurs"
 	}
 }

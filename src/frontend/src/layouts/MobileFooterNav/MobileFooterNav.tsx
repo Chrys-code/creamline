@@ -1,6 +1,7 @@
 import styles from "./MobileFooterNav.module.scss";
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router";
 
 const MdOutlineAccountCircle = React.lazy(() =>
@@ -13,6 +14,8 @@ const MdListAlt = React.lazy(() =>
 );
 
 const MobileFooterNav: React.FC = () => {
+	const { t } = useTranslation();
+
 	return (
 		<nav className={styles.container}>
 			<ul>
@@ -22,7 +25,7 @@ const MobileFooterNav: React.FC = () => {
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
 						<MdListAlt size="2rem" />
-						<span>Főoldal</span>
+						<span>{t("mobile_navigation.home_page")}</span>
 					</NavLink>
 				</li>
 				<li>
@@ -31,7 +34,7 @@ const MobileFooterNav: React.FC = () => {
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
 						<MdOutlineAccountCircle size="2rem" />
-						<span>Profil</span>
+						<span>{t("mobile_navigation.profile")}</span>
 					</NavLink>
 				</li>
 			</ul>

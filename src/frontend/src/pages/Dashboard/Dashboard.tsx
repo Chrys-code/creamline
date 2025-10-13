@@ -5,10 +5,12 @@ import styles from "./Dashboard.module.scss";
 import Button from "../../components/Button";
 
 import { useNavigate, useRouteLoaderData } from "react-router";
+import { useTranslation } from "react-i18next";
 
 const Dashboard: React.FC = () => {
 	const data = useRouteLoaderData<DashboardProps>("app");
 	const navigate = useNavigate();
+	const { t } = useTranslation();
 
 	const name = `${data?.profile?.first_name} ${data?.profile?.last_name}`;
 	const profileHasName = !!name.replaceAll(" ", "");
@@ -17,26 +19,28 @@ const Dashboard: React.FC = () => {
 	return (
 		<>
 			<div>
-				<h1>Szia, {displayName}</h1>
-				<p>Mit csinálunk ma?</p>
+				<h1>
+					{t("dashboard.greet")}, {displayName}
+				</h1>
+				<p>{t("dashboard.question")}</p>
 			</div>
 
 			<section className={styles.tasks}>
-				<h2>Feladatok:</h2>
+				<h2>{t("dashboard.tasks")}</h2>
 				<div>
 					<Button
 						style="secondary"
 						type="button"
 						onClick={() => navigate("/milk-collection")}
 					>
-						Tejátvételek
+						{t("dashboard.task_milk_collection")}
 					</Button>
 					<Button
 						style="secondary"
 						type="button"
 						onClick={() => navigate("/pasteurised-milk")}
 					>
-						Pasztőrözések
+						{t("dashboard.task_pasteur")}
 					</Button>
 				</div>
 			</section>
