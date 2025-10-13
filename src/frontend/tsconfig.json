@@ -1,9 +1,10 @@
 {
 	"compilerOptions": {
 		"lib": ["DOM", "DOM.Iterable", "ES2022"],
-		"types": ["node", "vite/client"],
+		"types": ["node", "vite/client", "vitest/globals"],
 		"target": "ES2022",
 		"module": "ESNext",
+		"isolatedModules": false,
 		"moduleResolution": "bundler",
 		"jsx": "react-jsx",
 		"rootDirs": ["."],
