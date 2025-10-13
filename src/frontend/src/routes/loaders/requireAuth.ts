@@ -6,9 +6,11 @@ const requireAuth = async () => {
 	try {
 		await api.get("/api/session/");
 		const profileResponse = await api.get("/api/v1/profile/");
+		const roles = await api.get("/api/roles/");
 		const parsed = schemas.ProfileSchema.parse(profileResponse);
-		return parsed;
-	} catch {
+		return { ...parsed, roles };
+	} catch (err) {
+		console.log({ err });
 		throw redirect("/login");
 	}
 };

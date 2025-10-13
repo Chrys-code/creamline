@@ -1,6 +1,12 @@
 import { makeApi, Zodios, type ZodiosOptions } from "@zodios/core";
 import z from "zod";
-import { LoginEndpoint, LogoutEndpoint, SessionEndpoint, SignupEndpoint } from "./auth";
+import {
+	LoginEndpoint,
+	LogoutEndpoint,
+	SessionEndpoint,
+	SignupEndpoint,
+	GetRolesEndpoint,
+} from "./auth";
 import {
 	CreateMilkEndpoint,
 	GetMilkEndpoint,
@@ -41,6 +47,7 @@ const endpoints = makeApi([
 	LoginEndpoint,
 	LogoutEndpoint,
 	SessionEndpoint,
+	GetRolesEndpoint,
 
 	// Milk Collection Endpoints
 	ListMilkEndpoint,

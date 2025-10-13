@@ -66,3 +66,14 @@ class SessionCheckView(views.APIView):
 
     def get(self, _request):
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class GetRolesView(views.APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        data = {}
+        data["groups"] = list(request.user.groups.values_list("name", flat=True))
+        data["permissions"] = list(request.user.get_all_permissions())
+
+        return Response(data, status=status.HTTP_200_OK)

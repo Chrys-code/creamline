@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 
 const Dashboard: React.FC = () => {
 	const data = useRouteLoaderData<DashboardProps>("app");
+	console.log({ data });
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 
