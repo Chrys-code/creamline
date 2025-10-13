@@ -1,6 +1,6 @@
 import type { Pasteur, Storage, ProductDefinition, PasteurisedMilk } from "../../api/types";
 
-export interface PasteurProps {
+export interface PasteurisationProps {
 	pasteurs: Pasteur[];
 	storages: Storage[];
 	productDefinitions: ProductDefinition[];

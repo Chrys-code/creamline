@@ -4,11 +4,11 @@ import { useNavigation } from "react-router";
 export function useDelayedLoader(showDelay = 200, minDuration = 1000) {
 	const navigation = useNavigation();
 	const [showLoading, setShowLoading] = useState(false);
-	const timerRef = useRef(null);
-	const startTimeRef = useRef(null);
+	const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+	const startTimeRef = useRef<number | null>(null);
 
 	useEffect(() => {
-		clearTimeout(timerRef.current);
+		if (timerRef.current) clearTimeout(timerRef.current);
 
 		if (navigation.state === "loading") {
 			// Start timer for showing the spinner after `showDelay`
@@ -35,7 +35,9 @@ export function useDelayedLoader(showDelay = 200, minDuration = 1000) {
 			}
 		}
 
-		return () => clearTimeout(timerRef.current);
+		return () => {
+			if (timerRef.current) clearTimeout(timerRef.current);
+		};
 	}, [navigation.state, showLoading, showDelay, minDuration]);
 
 	return showLoading;

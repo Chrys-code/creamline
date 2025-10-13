@@ -80,7 +80,8 @@ const appRouter = createBrowserRouter([
 			{
 				path: "pasteurised-milk/new",
 				lazy: {
-					Component: async () => (await import("../pages/Pasteur/Pasteur")).default,
+					Component: async () =>
+						(await import("../pages/Pasteurisation/Pasteurisation")).default,
 				},
 				loader: async () => ({
 					pasteurs: (await requirePasteurs()) || [],
@@ -91,7 +92,8 @@ const appRouter = createBrowserRouter([
 			{
 				path: "pasteurised-milk/:id",
 				lazy: {
-					Component: async () => (await import("../pages/Pasteur/Pasteur")).default,
+					Component: async () =>
+						(await import("../pages/Pasteurisation/Pasteurisation")).default,
 				},
 				loader: async (args) => ({
 					pasteurs: (await requirePasteurs()) || [],

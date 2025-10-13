@@ -54,8 +54,8 @@
 		"greet": "Hi",
 		"question": "What are we going to do today?",
 		"tasks": "Tasks",
-		"task_milk_collection": "Milk collection",
-		"task_pasteur": "Pasteurs"
+		"task_milk_collection": "Milk collections",
+		"task_pasteur": "Pasteurisations"
 	},
 	"add_producer": {
 		"page_title": "New producer",
@@ -77,7 +77,7 @@
 		"page_title": "Milk collections"
 	},
 	"pasteurised_milk": {
-		"page_title": "Pasteur",
+		"page_title": "Pasteurisation",
 		"data": "Data",
 		"input_pasteur_label": "Pasteur",
 		"input_product_definition_label": "Target product",
@@ -90,6 +90,6 @@
 		"pasteurisation_end": "Pasteurisation end"
 	},
 	"pasteurised_milk_list": {
-		"page_title": "Pasteurs"
+		"page_title": "Pasteurisations"
 	}
 }

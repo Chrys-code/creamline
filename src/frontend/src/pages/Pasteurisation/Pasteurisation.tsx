@@ -1,13 +1,13 @@
 import type React from "react";
 import type { CreateUpdatePasteurisedMilkFormData } from "../../api/types.js";
-import type { PasteurProps } from "./Pasteur.types.js";
-import styles from "./Pasteur.module.scss";
+import type { PasteurisationProps } from "./Pasteurisation.types.js";
+import styles from "./Pasteurisation.module.scss";
 
-import PageHeader from "../../components/PageHeader";
-import Form from "../../components/Form";
-import Dropdown from "../../components/Dropdown";
-import InputField from "../../components/InputField";
-import Button from "../../components/Button";
+import PageHeader from "../../components/PageHeader/index.js";
+import Form from "../../components/Form/index.js";
+import Dropdown from "../../components/Dropdown/index.js";
+import InputField from "../../components/InputField/index.js";
+import Button from "../../components/Button/index.js";
 
 import { useLoaderData, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
@@ -16,13 +16,14 @@ import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
 
-import { api } from "../../api/axios";
+import { api } from "../../api/axios.js";
 import { schemas } from "../../api/schemas.js";
 
 import convertMilkLiterAndKg from "../../lib/helpers/literToKg/literToKg.js";
 
-const Pasteur: React.FC = () => {
-	const { pasteurs, storages, productDefinitions, selectedItem } = useLoaderData<PasteurProps>();
+const Pasteurisation: React.FC = () => {
+	const { pasteurs, storages, productDefinitions, selectedItem } =
+		useLoaderData<PasteurisationProps>();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 
@@ -276,4 +277,4 @@ const Pasteur: React.FC = () => {
 	);
 };
 
-export default Pasteur;
+export default Pasteurisation;
