@@ -71,7 +71,7 @@ const Profile: React.FC = () => {
 		);
 	};
 
-	const containerStyle = `${styles.container} ${isEditing ? "" : styles.preview}`;
+	const containerStyle = `${styles.container}`;
 
 	return (
 		<div className={containerStyle}>
