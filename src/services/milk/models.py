@@ -1,12 +1,11 @@
 import uuid
 
+from django.conf import settings
 from django.core.validators import MinValueValidator
-from django.contrib.auth import get_user_model
 from django.db import models
 
 from storages.models import Storage
 from producers.models import Producer
-User = get_user_model()
 
 class Milk(models.Model):
     uuid = models.UUIDField(
@@ -44,7 +43,7 @@ class Milk(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         related_name="created_milk",
         on_delete=models.SET_NULL,
         editable=False,
@@ -54,7 +53,7 @@ class Milk(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(null=True, blank=True, editable=False)
     deleted_by =  models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         related_name="deleted_milk",
         on_delete=models.SET_NULL,
         editable=False,

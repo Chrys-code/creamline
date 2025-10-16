@@ -1,9 +1,8 @@
 import uuid
 
-from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.db import models
 
-User = get_user_model()
 
 class Producer(models.Model):
     uuid = models.UUIDField(
@@ -16,7 +15,7 @@ class Producer(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     created_by =  models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         related_name="created_producers",
         on_delete=models.SET_NULL,
         editable=False,
@@ -26,7 +25,7 @@ class Producer(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(null=True, blank=True, editable=False)
     deleted_by =  models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         related_name="deleted_producers",
         on_delete=models.SET_NULL,
         editable=False,
