@@ -5,32 +5,9 @@ from rest_framework import views, status, generics
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from authentication.serializers import LoginSerializer, SignupSerializer
-
-from profiles.models import Profile
-
+from authentication.serializers import LoginSerializer
 
 User = get_user_model()
-
-class SignupView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = SignupSerializer
-    permission_classes = [AllowAny]
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-
-        Profile.objects.create(
-            created_by=user,
-            email=user.email
-        )
-
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-
 
 class LoginView(generics.GenericAPIView):
     serializer_class = LoginSerializer

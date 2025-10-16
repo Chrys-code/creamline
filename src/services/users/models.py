@@ -67,3 +67,4 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     @property
     def is_admin(self):
         return self.is_staff
+    

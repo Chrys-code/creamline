@@ -7,6 +7,7 @@ from api.v1.pasteur.views import PasteurViewSet
 from api.v1.pasteurised_milk.views import PasteurisedMilkViewSet
 from api.v1.producer.views import ProducerViewSet
 from api.v1.product_definition.views import ProductDefinitionViewSet
+from api.v1.users.views import UserViewSet
 from api.v1.milk.views import MilkViewSet
 
 router = DefaultRouter()
@@ -27,6 +28,9 @@ router.register(
 )
 router.register(
     "product-definition", ProductDefinitionViewSet, basename="product-definition",
+)
+router.register(
+    "users", UserViewSet, basename="users",
 )
 
 

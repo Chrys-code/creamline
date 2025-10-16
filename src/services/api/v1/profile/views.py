@@ -1,40 +1,20 @@
-from django.utils.translation import gettext_lazy as _
+from django.shortcuts import get_object_or_404
 
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.generics import RetrieveUpdateDestroyAPIView
+from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 
 from api.v1.profile import serializers
 
 from profiles.models import Profile
-from profiles.use_cases.delete import delete_profile
 
 
-class ProfileDetailView(RetrieveUpdateDestroyAPIView):
+class ProfileDetailView(RetrieveUpdateAPIView):
     serializer_class = serializers.ProfileSerializer
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
-        try:
-            return Profile.objects.get(created_by=self.request.user, deleted_at__isnull=True)
-        except Profile.DoesNotExist:
-            return None
-        
-    def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
-        if instance is None:
-            return Response(
-                {"detail": _("Profile not found.")},
-                status=status.HTTP_404_NOT_FOUND,
-            )
-
-        if instance.deleted_at is not None:
-            return Response(
-                {"detail": _("Profile already deleted.")},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        delete_profile(instance=instance, deleted_by=self.request.user)
-
-        return Response(status=status.HTTP_204_NO_CONTENT)
+         return get_object_or_404(
+            Profile,
+            user=self.request.user,
+            deleted_at__isnull=True
+        )
