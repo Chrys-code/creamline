@@ -1,11 +1,11 @@
 import type React from "react";
-import type { PatchedProfile, Profile } from "../../api/types";
+import type { PatchProfileFormData, Profile } from "../../api/types";
 import type { ProfileProps } from "./Profile.types";
 import styles from "./Profile.module.scss";
 
-import Button from "../../components/Button";
-import Form from "../../components/Form";
-import InputField from "../../components/InputField";
+import Button from "../../components/button";
+import Form from "../../components/form";
+import InputField from "../../components/inputField";
 
 import { useState } from "react";
 import { useRouteLoaderData, useRevalidator } from "react-router";
@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { schemas } from "../../api/schemas";
-import { api } from "../../api/axios";
+import { api } from "../../api/client";
 import { toast } from "react-toastify";
 
 const Profile: React.FC = () => {
@@ -30,15 +30,15 @@ const Profile: React.FC = () => {
 		formState: { errors, isSubmitting },
 		setError,
 		clearErrors,
-	} = useForm<PatchedProfile>({
-		resolver: zodResolver(schemas.PatchedProfileSchema),
+	} = useForm<PatchProfileFormData>({
+		resolver: zodResolver(schemas.PatchProfileSchema),
 	});
 
 	const handleEditClick = () => {
 		setIsEditing(!isEditing);
 	};
 
-	const onSubmit = async (formData: PatchedProfile) => {
+	const onSubmit = async (formData: PatchProfileFormData) => {
 		try {
 			await api.put("/api/v1/profile/", formData);
 			toast.success(t("profile.notification_message"));

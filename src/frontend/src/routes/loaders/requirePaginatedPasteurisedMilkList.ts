@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from "react-router";
 
-import { api } from "../../api/axios";
+import { api } from "../../api/client";
 import { schemas } from "../../api/schemas";
 
 const requirePaginatedPasteurisedMilkList = async ({ request }: LoaderFunctionArgs) => {
@@ -12,7 +12,7 @@ const requirePaginatedPasteurisedMilkList = async ({ request }: LoaderFunctionAr
 		const pasteurisedMilkResponse = await api.get("/api/v1/pasteurised-milk/", {
 			queries: { page, page_size },
 		});
-		const data = schemas.PaginatedPasteurisedMilkSchema.parse(pasteurisedMilkResponse);
+		const data = schemas.ListPasteurisedMilkSchema.parse(pasteurisedMilkResponse);
 
 		return { data, page };
 	} catch {

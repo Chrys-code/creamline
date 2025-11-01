@@ -1,16 +1,16 @@
 import type { PasteurisedMilkListProps } from "./PasteurisedMilkList.types.js";
 import styles from "./PasteurisedMilkList.module.scss";
 
-import PageHeader from "../../components/PageHeader";
-import Pagination from "../../components/Pagination/Pagination";
-import PasteurisedMilkCard from "../../components/PasteurisedMilkCard/PasteurisedMilkCard.js";
-import IconButton from "../../components/IconButton";
-import Loader from "../../components/Loader";
+import PageHeader from "../../components/pageHeader";
+import Pagination from "../../components/pagination";
+import PasteurisedMilkCard from "../../components/pasteurisedMilkCard";
+import IconButton from "../../components/iconButton";
+import Loader from "../../components/loader";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLoaderData, useNavigate } from "react-router";
-import { useDelayedLoader } from "../../lib/hooks/useDelayedLoader";
+import { useDelayedLoader } from "../../lib/hooks/useDelayedLoader.js";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

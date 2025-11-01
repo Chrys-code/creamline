@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router";
 
-import Dashboard from "../pages/Dashboard/Dashboard";
-import AppLayout from "../layouts/AppLayout";
-import ErrorLayout from "../layouts/ErrorLayout";
+import Dashboard from "../pages/dashboard/Dashboard";
+import AppLayout from "../layouts/appLayout";
+import ErrorLayout from "../layouts/errorLayout";
 
 import requireAuth from "./loaders/requireAuth";
 import requireProducers from "./loaders/requireProducers";
@@ -35,14 +35,14 @@ const appRouter = createBrowserRouter([
 			{
 				path: "profile",
 				lazy: {
-					Component: async () => (await import("../pages/Profile/Profile")).default,
+					Component: async () => (await import("../pages/profile/Profile")).default,
 				},
 			},
 			{
 				path: "milk-collection",
 				lazy: {
 					Component: async () =>
-						(await import("../pages/MilkCollectionList/MilkCollectionList")).default,
+						(await import("../pages/milkCollectionList/MilkCollectionList")).default,
 				},
 				loader: requirePaginatedMilkList,
 			},
@@ -50,7 +50,7 @@ const appRouter = createBrowserRouter([
 				path: "milk-collection/new",
 				lazy: {
 					Component: async () =>
-						(await import("../pages/MilkCollection/MilkCollection")).default,
+						(await import("../pages/milkCollection/MilkCollection")).default,
 				},
 				loader: async () => ({
 					producers: (await requireProducers()) || [],
@@ -61,7 +61,7 @@ const appRouter = createBrowserRouter([
 				path: "milk-collection/:id",
 				lazy: {
 					Component: async () =>
-						(await import("../pages/MilkCollection/MilkCollection")).default,
+						(await import("../pages/milkCollection/MilkCollection")).default,
 				},
 				loader: async (args) => ({
 					producers: (await requireProducers()) || [],
@@ -73,7 +73,7 @@ const appRouter = createBrowserRouter([
 				path: "pasteurised-milk",
 				lazy: {
 					Component: async () =>
-						(await import("../pages/PasteurisedMilkList/PasteurisedMilkList")).default,
+						(await import("../pages/pasteurisedMilkList/PasteurisedMilkList")).default,
 				},
 				loader: requirePaginatedPasteurisedMilkList,
 			},
@@ -81,7 +81,7 @@ const appRouter = createBrowserRouter([
 				path: "pasteurised-milk/new",
 				lazy: {
 					Component: async () =>
-						(await import("../pages/Pasteurisation/Pasteurisation")).default,
+						(await import("../pages/pasteurisation/Pasteurisation")).default,
 				},
 				loader: async () => ({
 					pasteurs: (await requirePasteurs()) || [],
@@ -93,7 +93,7 @@ const appRouter = createBrowserRouter([
 				path: "pasteurised-milk/:id",
 				lazy: {
 					Component: async () =>
-						(await import("../pages/Pasteurisation/Pasteurisation")).default,
+						(await import("../pages/pasteurisation/Pasteurisation")).default,
 				},
 				loader: async (args) => ({
 					pasteurs: (await requirePasteurs()) || [],
@@ -106,7 +106,7 @@ const appRouter = createBrowserRouter([
 				path: "add-producer",
 				lazy: {
 					Component: async () =>
-						(await import("../pages/AddProducer/AddProducer")).default,
+						(await import("../pages/addProducer/AddProducer")).default,
 				},
 			},
 		],
@@ -114,7 +114,7 @@ const appRouter = createBrowserRouter([
 	{
 		path: "/login",
 		lazy: {
-			Component: async () => (await import("../pages/Login/Login")).default,
+			Component: async () => (await import("../pages/login/Login")).default,
 		},
 		errorElement: <ErrorLayout />,
 	},

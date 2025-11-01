@@ -1,10 +1,10 @@
 import type React from "react";
-import type { CreateUpdateProducerFormData } from "../../api/types";
+import type { CreateProducerFormData } from "../../api/types";
 
-import PageHeader from "../../components/PageHeader";
-import Form from "../../components/Form";
-import InputField from "../../components/InputField";
-import Button from "../../components/Button";
+import PageHeader from "../../components/pageHeader";
+import Form from "../../components/form";
+import InputField from "../../components/inputField";
+import Button from "../../components/button";
 
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
 
-import { api } from "../../api/axios";
+import { api } from "../../api/client";
 import { schemas } from "../../api/schemas";
 
 const AddProducer: React.FC = () => {
@@ -26,11 +26,11 @@ const AddProducer: React.FC = () => {
 		formState: { errors, isSubmitting },
 		setError,
 		clearErrors,
-	} = useForm<CreateUpdateProducerFormData>({
-		resolver: zodResolver(schemas.CreateUpdateProducerSchema),
+	} = useForm<CreateProducerFormData>({
+		resolver: zodResolver(schemas.CreateProducerSchema),
 	});
 
-	const onSubmit = async (formData: CreateUpdateProducerFormData) => {
+	const onSubmit = async (formData: CreateProducerFormData) => {
 		try {
 			await api.post("/api/v1/producer/", formData);
 			toast.success(t("add_producer.notification_message"));

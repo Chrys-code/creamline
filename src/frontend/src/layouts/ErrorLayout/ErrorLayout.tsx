@@ -1,7 +1,7 @@
 import type React from "react";
 import styles from "./ErrorLayout.module.scss";
 
-import Button from "../../components/Button";
+import Button from "../../components/button";
 
 import { useNavigate } from "react-router";
 

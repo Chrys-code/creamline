@@ -2,14 +2,13 @@ import type React from "react";
 import type { DashboardProps } from "./Dashboard.types";
 import styles from "./Dashboard.module.scss";
 
-import Button from "../../components/Button";
+import Button from "../../components/button";
 
 import { useNavigate, useRouteLoaderData } from "react-router";
 import { useTranslation } from "react-i18next";
 
 const Dashboard: React.FC = () => {
 	const data = useRouteLoaderData<DashboardProps>("app");
-	console.log({ data });
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 

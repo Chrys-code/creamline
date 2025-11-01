@@ -1,13 +1,13 @@
 import type React from "react";
-import type { CreateUpdatePasteurisedMilkFormData } from "../../api/types.js";
+import type { CreatePasteurisedMilkFormData } from "../../api/types.js";
 import type { PasteurisationProps } from "./Pasteurisation.types.js";
 import styles from "./Pasteurisation.module.scss";
 
-import PageHeader from "../../components/PageHeader/index.js";
-import Form from "../../components/Form/index.js";
-import Dropdown from "../../components/Dropdown/index.js";
-import InputField from "../../components/InputField/index.js";
-import Button from "../../components/Button/index.js";
+import PageHeader from "../../components/pageHeader";
+import Form from "../../components/form";
+import Dropdown from "../../components/dropdown";
+import InputField from "../../components/inputField";
+import Button from "../../components/button";
 
 import { useLoaderData, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
 
-import { api } from "../../api/axios.js";
+import { api } from "../../api/client.js";
 import { schemas } from "../../api/schemas.js";
 
 import convertMilkLiterAndKg from "../../lib/helpers/literToKg/literToKg.js";
@@ -34,9 +34,9 @@ const Pasteurisation: React.FC = () => {
 		setValue,
 		setError,
 		clearErrors,
-	} = useForm<CreateUpdatePasteurisedMilkFormData>({
+	} = useForm<CreatePasteurisedMilkFormData>({
 		// @ts-expect-error local-datetime conversion issue
-		resolver: zodResolver(schemas.CreateUpdatePasteurisedMilkSchema),
+		resolver: zodResolver(schemas.CreatePasteurisedMilkSchema),
 		mode: "onChange",
 		defaultValues: {
 			pasteur: selectedItem?.pasteur || undefined,
@@ -73,7 +73,7 @@ const Pasteurisation: React.FC = () => {
 			value: productDefinition.name,
 		})) || [];
 
-	const onSubmit = async (formData: CreateUpdatePasteurisedMilkFormData): Promise<void> => {
+	const onSubmit = async (formData: CreatePasteurisedMilkFormData): Promise<void> => {
 		try {
 			await api.post("/api/v1/pasteurised-milk/", formData);
 			toast.success("Pasztőr sikeresen elmentve!");

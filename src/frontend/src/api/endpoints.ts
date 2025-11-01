@@ -1,92 +1,89 @@
 import { makeApi, Zodios, type ZodiosOptions } from "@zodios/core";
 import z from "zod";
+import { LoginEndpoint, LogoutEndpoint, SessionEndpoint, GetRolesEndpoint } from "./endpoints/auth";
 import {
-	LoginEndpoint,
-	LogoutEndpoint,
-	SessionEndpoint,
-	SignupEndpoint,
-	GetRolesEndpoint,
-} from "./auth";
+	ListUserEndpoint,
+	GetUserEndpoint,
+	PatchUserEndpoint,
+	DeleteUserEndpoint,
+} from "./endpoints/user/endpoint";
 import {
 	CreateMilkEndpoint,
 	GetMilkEndpoint,
 	ListMilkEndpoint,
-	UpdateMilkEndpoint,
-} from "./milk/endpoint";
-import { GetPasteurEndpoint, ListPasteurEndpoint } from "./pasteur/endpoint";
+	PatchMilkEndpoint,
+} from "./endpoints/milk/endpoint";
 import {
-	CreateStorageEndpoint,
-	DeleteStorageEndpoint,
-	GetStorageEndpoint,
-	ListStorageEndpoint,
-	UpdateStorageEndpoint,
-} from "./storage/endpoint";
-import {
-	CreatePasteurisedMilk,
-	GetPasteurisedMilk,
-	ListPasteurisedMilk,
-	UpdatePasteurisedMilk,
-} from "./pasteurisedMilk/endpoints";
-import {
-	CreateProducerEndpoint,
-	DeleteProducerEndpoint,
-	GetProducerEndpoint,
-	ListProducerEndpoint,
-	UpdateProducerEndpoint,
-} from "./producer/endpoint";
-import { GetProductDefinition, ListProductDefinition } from "./productDefinition/endpoint";
-import {
-	DeleteProfileEndpoint,
-	GetProfileEndpoint,
-	UpdateProfileEndpoint,
-} from "./profile/endpoint";
-
-const endpoints = makeApi([
-	// Auth Endpoints
-	SignupEndpoint,
-	LoginEndpoint,
-	LogoutEndpoint,
-	SessionEndpoint,
-	GetRolesEndpoint,
-
-	// Milk Collection Endpoints
-	ListMilkEndpoint,
-	GetMilkEndpoint,
-	CreateMilkEndpoint,
-	UpdateMilkEndpoint,
-
-	// Pasteur Endpoints
 	ListPasteurEndpoint,
 	GetPasteurEndpoint,
-
-	// Storage Endpoints
+	CreatePasteurEndpoint,
+	PatchPasteurEndpoint,
+} from "./endpoints/pasteur/endpoint";
+import {
 	ListStorageEndpoint,
 	GetStorageEndpoint,
 	CreateStorageEndpoint,
-	UpdateStorageEndpoint,
-	DeleteStorageEndpoint,
+	PatchStorageEndpoint,
+} from "./endpoints/storage/endpoint";
+import {
+	CreatePasteurisedMilkEndpoint,
+	GetPasteurisedMilkEndpoint,
+	ListPasteurisedMilkEndpoint,
+	PatchPasteurisedMilkEndpoint,
+} from "./endpoints/pasteurisedMilk/endpoints";
+import {
+	GetProducerEndpoint,
+	CreateProducerEndpoint,
+	ListProducerEndpoint,
+	PatchProducerEndpoint,
+} from "./endpoints/producer/endpoint";
+import {
+	GetProductDefinition,
+	ListProductDefinition,
+} from "./endpoints/productDefinition/endpoint";
+import { GetProfileEndpoint, PatchProfileEndpoint } from "./endpoints/profile/endpoint";
 
-	// Pasteurised Milk Endpoints
-	ListPasteurisedMilk,
-	GetPasteurisedMilk,
-	CreatePasteurisedMilk,
-	UpdatePasteurisedMilk,
+const endpoints = makeApi([
+	LoginEndpoint,
+	LogoutEndpoint,
+	SessionEndpoint,
+	GetRolesEndpoint,
 
-	// Producer Endpoints
+	ListUserEndpoint,
+	GetUserEndpoint,
+	PatchUserEndpoint,
+	DeleteUserEndpoint,
+
+	GetProfileEndpoint,
+	PatchProfileEndpoint,
+
+	ListMilkEndpoint,
+	GetMilkEndpoint,
+	CreateMilkEndpoint,
+	PatchMilkEndpoint,
+
+	ListPasteurEndpoint,
+	GetPasteurEndpoint,
+	CreatePasteurEndpoint,
+	PatchPasteurEndpoint,
+
+	ListStorageEndpoint,
+	GetStorageEndpoint,
+	CreateStorageEndpoint,
+	PatchStorageEndpoint,
+
+	ListPasteurisedMilkEndpoint,
+	GetPasteurisedMilkEndpoint,
+	CreatePasteurisedMilkEndpoint,
+	PatchPasteurisedMilkEndpoint,
+
 	ListProducerEndpoint,
 	GetProducerEndpoint,
 	CreateProducerEndpoint,
-	UpdateProducerEndpoint,
-	DeleteProducerEndpoint,
+	PatchProducerEndpoint,
 
-	// Product Definition Endpoints
 	ListProductDefinition,
 	GetProductDefinition,
-
-	// Profile Endpoints
-	GetProfileEndpoint,
-	UpdateProfileEndpoint,
-	DeleteProfileEndpoint,
 
 	{
 		method: "get",

@@ -1,13 +1,13 @@
 import type { MilkCollectionProps } from "./MilkCollection.types";
-import type { CreateUpdateMilkFormData } from "../../api/types";
+import type { CreateMilkFormData } from "../../api/types";
 import styles from "./MilkCollection.module.scss";
 
-import PageHeader from "../../components/PageHeader";
-import Form from "../../components/Form";
-import InputField from "../../components/InputField";
-import Dropdown from "../../components/Dropdown";
-import Button from "../../components/Button";
-import IconButton from "../../components/IconButton";
+import PageHeader from "../../components/pageHeader";
+import Form from "../../components/form";
+import InputField from "../../components/inputField";
+import Dropdown from "../../components/dropdown";
+import Button from "../../components/button";
+import IconButton from "../../components/iconButton";
 
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
 
-import { api } from "../../api/axios";
+import { api } from "../../api/client";
 import { schemas } from "../../api/schemas";
 import { useTranslation } from "react-i18next";
 
@@ -40,8 +40,8 @@ const MilkCollection: React.FC = () => {
 		setValue,
 		setError,
 		clearErrors,
-	} = useForm<CreateUpdateMilkFormData>({
-		resolver: zodResolver(schemas.CreateUpdateMilkSchema),
+	} = useForm<CreateMilkFormData>({
+		resolver: zodResolver(schemas.CreateMilkSchema),
 		defaultValues: {
 			producer: selectedItem?.producer || undefined,
 			storage: selectedItem?.storage || undefined,
@@ -67,7 +67,7 @@ const MilkCollection: React.FC = () => {
 		{ id: "false", value: t("common.no") },
 	];
 
-	const onSubmit = async (formData: CreateUpdateMilkFormData): Promise<void> => {
+	const onSubmit = async (formData: CreateMilkFormData): Promise<void> => {
 		try {
 			await api.post("/api/v1/milk/", formData);
 			toast.success(t("add_producer.notification_message"));

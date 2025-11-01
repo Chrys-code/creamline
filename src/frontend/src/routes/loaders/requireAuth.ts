@@ -1,5 +1,5 @@
 import { redirect } from "react-router";
-import { api } from "../../api/axios";
+import { api } from "../../api/client";
 import { schemas } from "../../api/schemas";
 
 const requireAuth = async () => {
@@ -9,8 +9,7 @@ const requireAuth = async () => {
 		const roles = await api.get("/api/roles/");
 		const parsed = schemas.ProfileSchema.parse(profileResponse);
 		return { ...parsed, roles };
-	} catch (err) {
-		console.log({ err });
+	} catch {
 		throw redirect("/login");
 	}
 };

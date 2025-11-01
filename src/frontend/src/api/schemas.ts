@@ -1,44 +1,83 @@
-import { LoginSchema } from "./auth/login";
-import { SignupSchema } from "./auth/signup";
-import { CreateUpdatePasteurSchema, GetPasteurSchema } from "./pasteur/schema";
-import { CreateUpdateStorageSchema, GetStorageSchema } from "./storage/schema";
-import { CreateUpdateProducerSchema, GetProducerSchema } from "./producer/schema";
+import { LoginSchema } from "./endpoints/auth/login";
 import {
-	CreateUpdateProductDefinitionSchema,
-	GetProductDefinitionSchema,
-} from "./productDefinition/schema";
-import { ProfileSchema, PatchedProfileSchema } from "./profile/schema";
+	PasteurSchema,
+	ListPasteurSchema,
+	CreatePasteurSchema,
+	PatchPasteurSchema,
+} from "./endpoints/pasteur/schema";
 import {
-	CreateUpdatePasteurisedMilkSchema,
-	GetPasteurisedMilkSchema,
-	PaginatedPasteurisedMilkSchema,
-} from "./pasteurisedMilk/schema";
-import { CreateUpdateMilkSchema, GetMilkSchema, PaginatedMilkListSchema } from "./milk/schema";
+	StorageSchema,
+	ListStorageSchema,
+	CreateStorageSchema,
+	PatchStorageSchema,
+} from "./endpoints/storage/schema";
+import {
+	ProducerSchema,
+	CreateProducerSchema,
+	PatchProducerSchema,
+} from "./endpoints/producer/schema";
+import {
+	ProductDefinitionSchema,
+	CreateProductDefinitionSchema,
+} from "./endpoints/productDefinition/schema";
+import { ProfileSchema, PatchProfileSchema } from "./endpoints/profile/schema";
+import {
+	PasteurisedMilk,
+	ListPasteurisedMilkSchema,
+	CreatePasteurisedMilkSchema,
+	PatchPasteurisedMilkSchema,
+} from "./endpoints/pasteurisedMilk/schema";
+import {
+	MilkSchema,
+	ListMilkSchema,
+	CreateMilkSchema,
+	PatchMilkSchema,
+} from "./endpoints/milk/schema";
+import {
+	UserSchema,
+	ListUserSchema,
+	CreateUserSchema,
+	PatchUserSchema,
+} from "./endpoints/user/schema";
 
 export const schemas = {
+	// Auth & User
 	LoginSchema,
-	SignupSchema,
+
+	UserSchema,
+	ListUserSchema,
+	CreateUserSchema,
+	PatchUserSchema,
 
 	ProfileSchema,
-	PatchedProfileSchema,
+	PatchProfileSchema,
 
-	CreateUpdatePasteurSchema,
-	GetPasteurSchema,
+	// Process results
+	MilkSchema,
+	ListMilkSchema,
+	CreateMilkSchema,
+	PatchMilkSchema,
 
-	CreateUpdateStorageSchema,
-	GetStorageSchema,
+	PasteurisedMilk,
+	ListPasteurisedMilkSchema,
+	CreatePasteurisedMilkSchema,
+	PatchPasteurisedMilkSchema,
 
-	CreateUpdateProducerSchema,
-	GetProducerSchema,
+	// Misc
+	PasteurSchema,
+	ListPasteurSchema,
+	CreatePasteurSchema,
+	PatchPasteurSchema,
 
-	CreateUpdateProductDefinitionSchema,
-	GetProductDefinitionSchema,
+	StorageSchema,
+	ListStorageSchema,
+	CreateStorageSchema,
+	PatchStorageSchema,
 
-	CreateUpdateMilkSchema,
-	GetMilkSchema,
-	PaginatedMilkListSchema,
+	ProducerSchema,
+	CreateProducerSchema,
+	PatchProducerSchema,
 
-	CreateUpdatePasteurisedMilkSchema,
-	GetPasteurisedMilkSchema,
-	PaginatedPasteurisedMilkSchema,
+	ProductDefinitionSchema,
+	CreateProductDefinitionSchema,
 };

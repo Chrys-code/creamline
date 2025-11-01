@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from "react-router";
 
-import { api } from "../../api/axios";
+import { api } from "../../api/client";
 import { schemas } from "../../api/schemas";
 
 const requirePaginatedMilkList = async ({ request }: LoaderFunctionArgs) => {
@@ -10,7 +10,7 @@ const requirePaginatedMilkList = async ({ request }: LoaderFunctionArgs) => {
 		const page_size = Number(import.meta.env.VITE_PAGINATION_PAGE_SIZE) || 0;
 
 		const milkResponse = await api.get("/api/v1/milk/", { queries: { page, page_size } });
-		const data = schemas.PaginatedMilkListSchema.parse(milkResponse);
+		const data = schemas.ListMilkSchema.parse(milkResponse);
 
 		return { data, page };
 	} catch {

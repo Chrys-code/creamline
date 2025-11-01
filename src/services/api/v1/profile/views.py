@@ -11,6 +11,7 @@ from profiles.models import Profile
 class ProfileDetailView(RetrieveUpdateAPIView):
     serializer_class = serializers.ProfileSerializer
     permission_classes = [IsAuthenticated]
+    lookup_field = "uuid"
 
     def get_object(self):
          return get_object_or_404(

@@ -1,11 +1,11 @@
 import type { MilkCollectionListProps } from "./MilkCollectionList.types";
 import styles from "./MilkCollectionList.module.scss";
 
-import PageHeader from "../../components/PageHeader";
-import Pagination from "../../components/Pagination/Pagination";
-import MilkCard from "../../components/MilkCard";
-import IconButton from "../../components/IconButton";
-import Loader from "../../components/Loader";
+import PageHeader from "../../components/pageHeader";
+import Pagination from "../../components/pagination";
+import MilkCard from "../../components/milkCard";
+import IconButton from "../../components/iconButton";
+import Loader from "../../components/loader";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
