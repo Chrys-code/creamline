@@ -10,12 +10,16 @@
 	div {
 		width: 100%;
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 1rem;
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: flex-start;
+		column-gap: 0.5rem;
+		row-gap: 0.25rem;
+		flex-wrap: wrap;
 
 		> * {
 			width: 100%;
+			max-width: calc(50% - 0.5rem);
 		}
 	}
 }

@@ -6,6 +6,7 @@ import {
 	GetUserEndpoint,
 	PatchUserEndpoint,
 	DeleteUserEndpoint,
+	CreateUserEndpoint,
 } from "./endpoints/user/endpoint";
 import {
 	CreateMilkEndpoint,
@@ -51,6 +52,7 @@ const endpoints = makeApi([
 
 	ListUserEndpoint,
 	GetUserEndpoint,
+	CreateUserEndpoint,
 	PatchUserEndpoint,
 	DeleteUserEndpoint,
 

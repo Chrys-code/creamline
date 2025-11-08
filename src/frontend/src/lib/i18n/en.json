@@ -91,5 +91,8 @@
 	},
 	"pasteurised_milk_list": {
 		"page_title": "Pasteurisations"
+	},
+	"user_list": {
+		"page_title": "Users"
 	}
 }

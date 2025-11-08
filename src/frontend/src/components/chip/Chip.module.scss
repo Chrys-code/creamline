@@ -1,0 +1,20 @@
+.container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 0.25rem;
+	background-color: var(--color-primary-500);
+	padding: 0.25rem 0.5rem;
+	width: fit-content;
+	border-radius: var(--border-wrapper-radius);
+
+	> * {
+		color: var(--color-neutral-0);
+	}
+
+	> span {
+		font-size: var(--fs-body-s);
+		text-transform: uppercase;
+	}
+}

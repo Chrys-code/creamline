@@ -1,16 +1,16 @@
-import type { PasteurisedMilkListProps } from "./PasteurisedMilkList.types.js";
-import styles from "./PasteurisedMilkList.module.scss";
+import type { ListPasteurisationProps } from "./ListPasteurisation.types";
+import styles from "./ListPasteurisation.module.scss";
 
-import PageHeader from "../../components/pageHeader";
-import Pagination from "../../components/pagination";
-import PasteurisedMilkCard from "../../components/pasteurisedMilkCard";
-import IconButton from "../../components/iconButton";
-import Loader from "../../components/loader";
+import PageHeader from "../../../components/pageHeader";
+import Pagination from "../../../components/pagination";
+import PasteurisedMilkCard from "../../../components/pasteurisedMilkCard";
+import IconButton from "../../../components/iconButton";
+import Loader from "../../../components/loader";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLoaderData, useNavigate } from "react-router";
-import { useDelayedLoader } from "../../lib/hooks/useDelayedLoader.js";
+import { useDelayedLoader } from "../../../lib/hooks/useDelayedLoader.js";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -18,14 +18,14 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 	}))
 );
 
-const PasteurisedMilkList: React.FC = () => {
+const ListPasteurisation: React.FC = () => {
 	const navigate = useNavigate();
 	const { i18n, t } = useTranslation();
-	const { data, page } = useLoaderData<PasteurisedMilkListProps>();
+	const { data, page } = useLoaderData<ListPasteurisationProps>();
 	const showLoading = useDelayedLoader(200, 1000);
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate("new")}>
+		<IconButton onClick={() => navigate("create")}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -42,7 +42,7 @@ const PasteurisedMilkList: React.FC = () => {
 					day: "numeric",
 				})}
 				temperature={result.temperature}
-				onClick={() => navigate(result.uuid)}
+				onClick={() => navigate(`edit/${result.uuid}`)}
 			/>
 		</li>
 	));
@@ -78,4 +78,4 @@ const PasteurisedMilkList: React.FC = () => {
 	);
 };
 
-export default PasteurisedMilkList;
+export default ListPasteurisation;

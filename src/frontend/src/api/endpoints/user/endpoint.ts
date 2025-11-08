@@ -1,14 +1,26 @@
 import { makeEndpoint } from "@zodios/core";
 import z from "zod";
 
-import { CreateUserSchema, PatchUserSchema, UserSchema } from "./schema";
+import { CreateUserSchema, ListUserSchema, PatchUserSchema, UserSchema } from "./schema";
 
 export const ListUserEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/users/",
 	alias: "v1_users_list",
 	requestFormat: "json",
-	response: z.array(UserSchema),
+	parameters: [
+		{
+			name: "page",
+			type: "Query",
+			schema: z.number().int().optional(),
+		},
+		{
+			name: "page_size",
+			type: "Query",
+			schema: z.number().int().optional(),
+		},
+	],
+	response: ListUserSchema,
 });
 
 export const GetUserEndpoint = makeEndpoint({

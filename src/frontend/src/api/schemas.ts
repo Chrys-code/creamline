@@ -38,6 +38,7 @@ import {
 	ListUserSchema,
 	CreateUserSchema,
 	PatchUserSchema,
+	UserFormSchema,
 } from "./endpoints/user/schema";
 
 export const schemas = {
@@ -46,6 +47,7 @@ export const schemas = {
 
 	UserSchema,
 	ListUserSchema,
+	UserFormSchema,
 	CreateUserSchema,
 	PatchUserSchema,
 

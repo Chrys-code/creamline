@@ -1,13 +1,13 @@
-import type { MilkCollectionProps } from "./MilkCollection.types";
-import type { CreateMilkFormData } from "../../api/types";
-import styles from "./MilkCollection.module.scss";
+import type { EditMilkCollectionProps } from "./EditMilkCollection.types";
+import type { CreateMilkFormData } from "../../../api/types";
+import styles from "./EditMilkCollection.module.scss";
 
-import PageHeader from "../../components/pageHeader";
-import Form from "../../components/form";
-import InputField from "../../components/inputField";
-import Dropdown from "../../components/dropdown";
-import Button from "../../components/button";
-import IconButton from "../../components/iconButton";
+import PageHeader from "../../../components/pageHeader";
+import Form from "../../../components/form";
+import InputField from "../../../components/inputField";
+import Dropdown from "../../../components/dropdown";
+import Button from "../../../components/button";
+import IconButton from "../../../components/iconButton";
 
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
@@ -16,11 +16,11 @@ import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
 
-import { api } from "../../api/client";
-import { schemas } from "../../api/schemas";
+import { api } from "../../../api/client";
+import { schemas } from "../../../api/schemas";
 import { useTranslation } from "react-i18next";
 
-import convertMilkLiterAndKg from "../../lib/helpers/literToKg/literToKg";
+import convertMilkLiterAndKg from "../../../lib/helpers/literToKg/literToKg";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -28,8 +28,8 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 	}))
 );
 
-const MilkCollection: React.FC = () => {
-	const { producers, storages, selectedItem } = useLoaderData<MilkCollectionProps>();
+const EditMilkCollection: React.FC = () => {
+	const { producers, storages, selectedItem } = useLoaderData<EditMilkCollectionProps>();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 
@@ -273,4 +273,4 @@ const MilkCollection: React.FC = () => {
 	);
 };
 
-export default MilkCollection;
+export default EditMilkCollection;

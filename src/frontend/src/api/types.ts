@@ -7,8 +7,10 @@ export type Profile = z.infer<typeof schemas.ProfileSchema>;
 export type PatchProfileFormData = z.infer<typeof schemas.PatchProfileSchema>;
 
 export type User = z.infer<typeof schemas.UserSchema>;
+export type UserFormData = z.infer<typeof schemas.UserFormSchema>;
 export type CreateUserFormData = z.infer<typeof schemas.CreateUserSchema>;
 export type PatchUserFormData = z.infer<typeof schemas.PatchUserSchema>;
+export type PaginatedUserListData = z.infer<typeof schemas.ListUserSchema>;
 
 export type Pasteur = z.infer<typeof schemas.PasteurSchema>;
 export type CreateUpdatePasteurFormData = z.infer<typeof schemas.CreatePasteurSchema>;
@@ -25,7 +27,7 @@ export type CreateUpdateProductDefinitionFormData = z.infer<
 >;
 
 export type Milk = z.infer<typeof schemas.MilkSchema>;
-export type ListMilkData = z.infer<typeof schemas.ListMilkSchema>;
+export type PaginatedMilkListData = z.infer<typeof schemas.ListMilkSchema>;
 export type CreateMilkFormData = z.infer<typeof schemas.CreateMilkSchema>;
 export type PatchMilkFormData = z.infer<typeof schemas.PatchMilkSchema>;
 

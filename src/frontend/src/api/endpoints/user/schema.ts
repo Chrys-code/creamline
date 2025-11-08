@@ -1,33 +1,34 @@
 import z from "zod";
 
-const UseProfileSchema = z.object({
+const UserProfileSchema = z.object({
 	// profile_image: z.string().max(256).nullable(),
 	first_name: z.string().max(100),
 	last_name: z.string().max(100),
 });
 
-const BaseUserSchema = z.object({
+export const BaseUserSchema = z.object({
+	uuid: z.string().uuid().optional(),
 	email: z.string().max(255).email(),
-	password: z.string(),
 	groups: z.array(z.string()),
 	is_active: z.boolean().optional(),
-	is_staff: z.boolean(),
-	profile: UseProfileSchema,
+	is_staff: z.boolean().nullish(),
+	profile: UserProfileSchema.nullish(),
+	password: z.string().optional(),
 });
 
 export const UserSchema = BaseUserSchema.extend({
 	uuid: z.string().uuid(),
 });
 
-export const ListUserSchema = z.object({
-	count: z.number().int(),
-	next: z.string().url().nullish(),
-	previous: z.string().url().nullish(),
-	results: z.array(UserSchema),
-});
+export const ListUserSchema = z
+	.object({
+		count: z.number().int(),
+		next: z.string().url().nullish(),
+		previous: z.string().url().nullish(),
+		results: z.array(UserSchema),
+	})
+	.passthrough();
 
+export const UserFormSchema = BaseUserSchema;
 export const CreateUserSchema = BaseUserSchema;
-
-export const PatchUserSchema = BaseUserSchema.extend({
-	uuid: z.string().uuid(),
-}).partial();
+export const PatchUserSchema = BaseUserSchema.partial();

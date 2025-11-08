@@ -1,16 +1,17 @@
-import type { MilkCollectionListProps } from "./MilkCollectionList.types";
-import styles from "./MilkCollectionList.module.scss";
+import type { Milk } from "../../../api/types";
+import type { ListMilkCollectionProps } from "./ListMilkCollection.types";
+import styles from "./ListMilkcollection.module.scss";
 
-import PageHeader from "../../components/pageHeader";
-import Pagination from "../../components/pagination";
-import MilkCard from "../../components/milkCard";
-import IconButton from "../../components/iconButton";
-import Loader from "../../components/loader";
+import PageHeader from "../../../components/pageHeader";
+import Pagination from "../../../components/pagination";
+import MilkCard from "../../../components/milkCard";
+import IconButton from "../../../components/iconButton";
+import Loader from "../../../components/loader";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLoaderData, useNavigate } from "react-router";
-import { useDelayedLoader } from "../../lib/hooks/useDelayedLoader";
+import { useDelayedLoader } from "../../../lib/hooks/useDelayedLoader";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -18,19 +19,19 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 	}))
 );
 
-const MilkCollectionList: React.FC = () => {
+const ListMilkCollection: React.FC = () => {
 	const navigate = useNavigate();
 	const { i18n, t } = useTranslation();
-	const { data, page } = useLoaderData<MilkCollectionListProps>();
+	const { data, page } = useLoaderData<ListMilkCollectionProps>();
 	const showLoading = useDelayedLoader(200, 1000);
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate("new")}>
+		<IconButton onClick={() => navigate("create")}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
 
-	const milkListItems = data.results.map((result) => (
+	const milkListItems = data.results.map((result: Milk) => (
 		<li key={result.uuid}>
 			<MilkCard
 				title={result.producer_name}
@@ -40,7 +41,7 @@ const MilkCollectionList: React.FC = () => {
 					month: "long",
 					day: "numeric",
 				})}
-				onClick={() => navigate(result.uuid)}
+				onClick={() => navigate(`edit/${result.uuid}`)}
 			/>
 		</li>
 	));
@@ -76,4 +77,4 @@ const MilkCollectionList: React.FC = () => {
 	);
 };
 
-export default MilkCollectionList;
+export default ListMilkCollection;

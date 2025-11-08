@@ -28,6 +28,9 @@ const Dashboard: React.FC = () => {
 			<section className={styles.tasks}>
 				<h2>{t("dashboard.tasks")}</h2>
 				<div>
+					<Button style="secondary" type="button" onClick={() => navigate("/users")}>
+						{"User management"}
+					</Button>
 					<Button
 						style="secondary"
 						type="button"

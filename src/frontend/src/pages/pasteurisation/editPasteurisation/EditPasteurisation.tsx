@@ -1,13 +1,13 @@
 import type React from "react";
-import type { CreatePasteurisedMilkFormData } from "../../api/types.js";
-import type { PasteurisationProps } from "./Pasteurisation.types.js";
-import styles from "./Pasteurisation.module.scss";
+import type { CreatePasteurisedMilkFormData } from "../../../api/types.js";
+import type { EditPasteurisationProps } from "./EditPasteurisation.types.js";
+import styles from "./EditPasteurisation.module.scss";
 
-import PageHeader from "../../components/pageHeader";
-import Form from "../../components/form";
-import Dropdown from "../../components/dropdown";
-import InputField from "../../components/inputField";
-import Button from "../../components/button";
+import PageHeader from "../../../components/pageHeader/index.js";
+import Form from "../../../components/form/index.js";
+import Dropdown from "../../../components/dropdown/index.js";
+import InputField from "../../../components/inputField/index.js";
+import Button from "../../../components/button/index.js";
 
 import { useLoaderData, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
@@ -16,14 +16,14 @@ import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
 
-import { api } from "../../api/client.js";
-import { schemas } from "../../api/schemas.js";
+import { api } from "../../../api/client.js";
+import { schemas } from "../../../api/schemas.js";
 
-import convertMilkLiterAndKg from "../../lib/helpers/literToKg/literToKg.js";
+import convertMilkLiterAndKg from "../../../lib/helpers/literToKg/literToKg.js";
 
-const Pasteurisation: React.FC = () => {
+const EditPasteurisation: React.FC = () => {
 	const { pasteurs, storages, productDefinitions, selectedItem } =
-		useLoaderData<PasteurisationProps>();
+		useLoaderData<EditPasteurisationProps>();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 
@@ -277,4 +277,4 @@ const Pasteurisation: React.FC = () => {
 	);
 };
 
-export default Pasteurisation;
+export default EditPasteurisation;
