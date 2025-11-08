@@ -6,6 +6,8 @@ export type Login = z.infer<typeof schemas.LoginSchema>;
 export type Profile = z.infer<typeof schemas.ProfileSchema>;
 export type PatchProfileFormData = z.infer<typeof schemas.PatchProfileSchema>;
 
+export type UserGroup = z.infer<typeof schemas.UserGroupBaseSchema>;
+
 export type User = z.infer<typeof schemas.UserSchema>;
 export type UserFormData = z.infer<typeof schemas.UserFormSchema>;
 export type CreateUserFormData = z.infer<typeof schemas.CreateUserSchema>;

@@ -9,10 +9,10 @@ const UserProfileSchema = z.object({
 export const BaseUserSchema = z.object({
 	uuid: z.string().uuid().optional(),
 	email: z.string().max(255).email(),
-	groups: z.array(z.string()),
+	groups: z.array(z.number()),
 	is_active: z.boolean().optional(),
 	is_staff: z.boolean().nullish(),
-	profile: UserProfileSchema.nullish(),
+	profile: UserProfileSchema,
 	password: z.string().optional(),
 });
 

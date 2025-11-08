@@ -5,6 +5,7 @@ const BaseProfileSchema = z
 		profile_image: z.string().max(256).nullish(),
 		first_name: z.string().max(100).optional(),
 		last_name: z.string().max(100).optional(),
+		groups: z.array(z.string()),
 	})
 	.passthrough();
 

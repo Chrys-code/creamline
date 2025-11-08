@@ -43,12 +43,15 @@ import {
 	ListProductDefinition,
 } from "./endpoints/productDefinition/endpoint";
 import { GetProfileEndpoint, PatchProfileEndpoint } from "./endpoints/profile/endpoint";
+import { ListUserGroupEndpoint } from "./endpoints/user_groups/endpoint";
 
 const endpoints = makeApi([
 	LoginEndpoint,
 	LogoutEndpoint,
 	SessionEndpoint,
 	GetRolesEndpoint,
+
+	ListUserGroupEndpoint,
 
 	ListUserEndpoint,
 	GetUserEndpoint,

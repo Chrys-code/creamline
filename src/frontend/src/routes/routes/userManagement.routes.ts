@@ -1,6 +1,8 @@
 import type { LoaderFunctionArgs } from "react-router";
 import requireUser from "../loaders/requireUser";
 import requirePaginatedUserList from "../loaders/requireUsers";
+import requireUserGroups from "../loaders/requireUserGroups";
+import { adaptUserGroupsForOptions } from "../../adapters/userGroupAdapter/userGroupAdapter";
 
 const userManagementRoutes = [
 	{
@@ -8,7 +10,10 @@ const userManagementRoutes = [
 		lazy: {
 			Component: async () => (await import("../../pages/user/userList/UserList")).default,
 		},
-		loader: requirePaginatedUserList,
+		loader: async (args: LoaderFunctionArgs) => ({
+			data: await requirePaginatedUserList(args),
+			userGroups: await requireUserGroups(),
+		}),
 	},
 	{
 		path: "users/create",
@@ -17,6 +22,7 @@ const userManagementRoutes = [
 		},
 		loader: async () => ({
 			selectedItem: null,
+			userGroups: await requireUserGroups(),
 		}),
 	},
 	{
@@ -26,6 +32,7 @@ const userManagementRoutes = [
 		},
 		loader: async (args: LoaderFunctionArgs) => ({
 			selectedItem: await requireUser(args),
+			userGroups: adaptUserGroupsForOptions(await requireUserGroups()),
 		}),
 	},
 ];

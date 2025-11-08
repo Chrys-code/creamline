@@ -21,7 +21,7 @@ import { schemas } from "../../../api/schemas";
 import { useTranslation } from "react-i18next";
 
 const EditUser: React.FC = () => {
-	const { selectedItem } = useLoaderData<EditUserProps>();
+	const { selectedItem, userGroups } = useLoaderData<EditUserProps>();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 
@@ -101,7 +101,7 @@ const EditUser: React.FC = () => {
 
 	const addGroup = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const currentGroups = getValues("groups");
-		const updatedGrous = currentGroups.concat(e.target.value);
+		const updatedGrous = currentGroups.concat(Number(e.target.value));
 		setValue("groups", updatedGrous);
 	};
 
@@ -110,10 +110,10 @@ const EditUser: React.FC = () => {
 		e.target.value = "init";
 	};
 
-	const removeGroup = (group: string) => {
+	const removeGroup = (groupId: number) => {
 		const currentGroups = getValues("groups");
-		const updatedGrous = currentGroups.filter((groupName) => groupName !== group);
-		setValue("groups", updatedGrous);
+		const updatedGroups = currentGroups.filter((currentGroup) => currentGroup !== groupId);
+		setValue("groups", updatedGroups);
 	};
 
 	const renderFormActions = (): React.ReactNode => {
@@ -130,11 +130,17 @@ const EditUser: React.FC = () => {
 	};
 
 	const renderGroups = () => {
-		return watch("groups").map((group) => (
-			<li key={uuid()} onClick={() => removeGroup(group)}>
-				<Chip text={group} />
-			</li>
-		));
+		return watch("groups").map((group) => {
+			const userGroup = userGroups.find((userGroup) => userGroup.id === Number(group));
+			if (userGroup) {
+				return (
+					<li key={uuid()} onClick={() => removeGroup(Number(group))}>
+						<Chip text={userGroup?.value} />
+					</li>
+				);
+			}
+			return null;
+		});
 	};
 
 	const isEditMode = window.location.pathname.includes("/users/edit/");
@@ -195,11 +201,7 @@ const EditUser: React.FC = () => {
 						label="Position:"
 						id={uuid()}
 						onChange={handleRoleDropdownChange}
-						options={[
-							{ id: "manager", value: "manager" },
-							{ id: "milk_collectors", value: "milk-collector" },
-							{ id: "pasteurisers", value: "pasteuriser" },
-						]}
+						options={userGroups}
 					/>
 					<ul className={styles.roleList}>{renderGroups()}</ul>
 				</section>

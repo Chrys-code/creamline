@@ -6,6 +6,7 @@ from rest_framework import serializers
 from profiles.models import Profile
 from profiles.use_cases.create import create_profile
 from profiles.use_cases.update import update_profile
+from user_groups.use_cases.set_groups import set_user_groups
 
 
 User = get_user_model()
@@ -18,14 +19,13 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    groups = serializers.SlugRelatedField(
-        many=True,
-        slug_field="name",
-        queryset=Group.objects.all()
-    )
     password = serializers.CharField(write_only=True, required=True)
     is_staff = serializers.BooleanField(read_only=True)
     profile = ProfileSerializer()
+    groups = serializers.PrimaryKeyRelatedField(
+        many=True,
+        queryset=Group.objects.all(),
+    )
 
     class Meta:
         model = User
@@ -33,10 +33,10 @@ class UserSerializer(serializers.ModelSerializer):
             "uuid", 
             "email", 
             "password", 
-            "groups", 
             "is_active", 
             "is_staff",
-            "profile"
+            "profile",
+            "groups",
         ]
 
     def create(self, validated_data):
@@ -44,6 +44,7 @@ class UserSerializer(serializers.ModelSerializer):
         password = validated_data.pop("password", None)
 
         profile = validated_data.pop("profile")
+        email = validated_data["email"]
         first_name = profile.get("first_name", "")
         last_name = profile.get("last_name", "")
 
@@ -51,9 +52,12 @@ class UserSerializer(serializers.ModelSerializer):
 
         user.set_password(password)
         user.save()
-        user.groups.set(groups)
+
+        if groups:
+            set_user_groups(user=user, group_ids=[g.id for g in groups])
 
         profile_data = {
+            "email": email,
             "first_name": first_name,
             "last_name": last_name
         }
@@ -64,6 +68,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
     def update(self, instance, validated_data):
+        # Remove email to prevent updates
+        _email = validated_data.pop("email")
         groups = validated_data.pop("groups", None)
         password = validated_data.pop("password", None)
         profile_data = validated_data.pop("profile")
@@ -76,7 +82,7 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
 
         if groups is not None:
-            instance.groups.set(groups)
+            set_user_groups(user=instance, group_ids=[g.id for g in groups])
 
         profile = Profile.objects.filter(user=instance).first()
 

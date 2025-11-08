@@ -40,19 +40,25 @@ import {
 	PatchUserSchema,
 	UserFormSchema,
 } from "./endpoints/user/schema";
+import { UserGroupBaseSchema } from "./endpoints/user_groups/schema";
 
 export const schemas = {
-	// Auth & User
+	// Auth
 	LoginSchema,
 
+	// User Profile (me)
+	ProfileSchema,
+	PatchProfileSchema,
+
+	// Domain
+	UserGroupBaseSchema,
+
+	// User Management
 	UserSchema,
 	ListUserSchema,
 	UserFormSchema,
 	CreateUserSchema,
 	PatchUserSchema,
-
-	ProfileSchema,
-	PatchProfileSchema,
 
 	// Process results
 	MilkSchema,

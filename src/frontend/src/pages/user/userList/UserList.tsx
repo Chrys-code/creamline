@@ -22,7 +22,10 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 const UserList: React.FC = () => {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
-	const { data, page } = useLoaderData<UserListProps>();
+	const {
+		data: { data, page },
+		userGroups,
+	} = useLoaderData<UserListProps>();
 	const showLoading = useDelayedLoader(200, 1000);
 
 	const headerActionElement = (
@@ -31,15 +34,28 @@ const UserList: React.FC = () => {
 		</IconButton>
 	);
 
-	const userListItem = data.results.map((result: User) => (
-		<li key={result.uuid}>
-			<UserCard
-				name={`${result.profile?.first_name} ${result.profile?.last_name}`}
-				groups={result.groups}
-				onClick={() => navigate(`edit/${result.uuid}`)}
-			/>
-		</li>
-	));
+	const getUserGroupNames = (
+		allUserGroups: { id: number; name: string }[],
+		activeUserGroups: number[]
+	): string[] => {
+		const activeUserGroupObjects = allUserGroups.filter((userGroup) =>
+			activeUserGroups.includes(userGroup.id)
+		);
+
+		return activeUserGroupObjects.map((obj) => obj.name);
+	};
+
+	const userListItem = data.results.map((result: User) => {
+		return (
+			<li key={result.uuid}>
+				<UserCard
+					name={`${result.profile?.first_name} ${result.profile?.last_name}`}
+					groups={getUserGroupNames(userGroups, result.groups)}
+					onClick={() => navigate(`edit/${result.uuid}`)}
+				/>
+			</li>
+		);
+	});
 
 	const next = () => navigate(`?page=${page + 1}&page_size=25`);
 	const prev = () => navigate(`?page=${page - 1}&page_size=25`);
