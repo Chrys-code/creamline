@@ -3,20 +3,6 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import * as translations from "../lib/i18n";
 
-export const namespaces = [
-	"common",
-	"auth",
-	"navigation",
-	"users",
-	"profile",
-	"producer",
-	"dashboard",
-	"milkCollection",
-	"pasteurisedMilk",
-] as const;
-
-export type NamespaceKey = (typeof namespaces)[number];
-
 i18n.use(LanguageDetector)
 	.use(initReactI18next)
 	.init({
@@ -49,3 +35,51 @@ i18n.use(LanguageDetector)
 	});
 
 export default i18n;
+
+import type * as TranslationTypes from "../lib/i18n/types";
+import i18next from "i18next";
+
+export const namespaces = [
+	"common",
+	"auth",
+	"navigation",
+	"users",
+	"profile",
+	"producer",
+	"dashboard",
+	"milkCollection",
+	"pasteurisedMilk",
+] as const;
+
+export type NamespaceKey = (typeof namespaces)[number];
+
+export type NamespaceMap = {
+	common: TranslationTypes.CommonTranslations;
+	auth: TranslationTypes.AuthTranslations;
+	navigation: TranslationTypes.NavigationTranslations;
+	users: TranslationTypes.UserTranslations;
+	profile: TranslationTypes.ProfileTranslations;
+	producer: TranslationTypes.ProducerTranslations;
+	dashboard: TranslationTypes.DashboardTranslations;
+	milkCollection: TranslationTypes.MilkCollectionTranslations;
+	pasteurisedMilk: TranslationTypes.PasteurisedMilkTranslations;
+};
+
+// Flattens nested keys into dot notations
+export type DotNestedKeys<T, Prefix extends string = ""> = {
+	[K in keyof T & (string | number)]: T[K] extends Record<string, any>
+		? `${Prefix}${K}` | DotNestedKeys<T[K], `${Prefix}${K}.`>
+		: `${Prefix}${K}`;
+}[keyof T & (string | number)];
+
+// Use for typed hooks
+export type TypedTFunction<NS extends NamespaceKey> = (
+	_key: DotNestedKeys<NamespaceMap[NS]>,
+	_options?: any
+) => string;
+
+// Use outside of React Context
+export function tTyped<NS extends NamespaceKey>(namespace: NS): TypedTFunction<NS> {
+	return ((key: string, options?: any) =>
+		i18next.t(key, { ns: namespace, ...options })) as TypedTFunction<NS>;
+}

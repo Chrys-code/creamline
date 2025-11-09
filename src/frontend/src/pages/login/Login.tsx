@@ -59,7 +59,7 @@ const Login: React.FC = () => {
 					<span className={styles.errorMessage}>{errors.formMessage.message}</span>
 				)}
 				<Button style="primary" type="submit" disabled={isSubmitting}>
-					{t("login.submit")}
+					{at("login.submit")}
 				</Button>
 			</div>
 		);
@@ -69,7 +69,7 @@ const Login: React.FC = () => {
 		<AuthLayout>
 			<div className={styles.container}>
 				<Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
-					<h1>{t("login.title")}</h1>
+					<h1>{at("login.title")}</h1>
 					<section>
 						<InputField
 							id={uuidv4()}

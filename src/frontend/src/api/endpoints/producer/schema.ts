@@ -1,19 +1,21 @@
 import z from "zod";
-import i18n from "../../../configs/i18n";
+import { tTyped } from "../../../configs/i18n";
+
+const tCommon = tTyped("common");
 
 const ProducerBaseSchema = z.object({
 	name: z
 		.string()
 		.max(255)
-		.min(1, { message: i18n.t("add_producer.input_name_required") }),
+		.min(1, { message: tCommon("errors.input_is_required") }),
 	address: z
 		.string()
-		.min(1, { message: i18n.t("add_producer.input_address_required") })
+		.min(1, { message: tCommon("errors.input_is_required") })
 		.max(100),
 	contact_email: z
 		.string()
 		.max(256)
-		.email({ message: i18n.t("add_producer.input_email_invalid") })
+		.email({ message: tCommon("errors.input_is_required") })
 		.or(z.literal(""))
 		.nullish(),
 });
