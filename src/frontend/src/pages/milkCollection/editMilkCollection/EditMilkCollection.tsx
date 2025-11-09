@@ -15,10 +15,10 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
+import { useTypedTranslation } from "../../../lib/hooks/useTypedTranslation/useTypedTranslation";
 
 import { api } from "../../../api/client";
 import { schemas } from "../../../api/schemas";
-import { useTranslation } from "react-i18next";
 
 import convertMilkLiterAndKg from "../../../lib/helpers/literToKg/literToKg";
 
@@ -30,8 +30,9 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 
 const EditMilkCollection: React.FC = () => {
 	const { producers, storages, selectedItem } = useLoaderData<EditMilkCollectionProps>();
-	const { t } = useTranslation();
 	const navigate = useNavigate();
+	const mct = useTypedTranslation("milkCollection");
+	const ct = useTypedTranslation("common");
 
 	const {
 		register,
@@ -63,14 +64,14 @@ const EditMilkCollection: React.FC = () => {
 		value: storage.name,
 	}));
 	const booleanOptions = [
-		{ id: "true", value: t("common.yes") },
-		{ id: "false", value: t("common.no") },
+		{ id: "true", value: ct("common.yes") },
+		{ id: "false", value: ct("common.no") },
 	];
 
 	const onSubmit = async (formData: CreateMilkFormData): Promise<void> => {
 		try {
 			await api.post("/api/v1/milk/", formData);
-			toast.success(t("add_producer.notification_message"));
+			toast.success(mct("edit_milk_collection.notifications.create_success"));
 			navigate("/");
 		} catch (err: any) {
 			if (err.response?.data) {
@@ -124,7 +125,7 @@ const EditMilkCollection: React.FC = () => {
 					style="secondary"
 					onClick={() => navigate("/milk-collection/")}
 				>
-					{t("common.back")}
+					{ct("common.back")}
 				</Button>
 			);
 		}
@@ -132,31 +133,36 @@ const EditMilkCollection: React.FC = () => {
 		return (
 			<>
 				<Button type="button" style="secondary" onClick={() => navigate(-1)}>
-					{t("common.back")}
+					{ct("common.back")}
 				</Button>
 				<Button type="submit" disabled={isSubmitting}>
-					{t("common.save")}
+					{ct("common.save")}
 				</Button>
 			</>
 		);
 	};
 
+	const isEdit = window.location.pathname.includes("/edit/");
+	const pageTitle = isEdit
+		? mct("edit_milk_collection.page_title.edit")
+		: mct("edit_milk_collection.page_title.create");
+
 	return (
 		<>
 			<PageHeader
-				title={t("milk_collection.page_title")}
+				title={pageTitle}
 				onNavigateBack={() => (selectedItem ? navigate("/milk-collection/") : navigate(-1))}
 			/>
 			<Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
 				<section>
-					<h2>{t("milk_collection.producer_section_title")}</h2>
+					<h2>{mct("edit_milk_collection.form_section.producer")}</h2>
 					<div className={styles.sourceWrapper}>
 						<Dropdown
 							id={uuid()}
 							{...register("producer", {
 								onChange: () => clearErrors("producer"),
 							})}
-							placeholder={t("common.select")}
+							placeholder={ct("common.select")}
 							options={producerOptions}
 							error={errors.producer?.message}
 							disabled={!!selectedItem}
@@ -172,8 +178,8 @@ const EditMilkCollection: React.FC = () => {
 					<Dropdown
 						id={uuid()}
 						{...register("storage", { onChange: () => clearErrors("storage") })}
-						label={t("utilities.storage")}
-						placeholder={t("common.select")}
+						label={ct("utilities.storage")}
+						placeholder={ct("common.select")}
 						options={storageOptions}
 						error={errors.storage?.message}
 						disabled={!!selectedItem}
@@ -190,8 +196,8 @@ const EditMilkCollection: React.FC = () => {
 							})}
 							type="number"
 							step="0.01"
-							label={t("utilities.volume")}
-							info={t("units.liter")}
+							label={ct("utilities.volume")}
+							info={ct("units.liter")}
 							error={errors.volume_liters?.message}
 							onChange={handleVolumeChange}
 							disabled={!!selectedItem}
@@ -207,8 +213,8 @@ const EditMilkCollection: React.FC = () => {
 							})}
 							type="number"
 							step="0.01"
-							label={t("utilities.volume")}
-							info={t("units.kg_short")}
+							label={ct("utilities.volume")}
+							info={ct("units.kg_short")}
 							error={errors.volume_kg?.message}
 							onChange={handleVolumeChange}
 							disabled={!!selectedItem}
@@ -216,7 +222,7 @@ const EditMilkCollection: React.FC = () => {
 					</div>
 				</section>
 				<section>
-					<h2>{t("milk_collection.qualities_section_title")}</h2>
+					<h2>{mct("edit_milk_collection.form_section.qualities")}</h2>
 					<InputField
 						id={uuid()}
 						{...register("temperature", {
@@ -225,8 +231,8 @@ const EditMilkCollection: React.FC = () => {
 						})}
 						type="number"
 						step="0.1"
-						label={t("qualities.temperature")}
-						info={t("units.celsius")}
+						label={ct("qualities.temperature")}
+						info={ct("units.celsius")}
 						error={errors.temperature?.message}
 						disabled={!!selectedItem}
 					/>
@@ -235,10 +241,10 @@ const EditMilkCollection: React.FC = () => {
 						{...register("inhibitory_residue", {
 							onChange: () => clearErrors("inhibitory_residue"),
 						})}
-						placeholder={t("common.select")}
+						placeholder={ct("common.select")}
 						options={booleanOptions}
-						label={t("qualities.inhibitory_residue")}
-						info={t("units.positive_or_negative")}
+						label={ct("qualities.inhibitory_residue")}
+						info={ct("units.positive_or_negative")}
 						error={errors.inhibitory_residue?.message}
 						disabled={!!selectedItem}
 					/>
@@ -247,10 +253,10 @@ const EditMilkCollection: React.FC = () => {
 						{...register("aflatoxin", {
 							onChange: () => clearErrors("aflatoxin"),
 						})}
-						placeholder={t("common.select")}
+						placeholder={ct("common.select")}
 						options={booleanOptions}
-						label={t("qualities.aflatoxin")}
-						info={t("units.more_or_less_than_50")}
+						label={ct("qualities.aflatoxin")}
+						info={ct("units.more_or_less_than_50")}
 						error={errors.aflatoxin?.message}
 						disabled={!!selectedItem}
 					/>
@@ -262,8 +268,8 @@ const EditMilkCollection: React.FC = () => {
 						})}
 						type="number"
 						step="0.1"
-						label={t("qualities.acid_level")}
-						info={t("units.acid_level")}
+						label={ct("qualities.acid_level")}
+						info={ct("units.acid_level")}
 						error={errors.acid_content?.message}
 						disabled={!!selectedItem}
 					/>

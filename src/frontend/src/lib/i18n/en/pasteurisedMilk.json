@@ -1,0 +1,24 @@
+{
+	"edit_pasteurised_milk": {
+		"page_titles": {
+			"create": "Create pasteurisation",
+			"edit": "Edit pasteurisation"
+		},
+		"input_labels": {
+			"pasteur": "Pasteur",
+			"product_definition": "Target product",
+			"source_storage": "Source storage",
+			"target_storage": "Target storage",
+			"pasteurisation_start": "Pasteurisation start",
+			"pasteurisation_end": "Pasteurisation end"
+		},
+		"form_sections": {
+			"data": "Data",
+			"route": "Route",
+			"duration": "Duration"
+		}
+	},
+	"list_pasteurised_milk": {
+		"page_title": "Pasteurisations"
+	}
+}

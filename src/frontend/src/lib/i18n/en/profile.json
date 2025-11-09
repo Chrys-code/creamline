@@ -1,0 +1,11 @@
+{
+	"profile": {
+		"input_labels": {
+			"first_name": "Firstname",
+			"last_name": "Lastname"
+		},
+		"notifications": {
+			"update_success": "Profile updated!"
+		}
+	}
+}

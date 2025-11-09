@@ -1,0 +1,9 @@
+{
+	"dashboard": {
+		"greet": "Hi",
+		"question": "What are we going to do today?",
+		"tasks": "Tasks",
+		"task_milk_collection": "Milk collections",
+		"task_pasteur": "Pasteurisations"
+	}
+}

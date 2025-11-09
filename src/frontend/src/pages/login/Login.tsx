@@ -14,11 +14,11 @@ import { v4 as uuidv4 } from "uuid";
 
 import { api } from "../../api/client";
 import { schemas } from "../../api/schemas";
-import { useTranslation } from "react-i18next";
+import { useTypedTranslation } from "../../lib/hooks/useTypedTranslation/useTypedTranslation";
 
 const Login: React.FC = () => {
-	const { t } = useTranslation();
 	const navigate = useNavigate();
+	const at = useTypedTranslation("auth");
 
 	const {
 		register,
@@ -74,7 +74,7 @@ const Login: React.FC = () => {
 						<InputField
 							id={uuidv4()}
 							{...register("email", { onChange: () => clearErrors("email") })}
-							label={t("login.input_email_label")}
+							label={at("login.input_labels.email")}
 							type="text"
 							error={errors.email?.message}
 						/>
@@ -83,7 +83,7 @@ const Login: React.FC = () => {
 							{...register("password", {
 								onChange: () => clearErrors("password"),
 							})}
-							label={t("login.input_password_label")}
+							label={at("login.input_labels.password")}
 							type="password"
 							error={errors.password?.message}
 						/>

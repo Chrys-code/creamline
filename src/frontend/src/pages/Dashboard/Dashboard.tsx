@@ -5,12 +5,12 @@ import styles from "./Dashboard.module.scss";
 import Button from "../../components/button";
 
 import { useNavigate, useRouteLoaderData } from "react-router";
-import { useTranslation } from "react-i18next";
+import { useTypedTranslation } from "../../lib/hooks/useTypedTranslation/useTypedTranslation";
 
 const Dashboard: React.FC = () => {
 	const data = useRouteLoaderData<DashboardProps>("app");
 	const navigate = useNavigate();
-	const { t } = useTranslation();
+	const dt = useTypedTranslation("dashboard");
 
 	const name = `${data?.profile?.first_name} ${data?.profile?.last_name}`;
 	const profileHasName = !!name.replaceAll(" ", "");
@@ -20,13 +20,13 @@ const Dashboard: React.FC = () => {
 		<>
 			<div>
 				<h1>
-					{t("dashboard.greet")}, {displayName}
+					{dt("dashboard.greet")}, {displayName}
 				</h1>
-				<p>{t("dashboard.question")}</p>
+				<p>{dt("dashboard.question")}</p>
 			</div>
 
 			<section className={styles.tasks}>
-				<h2>{t("dashboard.tasks")}</h2>
+				<h2>{dt("dashboard.tasks")}</h2>
 				<div>
 					<Button style="secondary" type="button" onClick={() => navigate("/users")}>
 						{"User management"}
@@ -36,14 +36,14 @@ const Dashboard: React.FC = () => {
 						type="button"
 						onClick={() => navigate("/milk-collection")}
 					>
-						{t("dashboard.task_milk_collection")}
+						{dt("dashboard.task_milk_collection")}
 					</Button>
 					<Button
 						style="secondary"
 						type="button"
 						onClick={() => navigate("/pasteurised-milk")}
 					>
-						{t("dashboard.task_pasteur")}
+						{dt("dashboard.task_pasteur")}
 					</Button>
 				</div>
 			</section>

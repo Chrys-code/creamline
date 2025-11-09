@@ -10,7 +10,8 @@ import Loader from "../../../components/loader";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLoaderData, useNavigate } from "react-router";
-import { useDelayedLoader } from "../../../lib/hooks/useDelayedLoader.js";
+import { useDelayedLoader } from "../../../lib/hooks/useDelayedLoader/useDelayedLoader";
+import { useTypedTranslation } from "../../../lib/hooks/useTypedTranslation/useTypedTranslation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -20,7 +21,8 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 
 const ListPasteurisation: React.FC = () => {
 	const navigate = useNavigate();
-	const { i18n, t } = useTranslation();
+	const { i18n } = useTranslation();
+	const pt = useTypedTranslation("pasteurisedMilk");
 	const { data, page } = useLoaderData<ListPasteurisationProps>();
 	const showLoading = useDelayedLoader(200, 1000);
 
@@ -56,7 +58,7 @@ const ListPasteurisation: React.FC = () => {
 	return (
 		<>
 			<PageHeader
-				title={t("pasteurised_milk_list.page_title")}
+				title={pt("list_pasteurised_milk.page_title")}
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>

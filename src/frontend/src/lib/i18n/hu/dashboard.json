@@ -1,0 +1,9 @@
+{
+	"dashboard": {
+		"greet": "Szia",
+		"question": "Mit csinálunk ma?",
+		"tasks": "Feladatok",
+		"task_milk_collection": "Tejátvételek",
+		"task_pasteur": "Pasztőrözések"
+	}
+}

@@ -8,17 +8,18 @@ import Button from "../../components/button";
 
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
 
 import { api } from "../../api/client";
 import { schemas } from "../../api/schemas";
+import { useTypedTranslation } from "../../lib/hooks/useTypedTranslation/useTypedTranslation";
 
 const AddProducer: React.FC = () => {
-	const { t } = useTranslation();
 	const navigate = useNavigate();
+	const pt = useTypedTranslation("producer");
+	const ct = useTypedTranslation("common");
 
 	const {
 		register,
@@ -33,7 +34,7 @@ const AddProducer: React.FC = () => {
 	const onSubmit = async (formData: CreateProducerFormData) => {
 		try {
 			await api.post("/api/v1/producer/", formData);
-			toast.success(t("add_producer.notification_message"));
+			toast.success(pt("edit_producer.notifications.create_success"));
 			navigate(-1);
 		} catch (err: any) {
 			if (err.response?.data) {
@@ -50,32 +51,37 @@ const AddProducer: React.FC = () => {
 		return (
 			<>
 				<Button type="button" style="secondary" onClick={() => navigate(-1)}>
-					{t("common.back")}
+					{ct("common.back")}
 				</Button>
 				<Button type="submit" disabled={isSubmitting}>
-					{t("common.save")}
+					{ct("common.save")}
 				</Button>
 			</>
 		);
 	};
 
+	const isEdit = window.location.pathname.includes("/edit/");
+	const pageTitle = isEdit
+		? pt("edit_producer.page_titles.edit")
+		: pt("edit_producer.page_titles.create");
+
 	return (
 		<>
-			<PageHeader title={t("add_producer.page_title")} />
+			<PageHeader title={pageTitle} />
 			<Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
 				<section>
-					<h2>{t("add_producer.form_title")}</h2>
+					<h2>{pt("edit_producer.form_sections.form_title")}</h2>
 					<InputField
 						id={uuid()}
 						{...register("name", { onChange: () => clearErrors("name") })}
-						label={t("add_producer.input_name_label")}
+						label={pt("edit_producer.input_labels.name")}
 						type="text"
 						error={errors.name?.message}
 					/>
 					<InputField
 						id={uuid()}
 						{...register("address", { onChange: () => clearErrors("address") })}
-						label={t("add_producer.input_address_label")}
+						label={pt("edit_producer.input_labels.address")}
 						type="text"
 						error={errors.address?.message}
 					/>
@@ -84,8 +90,8 @@ const AddProducer: React.FC = () => {
 						{...register("contact_email", {
 							onChange: () => clearErrors("contact_email"),
 						})}
-						label={t("add_producer.input_contact_email_label")}
-						info={t("common.optional")}
+						label={pt("edit_producer.input_labels.contact_email")}
+						info={ct("common.optional")}
 						type="text"
 						error={errors.contact_email?.message}
 					/>

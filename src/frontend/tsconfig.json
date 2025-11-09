@@ -15,6 +15,6 @@
 		"skipLibCheck": true,
 		"strict": true
 	},
-	"include": ["**/*.ts", "**/*d.ts", "**/*.tsx"],
+	"include": ["**/*.ts", "**/*d.ts", "**/*.tsx", "src/lib/hooks/useTypedTranslation"],
 	"exclude": ["node_modules"]
 }

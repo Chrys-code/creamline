@@ -9,9 +9,9 @@ import IconButton from "../../../components/iconButton/index.js";
 import Loader from "../../../components/loader/index.js";
 
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { useLoaderData, useNavigate } from "react-router";
-import { useDelayedLoader } from "../../../lib/hooks/useDelayedLoader.js";
+import { useDelayedLoader } from "../../../lib/hooks/useDelayedLoader/useDelayedLoader";
+import { useTypedTranslation } from "../../../lib/hooks/useTypedTranslation/useTypedTranslation.js";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -21,7 +21,8 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 
 const UserList: React.FC = () => {
 	const navigate = useNavigate();
-	const { t } = useTranslation();
+	const ut = useTypedTranslation("users");
+
 	const {
 		data: { data, page },
 		userGroups,
@@ -66,7 +67,7 @@ const UserList: React.FC = () => {
 	return (
 		<>
 			<PageHeader
-				title={t("user_list.page_title")}
+				title={ut("list_users.page_title")}
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>

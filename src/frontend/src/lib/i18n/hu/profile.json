@@ -1,0 +1,11 @@
+{
+	"profile": {
+		"input_labels": {
+			"first_name": "Vezetéknév",
+			"last_name": "Családnév"
+		},
+		"notifications": {
+			"update_success": "Profil frissítve!"
+		}
+	}
+}

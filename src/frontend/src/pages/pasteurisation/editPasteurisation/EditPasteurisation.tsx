@@ -11,7 +11,7 @@ import Button from "../../../components/button/index.js";
 
 import { useLoaderData, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { useTypedTranslation } from "../../../lib/hooks/useTypedTranslation/useTypedTranslation.js";
 import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
@@ -24,7 +24,8 @@ import convertMilkLiterAndKg from "../../../lib/helpers/literToKg/literToKg.js";
 const EditPasteurisation: React.FC = () => {
 	const { pasteurs, storages, productDefinitions, selectedItem } =
 		useLoaderData<EditPasteurisationProps>();
-	const { t } = useTranslation();
+	const pt = useTypedTranslation("pasteurisedMilk");
+	const ct = useTypedTranslation("common");
 	const navigate = useNavigate();
 
 	const {
@@ -124,7 +125,7 @@ const EditPasteurisation: React.FC = () => {
 					style="secondary"
 					onClick={() => navigate("/pasteurised-milk")}
 				>
-					{t("common.back")}
+					{ct("common.back")}
 				</Button>
 			);
 		}
@@ -132,19 +133,24 @@ const EditPasteurisation: React.FC = () => {
 		return (
 			<>
 				<Button type="button" style="secondary" onClick={() => navigate(-1)}>
-					{t("common.back")}
+					{ct("common.back")}
 				</Button>
 				<Button type="submit" disabled={isSubmitting}>
-					{t("common.save")}
+					{ct("common.save")}
 				</Button>
 			</>
 		);
 	};
 
+	const isEdit = window.location.pathname.includes("/edit/");
+	const pageTitle = isEdit
+		? pt("edit_pasteurised_milk.page_titles.edit")
+		: pt("edit_pasteurised_milk.page_titles.create");
+
 	return (
 		<>
 			<PageHeader
-				title={t("pasteurised_milk.page_title")}
+				title={pageTitle}
 				onNavigateBack={() =>
 					selectedItem ? navigate("/pasteurised-milk/") : navigate(-1)
 				}
@@ -152,12 +158,12 @@ const EditPasteurisation: React.FC = () => {
 			{/*  @ts-expect-error local-datetime conversion issue  */}
 			<Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
 				<section>
-					<h2>{t("pasteurised_milk.data")}</h2>
+					<h2>{pt("edit_pasteurised_milk.form_sections.data")}</h2>
 					<Dropdown
 						id={uuid()}
 						{...register("pasteur", { onChange: () => clearErrors("pasteur") })}
-						label={t("pasteurised_milk.input_pasteur_label")}
-						placeholder={t("common.select")}
+						label={pt("edit_pasteurised_milk.input_labels.pasteur")}
+						placeholder={ct("common.select")}
 						options={pasteurOptions}
 						error={errors.pasteur?.message}
 						disabled={!!selectedItem}
@@ -167,8 +173,8 @@ const EditPasteurisation: React.FC = () => {
 						{...register("product_definition", {
 							onChange: () => clearErrors("product_definition"),
 						})}
-						label={t("pasteurised_milk.input_product_definition_label")}
-						placeholder={t("common.select")}
+						label={pt("edit_pasteurised_milk.input_labels.product_definition")}
+						placeholder={ct("common.select")}
 						options={productDefinitionOptions}
 						error={errors.product_definition?.message}
 						disabled={!!selectedItem}
@@ -181,23 +187,23 @@ const EditPasteurisation: React.FC = () => {
 						})}
 						type="number"
 						step="0.1"
-						label={t("qualities.temperature")}
-						info={t("units.celsius")}
+						label={ct("qualities.temperature")}
+						info={ct("units.celsius")}
 						defaultValue="0"
 						error={errors.temperature?.message}
 						disabled={!!selectedItem}
 					/>
 				</section>
 				<section>
-					<h2>{t("pasteurised_milk.route")}</h2>
+					<h2>{pt("edit_pasteurised_milk.form_sections.route")}</h2>
 					<div className={styles.sideBySideWrapper}>
 						<Dropdown
 							id={uuid()}
 							{...register("source_storage", {
 								onChange: () => clearErrors("source_storage"),
 							})}
-							label={t("pasteurised_milk.input_source_storage_label")}
-							placeholder={t("common.select")}
+							label={pt("edit_pasteurised_milk.input_labels.source_storage")}
+							placeholder={ct("common.select")}
 							options={storageOptions}
 							error={errors.source_storage?.message}
 							disabled={!!selectedItem}
@@ -207,8 +213,8 @@ const EditPasteurisation: React.FC = () => {
 							{...register("target_storage", {
 								onChange: () => clearErrors("target_storage"),
 							})}
-							label={t("pasteurised_milk.input_target_storage_label")}
-							placeholder={t("common.select")}
+							label={pt("edit_pasteurised_milk.input_labels.target_storage")}
+							placeholder={ct("common.select")}
 							options={storageOptions}
 							error={errors.target_storage?.message}
 							disabled={!!selectedItem}
@@ -226,8 +232,8 @@ const EditPasteurisation: React.FC = () => {
 							})}
 							type="number"
 							step="0.01"
-							label={t("utilities.volume")}
-							info={t("units.liter")}
+							label={ct("utilities.volume")}
+							info={ct("units.liter")}
 							error={errors.volume_liters?.message}
 							disabled={!!selectedItem}
 						/>
@@ -242,22 +248,22 @@ const EditPasteurisation: React.FC = () => {
 							})}
 							type="number"
 							step="0.01"
-							label={t("utilities.volume")}
-							info={t("units.kg_short")}
+							label={ct("utilities.volume")}
+							info={ct("units.kg_short")}
 							error={errors.volume_kg?.message}
 							disabled={!!selectedItem}
 						/>
 					</div>
 				</section>
 				<section>
-					<h2>{t("pasteurised_milk.duration")}</h2>
+					<h2>{pt("edit_pasteurised_milk.form_sections.duration")}</h2>
 					<InputField
 						id={uuid()}
 						{...register("start_date", {
 							onChange: () => clearErrors("start_date"),
 						})}
 						type="datetime-local"
-						label={t("pasteurised_milk.pasteurisation_start")}
+						label={pt("edit_pasteurised_milk.input_labels.pasteurisation_start")}
 						error={errors.start_date?.message}
 						disabled={!!selectedItem}
 					/>
@@ -267,7 +273,7 @@ const EditPasteurisation: React.FC = () => {
 							onChange: () => clearErrors("end_date"),
 						})}
 						type="datetime-local"
-						label={t("pasteurised_milk.pasteurisation_end")}
+						label={pt("edit_pasteurised_milk.input_labels.pasteurisation_end")}
 						error={errors.end_date?.message}
 						disabled={!!selectedItem}
 					/>

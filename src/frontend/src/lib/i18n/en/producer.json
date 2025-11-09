@@ -1,0 +1,24 @@
+{
+	"edit_producer": {
+		"page_titles": {
+			"create": "New producer",
+			"edit": "Edit producer"
+		},
+		"form_sections": {
+			"form_title": "Producer details"
+		},
+		"input_labels": {
+			"name": "Producer name",
+			"address": "Producer address",
+			"contact_email": "Contact email"
+		},
+		"errors": {
+			"name": "Please enter producer name",
+			"address": "Please enter producer address",
+			"email": "Invalid email address"
+		},
+		"notifications": {
+			"create_success": "New producer added!"
+		}
+	}
+}

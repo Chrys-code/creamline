@@ -9,8 +9,8 @@ import InputField from "../../components/inputField";
 
 import { useState } from "react";
 import { useRouteLoaderData, useRevalidator } from "react-router";
+import { useTypedTranslation } from "../../lib/hooks/useTypedTranslation/useTypedTranslation";
 import { v4 as uuid } from "uuid";
-import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -19,7 +19,8 @@ import { api } from "../../api/client";
 import { toast } from "react-toastify";
 
 const Profile: React.FC = () => {
-	const { t } = useTranslation();
+	const pt = useTypedTranslation("profile");
+	const ct = useTypedTranslation("common");
 	const data = useRouteLoaderData("app") as ProfileProps;
 	const revalidator = useRevalidator();
 	const [isEditing, setIsEditing] = useState(false);
@@ -41,7 +42,7 @@ const Profile: React.FC = () => {
 	const onSubmit = async (formData: PatchProfileFormData) => {
 		try {
 			await api.put("/api/v1/profile/", formData);
-			toast.success(t("profile.notification_message"));
+			toast.success(pt("profile.notifications.update_success"));
 		} catch (err: any) {
 			if (err.response?.data) {
 				const responseData = err.response.data;
@@ -62,10 +63,10 @@ const Profile: React.FC = () => {
 		return (
 			<div className={styles.actions}>
 				<Button style="secondary" type="button" onClick={handleEditClick}>
-					{t("common.cancel")}
+					{ct("common.cancel")}
 				</Button>
 				<Button style="primary" type="submit" disabled={isSubmitting}>
-					{t("common.save")}
+					{ct("common.save")}
 				</Button>
 			</div>
 		);
@@ -85,7 +86,7 @@ const Profile: React.FC = () => {
 						id={uuid()}
 						{...register("first_name", { onChange: () => clearErrors("first_name") })}
 						type="text"
-						label={t("profile.input_first_name_label")}
+						label={pt("profile.input_labels.first_name")}
 						defaultValue={data.profile.first_name}
 						error={errors.first_name?.message}
 						disabled={!isEditing}
@@ -94,7 +95,7 @@ const Profile: React.FC = () => {
 						id={uuid()}
 						{...register("last_name", { onChange: () => clearErrors("last_name") })}
 						type="text"
-						label={t("profile.input_last_name_label")}
+						label={pt("profile.input_labels.last_name")}
 						defaultValue={data.profile.last_name}
 						error={errors.last_name?.message}
 						disabled={!isEditing}
@@ -112,7 +113,7 @@ const Profile: React.FC = () => {
 							<div className={styles.editAaction}>
 								<span></span>
 								<Button style="secondary" type="button" onClick={handleEditClick}>
-									{t("common.edit")}
+									{ct("common.edit")}
 								</Button>
 							</div>
 						</>

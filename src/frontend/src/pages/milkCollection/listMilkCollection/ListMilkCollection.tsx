@@ -10,8 +10,9 @@ import Loader from "../../../components/loader";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useTypedTranslation } from "../../../lib/hooks/useTypedTranslation/useTypedTranslation";
 import { useLoaderData, useNavigate } from "react-router";
-import { useDelayedLoader } from "../../../lib/hooks/useDelayedLoader";
+import { useDelayedLoader } from "../../../lib/hooks/useDelayedLoader/useDelayedLoader";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -21,7 +22,8 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 
 const ListMilkCollection: React.FC = () => {
 	const navigate = useNavigate();
-	const { i18n, t } = useTranslation();
+	const { i18n } = useTranslation();
+	const mct = useTypedTranslation("milkCollection");
 	const { data, page } = useLoaderData<ListMilkCollectionProps>();
 	const showLoading = useDelayedLoader(200, 1000);
 
@@ -55,7 +57,7 @@ const ListMilkCollection: React.FC = () => {
 	return (
 		<>
 			<PageHeader
-				title={t("milk_collection_list.page_title")}
+				title={mct("list_milk_collection.page_title")}
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>

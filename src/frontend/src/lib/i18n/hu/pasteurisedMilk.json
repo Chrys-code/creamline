@@ -1,0 +1,24 @@
+{
+	"edit_pasteurised_milk": {
+		"page_titles": {
+			"create": "Új pasztőrözés",
+			"edit": "Pasztőrözés szerkesztése"
+		},
+		"input_labels": {
+			"pasteur": "Pasztőr",
+			"product_definition": "Céltermék",
+			"source_storage": "Honnan",
+			"target_storage": "Hová",
+			"pasteurisation_start": "Pasztőrözés kezdete",
+			"pasteurisation_end": "Pasztőrözés vége"
+		},
+		"form_sections": {
+			"data": "Adatok",
+			"route": "Útvonal",
+			"duration": "Időtartam"
+		}
+	},
+	"list_pasteurised_milk": {
+		"page_title": "Pasztőrözések"
+	}
+}

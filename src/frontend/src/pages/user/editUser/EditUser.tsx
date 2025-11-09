@@ -12,18 +12,19 @@ import Chip from "../../../components/chip/Chip";
 
 import { useLoaderData, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+import { useTypedTranslation } from "../../../lib/hooks/useTypedTranslation/useTypedTranslation";
 import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
 
 import { api } from "../../../api/client";
 import { schemas } from "../../../api/schemas";
-import { useTranslation } from "react-i18next";
 
 const EditUser: React.FC = () => {
 	const { selectedItem, userGroups } = useLoaderData<EditUserProps>();
-	const { t } = useTranslation();
 	const navigate = useNavigate();
+	const ut = useTypedTranslation("users");
+	const ct = useTypedTranslation("common");
 
 	const {
 		register,
@@ -120,10 +121,10 @@ const EditUser: React.FC = () => {
 		return (
 			<>
 				<Button type="button" style="secondary" onClick={() => navigate(-1)}>
-					{t("common.back")}
+					{ct("common.back")}
 				</Button>
 				<Button type="submit" disabled={isSubmitting}>
-					{t("common.save")}
+					{ct("common.save")}
 				</Button>
 			</>
 		);
@@ -144,7 +145,9 @@ const EditUser: React.FC = () => {
 	};
 
 	const isEditMode = window.location.pathname.includes("/users/edit/");
-	const pageTitle = isEditMode ? "Edit user" : "Create user";
+	const pageTitle = isEditMode
+		? ut("edit_user.page_title.edit")
+		: ut("edit_user.page_title.create");
 
 	return (
 		<>
@@ -163,7 +166,7 @@ const EditUser: React.FC = () => {
 							onChange: () => clearErrors("profile.first_name"),
 						})}
 						type="text"
-						label={t("profile.input_first_name_label") + ":"}
+						label={ut("edit_user.input_labels.first_name") + ":"}
 						error={errors.profile?.first_name?.message}
 					/>
 					<InputField
@@ -172,7 +175,7 @@ const EditUser: React.FC = () => {
 							onChange: () => clearErrors("profile.last_name"),
 						})}
 						type="text"
-						label={t("profile.input_first_name_label") + ":"}
+						label={ut("edit_user.input_labels.last_name") + ":"}
 						error={errors.profile?.last_name?.message}
 					/>
 					<InputField
@@ -198,7 +201,7 @@ const EditUser: React.FC = () => {
 					<Dropdown
 						name="roleSelectionDropdown"
 						placeholder="Select position"
-						label="Position:"
+						label={ut("edit_user.input_labels.position")}
 						id={uuid()}
 						onChange={handleRoleDropdownChange}
 						options={userGroups}

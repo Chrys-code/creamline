@@ -1,0 +1,18 @@
+{
+	"edit_milk_collection": {
+		"page_title": {
+			"create": "Create milk collection",
+			"edit": "Edit milk collection"
+		},
+		"form_section": {
+			"producer": "Producer",
+			"qualities": "Qualities"
+		},
+		"notifications": {
+			"create_success": "Milk collection saved!"
+		}
+	},
+	"list_milk_collection": {
+		"page_title": "Milk collections"
+	}
+}

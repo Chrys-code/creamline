@@ -1,0 +1,24 @@
+{
+	"edit_producer": {
+		"page_titles": {
+			"create": "Új termelő",
+			"edit": "Termelő szerkesztése"
+		},
+		"form_sections": {
+			"form_title": "Termelő adatai"
+		},
+		"input_labels": {
+			"name": "Termelő neve",
+			"address": "Termelő székhelye",
+			"contact_email": "Kapcsolattartó email"
+		},
+		"errors": {
+			"name": "Adja meg a termelő nevét",
+			"address": "Adja meg a termelő székhelyét",
+			"email": "Érvénytelen email cím"
+		},
+		"notifications": {
+			"create_success": "Új termelő hozzáadva!"
+		}
+	}
+}
