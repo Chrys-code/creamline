@@ -1,0 +1,17 @@
+{
+	"edit_user": {
+		"page_title": {
+			"create": "Új felhasználó",
+			"edit": "Felhasználó szerkesztése"
+		},
+		"input_labels": {
+			"first_name": "Vezetéknév",
+			"last_name": "Családnév",
+			"position": "Pozició",
+			"password": "Jelszó"
+		}
+	},
+	"list_users": {
+		"page_title": "Felhasználók"
+	}
+}

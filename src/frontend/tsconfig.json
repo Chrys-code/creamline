@@ -5,7 +5,7 @@
 		"target": "ES2022",
 		"module": "ESNext",
 		"isolatedModules": false,
-		"moduleResolution": "bundler",
+		"moduleResolution": "node",
 		"jsx": "react-jsx",
 		"rootDirs": ["."],
 		"esModuleInterop": true,
@@ -15,6 +15,6 @@
 		"skipLibCheck": true,
 		"strict": true
 	},
-	"include": ["**/*.ts", "**/*d.ts", "**/*.tsx", "src/lib/hooks/useTypedTranslation"],
+	"include": ["**/*.ts", "**/*d.ts", "**/*.tsx", "src/shared/hooks/useTypedTranslation"],
 	"exclude": ["node_modules"]
 }

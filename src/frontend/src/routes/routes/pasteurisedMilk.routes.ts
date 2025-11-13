@@ -1,10 +1,13 @@
 import type { LoaderFunctionArgs } from "react-router";
 
-import requirePaginatedPasteurisedMilkList from "../loaders/requirePaginatedPasteurisedMilkList";
-import requirePasteurisedMilk from "../loaders/requirePasteurisedMilk";
-import requirePasteurs from "../loaders/requirePasteurs";
-import requireProductDefinitions from "../loaders/requireProductDefinitions";
-import requireStorages from "../loaders/requireStorages";
+import { getPasteurisation } from "../../features/domain/pasteurisation/loaders/getPasteurisation";
+import { getPaginatedPasteuriationList } from "../../features/domain/pasteurisation/loaders/listPasteuriations";
+import { listStorages } from "../../features/domain/storage/loaders/listStorages";
+import { listPasteurs } from "../../features/domain/pasteur/loaders/listPasteurs";
+import { listProductDefinitions } from "../../features/domain/productDefinition/loaders/listProductDefinitions";
+import { adaptPasteursToPasteurOptions } from "../../features/domain/pasteurisation/adapters";
+import { adaptStoragesToStorageOptions } from "../../features/domain/storage/adapters";
+import { adaptProductDefinitionsToProductDefinitionOptions } from "../../features/domain/productDefinition/adapters";
 
 const pasteurisedMilkRoutes = [
 	{
@@ -14,7 +17,7 @@ const pasteurisedMilkRoutes = [
 				(await import("../../pages/pasteurisation/listPasteurisation/ListPasteurisation"))
 					.default,
 		},
-		loader: requirePaginatedPasteurisedMilkList,
+		loader: getPaginatedPasteuriationList,
 	},
 	{
 		path: "pasteurised-milk/create",
@@ -24,9 +27,11 @@ const pasteurisedMilkRoutes = [
 					.default,
 		},
 		loader: async () => ({
-			pasteurs: (await requirePasteurs()) || [],
-			storages: (await requireStorages()) || [],
-			productDefinitions: (await requireProductDefinitions()) || [],
+			pasteurOptions: adaptPasteursToPasteurOptions(await listPasteurs()),
+			storageOptions: adaptStoragesToStorageOptions(await listStorages()),
+			productDefinitionOptions: adaptProductDefinitionsToProductDefinitionOptions(
+				await listProductDefinitions()
+			),
 		}),
 	},
 	{
@@ -37,10 +42,12 @@ const pasteurisedMilkRoutes = [
 					.default,
 		},
 		loader: async (args: LoaderFunctionArgs) => ({
-			pasteurs: (await requirePasteurs()) || [],
-			storages: (await requireStorages()) || [],
-			productDefinitions: (await requireProductDefinitions()) || [],
-			selectedItem: (await requirePasteurisedMilk(args)) || null,
+			pasteurOptions: adaptPasteursToPasteurOptions(await listPasteurs()),
+			storageOptions: adaptStoragesToStorageOptions(await listStorages()),
+			productDefinitionOptions: adaptProductDefinitionsToProductDefinitionOptions(
+				await listProductDefinitions()
+			),
+			selectedItem: await getPasteurisation(args),
 		}),
 	},
 ];

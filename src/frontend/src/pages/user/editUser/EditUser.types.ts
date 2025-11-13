@@ -1,4 +1,4 @@
-import type { User } from "../../../api/types";
+import type { User } from "../../../features/domain/user/types";
 
 export interface EditUserProps {
 	selectedItem: User;

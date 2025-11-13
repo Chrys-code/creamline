@@ -1,8 +1,17 @@
-import type { Pasteur, Storage, ProductDefinition, PasteurisedMilk } from "../../../api/types";
+import type { Pasteurisation } from "../../../features/domain/pasteurisation/types";
 
 export interface EditPasteurisationProps {
-	pasteurs: Pasteur[];
-	storages: Storage[];
-	productDefinitions: ProductDefinition[];
-	selectedItem: PasteurisedMilk | null;
+	pasteurOptions: {
+		id: string;
+		value: string;
+	}[];
+	storageOptions: {
+		id: string;
+		value: string;
+	}[];
+	productDefinitionOptions: {
+		id: string;
+		value: string;
+	}[];
+	selectedItem: Pasteurisation | null;
 }

@@ -1,6 +1,6 @@
-import type { PaginatedPasteurisedMilkData } from "../../../api/types";
+import type { PaginatedPasteurisationListSchema } from "../../../features/domain/pasteurisation/types";
 
 export interface ListPasteurisationProps {
-	data: PaginatedPasteurisedMilkData;
+	data: PaginatedPasteurisationListSchema;
 	page: number;
 }

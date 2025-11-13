@@ -1,22 +1,22 @@
 import type React from "react";
-import type { PatchProfileFormData, Profile } from "../../api/types";
+import type { PatchProfileFormSchema } from "../../features/domain/profile/types";
 import type { ProfileProps } from "./Profile.types";
 import styles from "./Profile.module.scss";
 
-import Button from "../../components/button";
-import Form from "../../components/form";
-import InputField from "../../components/inputField";
+import Button from "../../shared/components/button";
+import Form from "../../shared/components/form";
+import InputField from "../../shared/components/inputField";
 
 import { useState } from "react";
 import { useRouteLoaderData, useRevalidator } from "react-router";
-import { useTypedTranslation } from "../../lib/hooks/useTypedTranslation/useTypedTranslation";
+import { useTypedTranslation } from "../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { v4 as uuid } from "uuid";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { schemas } from "../../api/schemas";
-import { api } from "../../api/client";
+import schemas from "../../features/domain/profile/services/schemas";
 import { toast } from "react-toastify";
+import { profileClient } from "../../features/domain/profile/services/client";
 
 const Profile: React.FC = () => {
 	const pt = useTypedTranslation("profile");
@@ -31,17 +31,17 @@ const Profile: React.FC = () => {
 		formState: { errors, isSubmitting },
 		setError,
 		clearErrors,
-	} = useForm<PatchProfileFormData>({
-		resolver: zodResolver(schemas.PatchProfileSchema),
+	} = useForm<PatchProfileFormSchema>({
+		resolver: zodResolver(schemas.PatchProfileFormSchema),
 	});
 
 	const handleEditClick = () => {
 		setIsEditing(!isEditing);
 	};
 
-	const onSubmit = async (formData: PatchProfileFormData) => {
+	const onSubmit = async (formData: PatchProfileFormSchema) => {
 		try {
-			await api.put("/api/v1/profile/", formData);
+			await profileClient.v1_profile_update(formData);
 			toast.success(pt("profile.notifications.update_success"));
 		} catch (err: any) {
 			if (err.response?.data) {

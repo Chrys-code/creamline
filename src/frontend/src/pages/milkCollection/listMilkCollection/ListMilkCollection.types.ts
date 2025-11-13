@@ -1,6 +1,6 @@
-import type { PaginatedMilkListData } from "../../../api/types";
+import type { PaginatedMilkListSchema } from "../../../features/domain/milk/types";
 
 export interface ListMilkCollectionProps {
-	data: PaginatedMilkListData;
+	data: PaginatedMilkListSchema;
 	page: number;
 }

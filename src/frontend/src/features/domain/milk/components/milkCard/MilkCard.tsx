@@ -1,0 +1,23 @@
+import type React from "react";
+import type { MilkCardProps } from "./MilkCard.types";
+
+import styles from "./MilkCard.module.scss";
+
+const MilkCard: React.FC<MilkCardProps> = ({
+	title,
+	storages,
+	datetime,
+	onClick,
+}: MilkCardProps) => {
+	return (
+		<div className={styles.container} onClick={onClick}>
+			<p>{title}</p>
+			<div>
+				<p>{storages}</p>
+				<span>{datetime}</span>
+			</div>
+		</div>
+	);
+};
+
+export default MilkCard;

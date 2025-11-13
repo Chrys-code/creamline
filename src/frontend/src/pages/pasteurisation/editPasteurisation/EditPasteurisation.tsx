@@ -1,30 +1,29 @@
 import type React from "react";
-import type { CreatePasteurisedMilkFormData } from "../../../api/types.js";
-import type { EditPasteurisationProps } from "./EditPasteurisation.types.js";
+import type { EditPasteurisationProps } from "./EditPasteurisation.types";
+import type { CreatePasteurisationFormSchema } from "../../../features/domain/pasteurisation/types";
 import styles from "./EditPasteurisation.module.scss";
 
-import PageHeader from "../../../components/pageHeader/index.js";
-import Form from "../../../components/form/index.js";
-import Dropdown from "../../../components/dropdown/index.js";
-import InputField from "../../../components/inputField/index.js";
-import Button from "../../../components/button/index.js";
+import PageHeader from "../../../shared/components/pageHeader/index";
+import Form from "../../../shared/components/form/index";
+import Dropdown from "../../../shared/components/dropdown/index";
+import InputField from "../../../shared/components/inputField/index";
+import Button from "../../../shared/components/button/index";
 
 import { useLoaderData, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
-import { useTypedTranslation } from "../../../lib/hooks/useTypedTranslation/useTypedTranslation.js";
+import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
 
-import { api } from "../../../api/client.js";
-import { schemas } from "../../../api/schemas.js";
-
-import convertMilkLiterAndKg from "../../../lib/helpers/literToKg/literToKg.js";
+import pasteurisationClient from "../../../features/domain/pasteurisation/services/client";
+import schemas from "../../../features/domain/pasteurisation/services/schemas";
+import convertMilkLiterAndKg from "../../../shared/helpers/literToKg/literToKg";
 
 const EditPasteurisation: React.FC = () => {
-	const { pasteurs, storages, productDefinitions, selectedItem } =
+	const { pasteurOptions, storageOptions, productDefinitionOptions, selectedItem } =
 		useLoaderData<EditPasteurisationProps>();
-	const pt = useTypedTranslation("pasteurisedMilk");
+	const pt = useTypedTranslation("pasteurisation");
 	const ct = useTypedTranslation("common");
 	const navigate = useNavigate();
 
@@ -35,9 +34,9 @@ const EditPasteurisation: React.FC = () => {
 		setValue,
 		setError,
 		clearErrors,
-	} = useForm<CreatePasteurisedMilkFormData>({
+	} = useForm<CreatePasteurisationFormSchema>({
 		// @ts-expect-error local-datetime conversion issue
-		resolver: zodResolver(schemas.CreatePasteurisedMilkSchema),
+		resolver: zodResolver(schemas.CreatePasteurisationFormSchema),
 		mode: "onChange",
 		defaultValues: {
 			pasteur: selectedItem?.pasteur || undefined,
@@ -56,27 +55,9 @@ const EditPasteurisation: React.FC = () => {
 		},
 	});
 
-	const pasteurOptions =
-		pasteurs?.map((pasteur) => ({
-			id: pasteur.uuid,
-			value: pasteur.name,
-		})) || [];
-
-	const storageOptions =
-		storages?.map((storage) => ({
-			id: storage.uuid,
-			value: storage.name,
-		})) || [];
-
-	const productDefinitionOptions =
-		productDefinitions?.map((productDefinition) => ({
-			id: productDefinition.uuid,
-			value: productDefinition.name,
-		})) || [];
-
-	const onSubmit = async (formData: CreatePasteurisedMilkFormData): Promise<void> => {
+	const onSubmit = async (formData: CreatePasteurisationFormSchema): Promise<void> => {
 		try {
-			await api.post("/api/v1/pasteurised-milk/", formData);
+			await pasteurisationClient.v1_pasteurised_milk_create(formData);
 			toast.success("Pasztőr sikeresen elmentve!");
 			navigate("/");
 		} catch (err: any) {

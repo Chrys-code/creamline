@@ -1,0 +1,17 @@
+{
+	"edit_user": {
+		"page_title": {
+			"create": "Create user",
+			"edit": "Edit user"
+		},
+		"input_labels": {
+			"first_name": "Firstname",
+			"last_name": "Lastname",
+			"position": "Position",
+			"password": "Password"
+		}
+	},
+	"list_users": {
+		"page_title": "Users"
+	}
+}

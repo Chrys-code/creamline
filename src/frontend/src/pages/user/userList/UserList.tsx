@@ -1,17 +1,17 @@
-import type { User } from "../../../api/types.js";
-import type { UserListProps } from "./UserList.types.js";
+import type { UserListProps } from "./UserList.types";
+import type { User } from "../../../features/domain/user/types";
 import styles from "./UserList.module.scss";
 
-import PageHeader from "../../../components/pageHeader/index.js";
-import Pagination from "../../../components/pagination/index.js";
-import UserCard from "../../../components/userCard/index.js";
-import IconButton from "../../../components/iconButton/index.js";
-import Loader from "../../../components/loader/index.js";
+import PageHeader from "../../../shared/components/pageHeader";
+import Pagination from "../../../shared/components/pagination";
+import IconButton from "../../../shared/components/iconButton";
+import Loader from "../../../shared/components/loader";
+import UserCard from "../../../features/domain/user/components/userCard";
 
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
-import { useDelayedLoader } from "../../../lib/hooks/useDelayedLoader/useDelayedLoader";
-import { useTypedTranslation } from "../../../lib/hooks/useTypedTranslation/useTypedTranslation.js";
+import { useDelayedLoader } from "../../../shared/hooks/useDelayedLoader/useDelayedLoader";
+import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -48,7 +48,7 @@ const UserList: React.FC = () => {
 
 	const userListItem = data.results.map((result: User) => {
 		return (
-			<li key={result.uuid}>
+			<li key={result.uuid} tabIndex={0}>
 				<UserCard
 					name={`${result.profile?.first_name} ${result.profile?.last_name}`}
 					groups={getUserGroupNames(userGroups, result.groups)}

@@ -1,26 +1,26 @@
 import type { EditMilkCollectionProps } from "./EditMilkCollection.types";
-import type { CreateMilkFormData } from "../../../api/types";
+import type { CreateMilkFormSchema } from "../../../features/domain/milk/types";
 import styles from "./EditMilkCollection.module.scss";
 
-import PageHeader from "../../../components/pageHeader";
-import Form from "../../../components/form";
-import InputField from "../../../components/inputField";
-import Dropdown from "../../../components/dropdown";
-import Button from "../../../components/button";
-import IconButton from "../../../components/iconButton";
+import PageHeader from "../../../shared/components/pageHeader";
+import Form from "../../../shared/components/form";
+import InputField from "../../../shared/components/inputField";
+import Dropdown from "../../../shared/components/dropdown";
+import Button from "../../../shared/components/button";
+import IconButton from "../../../shared/components/iconButton";
 
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
+import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { v4 as uuid } from "uuid";
-import { useTypedTranslation } from "../../../lib/hooks/useTypedTranslation/useTypedTranslation";
 
-import { api } from "../../../api/client";
-import { schemas } from "../../../api/schemas";
+import { milkClient } from "../../../features/domain/milk/services/client";
+import milkSchemas from "../../../features/domain/milk/services/schemas";
 
-import convertMilkLiterAndKg from "../../../lib/helpers/literToKg/literToKg";
+import convertMilkLiterAndKg from "../../../shared/helpers/literToKg/literToKg";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -29,7 +29,8 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 );
 
 const EditMilkCollection: React.FC = () => {
-	const { producers, storages, selectedItem } = useLoaderData<EditMilkCollectionProps>();
+	const { producerOptions, storageOptions, selectedItem } =
+		useLoaderData<EditMilkCollectionProps>();
 	const navigate = useNavigate();
 	const mct = useTypedTranslation("milkCollection");
 	const ct = useTypedTranslation("common");
@@ -41,8 +42,9 @@ const EditMilkCollection: React.FC = () => {
 		setValue,
 		setError,
 		clearErrors,
-	} = useForm<CreateMilkFormData>({
-		resolver: zodResolver(schemas.CreateMilkSchema),
+	} = useForm<CreateMilkFormSchema>({
+		resolver: zodResolver(milkSchemas.CreateMilkFormSchema),
+		mode: "onChange",
 		defaultValues: {
 			producer: selectedItem?.producer || undefined,
 			storage: selectedItem?.storage || undefined,
@@ -55,22 +57,14 @@ const EditMilkCollection: React.FC = () => {
 		},
 	});
 
-	const producerOptions = producers.map((producer) => ({
-		id: producer.uuid,
-		value: producer.name,
-	}));
-	const storageOptions = storages.map((storage) => ({
-		id: storage.uuid,
-		value: storage.name,
-	}));
 	const booleanOptions = [
 		{ id: "true", value: ct("common.yes") },
 		{ id: "false", value: ct("common.no") },
 	];
 
-	const onSubmit = async (formData: CreateMilkFormData): Promise<void> => {
+	const onSubmit = async (formData: CreateMilkFormSchema): Promise<void> => {
 		try {
-			await api.post("/api/v1/milk/", formData);
+			await milkClient.v1_milk_create(formData);
 			toast.success(mct("edit_milk_collection.notifications.create_success"));
 			navigate("/");
 		} catch (err: any) {
@@ -199,7 +193,6 @@ const EditMilkCollection: React.FC = () => {
 							label={ct("utilities.volume")}
 							info={ct("units.liter")}
 							error={errors.volume_liters?.message}
-							onChange={handleVolumeChange}
 							disabled={!!selectedItem}
 						/>
 						<InputField
@@ -216,7 +209,6 @@ const EditMilkCollection: React.FC = () => {
 							label={ct("utilities.volume")}
 							info={ct("units.kg_short")}
 							error={errors.volume_kg?.message}
-							onChange={handleVolumeChange}
 							disabled={!!selectedItem}
 						/>
 					</div>

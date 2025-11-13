@@ -1,7 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-import * as translations from "../lib/i18n";
+import * as translations from "../shared/i18n";
 
 i18n.use(LanguageDetector)
 	.use(initReactI18next)
@@ -30,13 +30,13 @@ i18n.use(LanguageDetector)
 				pasteurisation: translations.translationHu.pasteurisation,
 			},
 		},
-		fallbackLng: "en",
+		fallbackLng: "hu",
 		interpolation: { escapeValue: false },
 	});
 
 export default i18n;
 
-import type * as TranslationTypes from "../lib/i18n/types";
+import type * as TranslationTypes from "../shared/i18n/types";
 import i18next from "i18next";
 
 export const namespaces = [
@@ -48,7 +48,7 @@ export const namespaces = [
 	"producer",
 	"dashboard",
 	"milkCollection",
-	"pasteurisedMilk",
+	"pasteurisation",
 ] as const;
 
 export type NamespaceKey = (typeof namespaces)[number];
@@ -62,7 +62,7 @@ export type NamespaceMap = {
 	producer: TranslationTypes.ProducerTranslations;
 	dashboard: TranslationTypes.DashboardTranslations;
 	milkCollection: TranslationTypes.MilkCollectionTranslations;
-	pasteurisedMilk: TranslationTypes.PasteurisedMilkTranslations;
+	pasteurisation: TranslationTypes.PasteurisedMilkTranslations;
 };
 
 // Flattens nested keys into dot notations

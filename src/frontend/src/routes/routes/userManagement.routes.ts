@@ -1,8 +1,8 @@
 import type { LoaderFunctionArgs } from "react-router";
-import requireUser from "../loaders/requireUser";
-import requirePaginatedUserList from "../loaders/requireUsers";
-import requireUserGroups from "../loaders/requireUserGroups";
-import { adaptUserGroupsForOptions } from "../../adapters/userGroupAdapter/userGroupAdapter";
+import getPaginatedUserList from "../../features/domain/user/loaders/listUsers";
+import { getUser } from "../../features/domain/user/loaders/getUser";
+import { listUserGroups } from "../../features/domain/userGroups/loaders/listUserGroups";
+import { adaptUserGroupsForUserGroupOptions } from "../../features/domain/userGroups/adapters";
 
 const userManagementRoutes = [
 	{
@@ -11,8 +11,8 @@ const userManagementRoutes = [
 			Component: async () => (await import("../../pages/user/userList/UserList")).default,
 		},
 		loader: async (args: LoaderFunctionArgs) => ({
-			data: await requirePaginatedUserList(args),
-			userGroups: await requireUserGroups(),
+			data: await getPaginatedUserList(args),
+			userGroups: await listUserGroups(),
 		}),
 	},
 	{
@@ -22,7 +22,7 @@ const userManagementRoutes = [
 		},
 		loader: async () => ({
 			selectedItem: null,
-			userGroups: await requireUserGroups(),
+			userGroups: await listUserGroups(),
 		}),
 	},
 	{
@@ -31,8 +31,8 @@ const userManagementRoutes = [
 			Component: async () => (await import("../../pages/user/editUser/EditUser")).default,
 		},
 		loader: async (args: LoaderFunctionArgs) => ({
-			selectedItem: await requireUser(args),
-			userGroups: adaptUserGroupsForOptions(await requireUserGroups()),
+			selectedItem: await getUser(args),
+			userGroups: adaptUserGroupsForUserGroupOptions(await listUserGroups()),
 		}),
 	},
 ];

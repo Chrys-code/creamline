@@ -1,20 +1,20 @@
 import type React from "react";
-import type { CreateProducerFormData } from "../../api/types";
+import type { CreateProducerFormSchema } from "../../features/domain/producer/types";
 
-import PageHeader from "../../components/pageHeader";
-import Form from "../../components/form";
-import InputField from "../../components/inputField";
-import Button from "../../components/button";
+import PageHeader from "../../shared/components/pageHeader";
+import Form from "../../shared/components/form";
+import InputField from "../../shared/components/inputField";
+import Button from "../../shared/components/button";
 
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { useTypedTranslation } from "../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 
-import { api } from "../../api/client";
-import { schemas } from "../../api/schemas";
-import { useTypedTranslation } from "../../lib/hooks/useTypedTranslation/useTypedTranslation";
+import { producerClient } from "../../features/domain/producer/services/client";
+import producerSchemas from "../../features/domain/producer/services/schemas";
 
 const AddProducer: React.FC = () => {
 	const navigate = useNavigate();
@@ -27,13 +27,13 @@ const AddProducer: React.FC = () => {
 		formState: { errors, isSubmitting },
 		setError,
 		clearErrors,
-	} = useForm<CreateProducerFormData>({
-		resolver: zodResolver(schemas.CreateProducerSchema),
+	} = useForm<CreateProducerFormSchema>({
+		resolver: zodResolver(producerSchemas.CreateProducerFormSchema),
 	});
 
-	const onSubmit = async (formData: CreateProducerFormData) => {
+	const onSubmit = async (formData: CreateProducerFormSchema) => {
 		try {
-			await api.post("/api/v1/producer/", formData);
+			await producerClient.v1_producer_create(formData);
 			toast.success(pt("edit_producer.notifications.create_success"));
 			navigate(-1);
 		} catch (err: any) {

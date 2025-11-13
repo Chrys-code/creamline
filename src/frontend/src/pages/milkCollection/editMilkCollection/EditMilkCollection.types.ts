@@ -1,7 +1,13 @@
-import type { Milk, Producer } from "../../../api/types";
+import type { Milk } from "../../../features/domain/milk/types";
 
 export interface EditMilkCollectionProps {
-	producers: Producer[];
-	storages: Storage[];
+	producerOptions: {
+		id: string;
+		value: string;
+	}[];
+	storageOptions: {
+		id: string;
+		value: string;
+	}[];
 	selectedItem: Milk | null;
 }

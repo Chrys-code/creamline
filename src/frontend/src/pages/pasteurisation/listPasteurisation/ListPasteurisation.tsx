@@ -1,17 +1,17 @@
 import type { ListPasteurisationProps } from "./ListPasteurisation.types";
 import styles from "./ListPasteurisation.module.scss";
 
-import PageHeader from "../../../components/pageHeader";
-import Pagination from "../../../components/pagination";
-import PasteurisedMilkCard from "../../../components/pasteurisedMilkCard";
-import IconButton from "../../../components/iconButton";
-import Loader from "../../../components/loader";
+import PageHeader from "../../../shared/components/pageHeader";
+import Pagination from "../../../shared/components/pagination";
+import IconButton from "../../../shared/components/iconButton";
+import Loader from "../../../shared/components/loader";
+import PasteurisationCard from "../../../features/domain/pasteurisation/components/pasteurisationCard";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLoaderData, useNavigate } from "react-router";
-import { useDelayedLoader } from "../../../lib/hooks/useDelayedLoader/useDelayedLoader";
-import { useTypedTranslation } from "../../../lib/hooks/useTypedTranslation/useTypedTranslation";
+import { useDelayedLoader } from "../../../shared/hooks/useDelayedLoader/useDelayedLoader";
+import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -22,7 +22,7 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 const ListPasteurisation: React.FC = () => {
 	const navigate = useNavigate();
 	const { i18n } = useTranslation();
-	const pt = useTypedTranslation("pasteurisedMilk");
+	const pt = useTypedTranslation("pasteurisation");
 	const { data, page } = useLoaderData<ListPasteurisationProps>();
 	const showLoading = useDelayedLoader(200, 1000);
 
@@ -33,8 +33,8 @@ const ListPasteurisation: React.FC = () => {
 	);
 
 	const pasteurisedMilkListItems = data.results.map((result) => (
-		<li key={result.uuid}>
-			<PasteurisedMilkCard
+		<li key={result.uuid} tabIndex={0}>
+			<PasteurisationCard
 				title={result.pasteur_name}
 				source_storage={result.source_storage_name}
 				target_storage={result.target_storage_name}

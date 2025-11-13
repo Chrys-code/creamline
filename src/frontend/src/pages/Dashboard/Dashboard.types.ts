@@ -1,9 +1,5 @@
-import type { Profile } from "../../api/types";
-
-export interface ProfileData extends Profile {
-	roles: any;
-}
+import type { Profile } from "../../features/domain/profile/types";
 
 export interface DashboardProps {
-	profile: ProfileData;
+	profile: Profile;
 }

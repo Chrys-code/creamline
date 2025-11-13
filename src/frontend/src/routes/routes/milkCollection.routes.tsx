@@ -1,9 +1,12 @@
 import type { LoaderFunctionArgs } from "react-router";
 
-import requireMilk from "../loaders/requireMilk";
-import requirePaginatedMilkList from "../loaders/requirePaginatedMilkList";
-import requireProducers from "../loaders/requireProducers";
-import requireStorages from "../loaders/requireStorages";
+import { getPaginatedMilkList } from "../../features/domain/milk/loaders/listMilk";
+import { listProducers } from "../../features/domain/producer/loaders/listProducers";
+import { getMilk } from "../../features/domain/milk/loaders/getMilk";
+import { listStorages } from "../../features/domain/storage/loaders/listStorages";
+
+import { adaptProducersToProducerOptions } from "../../features/domain/milk/adapters";
+import { adaptStoragesToStorageOptions } from "../../features/domain/storage/adapters";
 
 const milkCollectionRoutes = [
 	{
@@ -13,7 +16,7 @@ const milkCollectionRoutes = [
 				(await import("../../pages/milkCollection/listMilkCollection/ListMilkCollection"))
 					.default,
 		},
-		loader: requirePaginatedMilkList,
+		loader: getPaginatedMilkList,
 	},
 	{
 		path: "milk-collection/create",
@@ -23,8 +26,8 @@ const milkCollectionRoutes = [
 					.default,
 		},
 		loader: async () => ({
-			producers: (await requireProducers()) || [],
-			storages: (await requireStorages()) || [],
+			producerOptions: adaptProducersToProducerOptions(await listProducers()),
+			storageOptions: adaptStoragesToStorageOptions(await listStorages()),
 		}),
 	},
 	{
@@ -35,9 +38,9 @@ const milkCollectionRoutes = [
 					.default,
 		},
 		loader: async (args: LoaderFunctionArgs) => ({
-			producers: (await requireProducers()) || [],
-			storages: (await requireStorages()) || [],
-			selectedItem: (await requireMilk(args)) || null,
+			producerOptions: adaptProducersToProducerOptions(await listProducers()),
+			storageOptions: adaptStoragesToStorageOptions(await listStorages()),
+			selectedItem: (await getMilk(args)) || null,
 		}),
 	},
 ];
