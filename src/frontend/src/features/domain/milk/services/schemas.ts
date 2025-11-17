@@ -1,5 +1,5 @@
 import z from "zod";
-import i18n, { tTyped } from "../../../../configs/i18n";
+import { tTyped } from "../../../../configs/i18n";
 
 const tCommon = tTyped("common");
 
@@ -14,7 +14,7 @@ const MilkBaseSchema = z.object({
 	temperature: z
 		.number()
 		.gte(-273.15, {
-			message: i18n.t("common_validation.input_gte_absolute_zero"),
+			message: tCommon("errors.input_gte_absolute_zero"),
 		})
 		.optional(),
 });

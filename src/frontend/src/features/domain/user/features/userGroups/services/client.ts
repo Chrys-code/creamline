@@ -1,5 +1,5 @@
 import { createApiClient } from "./endpoints";
-import { getCookie } from "../../../../shared/helpers/getCookie/getCookie";
+import { getCookie } from "../../../../../../shared/helpers/getCookie/getCookie";
 
 export const userGroupClient = createApiClient("/", {
 	axiosConfig: {

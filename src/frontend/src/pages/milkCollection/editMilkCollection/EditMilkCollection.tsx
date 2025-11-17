@@ -163,7 +163,7 @@ const EditMilkCollection: React.FC = () => {
 						/>
 						<IconButton
 							type="button"
-							onClick={() => navigate("/add-producer")}
+							onClick={() => navigate("/producer/create")}
 							disabled={!!selectedItem}
 						>
 							<MdOutlineAddCircleOutline size="1.5rem" />

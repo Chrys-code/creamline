@@ -1,14 +1,14 @@
 import type { LoaderFunctionArgs } from "react-router";
 import getPaginatedUserList from "../../features/domain/user/loaders/listUsers";
 import { getUser } from "../../features/domain/user/loaders/getUser";
-import { listUserGroups } from "../../features/domain/userGroups/loaders/listUserGroups";
-import { adaptUserGroupsForUserGroupOptions } from "../../features/domain/userGroups/adapters";
+import { listUserGroups } from "../../features/domain/user/features/userGroups/loaders/listUserGroups";
+import { adaptUserGroupsForUserGroupOptions } from "../../features/domain/user/features/userGroups/adapters";
 
 const userManagementRoutes = [
 	{
 		path: "users",
 		lazy: {
-			Component: async () => (await import("../../pages/user/userList/UserList")).default,
+			Component: async () => (await import("../../pages/user/listUser/ListUser")).default,
 		},
 		loader: async (args: LoaderFunctionArgs) => ({
 			data: await getPaginatedUserList(args),

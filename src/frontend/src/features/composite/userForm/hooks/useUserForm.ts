@@ -12,8 +12,11 @@ import { userClient } from "../../../domain/user/services/client";
 import userSchemas from "../../../domain/user/services/schemas";
 
 import { toast } from "react-toastify";
+import { useTypedTranslation } from "../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 
 export const useUserForm = (user: User) => {
+	const tCommon = useTypedTranslation("common");
+
 	const {
 		register,
 		handleSubmit,
@@ -40,7 +43,10 @@ export const useUserForm = (user: User) => {
 
 	const createUser = async (formData: CreateUserFormSchema): Promise<void> => {
 		if (!formData.password || !formData.password.length) {
-			setError("password", { type: "minLength", message: "Password is required" });
+			setError("password", {
+				type: "minLength",
+				message: tCommon("errors.input_is_required"),
+			});
 			return;
 		}
 

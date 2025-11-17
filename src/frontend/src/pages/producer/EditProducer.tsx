@@ -16,7 +16,7 @@ import { v4 as uuid } from "uuid";
 import { producerClient } from "../../features/domain/producer/services/client";
 import producerSchemas from "../../features/domain/producer/services/schemas";
 
-const AddProducer: React.FC = () => {
+const EditProducer: React.FC = () => {
 	const navigate = useNavigate();
 	const pt = useTypedTranslation("producer");
 	const ct = useTypedTranslation("common");
@@ -101,4 +101,4 @@ const AddProducer: React.FC = () => {
 	);
 };
 
-export default AddProducer;
+export default EditProducer;

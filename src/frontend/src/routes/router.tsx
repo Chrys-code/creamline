@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, redirect } from "react-router";
 
 import Dashboard from "../pages/dashboard/Dashboard";
 import AppLayout from "../shared/layouts/appLayout";
@@ -9,15 +9,21 @@ import pasteurisedMilkRoutes from "./routes/pasteurisedMilk.routes";
 import userManagementRoutes from "./routes/userManagement.routes";
 import { getProfile } from "../features/domain/profile/loaders/getProfile";
 import AuthLayout from "../shared/layouts/authLayout";
+import producerRoutes from "./routes/producer.routes";
 
 const appRouter = createBrowserRouter([
 	{
 		id: "app",
 		path: "/",
 		element: <AppLayout />,
-		loader: async () => ({
-			profile: await getProfile(),
-		}),
+		loader: async () => {
+			try {
+				const profile = await getProfile();
+				return { profile };
+			} catch {
+				throw redirect("/login");
+			}
+		},
 		errorElement: (
 			<AppLayout>
 				<ErrorLayout />
@@ -31,17 +37,11 @@ const appRouter = createBrowserRouter([
 			...milkCollectionRoutes,
 			...pasteurisedMilkRoutes,
 			...userManagementRoutes,
+			...producerRoutes,
 			{
 				path: "profile",
 				lazy: {
 					Component: async () => (await import("../pages/profile/Profile")).default,
-				},
-			},
-			{
-				path: "add-producer",
-				lazy: {
-					Component: async () =>
-						(await import("../pages/addProducer/AddProducer")).default,
 				},
 			},
 		],

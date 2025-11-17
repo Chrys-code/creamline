@@ -15,8 +15,8 @@ import { v4 as uuid } from "uuid";
 
 const UserForm: React.FC<UserFormProps> = ({ user, userGroups }: UserFormProps) => {
 	const navigate = useNavigate();
-	const ut = useTypedTranslation("users");
-	const ct = useTypedTranslation("common");
+	const tUser = useTypedTranslation("users");
+	const tCommon = useTypedTranslation("common");
 
 	const {
 		errors,
@@ -53,10 +53,10 @@ const UserForm: React.FC<UserFormProps> = ({ user, userGroups }: UserFormProps) 
 		return (
 			<>
 				<Button type="button" style="secondary" onClick={() => navigate(-1)}>
-					{ct("common.back")}
+					{tCommon("common.back")}
 				</Button>
 				<Button type="submit" disabled={isSubmitting}>
-					{ct("common.save")}
+					{tCommon("common.save")}
 				</Button>
 			</>
 		);
@@ -74,7 +74,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, userGroups }: UserFormProps) 
 						onChange: () => clearErrors("profile.first_name"),
 					})}
 					type="text"
-					label={ut("edit_user.input_labels.first_name") + ":"}
+					label={tUser("edit_user.input_labels.first_name") + ":"}
 					error={errors.profile?.first_name?.message}
 				/>
 				<InputField
@@ -83,7 +83,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, userGroups }: UserFormProps) 
 						onChange: () => clearErrors("profile.last_name"),
 					})}
 					type="text"
-					label={ut("edit_user.input_labels.last_name") + ":"}
+					label={tUser("edit_user.input_labels.last_name") + ":"}
 					error={errors.profile?.last_name?.message}
 				/>
 				<InputField
@@ -102,14 +102,14 @@ const UserForm: React.FC<UserFormProps> = ({ user, userGroups }: UserFormProps) 
 							onChange: () => clearErrors("password"),
 						})}
 						type="password"
-						label={ut("edit_user.input_labels.password") + ":"}
+						label={tUser("edit_user.input_labels.password") + ":"}
 						error={errors.password?.message}
 					/>
 				)}
 				<Dropdown
 					name="roleSelectionDropdown"
 					placeholder="Select position"
-					label={ut("edit_user.input_labels.position") + ":"}
+					label={tUser("edit_user.input_labels.position") + ":"}
 					id={uuid()}
 					onChange={handleRoleDropdownChange}
 					options={userGroups}

@@ -1,12 +1,12 @@
-import type { UserListProps } from "./UserList.types";
+import type { UserListProps } from "./ListUser.types";
 import type { User } from "../../../features/domain/user/types";
-import styles from "./UserList.module.scss";
+import styles from "./ListUser.module.scss";
 
 import PageHeader from "../../../shared/components/pageHeader";
 import Pagination from "../../../shared/components/pagination";
 import IconButton from "../../../shared/components/iconButton";
-import Loader from "../../../shared/components/loader";
 import UserCard from "../../../features/domain/user/components/userCard";
+import Loader from "../../../shared/components/loader";
 
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
@@ -19,7 +19,7 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 	}))
 );
 
-const UserList: React.FC = () => {
+const ListUser: React.FC = () => {
 	const navigate = useNavigate();
 	const ut = useTypedTranslation("users");
 
@@ -89,4 +89,4 @@ const UserList: React.FC = () => {
 	);
 };
 
-export default UserList;
+export default ListUser;

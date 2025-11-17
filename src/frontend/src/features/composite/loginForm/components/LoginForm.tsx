@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const LoginForm: React.FC = () => {
 	const { errors, isSubmitting, register, handleSubmit, onSubmit, clearErrors } = useLoginForm();
-	const at = useTypedTranslation("auth");
+	const tAuth = useTypedTranslation("auth");
 
 	const renderFormActions = () => {
 		return (
@@ -20,7 +20,7 @@ const LoginForm: React.FC = () => {
 					<span className={styles.errorMessage}>{errors.message.message}</span>
 				)}
 				<Button style="primary" type="submit" disabled={isSubmitting}>
-					{at("login.submit")}
+					{tAuth("login.submit")}
 				</Button>
 			</div>
 		);
@@ -29,12 +29,12 @@ const LoginForm: React.FC = () => {
 	return (
 		<div className={styles.container}>
 			<Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
-				<h1>{at("login.title")}</h1>
+				<h1>{tAuth("login.title")}</h1>
 				<section>
 					<InputField
 						id={uuidv4()}
 						{...register("email", { onChange: () => clearErrors("email") })}
-						label={at("login.input_labels.email")}
+						label={tAuth("login.input_labels.email")}
 						type="text"
 						error={errors.email?.message}
 					/>
@@ -43,7 +43,7 @@ const LoginForm: React.FC = () => {
 						{...register("password", {
 							onChange: () => clearErrors("password"),
 						})}
-						label={at("login.input_labels.password")}
+						label={tAuth("login.input_labels.password")}
 						type="password"
 						error={errors.password?.message}
 					/>
