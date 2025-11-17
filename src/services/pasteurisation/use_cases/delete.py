@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 
 from django.utils import timezone
 
-from pasteurised_milk.models import PasteurisedMilk
+from pasteurisation.models import Pasteurisation
 
 if TYPE_CHECKING:
     from users.models import CustomUser
@@ -12,18 +12,18 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-def _delete(instance: PasteurisedMilk):
+def _delete(instance: Pasteurisation):
     instance.save()
 
 
-def delete_pasteurised_milk(instance: PasteurisedMilk, deleted_by: "CustomUser"):
+def delete_pasteurisation(instance: Pasteurisation, deleted_by: "CustomUser"):
     instance.deleted_at=timezone.now()
     instance.deleted_by=deleted_by
 
     _delete(instance=instance)
 
     logger.info(
-        "pasteurised_milk-deleted",
+        "pasteurisation-deleted",
         extra={
             "uuid": instance.uuid,
             "deleted_by": deleted_by.uuid

@@ -1,13 +1,18 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from django.contrib.auth.models import Group
-
 from common.has_group import HasGroup
+
+from user_groups.models import GroupMetadata
 
 class UserGroupsView(APIView):
     permission_classes = [HasGroup.Manager]
 
     def get(self, request, *args, **kwargs):
-        groups = Group.objects.all().values("id", "name")
-        return Response(list(groups))
+        groups = GroupMetadata.objects.all()
+        data = [
+            {"id": group.id, "name": group.code_name}
+            for group in groups
+        ]
+
+        return Response(data)

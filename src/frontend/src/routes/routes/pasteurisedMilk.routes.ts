@@ -9,7 +9,7 @@ import { adaptPasteursToPasteurOptions } from "../../features/domain/pasteurisat
 import { adaptStoragesToStorageOptions } from "../../features/domain/storage/adapters";
 import { adaptProductDefinitionsToProductDefinitionOptions } from "../../features/domain/productDefinition/adapters";
 
-const pasteurisedMilkRoutes = [
+const pasteurisationRoutes = [
 	{
 		path: "pasteurised-milk",
 		lazy: {
@@ -52,4 +52,4 @@ const pasteurisedMilkRoutes = [
 	},
 ];
 
-export default pasteurisedMilkRoutes;
+export default pasteurisationRoutes;

@@ -2,9 +2,9 @@ import logging
 import datetime as dt
 from typing import TypedDict, TYPE_CHECKING
 
+from pasteurisation.models import Pasteurisation
 from storages.models import Storage
 from pasteurs.models import Pasteur
-from pasteurised_milk.models import PasteurisedMilk
 from product_definitions.models import ProductDefinition
 
 if TYPE_CHECKING:
@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-class CreatePasteurisedMilkData(TypedDict):
+class CreatePasteurisationData(TypedDict):
     pasteur: Pasteur
     pasteur_uuid: str
     pasteur_name: str
@@ -69,8 +69,8 @@ def _create(
     end_date: dt.datetime,
 
     created_by: "CustomUser"
-) -> PasteurisedMilk:
-    pasteurised_milk = PasteurisedMilk.objects.create(
+) -> Pasteurisation:
+    pasteurisation = Pasteurisation.objects.create(
         pasteur=pasteur,
         pasteur_uuid=pasteur_uuid,
         pasteur_name=pasteur_name,
@@ -99,19 +99,19 @@ def _create(
         created_by=created_by,
     )
 
-    return pasteurised_milk
+    return pasteurisation
 
 
-def create_pasteurised_milk(
-        validated_data: CreatePasteurisedMilkData,
+def create_pasteurisation(
+        validated_data: CreatePasteurisationData,
         created_by: "CustomUser"
-) -> PasteurisedMilk:
+) -> Pasteurisation:
     pasteur=validated_data["pasteur"]
     source_storage=validated_data["source_storage"]
     target_storage=validated_data["target_storage"]
     product_definition=validated_data["product_definition"]
 
-    created_pasteurised_milk = _create(
+    created_pasteurisation = _create(
         **validated_data,
 
         pasteur_uuid=pasteur.uuid,
@@ -132,11 +132,11 @@ def create_pasteurised_milk(
     )
 
     logger.info(
-        "pasteurised_milk-created",
+        "Pasteurisation-created",
         extra={
-            "uuid": created_pasteurised_milk.uuid,
+            "uuid": created_pasteurisation.uuid,
             "created_by": created_by.uuid
         },
     )
 
-    return created_pasteurised_milk
+    return created_pasteurisation

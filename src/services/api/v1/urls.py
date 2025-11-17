@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from api.v1.storage.views import StorageViewSet
 from api.v1.profile.views import ProfileDetailView
 from api.v1.pasteur.views import PasteurViewSet
-from api.v1.pasteurised_milk.views import PasteurisedMilkViewSet
+from api.v1.pasteurisation.views import PasteurisationViewSet
 from api.v1.producer.views import ProducerViewSet
 from api.v1.product_definition.views import ProductDefinitionViewSet
 from api.v1.users.views import UserViewSet
@@ -24,7 +24,7 @@ router.register(
     "pasteur", PasteurViewSet, basename="pasteur",
 )
 router.register(
-    "pasteurised-milk", PasteurisedMilkViewSet, basename="pasteurised-milk",
+    "pasteurisation", PasteurisationViewSet, basename="pasteurisation",
 )
 router.register(
     "product-definition", ProductDefinitionViewSet, basename="product-definition",

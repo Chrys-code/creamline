@@ -5,8 +5,8 @@ import schemas from "./schemas";
 
 const ListPasteurisedMilkEndpoint = makeEndpoint({
 	method: "get",
-	path: "/api/v1/pasteurised-milk/",
-	alias: "v1_pasteurised_milk_list",
+	path: "/api/v1/pasteurisation/",
+	alias: "v1_pasteurisation_list",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -25,8 +25,8 @@ const ListPasteurisedMilkEndpoint = makeEndpoint({
 
 const GetPasteurisedMilkEndpoint = makeEndpoint({
 	method: "get",
-	path: "/api/v1/pasteurised-milk/:id/",
-	alias: "v1_pasteurised_milk_retrieve",
+	path: "/api/v1/pasteurisation/:id/",
+	alias: "v1_pasteurisation_retrieve",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -40,8 +40,8 @@ const GetPasteurisedMilkEndpoint = makeEndpoint({
 
 const CreatePasteurisedMilkEndpoint = makeEndpoint({
 	method: "post",
-	path: "/api/v1/pasteurised-milk/",
-	alias: "v1_pasteurised_milk_create",
+	path: "/api/v1/pasteurisation/",
+	alias: "v1_pasteurisation_create",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -55,8 +55,8 @@ const CreatePasteurisedMilkEndpoint = makeEndpoint({
 
 const PatchPasteurisedMilkEndpoint = makeEndpoint({
 	method: "patch",
-	path: "/api/v1/pasteurised-milk/:id/",
-	alias: "v1_pasteurised_milk_update",
+	path: "/api/v1/pasteurisation/:id/",
+	alias: "v1_pasteurisation_update",
 	requestFormat: "json",
 	parameters: [
 		{

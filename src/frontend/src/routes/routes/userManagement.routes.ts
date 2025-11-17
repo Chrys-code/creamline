@@ -2,7 +2,10 @@ import type { LoaderFunctionArgs } from "react-router";
 import getPaginatedUserList from "../../features/domain/user/loaders/listUsers";
 import { getUser } from "../../features/domain/user/loaders/getUser";
 import { listUserGroups } from "../../features/domain/user/features/userGroups/loaders/listUserGroups";
-import { adaptUserGroupsForUserGroupOptions } from "../../features/domain/user/features/userGroups/adapters";
+import {
+	adaptUserGroupsForTranslatedNames,
+	adaptUserGroupsForUserGroupOptions,
+} from "../../features/domain/user/features/userGroups/adapters";
 
 const userManagementRoutes = [
 	{
@@ -12,7 +15,7 @@ const userManagementRoutes = [
 		},
 		loader: async (args: LoaderFunctionArgs) => ({
 			data: await getPaginatedUserList(args),
-			userGroups: await listUserGroups(),
+			userGroups: adaptUserGroupsForTranslatedNames(await listUserGroups()),
 		}),
 	},
 	{
@@ -22,7 +25,7 @@ const userManagementRoutes = [
 		},
 		loader: async () => ({
 			selectedItem: null,
-			userGroups: await listUserGroups(),
+			userGroups: adaptUserGroupsForUserGroupOptions(await listUserGroups()),
 		}),
 	},
 	{

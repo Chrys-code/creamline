@@ -9,6 +9,11 @@
 		"yes": "Yes",
 		"no": "No"
 	},
+	"user_groups": {
+		"manager": "Manager",
+		"milk_collector": "Milk collector",
+		"pasteuriser": "Pasteuriser"
+	},
 	"qualities": {
 		"temperature": "Temperature",
 		"inhibitory_residue": "Inhibitory Residue",

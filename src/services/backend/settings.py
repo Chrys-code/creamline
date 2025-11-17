@@ -64,6 +64,7 @@ if os.getenv("ENV") == "production":
 # Application definition
 
 INSTALLED_APPS = [
+    "users",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -72,15 +73,15 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_spectacular",
-    "users",
 	"authentication",
     "profiles",
     "producers",
     "milk",
     "storages",
     "pasteurs",
-    "pasteurised_milk",
-    "product_definitions"
+    "pasteurisation",
+    "product_definitions",
+    "user_groups"
 ]
 
 MIDDLEWARE = [

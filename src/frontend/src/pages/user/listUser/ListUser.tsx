@@ -21,7 +21,7 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 
 const ListUser: React.FC = () => {
 	const navigate = useNavigate();
-	const ut = useTypedTranslation("users");
+	const tUser = useTypedTranslation("users");
 
 	const {
 		data: { data, page },
@@ -67,7 +67,7 @@ const ListUser: React.FC = () => {
 	return (
 		<>
 			<PageHeader
-				title={ut("list_users.page_title")}
+				title={tUser("list_users.page_title")}
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>

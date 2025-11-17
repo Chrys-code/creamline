@@ -6,7 +6,7 @@ export const getPasteurisation = async ({ params }: LoaderFunctionArgs) => {
 		const { id } = params;
 		if (!id) return null;
 
-		const milkResponse = await pasteurisationClient.v1_pasteurised_milk_retrieve({
+		const milkResponse = await pasteurisationClient.v1_pasteurisation_retrieve({
 			params: { id },
 		});
 

@@ -34,6 +34,7 @@ i18n.use(LanguageDetector)
 		interpolation: { escapeValue: false },
 	});
 
+export const commonTranslations = translations.translationEn.common;
 export default i18n;
 
 import type * as TranslationTypes from "../shared/i18n/types";

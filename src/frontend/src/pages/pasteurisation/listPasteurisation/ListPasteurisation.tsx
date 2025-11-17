@@ -58,7 +58,7 @@ const ListPasteurisation: React.FC = () => {
 	return (
 		<>
 			<PageHeader
-				title={pt("list_pasteurised_milk.page_title")}
+				title={pt("list_pasteurisation.page_title")}
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>

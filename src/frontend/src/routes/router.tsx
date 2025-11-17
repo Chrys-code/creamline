@@ -1,15 +1,16 @@
 import { createBrowserRouter, redirect } from "react-router";
 
-import Dashboard from "../pages/dashboard/Dashboard";
 import AppLayout from "../shared/layouts/appLayout";
+import AuthLayout from "../shared/layouts/authLayout";
 import ErrorLayout from "../shared/layouts/errorLayout";
+import Dashboard from "../pages/dashboard/Dashboard";
 
 import milkCollectionRoutes from "./routes/milkCollection.routes";
-import pasteurisedMilkRoutes from "./routes/pasteurisedMilk.routes";
 import userManagementRoutes from "./routes/userManagement.routes";
-import { getProfile } from "../features/domain/profile/loaders/getProfile";
-import AuthLayout from "../shared/layouts/authLayout";
 import producerRoutes from "./routes/producer.routes";
+import pasteurisationRoutes from "./routes/pasteurisedMilk.routes";
+
+import { getProfile } from "../features/domain/profile/loaders/getProfile";
 
 const appRouter = createBrowserRouter([
 	{
@@ -35,7 +36,7 @@ const appRouter = createBrowserRouter([
 				element: <Dashboard />,
 			},
 			...milkCollectionRoutes,
-			...pasteurisedMilkRoutes,
+			...pasteurisationRoutes,
 			...userManagementRoutes,
 			...producerRoutes,
 			{

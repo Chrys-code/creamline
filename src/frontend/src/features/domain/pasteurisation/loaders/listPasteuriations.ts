@@ -7,7 +7,7 @@ export const getPaginatedPasteuriationList = async ({ request }: LoaderFunctionA
 		const page = Number(url.searchParams.get("page")) || 1;
 		const page_size = Number(import.meta.env.VITE_PAGINATION_PAGE_SIZE) || 0;
 
-		const pasteurisedMilkResponse = await pasteurisationClient.v1_pasteurised_milk_list({
+		const pasteurisedMilkResponse = await pasteurisationClient.v1_pasteurisation_list({
 			queries: { page, page_size },
 		});
 

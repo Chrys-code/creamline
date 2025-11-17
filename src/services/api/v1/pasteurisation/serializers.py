@@ -4,11 +4,11 @@ from product_definitions.models import ProductDefinition
 from storages.models import Storage
 from pasteurs.models import Pasteur
 
-from pasteurised_milk.models import PasteurisedMilk
-from pasteurised_milk.use_cases.create import create_pasteurised_milk
-from pasteurised_milk.use_cases.update import update_pasteurised_milk
+from pasteurisation.models import Pasteurisation
+from pasteurisation.use_cases.create import create_pasteurisation
+from pasteurisation.use_cases.update import update_pasteurisation
 
-class PasteurisedMilkSerializer(serializers.ModelSerializer):
+class PasteurisationSerializer(serializers.ModelSerializer):
 
     pasteur = serializers.SlugRelatedField(
         slug_field="uuid",
@@ -42,7 +42,7 @@ class PasteurisedMilkSerializer(serializers.ModelSerializer):
 
 
     class Meta:
-        model = PasteurisedMilk
+        model = Pasteurisation
         fields = [
             "uuid",
 
@@ -76,10 +76,10 @@ class PasteurisedMilkSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        pasteurised_milk = create_pasteurised_milk(validated_data=validated_data, created_by=self.context["request"].user)
-        return pasteurised_milk
+        pasteurisation = create_pasteurisation(validated_data=validated_data, created_by=self.context["request"].user)
+        return pasteurisation
 
 
     def update(self, instance, validated_data):
-        milk = update_pasteurised_milk(instance=instance, validated_data=validated_data)
+        milk = update_pasteurisation(instance=instance, validated_data=validated_data)
         return milk

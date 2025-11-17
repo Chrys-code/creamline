@@ -9,14 +9,14 @@ from pasteurs.models import Pasteur
 from product_definitions.models import ProductDefinition
 
 
-class PasteurisedMilk(models.Model):
+class Pasteurisation(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4, unique=True, editable=False, primary_key=False
     )
 
     pasteur = models.ForeignKey(
         Pasteur,
-        related_name="pasteurised_milk",
+        related_name="pasteurisation",
         on_delete=models.SET_NULL,
         editable=False,
         null=True,
@@ -27,7 +27,7 @@ class PasteurisedMilk(models.Model):
 
     source_storage = models.ForeignKey(
         Storage,
-        related_name="originated_pasteurised_milk",
+        related_name="originated_pasteurisation",
         on_delete=models.SET_NULL,
         editable=False,
         null=True,
@@ -39,7 +39,7 @@ class PasteurisedMilk(models.Model):
 
     target_storage = models.ForeignKey(
         Storage,
-        related_name="targeted_pasteurised_milk",
+        related_name="targeted_pasteurisation",
         on_delete=models.SET_NULL,
         editable=False,
         null=True,
@@ -51,7 +51,7 @@ class PasteurisedMilk(models.Model):
 
     product_definition = models.ForeignKey(
         ProductDefinition,
-        related_name="pasteurised_milk",
+        related_name="pasteurisation",
         on_delete=models.SET_NULL,
         editable=False,
         null=True,
@@ -71,7 +71,7 @@ class PasteurisedMilk(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        related_name="created_pasteurised_milk",
+        related_name="created_pasteurisation",
         on_delete=models.SET_NULL,
         editable=False,
         null=True,
@@ -81,7 +81,7 @@ class PasteurisedMilk(models.Model):
     deleted_at = models.DateTimeField(null=True, blank=True, editable=False)
     deleted_by =  models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        related_name="deleted_pasteurised_milk",
+        related_name="deleted_pasteurisation",
         on_delete=models.SET_NULL,
         editable=False,
         null=True,
