@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
-from product_definitions.models import ProductDefinition
+from apps.product_definitions.models import ProductDefinition
 from api.v1.product_definition import serializers
 
 

@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
-from storages.models import Storage
-from storages.use_cases.create import create_storage
-from storages.use_cases.update import update_storage
+from apps.storages.models import Storage
+from apps.storages.use_cases.create import create_storage
+from apps.storages.use_cases.update import update_storage
 
 
 class StorageSerializer(serializers.ModelSerializer):

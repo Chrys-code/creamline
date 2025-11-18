@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from profiles.models import Profile
-from profiles.use_cases.update import update_profile
+from apps.profiles.models import Profile
+from apps.profiles.use_cases.update import update_profile
 
 
 class ProfileSerializer(serializers.ModelSerializer):

@@ -1,9 +1,10 @@
-from profiles.use_cases.create import create_profile
-from profiles.use_cases.update import update_profile
-from user_groups.use_cases.set_groups import set_user_groups
-from users.use_cases.create import create_user
-from users.use_cases.update import update_user
-from users.models import CustomUser
+from apps.profiles.use_cases.create import create_profile
+from apps.profiles.use_cases.update import update_profile
+from apps.users.features.user_groups.use_cases.set_groups import set_user_groups
+from apps.users.use_cases.create import create_user
+from apps.users.use_cases.update import update_user
+from apps.users.models import CustomUser
+
 
 def create_user_workflow(
     email: str,
@@ -11,7 +12,7 @@ def create_user_workflow(
     profile_image: str | None,
     first_name: str,
     last_name: str,
-    group_ids: list[str]
+    group_ids: list[str],
 ):
     """
     Functional service layer orchestrating a business workflow to

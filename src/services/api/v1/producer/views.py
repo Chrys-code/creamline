@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from api.v1.producer import serializers
 
-from producers.models import Producer
+from apps.producers.models import Producer
 
 
 class ProducerViewSet(viewsets.ModelViewSet):

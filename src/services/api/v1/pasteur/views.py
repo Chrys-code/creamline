@@ -9,8 +9,8 @@ from rest_framework.viewsets import ModelViewSet
 from api.v1.pagination import StandardPagePagination
 from api.v1.pasteur import seralizers
 
-from pasteurs.models import Pasteur
-from pasteurs.use_cases.delete import delete_pasteur
+from apps.pasteurs.models import Pasteur
+from apps.pasteurs.use_cases.delete import delete_pasteur
 
 
 class PasteurViewSet(ModelViewSet):

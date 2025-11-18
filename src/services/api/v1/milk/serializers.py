@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
-from storages.models import Storage
-from producers.models import Producer
+from apps.storages.models import Storage
+from apps.producers.models import Producer
 
-from milk.models import Milk
-from milk.use_cases.create import create_milk
-from milk.use_cases.update import update_milk
+from apps.milk.models import Milk
+from apps.milk.use_cases.create import create_milk
+from apps.milk.use_cases.update import update_milk
 
 
 class MilkSerializer(serializers.ModelSerializer):

@@ -3,7 +3,7 @@ from django.contrib.auth.models import Group
 
 from rest_framework import serializers
 
-from profiles.models import Profile
+from apps.profiles.models import Profile
 
 from services.user.user_workflows import create_user_workflow, update_user_workflow
 
@@ -69,7 +69,7 @@ class UserSerializer(serializers.ModelSerializer):
         group_ids = []
 
         if groups is not None:
-            group_ids=[g.id for g in groups]
+            group_ids = [g.id for g in groups]
 
         update_user_workflow(
             user=instance,

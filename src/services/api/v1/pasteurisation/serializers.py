@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from product_definitions.models import ProductDefinition
-from storages.models import Storage
-from pasteurs.models import Pasteur
+from apps.product_definitions.models import ProductDefinition
+from apps.storages.models import Storage
+from apps.pasteurs.models import Pasteur
 
-from pasteurisation.models import Pasteurisation
-from pasteurisation.use_cases.create import create_pasteurisation
-from pasteurisation.use_cases.update import update_pasteurisation
+from apps.pasteurisation.models import Pasteurisation
+from apps.pasteurisation.use_cases.create import create_pasteurisation
+from apps.pasteurisation.use_cases.update import update_pasteurisation
 
 
 class PasteurisationSerializer(serializers.ModelSerializer):

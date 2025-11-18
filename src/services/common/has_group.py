@@ -1,6 +1,6 @@
 from rest_framework.permissions import BasePermission
 
-from user_groups.models import GroupMetadata
+from apps.users.features.user_groups.models import GroupMetadata
 
 
 class HasGroup:

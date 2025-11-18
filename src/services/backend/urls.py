@@ -2,8 +2,13 @@ from django.contrib import admin
 from django.urls import include, path
 
 from drf_spectacular.views import SpectacularAPIView
-from authentication.views import GetRolesView, LoginView, LogoutView, SessionCheckView
-from user_groups.views import UserGroupsView
+from apps.authentication.views import (
+    GetRolesView,
+    LoginView,
+    LogoutView,
+    SessionCheckView,
+)
+from apps.users.features.user_groups.views import UserGroupsView
 
 
 urlpatterns = [

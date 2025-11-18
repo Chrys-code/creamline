@@ -5,7 +5,7 @@ from api.v1.milk import serializers
 from api.v1.pagination import StandardPagePagination
 from api.v1.permissions import StrictDjangoModelPermissions
 
-from milk.models import Milk
+from apps.milk.models import Milk
 
 
 class MilkViewSet(viewsets.ModelViewSet):
