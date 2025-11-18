@@ -12,16 +12,12 @@ urlpatterns = [
     path("api/logout/", LogoutView.as_view()),
     path("api/session/", SessionCheckView.as_view()),
     path("api/roles/", GetRolesView.as_view()),
-
     # Admin
     path("api/admin/", admin.site.urls),
-
     # Domain endpoints
     path("api/user-groups/", UserGroupsView.as_view(), name="user-groups"),
-
     # API schema
     path("api/schema/", SpectacularAPIView.as_view()),
-
     # Other versioned API endpoints
     path("api/", include(("api.urls", "api"))),
 ]

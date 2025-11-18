@@ -1,5 +1,10 @@
 from django.contrib import admin
-from product_definitions.models import ProductDefinition, SkimmedMilkProductDefinition, WholeMilkMilkProductDefinition, CreamProductDefinition
+from product_definitions.models import (
+    ProductDefinition,
+    SkimmedMilkProductDefinition,
+    WholeMilkMilkProductDefinition,
+    CreamProductDefinition,
+)
 
 
 class FilteredProductDefinitionAdmin(admin.ModelAdmin):
@@ -15,14 +20,15 @@ class FilteredProductDefinitionAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
-
 @admin.register(SkimmedMilkProductDefinition)
 class SkimmedMilkProductDefinitionAdmin(FilteredProductDefinitionAdmin):
     type = ProductDefinition.ProductDefinitionTypes.SKIMMEDMILK
 
+
 @admin.register(WholeMilkMilkProductDefinition)
 class WholeMilkProductDefinitionAdmin(FilteredProductDefinitionAdmin):
     type = ProductDefinition.ProductDefinitionTypes.WHOLEMILK
+
 
 @admin.register(CreamProductDefinition)
 class CreamProductDefinitionAdmin(FilteredProductDefinitionAdmin):

@@ -12,25 +12,39 @@ from api.v1.milk.views import MilkViewSet
 
 router = DefaultRouter()
 router.register(
-    "producer", ProducerViewSet, basename="producer",
+    "producer",
+    ProducerViewSet,
+    basename="producer",
 )
 router.register(
-    "storage", StorageViewSet, basename="storage",
+    "storage",
+    StorageViewSet,
+    basename="storage",
 )
 router.register(
-    "milk", MilkViewSet, basename="milk",
+    "milk",
+    MilkViewSet,
+    basename="milk",
 )
 router.register(
-    "pasteur", PasteurViewSet, basename="pasteur",
+    "pasteur",
+    PasteurViewSet,
+    basename="pasteur",
 )
 router.register(
-    "pasteurisation", PasteurisationViewSet, basename="pasteurisation",
+    "pasteurisation",
+    PasteurisationViewSet,
+    basename="pasteurisation",
 )
 router.register(
-    "product-definition", ProductDefinitionViewSet, basename="product-definition",
+    "product-definition",
+    ProductDefinitionViewSet,
+    basename="product-definition",
 )
 router.register(
-    "users", UserViewSet, basename="users",
+    "users",
+    UserViewSet,
+    basename="users",
 )
 
 

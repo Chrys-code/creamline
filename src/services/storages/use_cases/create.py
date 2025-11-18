@@ -15,36 +15,22 @@ class CreateStorageData(TypedDict):
     created_by: "CustomUser"
 
 
-def _create(
-    name: str,
-    type: Storage.StorageType,
-    created_by: "CustomUser"
-) -> Storage:
-    storage = Storage.objects.create(
-        name=name,
-        type=type,
-        created_by=created_by
-    )
+def _create(name: str, type: Storage.StorageType, created_by: "CustomUser") -> Storage:
+    storage = Storage.objects.create(name=name, type=type, created_by=created_by)
 
     return storage
 
 
 def create_storage(
-    validated_data: CreateStorageData,
-    created_by: "CustomUser"
+    validated_data: CreateStorageData, created_by: "CustomUser"
 ) -> Storage:
     created_storage = _create(
-        name=validated_data["name"],
-        type=validated_data["type"],
-        created_by=created_by
+        name=validated_data["name"], type=validated_data["type"], created_by=created_by
     )
 
     logger.info(
         "storage-created",
-        extra={
-            "uuid": created_storage.uuid,
-            "created_by": created_by.uuid
-        },
+        extra={"uuid": created_storage.uuid, "created_by": created_by.uuid},
     )
 
     return created_storage

@@ -7,9 +7,7 @@ from milk.models import Milk
 logger = logging.getLogger(__name__)
 
 
-def _update(
-    instance: Milk
-) -> Milk:
+def _update(instance: Milk) -> Milk:
     updated_milk = instance.save()
 
     return updated_milk

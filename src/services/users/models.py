@@ -3,7 +3,7 @@ import uuid
 from django.contrib.auth.models import (
     BaseUserManager,
     AbstractBaseUser,
-    PermissionsMixin
+    PermissionsMixin,
 )
 from django.utils.translation import gettext_lazy as _
 from django.db import models
@@ -14,42 +14,32 @@ class UserManager(BaseUserManager):
         if not email:
             raise ValueError("Users must have an email address")
 
-        user = self.model(
-            email=self.normalize_email(email)
-        )
+        user = self.model(email=self.normalize_email(email))
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
     def create_superuser(self, email, password=None):
-        user = self.create_user(
-            email=email,
-            password=password
-        )
+        user = self.create_user(email=email, password=password)
 
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
         return user
-    
+
     def get_by_natural_key(self, email):
         return self.get(email=email)
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
-    
+
     uuid = models.UUIDField(
         default=uuid.uuid4, unique=True, editable=False, primary_key=False
     )
 
-    
-    email = models.EmailField(
-        verbose_name="email",
-        max_length=255,
-        unique=True
-    )
+    email = models.EmailField(verbose_name="email", max_length=255, unique=True)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -67,4 +57,3 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     @property
     def is_admin(self):
         return self.is_staff
-    

@@ -1,5 +1,6 @@
 from django.contrib.auth.models import Group
 
+
 def set_user_groups(user, group_ids):
     """
     Overwrite user's group membership.

@@ -11,4 +11,3 @@ class PasteurViewSet(ReadOnlyModelViewSet):
     queryset = Pasteur.objects.all()
     serializer_class = seralizers.PasteurSerializer
     permission_classes = [IsAuthenticated]
-

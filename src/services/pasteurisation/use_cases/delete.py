@@ -17,15 +17,12 @@ def _delete(instance: Pasteurisation):
 
 
 def delete_pasteurisation(instance: Pasteurisation, deleted_by: "CustomUser"):
-    instance.deleted_at=timezone.now()
-    instance.deleted_by=deleted_by
+    instance.deleted_at = timezone.now()
+    instance.deleted_by = deleted_by
 
     _delete(instance=instance)
 
     logger.info(
         "pasteurisation-deleted",
-        extra={
-            "uuid": instance.uuid,
-            "deleted_by": deleted_by.uuid
-        },
+        extra={"uuid": instance.uuid, "deleted_by": deleted_by.uuid},
     )

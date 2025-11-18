@@ -4,7 +4,6 @@ from django.conf import settings
 from django.db import models
 
 
-
 class Storage(models.Model):
     class StorageType(models.TextChoices):
         SILO = "SILO", "silo"
@@ -25,17 +24,17 @@ class Storage(models.Model):
         on_delete=models.SET_NULL,
         editable=False,
         null=True,
-        blank=True
+        blank=True,
     )
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(null=True, blank=True, editable=False)
-    deleted_by =  models.ForeignKey(
+    deleted_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name="deleted_storages",
         on_delete=models.SET_NULL,
         editable=False,
         null=True,
-        blank=True
+        blank=True,
     )
 
     objects = models.Manager()

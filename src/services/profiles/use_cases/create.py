@@ -23,7 +23,7 @@ def _create(
     first_name: str,
     last_name: str,
     user: "CustomUser",
-    created_by: "CustomUser"
+    created_by: "CustomUser",
 ) -> Profile:
     profile = Profile.objects.create(
         email=email,
@@ -31,16 +31,14 @@ def _create(
         first_name=first_name,
         last_name=last_name,
         user=user,
-        created_by=created_by
+        created_by=created_by,
     )
 
     return profile
 
 
 def create_profile(
-    validated_data: CreateProfileData,
-    user: "CustomUser",
-    created_by: "CustomUser"
+    validated_data: CreateProfileData, user: "CustomUser", created_by: "CustomUser"
 ) -> Profile:
     created_profile = _create(
         email=validated_data["email"],
@@ -48,7 +46,7 @@ def create_profile(
         first_name=validated_data["first_name"],
         last_name=validated_data["last_name"],
         user=user,
-        created_by=created_by
+        created_by=created_by,
     )
 
     logger.info(

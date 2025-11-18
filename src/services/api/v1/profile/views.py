@@ -14,8 +14,6 @@ class ProfileDetailView(RetrieveUpdateAPIView):
     lookup_field = "uuid"
 
     def get_object(self):
-         return get_object_or_404(
-            Profile,
-            user=self.request.user,
-            deleted_at__isnull=True
+        return get_object_or_404(
+            Profile, user=self.request.user, deleted_at__isnull=True
         )

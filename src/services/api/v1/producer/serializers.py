@@ -9,22 +9,21 @@ class ProducerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Producer
         fields = [
-            "uuid", 
-            "name", 
-            "address", 
+            "uuid",
+            "name",
+            "address",
             "contact_email",
-
-            "created_at", 
-            "updated_at", 
-            "deleted_at"
+            "created_at",
+            "updated_at",
+            "deleted_at",
         ]
 
     def create(self, validated_data):
-        producer = create_producer(validated_data=validated_data, created_by=self.context["request"].user)
+        producer = create_producer(
+            validated_data=validated_data, created_by=self.context["request"].user
+        )
         return producer
-    
+
     def update(self, instance, validated_data):
         profile = update_producer(instance=instance, validated_data=validated_data)
         return profile
-
-        

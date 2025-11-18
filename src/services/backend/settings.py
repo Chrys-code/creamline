@@ -57,14 +57,12 @@ if os.getenv("ENV") == "production":
     SESSION_COOKIE_DOMAIN = ".creamline.com"
     SESSION_COOKIE_SECURE = True
     SESSION_COOKIE_SAMESITE = "None"
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    "users",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -72,8 +70,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "users",
     "drf_spectacular",
-	"authentication",
+    "authentication",
     "profiles",
     "producers",
     "milk",
@@ -81,7 +80,7 @@ INSTALLED_APPS = [
     "pasteurs",
     "pasteurisation",
     "product_definitions",
-    "user_groups"
+    "user_groups",
 ]
 
 MIDDLEWARE = [
@@ -92,7 +91,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.middleware.locale.LocaleMiddleware"
+    "django.middleware.locale.LocaleMiddleware",
 ]
 
 ROOT_URLCONF = "backend.urls"
@@ -132,7 +131,9 @@ DATABASES = {
 }
 
 
-LOGIN_REDIRECT_URL = "http://localhost:3000" if os.getenv("ENV") == "development" else "/"
+LOGIN_REDIRECT_URL = (
+    "http://localhost:3000" if os.getenv("ENV") == "development" else "/"
+)
 LOGOUT_REDIRECT_URL = "/auth/login/"
 
 # Password validation
@@ -158,7 +159,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
-        'rest_framework.permissions.DjangoModelPermissions',
+        "rest_framework.permissions.DjangoModelPermissions",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }

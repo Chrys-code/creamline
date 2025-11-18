@@ -9,6 +9,7 @@ from authentication.serializers import LoginSerializer
 
 User = get_user_model()
 
+
 class LoginView(generics.GenericAPIView):
     serializer_class = LoginSerializer
     permission_classes = [AllowAny]
@@ -28,9 +29,9 @@ class LoginView(generics.GenericAPIView):
             return Response(status=status.HTTP_200_OK)
 
         return Response(
-            {"message": _("Invalid credentials")},
-            status=status.HTTP_401_UNAUTHORIZED
+            {"message": _("Invalid credentials")}, status=status.HTTP_401_UNAUTHORIZED
         )
+
 
 class LogoutView(views.APIView):
     def post(self, request):

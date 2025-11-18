@@ -7,9 +7,7 @@ from storages.models import Storage
 logger = logging.getLogger(__name__)
 
 
-def _update(
-    instance: Storage
-) -> Storage:
+def _update(instance: Storage) -> Storage:
     updated_storage = instance.save()
 
     return updated_storage

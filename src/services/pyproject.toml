@@ -32,6 +32,22 @@ black = "^25.1.0"
 pyright = "^1.1.402"
 pylint = "^3.3.7"
 
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.venv
+  | build
+  | dist
+)/
+'''
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "backend.settings"
+
+[tool.pylint.master]
+init-hook = 'import sys; sys.path.append("services")'

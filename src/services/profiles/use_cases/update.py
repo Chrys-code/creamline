@@ -7,16 +7,12 @@ from profiles.models import Profile
 logger = logging.getLogger(__name__)
 
 
-def _update(
-    instance: Profile
-) -> Profile:
+def _update(instance: Profile) -> Profile:
     instance.save()
     return instance
 
-def update_profile(
-        instance: Profile,
-        validated_data: Dict
-) -> Profile:
+
+def update_profile(instance: Profile, validated_data: Dict) -> Profile:
     for field, value in validated_data.items():
         setattr(instance, field, value)
 

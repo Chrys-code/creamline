@@ -30,10 +30,10 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            "uuid", 
-            "email", 
-            "password", 
-            "is_active", 
+            "uuid",
+            "email",
+            "password",
+            "is_active",
             "is_staff",
             "profile",
             "groups",
@@ -48,7 +48,12 @@ class UserSerializer(serializers.ModelSerializer):
         first_name = profile.get("first_name", "")
         last_name = profile.get("last_name", "")
 
-        user = User(email=validated_data["email"], password=password, is_staff=False, is_active=True)
+        user = User(
+            email=validated_data["email"],
+            password=password,
+            is_staff=False,
+            is_active=True,
+        )
 
         user.set_password(password)
         user.save()
@@ -59,13 +64,16 @@ class UserSerializer(serializers.ModelSerializer):
         profile_data = {
             "email": email,
             "first_name": first_name,
-            "last_name": last_name
+            "last_name": last_name,
         }
 
-        create_profile(validated_data=profile_data, user=user, created_by=self.context["request"].user)
+        create_profile(
+            validated_data=profile_data,
+            user=user,
+            created_by=self.context["request"].user,
+        )
 
         return user
-
 
     def update(self, instance, validated_data):
         # Remove email to prevent updates
@@ -89,7 +97,7 @@ class UserSerializer(serializers.ModelSerializer):
         if profile:
             profile_data = {
                 "first_name": profile_data.get("first_name", profile.first_name),
-                "last_name": profile_data.get("last_name", profile.last_name)
+                "last_name": profile_data.get("last_name", profile.last_name),
             }
 
             update_profile(instance=profile, validated_data=profile_data)

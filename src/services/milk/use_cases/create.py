@@ -37,7 +37,7 @@ def _create(
     aflatoxin: bool,
     inhibitory_residue: bool,
     temperature: float,
-    created_by: "CustomUser"
+    created_by: "CustomUser",
 ) -> Milk:
     milk = Milk.objects.create(
         producer=producer,
@@ -53,45 +53,36 @@ def _create(
         aflatoxin=aflatoxin,
         inhibitory_residue=inhibitory_residue,
         temperature=temperature,
-        created_by=created_by
+        created_by=created_by,
     )
 
     return milk
 
 
-def create_milk(
-    validated_data: CreateMilkData,
-    created_by: "CustomUser"        
-) -> Milk:
-    producer=validated_data["producer"]
-    storage=validated_data["storage"]
+def create_milk(validated_data: CreateMilkData, created_by: "CustomUser") -> Milk:
+    producer = validated_data["producer"]
+    storage = validated_data["storage"]
 
     created_milk = _create(
         producer=producer,
         producer_uuid=producer.uuid,
         producer_name=producer.name,
-
         storage=storage,
         storage_uuid=storage.uuid,
         storage_name=storage.name,
         storage_type=storage.type,
-
         volume_kg=validated_data["volume_kg"],
         volume_liters=validated_data["volume_liters"],
-
         acid_content=validated_data["acid_content"],
         aflatoxin=validated_data["aflatoxin"],
         inhibitory_residue=validated_data["inhibitory_residue"],
         temperature=validated_data["temperature"],
-        created_by=created_by
+        created_by=created_by,
     )
 
     logger.info(
         "milk-created",
-        extra={
-            "uuid": created_milk.uuid,
-            "created_by": created_by.uuid
-        },
+        extra={"uuid": created_milk.uuid, "created_by": created_by.uuid},
     )
 
     return created_milk

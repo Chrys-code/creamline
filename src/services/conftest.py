@@ -6,6 +6,7 @@ from rest_framework.test import APIClient
 #     # app.test.fixtures
 # ]
 
+
 @pytest.fixture
 def api_client():
     return APIClient()

@@ -15,7 +15,6 @@ class FilteredStorageAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
-
 @admin.register(SiloStorage)
 class SiloStorageAdmin(FilteredStorageAdmin):
     type = Storage.StorageType.SILO

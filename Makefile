@@ -12,6 +12,9 @@ build:
 start:
 	docker-compose -f dockerfiles/docker-compose.dev.yml -p creamline-dev up -d
 
+code-format:
+	cd src/services && poetry run black .
+
 make-migrations:
 	docker-compose -f dockerfiles/docker-compose.dev.yml -p creamline-dev exec backend python3 manage.py makemigrations
 

@@ -7,9 +7,7 @@ from pasteurisation.models import Pasteurisation
 logger = logging.getLogger(__name__)
 
 
-def _update(
-    instance: Pasteurisation
-) -> Pasteurisation:
+def _update(instance: Pasteurisation) -> Pasteurisation:
     updated_pasteurisation = instance.save()
 
     return updated_pasteurisation

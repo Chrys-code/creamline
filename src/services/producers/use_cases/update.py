@@ -7,9 +7,7 @@ from producers.models import Producer
 logger = logging.getLogger(__name__)
 
 
-def _update(
-    instance: Producer
-) -> Producer:
+def _update(instance: Producer) -> Producer:
     updated_producer = instance.save()
 
     return updated_producer

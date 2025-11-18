@@ -2,6 +2,7 @@ from rest_framework.permissions import BasePermission
 
 from user_groups.models import GroupMetadata
 
+
 class HasGroup:
     """
     Simple permission helpers for group-based access.
@@ -15,10 +16,8 @@ class HasGroup:
             if not user.is_authenticated or not self.code_name:
                 return False
 
-
             return GroupMetadata.objects.filter(
-                code_name=self.code_name,
-                group__in=user.groups.all()
+                code_name=self.code_name, group__in=user.groups.all()
             ).exists()
 
     class Manager(BasePermission):

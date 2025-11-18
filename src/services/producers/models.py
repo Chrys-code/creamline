@@ -14,27 +14,26 @@ class Producer(models.Model):
     contact_email = models.EmailField(max_length=256, blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
-    created_by =  models.ForeignKey(
+    created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name="created_producers",
         on_delete=models.SET_NULL,
         editable=False,
         null=True,
-        blank=True
+        blank=True,
     )
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(null=True, blank=True, editable=False)
-    deleted_by =  models.ForeignKey(
+    deleted_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name="deleted_producers",
         on_delete=models.SET_NULL,
         editable=False,
         null=True,
-        blank=True
+        blank=True,
     )
 
     objects = models.Manager()
 
     def __str__(self):
         return f"{self.name} - {self.uuid}"
-

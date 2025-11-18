@@ -7,6 +7,7 @@ from django.db import models
 from storages.models import Storage
 from producers.models import Producer
 
+
 class Milk(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4, unique=True, editable=False, primary_key=False
@@ -17,7 +18,7 @@ class Milk(models.Model):
         related_name="produced_milk",
         on_delete=models.PROTECT,
         editable=False,
-        null=False
+        null=False,
     )
     producer_uuid = models.CharField(max_length=255, editable=False)
     producer_name = models.CharField(max_length=255, editable=False)
@@ -26,11 +27,11 @@ class Milk(models.Model):
     volume_liters = models.FloatField(validators=[MinValueValidator(1.00)])
 
     storage = models.ForeignKey(
-            Storage,
-            related_name="stored_milk",
-            on_delete=models.PROTECT,
-            editable=False,
-            null=False
+        Storage,
+        related_name="stored_milk",
+        on_delete=models.PROTECT,
+        editable=False,
+        null=False,
     )
     storage_uuid = models.CharField(max_length=255, editable=False)
     storage_name = models.CharField(max_length=255, editable=False)
@@ -48,17 +49,17 @@ class Milk(models.Model):
         on_delete=models.SET_NULL,
         editable=False,
         null=True,
-        blank=True
+        blank=True,
     )
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(null=True, blank=True, editable=False)
-    deleted_by =  models.ForeignKey(
+    deleted_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name="deleted_milk",
         on_delete=models.SET_NULL,
         editable=False,
         null=True,
-        blank=True
+        blank=True,
     )
 
     objects = models.Manager()
