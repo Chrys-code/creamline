@@ -12,8 +12,6 @@ class Profile(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="profile",
-        null=True,
-        blank=True,
     )
     email = models.EmailField(max_length=255, blank=True, null=True)
     profile_image = models.CharField(max_length=256, blank=True, null=True)

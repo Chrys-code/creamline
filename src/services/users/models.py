@@ -1,3 +1,4 @@
+from typing import TYPE_CHECKING, Optional
 import uuid
 
 from django.contrib.auth.models import (
@@ -8,7 +9,9 @@ from django.contrib.auth.models import (
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 
-
+if TYPE_CHECKING:
+    from profiles.models import Profile
+    
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
         if not email:
@@ -57,3 +60,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     @property
     def is_admin(self):
         return self.is_staff
+    
+    # Annotate reverse OneToOne relation for type checkers
+    profile: "Profile"

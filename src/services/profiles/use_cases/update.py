@@ -1,5 +1,4 @@
 import logging
-from typing import Dict
 
 from profiles.models import Profile
 
@@ -12,9 +11,20 @@ def _update(instance: Profile) -> Profile:
     return instance
 
 
-def update_profile(instance: Profile, validated_data: Dict) -> Profile:
-    for field, value in validated_data.items():
-        setattr(instance, field, value)
+def update_profile(
+        instance: Profile,
+        email: str | None,
+        first_name: str | None,
+        last_name: str | None
+    ) -> Profile:
+    if email is not None:
+        instance.email = email
+
+    if first_name is not None:
+        instance.first_name = first_name
+
+    if last_name is not None:
+        instance.last_name = last_name
 
     updated_profile = _update(instance=instance)
 
