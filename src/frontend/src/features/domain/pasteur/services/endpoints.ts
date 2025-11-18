@@ -4,10 +4,18 @@ import schemas from "./schemas";
 
 const ListPasteurEndpoint = makeEndpoint({
 	method: "get",
-	path: "/api/v1/pasteur/",
+	path: "/api/v1/pasteur/all",
 	alias: "v1_pasteur_list",
 	requestFormat: "json",
-	response: z.array(schemas.PasteurSchema),
+	response: schemas.ListPasteurSchema,
+});
+
+const PaginatedListPasteurEndpoint = makeEndpoint({
+	method: "get",
+	path: "/api/v1/pasteur/",
+	alias: "v1_pasteur_list_paginated",
+	requestFormat: "json",
+	response: schemas.PaginatedListPasteurSchema,
 });
 
 const GetPasteurEndpoint = makeEndpoint({
@@ -60,11 +68,28 @@ const PatchPasteurEndpoint = makeEndpoint({
 	response: schemas.PasteurSchema,
 });
 
+const DeletePasteurEndpoint = makeEndpoint({
+	method: "delete",
+	path: "/api/v1/pasteur/:id/",
+	alias: "v1_pasteur_delete",
+	requestFormat: "json",
+	parameters: [
+		{
+			name: "id",
+			type: "Path",
+			schema: z.string().uuid(),
+		},
+	],
+	response: z.void(),
+});
+
 const endpoints = makeApi([
 	ListPasteurEndpoint,
+	PaginatedListPasteurEndpoint,
 	GetPasteurEndpoint,
 	CreatePasteurEndpoint,
 	PatchPasteurEndpoint,
+	DeletePasteurEndpoint,
 ]);
 
 export function createApiClient(baseUrl: string, options?: ZodiosOptions) {

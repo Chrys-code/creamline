@@ -314,7 +314,7 @@ const endpoints = makeApi([
 	{
 		method: "get",
 		path: "/api/v1/milk/",
-		alias: "v1_milk_list",
+		alias: "v1_milk_list_paginated",
 		requestFormat: "json",
 		parameters: [
 			{
@@ -413,7 +413,7 @@ const endpoints = makeApi([
 	{
 		method: "get",
 		path: "/api/v1/pasteur/",
-		alias: "v1_pasteur_list",
+		alias: "v1_pasteur_list_paginated",
 		requestFormat: "json",
 		response: z.array(Pasteur),
 	},

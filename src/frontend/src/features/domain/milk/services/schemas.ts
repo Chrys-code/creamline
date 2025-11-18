@@ -33,7 +33,7 @@ const MilkSchema = MilkBaseSchema.extend({
 	deleted_at: z.string().nullish(),
 });
 
-const ListMilkSchema = z
+const PaginatedListMilkSchema = z
 	.object({
 		count: z.number().int(),
 		next: z.string().url().nullish(),
@@ -50,7 +50,7 @@ const PatchMilkFormSchema = MilkBaseSchema.extend({
 
 const schemas = {
 	MilkSchema,
-	ListMilkSchema,
+	PaginatedListMilkSchema,
 	CreateMilkFormSchema,
 	PatchMilkFormSchema,
 };

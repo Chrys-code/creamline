@@ -5,9 +5,9 @@ import { getPaginatedPasteuriationList } from "../../features/domain/pasteurisat
 import { listStorages } from "../../features/domain/storage/loaders/listStorages";
 import { listPasteurs } from "../../features/domain/pasteur/loaders/listPasteurs";
 import { listProductDefinitions } from "../../features/domain/productDefinition/loaders/listProductDefinitions";
-import { adaptPasteursToPasteurOptions } from "../../features/domain/pasteurisation/adapters";
 import { adaptStoragesToStorageOptions } from "../../features/domain/storage/adapters";
 import { adaptProductDefinitionsToProductDefinitionOptions } from "../../features/domain/productDefinition/adapters";
+import { adaptPasteursToPasteurOptions } from "../../features/domain/pasteur/adapters";
 
 const pasteurisationRoutes = [
 	{

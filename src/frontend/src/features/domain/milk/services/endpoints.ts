@@ -2,10 +2,10 @@ import z from "zod";
 import { makeApi, makeEndpoint, Zodios, type ZodiosOptions } from "@zodios/core";
 import schemas from "./schemas";
 
-const ListMilkEndpoint = makeEndpoint({
+const PaginatedListMilkEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/milk/",
-	alias: "v1_milk_list",
+	alias: "v1_milk_list_paginated_paginated",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -19,7 +19,7 @@ const ListMilkEndpoint = makeEndpoint({
 			schema: z.number().int().optional(),
 		},
 	],
-	response: schemas.ListMilkSchema,
+	response: schemas.PaginatedListMilkSchema,
 });
 
 const GetMilkEndpoint = makeEndpoint({
@@ -73,7 +73,7 @@ const PatchMilkEndpoint = makeEndpoint({
 });
 
 const endpoints = makeApi([
-	ListMilkEndpoint,
+	PaginatedListMilkEndpoint,
 	GetMilkEndpoint,
 	CreateMilkEndpoint,
 	PatchMilkEndpoint,
