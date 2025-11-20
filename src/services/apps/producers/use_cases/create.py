@@ -1,5 +1,5 @@
 import logging
-from typing import TypedDict, TYPE_CHECKING
+from typing import TYPE_CHECKING
 
 from apps.producers.models import Producer
 
@@ -7,13 +7,6 @@ if TYPE_CHECKING:
     from apps.users.models import CustomUser
 
 logger = logging.getLogger(__name__)
-
-
-class CreateProducerData(TypedDict):
-    name: str
-    address: str
-    contact_email: str | None
-    created_by: "CustomUser"
 
 
 def _create(
@@ -27,12 +20,12 @@ def _create(
 
 
 def create_producer(
-    validated_data: CreateProducerData, created_by: "CustomUser"
+    name: str, address: str, contact_email: str | None, created_by: "CustomUser"
 ) -> Producer:
     created_producer = _create(
-        name=validated_data["name"],
-        address=validated_data["address"],
-        contact_email=validated_data.get("contact_email", None),
+        name=name,
+        address=address,
+        contact_email=contact_email,
         created_by=created_by,
     )
 

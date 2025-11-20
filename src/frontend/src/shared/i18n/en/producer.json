@@ -18,7 +18,8 @@
 			"email": "Invalid email address"
 		},
 		"notifications": {
-			"create_success": "New producer added!"
+			"success": "Producer saved!",
+			"error": "Could not save Producer!"
 		}
 	}
 }

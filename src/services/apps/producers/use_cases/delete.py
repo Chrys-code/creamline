@@ -16,7 +16,7 @@ def _delete(instance: Producer):
     instance.save()
 
 
-def delete_profile(instance: Producer, deleted_by: "CustomUser"):
+def delete_producer(instance: Producer, deleted_by: "CustomUser"):
     instance.deleted_at = timezone.now()
     instance.deleted_by = deleted_by
 

@@ -2,9 +2,17 @@ import z from "zod";
 import { makeApi, makeEndpoint, Zodios, type ZodiosOptions } from "@zodios/core";
 import schemas from "./schemas";
 
-const ListProducerEndpoint = makeEndpoint({
+const PaginatedListProducerEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/producer/",
+	alias: "v1_producer_list_paginated",
+	requestFormat: "json",
+	response: schemas.PaginatedListProducerSchema,
+});
+
+const ListProducerEndpoint = makeEndpoint({
+	method: "get",
+	path: "/api/v1/producer/all",
 	alias: "v1_producer_list",
 	requestFormat: "json",
 	response: z.array(schemas.ProducerSchema),
@@ -42,8 +50,8 @@ const CreateProducerEndpoint = makeEndpoint({
 
 const PatchProducerEndpoint = makeEndpoint({
 	method: "put",
-	path: "/api/v1/producer/:id/",
-	alias: "v1_producer_update",
+	path: "/api/v1/producer/:uuid/",
+	alias: "v1_producer_partial_update",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -52,15 +60,16 @@ const PatchProducerEndpoint = makeEndpoint({
 			schema: schemas.PatchProducerFormSchema,
 		},
 		{
-			name: "id",
+			name: "uuid",
 			type: "Path",
-			schema: z.number().int(),
+			schema: z.string().uuid(),
 		},
 	],
 	response: schemas.ProducerSchema,
 });
 
 const endpoints = makeApi([
+	PaginatedListProducerEndpoint,
 	ListProducerEndpoint,
 	GetProducerEndpoint,
 	CreateProducerEndpoint,

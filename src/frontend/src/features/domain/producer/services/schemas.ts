@@ -3,7 +3,7 @@ import { tTyped } from "../../../../configs/i18n";
 
 const tCommon = tTyped("common");
 
-const ProducerBaseSchema = z.object({
+const BaseProducerSchema = z.object({
 	name: z
 		.string()
 		.max(255)
@@ -20,18 +20,36 @@ const ProducerBaseSchema = z.object({
 		.nullish(),
 });
 
-export const ProducerSchema = ProducerBaseSchema.extend({
+const ProducerSchema = BaseProducerSchema.extend({
 	uuid: z.string().uuid(),
+
+	created_at: z.string(),
+	updated_at: z.string(),
+	deleted_at: z.string().nullish(),
 });
 
-export const CreateProducerFormSchema = ProducerBaseSchema;
+const ListProducerSchema = z.array(ProducerSchema);
 
-export const PatchProducerFormSchema = ProducerBaseSchema.extend({
+const PaginatedListProducerSchema = z
+	.object({
+		count: z.number().int(),
+		next: z.string().url().nullish(),
+		previous: z.string().url().nullish(),
+		results: z.array(ProducerSchema),
+	})
+	.passthrough();
+
+const ProducerFromSchema = BaseProducerSchema;
+const CreateProducerFormSchema = BaseProducerSchema;
+const PatchProducerFormSchema = BaseProducerSchema.extend({
 	uuid: z.string().uuid(),
-});
+}).partial();
 
 const schemas = {
 	ProducerSchema,
+	ListProducerSchema,
+	PaginatedListProducerSchema,
+	ProducerFromSchema,
 	CreateProducerFormSchema,
 	PatchProducerFormSchema,
 };

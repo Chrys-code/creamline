@@ -1,5 +1,4 @@
 import logging
-from typing import Dict
 
 from apps.producers.models import Producer
 
@@ -15,10 +14,16 @@ def _update(instance: Producer) -> Producer:
 
 def update_producer(
     instance: Producer,
-    validated_data: Dict,
+    name: str | None,
+    address: str | None,
+    contact_email: str | None,
 ) -> Producer:
-    for field, value in validated_data.items():
-        setattr(instance, field, value)
+    if name is not None:
+        setattr(instance, "name", name)
+    if address is not None:
+        setattr(instance, "address", address)
+    if contact_email is not None:
+        setattr(instance, "contact_email", contact_email)
 
     updated_producer = _update(instance=instance)
 

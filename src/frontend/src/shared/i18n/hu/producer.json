@@ -18,7 +18,8 @@
 			"email": "Érvénytelen email cím"
 		},
 		"notifications": {
-			"create_success": "Új termelő hozzáadva!"
+			"success": "Termelő elmentve!",
+			"error": "Termelőt nem tudtuk elmenteni!"
 		}
 	}
 }
