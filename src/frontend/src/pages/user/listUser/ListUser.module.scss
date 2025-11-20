@@ -1,3 +1,5 @@
+@import "../../../styles/breakpoints.scss";
+
 .list {
 	list-style-type: none;
 	margin: 0;
@@ -32,12 +34,23 @@
 }
 
 .floatingMenu {
-	position: fixed;
+	position: absolute;
 	left: 0rem;
 	right: 0rem;
-	bottom: var(--mobile-footer-nav-height);
+	bottom: 0rem;
 
 	padding: 1rem 2rem;
 	background-color: var(--color-neutral-0);
 	z-index: 90;
+}
+
+@media (min-width: $breakpoint-desktop) {
+	.floatingMenu {
+		padding: 0.5rem 1rem 2rem 1rem;
+		position: sticky;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		background-color: var(--color-neutral-0);
+	}
 }

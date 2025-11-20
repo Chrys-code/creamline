@@ -1,3 +1,5 @@
+@import "../../../styles/breakpoints.scss";
+
 .container {
 	width: 100%;
 	position: fixed;
@@ -11,10 +13,42 @@
 	background-color: var(--color-primary-500);
 	padding: 1rem;
 	box-shadow: var(--box-shadow-bottom);
+
+	button {
+		margin: 0;
+		padding: 0;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		cursor: pointer;
+
+		> svg {
+			transition:
+				color var(--animation-duration) var(--animation-timing),
+				fill var(--animation-duration) var(--animation-timing);
+		}
+
+		&:hover {
+			> svg {
+				color: var(--color-primary-100);
+				fill: var(--color-primary-100);
+			}
+		}
+	}
 }
 
 .container menu {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+@media (min-width: $breakpoint-desktop) {
+	.container {
+		button {
+			display: none;
+		}
+	}
 }

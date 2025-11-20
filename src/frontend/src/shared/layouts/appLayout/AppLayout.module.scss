@@ -1,10 +1,23 @@
+@import "../../../styles/breakpoints.scss";
+
 .container {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+}
+
+.main {
 	height: calc(100vh - (var(--mobile-footer-nav-height) + var(--header-height)));
+	width: 100%;
+	max-width: 900px;
+
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: flex-start;
-	margin: 0px 0.5rem;
+
+	margin: 0px auto;
 	margin-top: var(--header-height); // Because header is fixed position
 	padding: 1rem 0.5rem;
 	gap: 2rem;
@@ -20,4 +33,11 @@
 
 	scrollbar-width: none;
 	/* hides scrollbar but still scrollable */
+}
+
+@media (min-width: $breakpoint-desktop) {
+	.main {
+		height: calc(100vh - var(--header-height));
+		padding-bottom: 0px;
+	}
 }

@@ -2,6 +2,7 @@
 	// App layout
 	--header-height: 2.5rem;
 	--mobile-footer-nav-height: 4em;
+	--sidebar-desktop-width: 17rem;
 
 	// Border radius
 	--border-wrapper-radius: 0.5rem;
@@ -10,4 +11,5 @@
 	// Shadow
 	--box-shadow-top: 0px -2px 8px 2px var(--color-shadow);
 	--box-shadow-bottom: 0px 2px 8px 2px var(--color-shadow);
+	--box-shadow-right: 2px 0px 8px 2px var(--color-shadow);
 }

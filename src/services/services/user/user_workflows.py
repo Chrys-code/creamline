@@ -15,7 +15,7 @@ def create_user_workflow(
     group_ids: list[str],
 ):
     """
-    Functional service layer orchestrating a business workflow to
+    Service layer orchestrating a business workflow to
     create user, assign groups and create profile
     """
     user = create_user(email=email, password=password)
@@ -39,7 +39,7 @@ def update_user_workflow(
     group_ids: list[str],
 ):
     """
-    Functional service layer orchestrating a business workflow to
+    Service layer orchestrating a business workflow to
     update user, assign groups and update profile
     """
     updated_user = update_user(instance=user, email=email)

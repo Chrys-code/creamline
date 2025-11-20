@@ -2,5 +2,22 @@
 	"mobile_navigation": {
 		"home_page": "home",
 		"profile": "profile"
+	},
+	"sidebar": {
+		"title": "Menu",
+		"users": "Users",
+		"home": "Home",
+		"processes": {
+			"section_title": "Processes",
+			"milk_collection": "Milk collections",
+			"pasteurisation": "Pasteurisations"
+		},
+		"utilities": {
+			"section_title": "Utilities",
+			"storage": "Storages",
+			"pasteur": "Pasteurs",
+			"producer": "Producers",
+			"product_definitions": "Product definitions"
+		}
 	}
 }

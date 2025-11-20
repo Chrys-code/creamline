@@ -1,3 +1,5 @@
+@import "../../../styles/breakpoints.scss";
+
 .container {
 	position: fixed;
 	bottom: 0;
@@ -54,5 +56,11 @@
 				color: var(--color-primary-500);
 			}
 		}
+	}
+}
+
+@media (min-width: $breakpoint-desktop) {
+	.container {
+		display: none;
 	}
 }

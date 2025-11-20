@@ -1,0 +1,11 @@
+// Media queryies are evaluated at runtime so we use preprocessors
+
+$breakpoint-desktop: 1024px;
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 480px;
+
+:root {
+	--breakpoint-desktop: 1024px;
+	--breakpoint-tablet: 768px;
+	--breakpoint-mobile: 480px;
+}

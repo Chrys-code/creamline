@@ -5,7 +5,7 @@ import schemas from "./schemas";
 const PaginatedListMilkEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/milk/",
-	alias: "v1_milk_list_paginated_paginated",
+	alias: "v1_milk_list_paginated",
 	requestFormat: "json",
 	parameters: [
 		{

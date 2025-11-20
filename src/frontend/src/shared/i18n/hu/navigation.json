@@ -2,5 +2,22 @@
 	"mobile_navigation": {
 		"home_page": "home",
 		"profile": "profile"
+	},
+	"sidebar": {
+		"title": "Menü",
+		"users": "Felhasználók",
+		"home": "Főoldal",
+		"processes": {
+			"section_title": "Folyamatok",
+			"milk_collection": "Tejátvételek",
+			"pasteurisation": "Pasztőrözések"
+		},
+		"utilities": {
+			"section_title": "Könyvtárak",
+			"storage": "Raktárak",
+			"pasteur": "Pasztőrök",
+			"producer": "Termelők",
+			"product_definitions": "Termék leírások"
+		}
 	}
 }
