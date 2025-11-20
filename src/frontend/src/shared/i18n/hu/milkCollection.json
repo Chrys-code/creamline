@@ -9,7 +9,8 @@
 			"qualities": "Beltartalmi értékek"
 		},
 		"notifications": {
-			"create_success": "Tejátvétel elmentve!"
+			"success": "Tejátvétel elmentve!",
+			"error": "Tejátvételt nem tudtuk elmenteni!"
 		}
 	},
 	"list_milk_collection": {

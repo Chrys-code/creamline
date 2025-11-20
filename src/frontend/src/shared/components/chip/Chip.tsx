@@ -11,10 +11,10 @@ const MdClose = React.lazy(() =>
 
 const Chip: React.FC<ChipProps> = ({ text }: ChipProps) => {
 	return (
-		<div className={styles.container}>
+		<button className={styles.container}>
 			<MdClose size={"1rem"} />
 			<span>{text}</span>
-		</div>
+		</button>
 	);
 };
 

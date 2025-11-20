@@ -9,6 +9,10 @@
 			"last_name": "Lastname",
 			"position": "Position",
 			"password": "Password"
+		},
+		"notifications": {
+			"success": "User saved!",
+			"error": "Could not save user!"
 		}
 	},
 	"list_users": {

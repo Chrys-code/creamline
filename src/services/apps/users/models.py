@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 import uuid
 
 from django.contrib.auth.models import (
@@ -10,7 +10,7 @@ from django.utils.translation import gettext_lazy as _
 from django.db import models
 
 if TYPE_CHECKING:
-    from apps.profiles.models import Profile
+    from apps.users.features.profiles.models import Profile
 
 
 class UserManager(BaseUserManager):

@@ -1,4 +1,5 @@
 from django.contrib import admin
-from apps.profiles.models import Profile
+
+from apps.users.features.profiles.models import Profile
 
 admin.site.register(Profile)

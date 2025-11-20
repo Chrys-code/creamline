@@ -23,4 +23,4 @@ msgstr "Érvénytelen hitelesítő adatok"
 
 #: views.py:53
 msgid "Unauthorized"
-msgstr ""
+msgstr "Jogosulatlan"

@@ -9,7 +9,8 @@
 			"qualities": "Qualities"
 		},
 		"notifications": {
-			"create_success": "Milk collection saved!"
+			"success": "Milk collection saved!",
+			"error": "Could not save milk collection!"
 		}
 	},
 	"list_milk_collection": {

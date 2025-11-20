@@ -3,9 +3,10 @@ from django.contrib.auth.models import Group
 
 from rest_framework import serializers
 
-from apps.profiles.models import Profile
+from apps.users.features.profiles.models import Profile
+from apps.users.use_cases.create import create_user_workflow
+from apps.users.use_cases.update import update_user_workflow
 
-from services.user.user_workflows import create_user_workflow, update_user_workflow
 
 
 User = get_user_model()

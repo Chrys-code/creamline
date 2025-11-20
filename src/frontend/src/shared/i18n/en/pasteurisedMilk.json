@@ -16,6 +16,10 @@
 			"data": "Data",
 			"route": "Route",
 			"duration": "Duration"
+		},
+		"notifications": {
+			"success": "Pasteurisation saved!",
+			"error": "Could not save pasteurisation!"
 		}
 	},
 	"list_pasteurisation": {

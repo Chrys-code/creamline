@@ -9,6 +9,10 @@
 			"last_name": "Családnév",
 			"position": "Pozició",
 			"password": "Jelszó"
+		},
+		"notifications": {
+			"success": "Felhasználó elmentve!",
+			"error": "Felhasználót nem tudtuk elmenteni!"
 		}
 	},
 	"list_users": {

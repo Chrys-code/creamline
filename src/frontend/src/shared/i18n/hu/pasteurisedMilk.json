@@ -16,6 +16,10 @@
 			"data": "Adatok",
 			"route": "Útvonal",
 			"duration": "Időtartam"
+		},
+		"notifications": {
+			"success": "Pasztőrözés elmentve!",
+			"error": "Pasztőrözést nem tudtuk elmenteni!"
 		}
 	},
 	"list_pasteurisation": {

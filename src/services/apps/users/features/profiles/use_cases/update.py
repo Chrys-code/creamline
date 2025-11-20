@@ -1,6 +1,6 @@
 import logging
 
-from apps.profiles.models import Profile
+from apps.users.features.profiles.models import Profile
 
 
 logger = logging.getLogger(__name__)

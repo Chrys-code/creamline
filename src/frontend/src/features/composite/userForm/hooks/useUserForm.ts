@@ -5,17 +5,20 @@ import type {
 	UserFormSchema,
 } from "../../../domain/user/types";
 
+import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-toastify";
 
 import { userClient } from "../../../domain/user/services/client";
 import userSchemas from "../../../domain/user/services/schemas";
 
-import { toast } from "react-toastify";
 import { useTypedTranslation } from "../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 
 export const useUserForm = (user: User) => {
+	const navigate = useNavigate();
 	const tCommon = useTypedTranslation("common");
+	const tUser = useTypedTranslation("users");
 
 	const {
 		register,
@@ -52,7 +55,8 @@ export const useUserForm = (user: User) => {
 
 		try {
 			await userClient.v1_users_create(formData);
-			toast.success("Felhasználó sikeresen elmentve");
+			toast.success(tUser("edit_user.notifications.success"));
+			navigate("/users");
 		} catch (err: any) {
 			if (err.response?.data) {
 				const responseData = err.response.data;
@@ -64,13 +68,15 @@ export const useUserForm = (user: User) => {
 				if (responseData.password)
 					setError("password", { message: responseData.password[0] });
 			}
+			toast.error(tUser("edit_user.notifications.error"));
 		}
 	};
 
 	const editUser = async (formData: PatchUserFormSchema, id: string): Promise<void> => {
 		try {
 			await userClient.v1_users_partial_update(formData, { params: { uuid: id } });
-			toast.success("Felhasználó sikeresen elmentve");
+			toast.success(tUser("edit_user.notifications.success"));
+			navigate("/users");
 		} catch (err: any) {
 			if (err.response?.data) {
 				const responseData = err.response.data;
@@ -82,6 +88,7 @@ export const useUserForm = (user: User) => {
 				if (responseData.password)
 					setError("password", { message: responseData.password[0] });
 			}
+			toast.error(tUser("edit_user.notifications.error"));
 		}
 	};
 

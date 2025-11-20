@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from apps.profiles.models import Profile
-from apps.profiles.use_cases.update import update_profile
+from apps.users.features.profiles.models import Profile
+from apps.users.features.profiles.use_cases.update import update_profile
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -24,5 +24,16 @@ class ProfileSerializer(serializers.ModelSerializer):
         ]
 
     def update(self, instance, validated_data):
-        profile = update_profile(instance=instance, validated_data=validated_data)
+
+        email = validated_data.pop("email")
+        first_name = validated_data.pop("first_name")
+        last_name = validated_data.pop("last_name")
+
+        profile = update_profile(
+            instance=instance,
+            email=email,
+            first_name=first_name,
+            last_name=last_name
+        )
+
         return profile

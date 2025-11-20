@@ -1,6 +1,6 @@
 import type React from "react";
 import type { UserFormProps } from "./UserForm.types";
-import styles from "./EditUser.module.scss";
+import styles from "./UserForm.module.scss";
 
 import Form from "../../../../shared/components/form/Form";
 import Dropdown from "../../../../shared/components/dropdown/Dropdown";

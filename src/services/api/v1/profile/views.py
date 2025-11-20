@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from api.v1.profile import serializers
 
-from apps.profiles.models import Profile
+from apps.users.features.profiles.models import Profile
 
 
 class ProfileDetailView(RetrieveUpdateAPIView):

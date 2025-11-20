@@ -3,7 +3,8 @@ from typing import TYPE_CHECKING
 
 from django.utils import timezone
 
-from apps.profiles.models import Profile
+from apps.users.features.profiles.models import Profile
+
 
 if TYPE_CHECKING:
     from apps.users.models import CustomUser
