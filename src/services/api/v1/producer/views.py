@@ -14,6 +14,7 @@ class ProducerViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ProducerSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = StandardPagePagination
+    lookup_field = "uuid"
 
     def get_queryset(self):
         return Producer.objects.all().filter(deleted_at=None)

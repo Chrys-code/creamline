@@ -7,9 +7,9 @@ logger = logging.getLogger(__name__)
 
 
 def _update(instance: Producer) -> Producer:
-    updated_producer = instance.save()
+    instance.save()
 
-    return updated_producer
+    return instance
 
 
 def update_producer(

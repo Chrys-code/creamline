@@ -11,6 +11,6 @@ export const getProducer = async ({ params }: LoaderFunctionArgs): Promise<Produ
 
 		return userResponse;
 	} catch {
-		throw new Error("Failed to load user");
+		throw new Error("Failed to load producer");
 	}
 };

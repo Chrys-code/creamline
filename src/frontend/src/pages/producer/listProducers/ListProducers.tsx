@@ -1,10 +1,13 @@
 import React from "react";
 import type { ListProducersProps } from "./ListProducers.types";
-import { useLoaderData, useNavigate } from "react-router";
-import IconButton from "../../../shared/components/iconButton";
 import type { Producer } from "../../../features/domain/producer/types";
+
 import PageHeader from "../../../shared/components/pageHeader";
 import PaginatedList from "../../../shared/components/paginatedList";
+import ProducerCard from "../../../features/domain/producer/components/producerCard";
+import IconButton from "../../../shared/components/iconButton";
+
+import { useLoaderData, useNavigate } from "react-router";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -27,7 +30,11 @@ const ListProducers: React.FC = () => {
 	const producerListItem = (item: Producer) => {
 		return (
 			<li key={item.uuid} tabIndex={0}>
-				<p>{item.name}</p>
+				<ProducerCard
+					name={item.name}
+					address={item.address}
+					onClick={() => navigate(`edit/${item.uuid}`)}
+				/>
 			</li>
 		);
 	};

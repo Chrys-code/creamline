@@ -6,7 +6,7 @@ import ErrorLayout from "../shared/layouts/errorLayout";
 import Dashboard from "../pages/dashboard/Dashboard";
 
 import milkCollectionRoutes from "./routes/milkCollection.routes";
-import userManagementRoutes from "./routes/userManagement.routes";
+import userRoutes from "./routes/user.routes";
 import producerRoutes from "./routes/producer.routes";
 import pasteurisationRoutes from "./routes/pasteurisedMilk.routes";
 
@@ -37,7 +37,7 @@ const appRouter = createBrowserRouter([
 			},
 			...milkCollectionRoutes,
 			...pasteurisationRoutes,
-			...userManagementRoutes,
+			...userRoutes,
 			...producerRoutes,
 			{
 				path: "profile",
