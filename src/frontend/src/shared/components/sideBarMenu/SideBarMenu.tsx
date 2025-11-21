@@ -64,7 +64,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 				</li>
 				<li>
 					<NavLink
-						to="/storages"
+						to="/storage"
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
 						<span>{tNavigation("sidebar.utilities.storage")}</span>
@@ -72,7 +72,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 				</li>
 				<li>
 					<NavLink
-						to="/pasteurs"
+						to="/pasteur"
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
 						<span>{tNavigation("sidebar.utilities.pasteur")}</span>
@@ -80,7 +80,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 				</li>
 				<li>
 					<NavLink
-						to="/product-definitions"
+						to="/product-definition"
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
 						<span>{tNavigation("sidebar.utilities.product_definitions")}</span>

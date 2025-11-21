@@ -13,10 +13,10 @@ from apps.producers.use_cases.delete import delete_producer
 class ProducerViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ProducerSerializer
     permission_classes = [IsAuthenticated]
-    pagination_class = [StandardPagePagination]
+    pagination_class = StandardPagePagination
 
     def get_queryset(self):
-        return Producer.objects.filter(deleted_at=None)
+        return Producer.objects.all().filter(deleted_at=None)
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()

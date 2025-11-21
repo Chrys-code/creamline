@@ -1,9 +1,9 @@
 import type React from "react";
 
-import PageHeader from "../../shared/components/pageHeader";
-import ProducerForm from "../../features/composite/producerForm/components/ProducerForm";
+import PageHeader from "../../../shared/components/pageHeader";
+import ProducerForm from "../../../features/composite/producerForm/components/ProducerForm";
 
-import { useTypedTranslation } from "../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const EditProducer: React.FC = () => {
 	const tProducer = useTypedTranslation("producer");

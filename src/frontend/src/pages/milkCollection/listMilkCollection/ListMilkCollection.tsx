@@ -1,18 +1,15 @@
 import type { ListMilkCollectionProps } from "./ListMilkCollection.types";
 import type { Milk } from "../../../features/domain/milk/types";
-import styles from "./ListMilkcollection.module.scss";
 
 import PageHeader from "../../../shared/components/pageHeader";
-import Pagination from "../../../shared/components/pagination";
-import IconButton from "../../../shared/components/iconButton";
-import Loader from "../../../shared/components/loader";
+import PaginatedList from "../../../shared/components/paginatedList";
 import MilkCard from "../../../features/domain/milk/components/milkCard";
+import IconButton from "../../../shared/components/iconButton";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { useLoaderData, useNavigate } from "react-router";
-import { useDelayedLoader } from "../../../shared/hooks/useDelayedLoader/useDelayedLoader";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -25,7 +22,6 @@ const ListMilkCollection: React.FC = () => {
 	const { i18n } = useTranslation();
 	const mct = useTypedTranslation("milkCollection");
 	const { data, page } = useLoaderData<ListMilkCollectionProps>();
-	const showLoading = useDelayedLoader(200, 1000);
 
 	const headerActionElement = (
 		<IconButton onClick={() => navigate("create")}>
@@ -33,7 +29,7 @@ const ListMilkCollection: React.FC = () => {
 		</IconButton>
 	);
 
-	const milkListItems = data.results.map((result: Milk) => (
+	const milkListItem = (result: Milk) => (
 		<li key={result.uuid} tabIndex={0}>
 			<MilkCard
 				title={result.producer_name}
@@ -46,13 +42,7 @@ const ListMilkCollection: React.FC = () => {
 				onClick={() => navigate(`edit/${result.uuid}`)}
 			/>
 		</li>
-	));
-
-	const next = () => navigate(`?page=${page + 1}&page_size=25`);
-	const prev = () => navigate(`?page=${page - 1}&page_size=25`);
-
-	const pageSize = import.meta.env.VITE_PAGINATION_PAGE_SIZE;
-	const totalPageCount = data.count < pageSize ? 1 : Math.ceil(data.count / pageSize);
+	);
 
 	return (
 		<>
@@ -61,20 +51,14 @@ const ListMilkCollection: React.FC = () => {
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>
-			{showLoading && <Loader />}
-			{!showLoading && <ul className={styles.list}>{milkListItems}</ul>}
-			<div className={styles.floatingMenu}>
-				<Pagination
-					isFirst={data.previous === null}
-					isLast={data.next === null}
-					onDecrease={prev}
-					onIncrease={next}
-				>
-					<p>
-						{page} / {totalPageCount}
-					</p>
-				</Pagination>
-			</div>
+			<PaginatedList
+				items={data.results}
+				itemCount={data.count}
+				currentPage={page}
+				nextPage={data.next}
+				previousPage={data.previous}
+				itemRenderer={milkListItem}
+			/>
 		</>
 	);
 };

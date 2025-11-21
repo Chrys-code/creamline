@@ -1,17 +1,15 @@
 import type { ListPasteurisationProps } from "./ListPasteurisation.types";
-import styles from "./ListPasteurisation.module.scss";
 
 import PageHeader from "../../../shared/components/pageHeader";
-import Pagination from "../../../shared/components/pagination";
-import IconButton from "../../../shared/components/iconButton";
-import Loader from "../../../shared/components/loader";
+import PaginatedList from "../../../shared/components/paginatedList";
 import PasteurisationCard from "../../../features/domain/pasteurisation/components/pasteurisationCard";
+import IconButton from "../../../shared/components/iconButton";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLoaderData, useNavigate } from "react-router";
-import { useDelayedLoader } from "../../../shared/hooks/useDelayedLoader/useDelayedLoader";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import type { Pasteurisation } from "../../../features/domain/pasteurisation/types";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -24,7 +22,6 @@ const ListPasteurisation: React.FC = () => {
 	const { i18n } = useTranslation();
 	const pt = useTypedTranslation("pasteurisation");
 	const { data, page } = useLoaderData<ListPasteurisationProps>();
-	const showLoading = useDelayedLoader(200, 1000);
 
 	const headerActionElement = (
 		<IconButton onClick={() => navigate("create")}>
@@ -32,7 +29,7 @@ const ListPasteurisation: React.FC = () => {
 		</IconButton>
 	);
 
-	const pasteurisedMilkListItems = data.results.map((result) => (
+	const pasteurisedMilkListItem = (result: Pasteurisation) => (
 		<li key={result.uuid} tabIndex={0}>
 			<PasteurisationCard
 				title={result.pasteur_name}
@@ -47,13 +44,7 @@ const ListPasteurisation: React.FC = () => {
 				onClick={() => navigate(`edit/${result.uuid}`)}
 			/>
 		</li>
-	));
-
-	const next = () => navigate(`?page=${page + 1}&page_size=25`);
-	const prev = () => navigate(`?page=${page - 1}&page_size=25`);
-
-	const pageSize = import.meta.env.VITE_PAGINATION_PAGE_SIZE;
-	const totalPageCount = data.count < pageSize ? 1 : Math.ceil(data.count / pageSize);
+	);
 
 	return (
 		<>
@@ -62,20 +53,14 @@ const ListPasteurisation: React.FC = () => {
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>
-			{showLoading && <Loader />}
-			{!showLoading && <ul className={styles.list}>{pasteurisedMilkListItems}</ul>}
-			<div className={styles.floatingMenu}>
-				<Pagination
-					isFirst={data.previous === null}
-					isLast={data.next === null}
-					onDecrease={prev}
-					onIncrease={next}
-				>
-					<p>
-						{page} / {totalPageCount}
-					</p>
-				</Pagination>
-			</div>
+			<PaginatedList
+				items={data.results}
+				itemCount={data.count}
+				currentPage={page}
+				nextPage={data.next}
+				previousPage={data.previous}
+				itemRenderer={pasteurisedMilkListItem}
+			/>
 		</>
 	);
 };

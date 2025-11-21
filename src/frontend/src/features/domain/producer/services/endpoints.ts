@@ -7,6 +7,18 @@ const PaginatedListProducerEndpoint = makeEndpoint({
 	path: "/api/v1/producer/",
 	alias: "v1_producer_list_paginated",
 	requestFormat: "json",
+	parameters: [
+		{
+			name: "page",
+			type: "Query",
+			schema: z.number().int().optional(),
+		},
+		{
+			name: "page_size",
+			type: "Query",
+			schema: z.number().int().optional(),
+		},
+	],
 	response: schemas.PaginatedListProducerSchema,
 });
 
@@ -20,14 +32,14 @@ const ListProducerEndpoint = makeEndpoint({
 
 const GetProducerEndpoint = makeEndpoint({
 	method: "get",
-	path: "/api/v1/producer/:id/",
+	path: "/api/v1/producer/:uuid/",
 	alias: "v1_producer_retrieve",
 	requestFormat: "json",
 	parameters: [
 		{
-			name: "id",
+			name: "uuid",
 			type: "Path",
-			schema: z.number().int(),
+			schema: z.string().uuid(),
 		},
 	],
 	response: schemas.ProducerSchema,

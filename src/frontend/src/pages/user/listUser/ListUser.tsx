@@ -1,16 +1,13 @@
 import type { UserListProps } from "./ListUser.types";
 import type { User } from "../../../features/domain/user/types";
-import styles from "./ListUser.module.scss";
 
 import PageHeader from "../../../shared/components/pageHeader";
-import Pagination from "../../../shared/components/pagination";
-import IconButton from "../../../shared/components/iconButton";
+import PaginatedList from "../../../shared/components/paginatedList";
 import UserCard from "../../../features/domain/user/components/userCard";
-import Loader from "../../../shared/components/loader";
+import IconButton from "../../../shared/components/iconButton";
 
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
-import { useDelayedLoader } from "../../../shared/hooks/useDelayedLoader/useDelayedLoader";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
@@ -27,7 +24,6 @@ const ListUser: React.FC = () => {
 		data: { data, page },
 		userGroups,
 	} = useLoaderData<UserListProps>();
-	const showLoading = useDelayedLoader(200, 1000);
 
 	const headerActionElement = (
 		<IconButton onClick={() => navigate("create")}>
@@ -46,7 +42,7 @@ const ListUser: React.FC = () => {
 		return activeUserGroupObjects.map((obj) => obj.name);
 	};
 
-	const userListItem = data.results.map((result: User) => {
+	const userListItem = (result: User) => {
 		return (
 			<li key={result.uuid} tabIndex={0}>
 				<UserCard
@@ -56,13 +52,7 @@ const ListUser: React.FC = () => {
 				/>
 			</li>
 		);
-	});
-
-	const next = () => navigate(`?page=${page + 1}&page_size=25`);
-	const prev = () => navigate(`?page=${page - 1}&page_size=25`);
-
-	const pageSize = import.meta.env.VITE_PAGINATION_PAGE_SIZE;
-	const totalPageCount = data.count < pageSize ? 1 : Math.ceil(data.count / pageSize);
+	};
 
 	return (
 		<>
@@ -71,20 +61,14 @@ const ListUser: React.FC = () => {
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>
-			{showLoading && <Loader />}
-			{!showLoading && <ul className={styles.list}>{userListItem}</ul>}
-			<div className={styles.floatingMenu}>
-				<Pagination
-					isFirst={data.previous === null}
-					isLast={data.next === null}
-					onDecrease={prev}
-					onIncrease={next}
-				>
-					<p>
-						{page} / {totalPageCount}
-					</p>
-				</Pagination>
-			</div>
+			<PaginatedList
+				items={data.results}
+				itemCount={data.count}
+				currentPage={page}
+				nextPage={data.next}
+				previousPage={data.previous}
+				itemRenderer={userListItem}
+			/>
 		</>
 	);
 };
