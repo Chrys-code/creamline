@@ -8,6 +8,7 @@ import ProducerCard from "../../../features/domain/producer/components/producerC
 import IconButton from "../../../shared/components/iconButton";
 
 import { useLoaderData, useNavigate } from "react-router";
+import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -20,6 +21,7 @@ const ListProducers: React.FC = () => {
 	const {
 		data: { data, page },
 	} = useLoaderData<ListProducersProps>();
+	const tProducer = useTypedTranslation("producer");
 
 	const headerActionElement = (
 		<IconButton onClick={() => navigate("create")}>
@@ -42,7 +44,7 @@ const ListProducers: React.FC = () => {
 	return (
 		<>
 			<PageHeader
-				title={"smth"}
+				title={tProducer("list_producers.page_title")}
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>

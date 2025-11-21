@@ -21,5 +21,8 @@
 			"success": "Producer saved!",
 			"error": "Could not save Producer!"
 		}
+	},
+	"list_producers": {
+		"page_title": "Producers"
 	}
 }
