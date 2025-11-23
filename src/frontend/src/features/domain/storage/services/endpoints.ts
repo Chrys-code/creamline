@@ -2,9 +2,29 @@ import z from "zod";
 import schemas from "./schemas";
 import { makeApi, makeEndpoint, Zodios, type ZodiosOptions } from "@zodios/core";
 
-const ListStorageEndpoint = makeEndpoint({
+const PaginatedListStorageEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/storage/",
+	alias: "v1_storage_list_paginated",
+	requestFormat: "json",
+	parameters: [
+		{
+			name: "page",
+			type: "Query",
+			schema: z.number().int().optional(),
+		},
+		{
+			name: "page_size",
+			type: "Query",
+			schema: z.number().int().optional(),
+		},
+	],
+	response: schemas.PaginatedListStorageSchema,
+});
+
+const ListStorageEndpoint = makeEndpoint({
+	method: "get",
+	path: "/api/v1/storage/all",
 	alias: "v1_storage_list",
 	requestFormat: "json",
 	response: z.array(schemas.StorageSchema),
@@ -12,14 +32,14 @@ const ListStorageEndpoint = makeEndpoint({
 
 const GetStorageEndpoint = makeEndpoint({
 	method: "get",
-	path: "/api/v1/storage/:id/",
+	path: "/api/v1/storage/:uuid/",
 	alias: "v1_storage_retrieve",
 	requestFormat: "json",
 	parameters: [
 		{
-			name: "id",
+			name: "uuid",
 			type: "Path",
-			schema: z.number().int(),
+			schema: z.string().uuid(),
 		},
 	],
 	response: schemas.StorageSchema,
@@ -61,6 +81,7 @@ const PatchStorageEndpoint = makeEndpoint({
 });
 
 const endpoints = makeApi([
+	PaginatedListStorageEndpoint,
 	ListStorageEndpoint,
 	GetStorageEndpoint,
 	CreateStorageEndpoint,

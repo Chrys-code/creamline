@@ -1,13 +1,13 @@
-import type { ListProducersProps } from "./ListProducers.types";
-import type { Producer } from "../../../features/domain/producer/types";
+import type { ListStoragesProps } from "./ListStorages.types";
+import type { Storage } from "../../../features/domain/storage/types";
+
+import PageHeader from "../../../shared/components/pageHeader";
+import IconButton from "../../../shared/components/iconButton";
+import PaginatedList from "../../../shared/components/paginatedList";
 
 import React from "react";
-import PageHeader from "../../../shared/components/pageHeader";
-import PaginatedList from "../../../shared/components/paginatedList";
-import ProducerCard from "../../../features/domain/producer/components/producerCard";
-import IconButton from "../../../shared/components/iconButton";
-
 import { useLoaderData, useNavigate } from "react-router";
+import StorageCard from "../../../features/domain/storage/components/storageCard";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
@@ -16,12 +16,12 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 	}))
 );
 
-const ListProducers: React.FC = () => {
+const ListStorages: React.FC = () => {
 	const navigate = useNavigate();
+	const tStorage = useTypedTranslation("storage");
 	const {
 		data: { data, page },
-	} = useLoaderData<ListProducersProps>();
-	const tProducer = useTypedTranslation("producer");
+	} = useLoaderData<ListStoragesProps>();
 
 	const headerActionElement = (
 		<IconButton onClick={() => navigate("create")}>
@@ -29,12 +29,12 @@ const ListProducers: React.FC = () => {
 		</IconButton>
 	);
 
-	const producerListItem = (item: Producer) => {
+	const storagesListItem = (item: Storage) => {
 		return (
 			<li key={item.uuid} tabIndex={0}>
-				<ProducerCard
+				<StorageCard
 					name={item.name}
-					address={item.address}
+					type={item.type}
 					onClick={() => navigate(`edit/${item.uuid}`)}
 				/>
 			</li>
@@ -44,7 +44,7 @@ const ListProducers: React.FC = () => {
 	return (
 		<>
 			<PageHeader
-				title={tProducer("list_producers.page_title")}
+				title={tStorage("list_storage.page_title")}
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>
@@ -54,10 +54,10 @@ const ListProducers: React.FC = () => {
 				currentPage={page}
 				nextPage={data.next}
 				previousPage={data.previous}
-				itemRenderer={producerListItem}
+				itemRenderer={storagesListItem}
 			/>
 		</>
 	);
 };
 
-export default ListProducers;
+export default ListStorages;

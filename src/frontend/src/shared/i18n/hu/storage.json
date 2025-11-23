@@ -1,0 +1,19 @@
+{
+	"edit_storage": {
+		"page_title": {
+			"create": "Raktár hozzáadása",
+			"edit": "Raktár szerkesztése"
+		},
+		"input_labels": {
+			"name": "Név",
+			"type": "Típus"
+		},
+		"notifications": {
+			"success": "Raktár elmentve!",
+			"error": "Raktárat nem tudtuk elmenteni!"
+		}
+	},
+	"list_storage": {
+		"page_title": "Raktárak"
+	}
+}

@@ -8,9 +8,10 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import milkCollectionRoutes from "./routes/milkCollection.routes";
 import userRoutes from "./routes/user.routes";
 import producerRoutes from "./routes/producer.routes";
-import pasteurisationRoutes from "./routes/pasteurisedMilk.routes";
+import pasteurisationRoutes from "./routes/pasteurisation.routes";
 
 import { getProfile } from "../features/domain/profile/loaders/getProfile";
+import storageRoutes from "./routes/storage.routes";
 
 const appRouter = createBrowserRouter([
 	{
@@ -39,6 +40,7 @@ const appRouter = createBrowserRouter([
 			...pasteurisationRoutes,
 			...userRoutes,
 			...producerRoutes,
+			...storageRoutes,
 			{
 				path: "profile",
 				lazy: {

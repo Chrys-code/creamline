@@ -1,0 +1,19 @@
+{
+	"edit_storage": {
+		"page_title": {
+			"create": "Create storage",
+			"edit": "Edit storage"
+		},
+		"input_labels": {
+			"name": "Name",
+			"type": "Type"
+		},
+		"notifications": {
+			"success": "Storage saved!",
+			"error": "Could not save Storage!"
+		}
+	},
+	"list_storage": {
+		"page_title": "Storages"
+	}
+}

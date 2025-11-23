@@ -14,6 +14,7 @@ i18n.use(LanguageDetector)
 				users: translations.translationEn.users,
 				profile: translations.translationEn.profile,
 				producer: translations.translationEn.producer,
+				storage: translations.translationEn.storage,
 				dashboard: translations.translationEn.dashboard,
 				milkCollection: translations.translationEn.milkCollection,
 				pasteurisation: translations.translationEn.pasteurisation,
@@ -25,6 +26,7 @@ i18n.use(LanguageDetector)
 				users: translations.translationHu.users,
 				profile: translations.translationHu.profile,
 				producer: translations.translationHu.producer,
+				storage: translations.translationHu.storage,
 				dashboard: translations.translationHu.dashboard,
 				milkCollection: translations.translationHu.milkCollection,
 				pasteurisation: translations.translationHu.pasteurisation,
@@ -47,6 +49,7 @@ export const namespaces = [
 	"users",
 	"profile",
 	"producer",
+	"storage",
 	"dashboard",
 	"milkCollection",
 	"pasteurisation",
@@ -61,6 +64,7 @@ export type NamespaceMap = {
 	users: TranslationTypes.UserTranslations;
 	profile: TranslationTypes.ProfileTranslations;
 	producer: TranslationTypes.ProducerTranslations;
+	storage: TranslationTypes.StorageTranslations;
 	dashboard: TranslationTypes.DashboardTranslations;
 	milkCollection: TranslationTypes.MilkCollectionTranslations;
 	pasteurisation: TranslationTypes.PasteurisedMilkTranslations;

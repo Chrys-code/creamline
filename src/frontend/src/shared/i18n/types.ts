@@ -6,6 +6,7 @@ export type NavigationTranslations = typeof translationEn.navigation;
 export type UserTranslations = typeof translationEn.users;
 export type ProfileTranslations = typeof translationEn.profile;
 export type ProducerTranslations = typeof translationEn.producer;
+export type StorageTranslations = typeof translationEn.storage;
 export type DashboardTranslations = typeof translationEn.dashboard;
 export type MilkCollectionTranslations = typeof translationEn.milkCollection;
 export type PasteurisedMilkTranslations = typeof translationEn.pasteurisation;

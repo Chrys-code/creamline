@@ -22,10 +22,12 @@ def _create(name: str, type: Storage.StorageType, created_by: "CustomUser") -> S
 
 
 def create_storage(
-    validated_data: CreateStorageData, created_by: "CustomUser"
+    name: str,
+    type: Storage.StorageType,
+    created_by: "CustomUser"
 ) -> Storage:
     created_storage = _create(
-        name=validated_data["name"], type=validated_data["type"], created_by=created_by
+        name=name, type=type, created_by=created_by
     )
 
     logger.info(

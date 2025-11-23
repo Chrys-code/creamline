@@ -22,8 +22,8 @@ export const useProducerForm = (producer: Producer | null) => {
 		formState: { errors, isSubmitting },
 		setError,
 		clearErrors,
-	} = useForm<CreateProducerFormSchema>({
-		resolver: zodResolver(schemas.CreateProducerFormSchema),
+	} = useForm<ProducerFormSchema>({
+		resolver: zodResolver(schemas.ProducerFromSchema),
 		defaultValues: producer ?? {},
 	});
 
@@ -43,6 +43,7 @@ export const useProducerForm = (producer: Producer | null) => {
 			toast.error(tProducer("edit_producer.notifications.error"));
 		}
 	};
+
 	const updateProducer = async (
 		formData: UpdateProducerFormSchema,
 		id: string

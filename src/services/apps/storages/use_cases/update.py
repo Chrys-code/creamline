@@ -1,5 +1,4 @@
 import logging
-from typing import Dict
 
 from apps.storages.models import Storage
 
@@ -8,17 +7,21 @@ logger = logging.getLogger(__name__)
 
 
 def _update(instance: Storage) -> Storage:
-    updated_storage = instance.save()
+    instance.save()
 
-    return updated_storage
+    return instance
 
 
 def update_storage(
     instance: Storage,
-    validated_data: Dict,
+    name: str,
+    type: Storage.StorageType
 ) -> Storage:
-    for field, value in validated_data.items():
-        setattr(instance, field, value)
+    
+    if name is not None:
+        setattr(instance, "name", name)
+    if type is not None:
+        setattr(instance, "type", type)
 
     updated_storage = _update(instance=instance)
 
