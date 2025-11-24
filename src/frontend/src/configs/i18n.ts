@@ -34,6 +34,7 @@ i18n.use(LanguageDetector)
 		},
 		fallbackLng: "hu",
 		interpolation: { escapeValue: false },
+		supportedLngs: ["hu", "en"],
 	});
 
 export const commonTranslations = translations.translationEn.common;
