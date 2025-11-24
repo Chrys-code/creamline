@@ -30,10 +30,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         last_name = validated_data.pop("last_name")
 
         profile = update_profile(
-            instance=instance,
-            email=email,
-            first_name=first_name,
-            last_name=last_name
+            instance=instance, email=email, first_name=first_name, last_name=last_name
         )
 
         return profile

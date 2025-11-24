@@ -21,16 +21,14 @@ class CreatePasteurisationData(TypedDict):
     source_storage: Storage
     source_storage_uuid: str
     source_storage_name: str
-    source_storage_type: Storage.StorageType.choices
 
     target_storage: Storage
     target_storage_uuid: str
     target_storage_name: str
-    target_storage_type: Storage.StorageType.choices
 
     product_definition: ProductDefinition
     product_definition_name: str
-    product_definition_type: ProductDefinition.ProductDefinitionTypes.choices
+    product_definition_type: ProductDefinition.ProductDefinitionTypes
 
     volume_kg: float
     volume_liters: float
@@ -49,14 +47,12 @@ def _create(
     source_storage: Storage,
     source_storage_uuid: str,
     source_storage_name: str,
-    source_storage_type: Storage.StorageType.choices,
     target_storage: Storage,
     target_storage_uuid: str,
     target_storage_name: str,
-    target_storage_type: Storage.StorageType.choices,
     product_definition: ProductDefinition,
     product_definition_name: str,
-    product_definition_type: ProductDefinition.ProductDefinitionTypes.choices,
+    product_definition_type: ProductDefinition.ProductDefinitionTypes,
     volume_kg: float,
     volume_liters: float,
     temperature: float,
@@ -71,11 +67,9 @@ def _create(
         source_storage=source_storage,
         source_storage_uuid=source_storage_uuid,
         source_storage_name=source_storage_name,
-        source_storage_type=source_storage_type,
         target_storage=target_storage,
         target_storage_uuid=target_storage_uuid,
         target_storage_name=target_storage_name,
-        target_storage_type=target_storage_type,
         product_definition=product_definition,
         product_definition_name=product_definition_name,
         product_definition_type=product_definition_type,
@@ -104,10 +98,8 @@ def create_pasteurisation(
         pasteur_name=pasteur.name,
         source_storage_uuid=source_storage.uuid,
         source_storage_name=source_storage.name,
-        source_storage_type=source_storage.type,
         target_storage_uuid=target_storage.uuid,
         target_storage_name=target_storage.name,
-        target_storage_type=target_storage.type,
         product_definition_name=product_definition.name,
         product_definition_type=product_definition.type,
         created_by=created_by,

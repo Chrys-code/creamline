@@ -8,7 +8,6 @@ from apps.users.use_cases.create import create_user_workflow
 from apps.users.use_cases.update import update_user_workflow
 
 
-
 User = get_user_model()
 
 

@@ -62,7 +62,7 @@ const CreateStorageEndpoint = makeEndpoint({
 
 const PatchStorageEndpoint = makeEndpoint({
 	method: "put",
-	path: "/api/v1/storage/:id/",
+	path: "/api/v1/storage/:uuid/",
 	alias: "v1_storage_update",
 	requestFormat: "json",
 	parameters: [
@@ -72,9 +72,9 @@ const PatchStorageEndpoint = makeEndpoint({
 			schema: schemas.PatchStorageFormSchema,
 		},
 		{
-			name: "id",
+			name: "uuid",
 			type: "Path",
-			schema: z.number().int(),
+			schema: z.string().uuid(),
 		},
 	],
 	response: schemas.StorageSchema,

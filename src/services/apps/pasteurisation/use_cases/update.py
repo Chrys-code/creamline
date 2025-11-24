@@ -8,9 +8,9 @@ logger = logging.getLogger(__name__)
 
 
 def _update(instance: Pasteurisation) -> Pasteurisation:
-    updated_pasteurisation = instance.save()
+    instance.save()
 
-    return updated_pasteurisation
+    return instance
 
 
 def update_pasteurisation(

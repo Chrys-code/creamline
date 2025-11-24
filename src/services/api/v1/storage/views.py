@@ -11,13 +11,59 @@ from api.v1.storage import serializers
 
 
 class StorageViewSet(viewsets.ModelViewSet):
-    serializer_class = serializers.StorageSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = StandardPagePagination
     lookup_field = "uuid"
 
+    serializer_classes = {
+        "list": serializers.StorageReadSerializer,
+        "retrieve": serializers.StorageReadSerializer,
+        "create": serializers.StorageWriteSerializer,
+        "update": serializers.StorageWriteSerializer,
+        "partial_update": serializers.StorageWriteSerializer,
+    }
+
     def get_queryset(self):
-        return Storage.objects.all().filter(deleted_at=None)
+        return Storage.objects.all().filter(deleted_at=None).order_by("name")
+
+    def get_serializer_class(self):
+        return self.serializer_classes.get(
+            self.action, serializers.StorageReadSerializer
+        )
+
+    def create(self, request, *args, **kwargs):
+        write_serializer = self.get_serializer(data=request.data)
+        write_serializer.is_valid(raise_exception=True)
+        instance = write_serializer.save()
+
+        return Response(
+            serializers.StorageReadSerializer(instance).data,
+            status=status.HTTP_201_CREATED,
+        )
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        write_serializer = self.get_serializer(
+            instance, data=request.data, partial=False
+        )
+        write_serializer.is_valid(raise_exception=True)
+        instance = write_serializer.save()
+
+        return Response(
+            serializers.StorageReadSerializer(instance).data, status=status.HTTP_200_OK
+        )
+
+    def partial_update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        write_serializer = self.get_serializer(
+            instance, data=request.data, partial=True
+        )
+        write_serializer.is_valid(raise_exception=True)
+        instance = write_serializer.save()
+
+        return Response(
+            serializers.StorageReadSerializer(instance).data, status=status.HTTP_200_OK
+        )
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()

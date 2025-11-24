@@ -9,8 +9,12 @@ import { useNavigate } from "react-router";
 import { useStorageForm } from "../hooks/useStorageForm.js";
 import { useTypedTranslation } from "../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { v4 as uuid } from "uuid";
+import Dropdown from "../../../../shared/components/dropdown/Dropdown.js";
 
-const StorageForm: React.FC<StorageFormProps> = ({ storage }: StorageFormProps) => {
+const StorageForm: React.FC<StorageFormProps> = ({
+	storage,
+	storageTypeOptions,
+}: StorageFormProps) => {
 	const navigate = useNavigate();
 	const tCommon = useTypedTranslation("common");
 	const tStorage = useTypedTranslation("storage");
@@ -41,11 +45,11 @@ const StorageForm: React.FC<StorageFormProps> = ({ storage }: StorageFormProps) 
 					type="text"
 					error={errors.name?.message}
 				/>
-				<InputField
+				<Dropdown
 					id={uuid()}
 					{...register("type", { onChange: () => clearErrors("type") })}
-					label={tStorage("edit_storage.input_labels.type")}
-					type="text"
+					placeholder="select"
+					options={storageTypeOptions}
 					error={errors.type?.message}
 				/>
 			</section>

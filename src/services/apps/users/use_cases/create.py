@@ -43,7 +43,6 @@ def _create_user(email: str, password: str) -> "CustomUser":
     return created_user
 
 
-
 def create_user_workflow(
     email: str,
     password: str,

@@ -35,9 +35,6 @@ class Pasteurisation(models.Model):
     )
     source_storage_uuid = models.CharField(max_length=255, editable=False)
     source_storage_name = models.CharField(max_length=255, editable=False)
-    source_storage_type = models.CharField(
-        choices=Storage.StorageType.choices, max_length=100, editable=False
-    )
 
     target_storage = models.ForeignKey(
         Storage,
@@ -49,9 +46,6 @@ class Pasteurisation(models.Model):
     )
     target_storage_uuid = models.CharField(max_length=255, editable=False)
     target_storage_name = models.CharField(max_length=255, editable=False)
-    target_storage_type = models.CharField(
-        choices=Storage.StorageType.choices, max_length=100, editable=False
-    )
 
     product_definition = models.ForeignKey(
         ProductDefinition,

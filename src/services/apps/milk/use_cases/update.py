@@ -8,9 +8,9 @@ logger = logging.getLogger(__name__)
 
 
 def _update(instance: Milk) -> Milk:
-    updated_milk = instance.save()
+    instance.save()
 
-    return updated_milk
+    return instance
 
 
 def update_milk(

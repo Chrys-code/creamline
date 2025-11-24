@@ -3,16 +3,11 @@ import { tTyped } from "../../../../configs/i18n";
 
 const tCommon = tTyped("common");
 
-const BaseStorageSchema = z.object({
-	name: z
-		.string()
-		.max(255)
-		.min(1, { message: tCommon("errors.input_is_required") }),
-	type: z.string().min(1, { message: tCommon("errors.input_is_required") }),
-});
-
-const StorageSchema = BaseStorageSchema.extend({
+const StorageSchema = z.object({
+	name: z.string(),
 	uuid: z.string().uuid(),
+	type: z.string(),
+	type_uuid: z.string(),
 
 	created_at: z.string(),
 	updated_at: z.string(),
@@ -29,9 +24,16 @@ const PaginatedListStorageSchema = z
 	})
 	.passthrough();
 
-const StorageFormSchema = BaseStorageSchema;
-const CreateStorageFormSchema = BaseStorageSchema;
-const PatchStorageFormSchema = BaseStorageSchema.extend({
+const StorageFormSchema = z.object({
+	name: z
+		.string()
+		.max(255)
+		.min(1, { message: tCommon("errors.input_is_required") }),
+	type: z.string().min(1, { message: tCommon("errors.input_is_required") }),
+});
+
+const CreateStorageFormSchema = StorageFormSchema;
+const PatchStorageFormSchema = StorageFormSchema.extend({
 	uuid: z.string().uuid(),
 }).partial();
 

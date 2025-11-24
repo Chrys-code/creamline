@@ -19,9 +19,9 @@ class ProducerSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        name=validated_data["name"]
-        address=validated_data["address"]
-        contact_email=validated_data.get("contact_email", None)
+        name = validated_data["name"]
+        address = validated_data["address"]
+        contact_email = validated_data.get("contact_email", None)
 
         producer = create_producer(
             name=name,
@@ -32,9 +32,9 @@ class ProducerSerializer(serializers.ModelSerializer):
         return producer
 
     def update(self, instance, validated_data):
-        name=validated_data.get("name", None)
-        address=validated_data.get("address", None)
-        contact_email=validated_data.get("contact_email", None)
+        name = validated_data.get("name", None)
+        address = validated_data.get("address", None)
+        contact_email = validated_data.get("contact_email", None)
 
         profile = update_producer(
             instance=instance,

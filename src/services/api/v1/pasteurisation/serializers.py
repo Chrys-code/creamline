@@ -10,7 +10,6 @@ from apps.pasteurisation.use_cases.update import update_pasteurisation
 
 
 class PasteurisationSerializer(serializers.ModelSerializer):
-
     pasteur = serializers.SlugRelatedField(
         slug_field="uuid", queryset=Pasteur.objects.all()
     )
@@ -28,14 +27,12 @@ class PasteurisationSerializer(serializers.ModelSerializer):
     )
     source_storage_uuid = serializers.CharField(required=False)
     source_storage_name = serializers.CharField(required=False)
-    source_storage_type = serializers.CharField(required=False)
 
     target_storage = serializers.SlugRelatedField(
         slug_field="uuid", queryset=Storage.objects.all()
     )
     target_storage_uuid = serializers.CharField(required=False)
     target_storage_name = serializers.CharField(required=False)
-    target_storage_type = serializers.CharField(required=False)
 
     class Meta:
         model = Pasteurisation
@@ -50,11 +47,9 @@ class PasteurisationSerializer(serializers.ModelSerializer):
             "source_storage",
             "source_storage_name",
             "source_storage_uuid",
-            "source_storage_type",
             "target_storage",
             "target_storage_name",
             "target_storage_uuid",
-            "target_storage_type",
             "volume_kg",
             "volume_liters",
             "temperature",

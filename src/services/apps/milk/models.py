@@ -35,7 +35,6 @@ class Milk(models.Model):
     )
     storage_uuid = models.CharField(max_length=255, editable=False)
     storage_name = models.CharField(max_length=255, editable=False)
-    storage_type = models.CharField(choices=Storage.StorageType.choices, blank=True)
 
     acid_content = models.FloatField(validators=[MinValueValidator(0.00)], blank=True)
     aflatoxin = models.BooleanField(blank=True)

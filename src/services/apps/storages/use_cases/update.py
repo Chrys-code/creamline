@@ -1,5 +1,6 @@
 import logging
 
+from apps.storages.features.storage_types.models import StorageType
 from apps.storages.models import Storage
 
 
@@ -12,12 +13,8 @@ def _update(instance: Storage) -> Storage:
     return instance
 
 
-def update_storage(
-    instance: Storage,
-    name: str,
-    type: Storage.StorageType
-) -> Storage:
-    
+def update_storage(instance: Storage, name: str, type: StorageType) -> Storage:
+
     if name is not None:
         setattr(instance, "name", name)
     if type is not None:

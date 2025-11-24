@@ -1,6 +1,9 @@
 import type { LoaderFunctionArgs } from "react-router";
 import { listPaginatedStorages } from "../../features/domain/storage/loaders/listStorages";
 import { getStorage } from "../../features/domain/storage/loaders/getStorage";
+import { listStorageTypes } from "../../features/domain/storage/features/storageType/loaders/listStorageTypes";
+import { adaptStorageTypesForStorageTypeOptions } from "../../features/domain/storage/features/storageType/adapters";
+import { adaptStorageToEditorForm } from "../../features/domain/storage/adapters";
 
 const storageRoutes = [
 	{
@@ -19,7 +22,10 @@ const storageRoutes = [
 			Component: async () =>
 				(await import("../../pages/storage/editStorage/EditStorage")).default,
 		},
-		loader: getStorage,
+		loader: async () => ({
+			storage: null,
+			storageTypeOptions: adaptStorageTypesForStorageTypeOptions(await listStorageTypes()),
+		}),
 	},
 	{
 		path: "storage/edit/:id",
@@ -27,7 +33,10 @@ const storageRoutes = [
 			Component: async () =>
 				(await import("../../pages/storage/editStorage/EditStorage")).default,
 		},
-		loader: getStorage,
+		loader: async (args: LoaderFunctionArgs) => ({
+			storage: adaptStorageToEditorForm(await getStorage(args)),
+			storageTypeOptions: adaptStorageTypesForStorageTypeOptions(await listStorageTypes()),
+		}),
 	},
 ];
 

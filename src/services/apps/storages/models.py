@@ -3,19 +3,22 @@ import uuid
 from django.conf import settings
 from django.db import models
 
+from apps.storages.features.storage_types.models import StorageType
+
 
 class Storage(models.Model):
-    class StorageType(models.TextChoices):
-        SILO = "SILO", "silo"
-        TUB = "TUB", "tub"
-        CONTAINER = "CONTAINER", "container"
-
     uuid = models.UUIDField(
         default=uuid.uuid4, unique=True, editable=False, primary_key=False
     )
 
     name = models.CharField(max_length=255)
-    type = models.CharField(choices=StorageType.choices, max_length=100)
+    type = models.ForeignKey(
+        StorageType,
+        related_name="storage",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(
@@ -41,30 +44,3 @@ class Storage(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.uuid}"
-
-
-class SiloStorage(Storage):
-    class Meta:
-        proxy = True
-        verbose_name = "Silo"
-        verbose_name_plural = "Silos"
-
-    objects = models.Manager()  # default manager
-
-
-class ContainerStorage(Storage):
-    class Meta:
-        proxy = True
-        verbose_name = "Container"
-        verbose_name_plural = "Containers"
-
-    objects = models.Manager()  # default manager
-
-
-class TubStorage(Storage):
-    class Meta:
-        proxy = True
-        verbose_name = "Tub"
-        verbose_name_plural = "Tubs"
-
-    objects = models.Manager()  # default manager

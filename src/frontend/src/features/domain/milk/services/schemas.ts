@@ -26,7 +26,6 @@ const MilkSchema = MilkBaseSchema.extend({
 
 	storage_uuid: z.string().uuid(),
 	storage_name: z.string(),
-	storage_type: z.string(),
 
 	created_at: z.string(),
 	updated_at: z.string(),

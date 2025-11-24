@@ -20,7 +20,6 @@ class MilkSerializer(serializers.ModelSerializer):
     )
     storage_uuid = serializers.CharField(required=False)
     storage_name = serializers.CharField(required=False)
-    storage_type = serializers.CharField(required=False)
 
     class Meta:
         model = Milk
@@ -32,7 +31,6 @@ class MilkSerializer(serializers.ModelSerializer):
             "storage",
             "storage_uuid",
             "storage_name",
-            "storage_type",
             "volume_kg",
             "volume_liters",
             "acid_content",
