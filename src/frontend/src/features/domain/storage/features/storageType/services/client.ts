@@ -1,5 +1,6 @@
 import { createApiClient } from "./endpoints";
 import { getCookie } from "../../../../../../shared/helpers/getCookie/getCookie";
+import i18n from "../../../../../../configs/i18n";
 
 export const storageTypeClient = createApiClient("/", {
 	axiosConfig: {
@@ -12,5 +13,8 @@ storageTypeClient.axios.interceptors.request.use((config: any) => {
 	if (csrfToken && ["post", "patch", "put", "delete"].includes(config.method || "")) {
 		config.headers["X-CSRFToken"] = csrfToken;
 	}
+	const language = i18n.language;
+	config.headers["X-Language"] = language;
+
 	return config;
 });

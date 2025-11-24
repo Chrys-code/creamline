@@ -6,13 +6,9 @@ def create_group_metadata(apps, _schema_editor):
     Group = apps.get_model("auth", "Group")
     GroupMetadata = apps.get_model("user_groups", "GroupMetadata")
 
-    mapping = [
-        ("Manager", "manager"),
-        ("Milk Collector", "milk_collector"),
-        ("Pasteuriser", "pasteuriser"),
-    ]
+    from apps.users.features.user_groups.common.constants import USER_GROUP_CHOICES
 
-    for name, code_name in mapping:
+    for code_name, name in USER_GROUP_CHOICES:
         group, _ = Group.objects.get_or_create(name=name)
         GroupMetadata.objects.get_or_create(
             group=group, code_name=code_name, display_name=name

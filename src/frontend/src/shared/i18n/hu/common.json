@@ -9,11 +9,6 @@
 		"yes": "Igen",
 		"no": "Nem"
 	},
-	"user_groups": {
-		"manager": "Menedzser",
-		"milk_collector": "Tejátvételes",
-		"pasteuriser": "Pasztőrös"
-	},
 	"utilities": {
 		"storage": "Raktár",
 		"volume": "Mennyiség"
