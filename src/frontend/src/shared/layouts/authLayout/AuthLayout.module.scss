@@ -4,6 +4,16 @@
 	width: 100%;
 	height: var(--header-height);
 	background-color: var(--color-primary-500);
+	padding: 1rem;
+
+	> div {
+		height: 100%;
+		width: 100%;
+
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
 }
 
 .container {

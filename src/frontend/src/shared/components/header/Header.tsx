@@ -2,6 +2,7 @@ import React from "react";
 import type { HeaderProps } from "./Header.types";
 import styles from "./Header.module.scss";
 import i18n from "../../../configs/i18n";
+import LanguageSelector from "../languageSelector";
 
 const MdCheckBoxOutlineBlank = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -36,17 +37,11 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }: HeaderProps) => {
 		<div className={styles.container}>
 			<MdCheckBoxOutlineBlank size="2rem" fill="white" />
 			<div>
-				<select defaultValue={i18n.language} onChange={handleLanguageChange}>
-					<option value="init" className={styles.initialOption} disabled>
-						{"Lang"}
-					</option>
-					{languageOptions &&
-						languageOptions.map((option) => (
-							<option key={option.id} value={option.id}>
-								{option.value}
-							</option>
-						))}
-				</select>
+				<LanguageSelector
+					languageOptions={languageOptions}
+					currentLanguageCode={i18n.language}
+					onChange={handleLanguageChange}
+				/>
 				<button onClick={onMenuClick}>
 					<MdOutlineMenu size="2rem" fill="white" />
 				</button>
