@@ -74,7 +74,7 @@ export const useUserForm = (user: User) => {
 
 	const editUser = async (formData: PatchUserFormSchema, id: string): Promise<void> => {
 		try {
-			await userClient.v1_users_partial_update(formData, { params: { uuid: id } });
+			await userClient.v1_users_update(formData, { params: { uuid: id } });
 			toast.success(tUser("edit_user.notifications.success"));
 			navigate("/users");
 		} catch (err: any) {

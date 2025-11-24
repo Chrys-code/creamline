@@ -63,7 +63,7 @@ const CreateProducerEndpoint = makeEndpoint({
 const PatchProducerEndpoint = makeEndpoint({
 	method: "put",
 	path: "/api/v1/producer/:uuid/",
-	alias: "v1_producer_partial_update",
+	alias: "v1_producer_update",
 	requestFormat: "json",
 	parameters: [
 		{

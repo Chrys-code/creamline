@@ -56,7 +56,7 @@ const CreateUserEndpoint = makeEndpoint({
 const PatchUserEndpoint = makeEndpoint({
 	method: "patch",
 	path: "/api/v1/users/:uuid/",
-	alias: "v1_users_partial_update",
+	alias: "v1_users_update",
 	requestFormat: "json",
 	parameters: [
 		{

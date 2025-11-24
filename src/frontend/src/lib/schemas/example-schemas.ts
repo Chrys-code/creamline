@@ -587,7 +587,7 @@ const endpoints = makeApi([
 	{
 		method: "patch",
 		path: "/api/v1/producer/:id/",
-		alias: "v1_producer_partial_update",
+		alias: "v1_producer_update",
 		requestFormat: "json",
 		parameters: [
 			{
@@ -817,7 +817,7 @@ const endpoints = makeApi([
 	{
 		method: "patch",
 		path: "/api/v1/users/:uuid/",
-		alias: "v1_users_partial_update",
+		alias: "v1_users_update",
 		requestFormat: "json",
 		parameters: [
 			{
