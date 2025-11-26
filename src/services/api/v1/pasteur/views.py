@@ -17,10 +17,11 @@ class PasteurViewSet(ModelViewSet):
     queryset = Pasteur.objects.all()
     serializer_class = seralizers.PasteurSerializer
     permission_classes = [IsAuthenticated]
-    pagination_class = [StandardPagePagination]
+    pagination_class = StandardPagePagination
+    lookup_field = "uuid"
 
     def get_queryset(self):
-        return Pasteur.objects.filter(deleted_at=None)
+        return Pasteur.objects.all().filter(deleted_at=None)
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()

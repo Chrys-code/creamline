@@ -1,5 +1,5 @@
 import logging
-from typing import TypedDict, TYPE_CHECKING
+from typing import TYPE_CHECKING
 
 from apps.pasteurs.models import Pasteur
 
@@ -7,11 +7,6 @@ if TYPE_CHECKING:
     from apps.users.models import CustomUser
 
 logger = logging.getLogger(__name__)
-
-
-class CreatePasteurData(TypedDict):
-    name: str
-    created_by: "CustomUser"
 
 
 def _create(
@@ -27,10 +22,10 @@ def _create(
 
 
 def create_pasteur(
-    validated_data: CreatePasteurData, created_by: "CustomUser"
+    name: str, created_by: "CustomUser"
 ) -> Pasteur:
     created_pasteur = _create(
-        name=validated_data["name"],
+        name=name,
         created_by=created_by,
     )
 

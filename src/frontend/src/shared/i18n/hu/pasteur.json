@@ -1,0 +1,21 @@
+{
+	"edit_pasteur": {
+		"page_titles": {
+			"create": "Új pasztőr",
+			"edit": "Pasztőr szerkesztése"
+		},
+		"form_sections": {
+			"form_title": "Pasteur details"
+		},
+		"input_labels": {
+			"name": "Pasztőr neve"
+		},
+		"notifications": {
+			"success": "Pasztőr elmentve!",
+			"error": "Pasztőrt nem tudtuk elmenteni!"
+		}
+	},
+	"list_pasteurs": {
+		"page_title": "Pasztőrök"
+	}
+}

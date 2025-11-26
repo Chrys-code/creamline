@@ -12,6 +12,7 @@ import pasteurisationRoutes from "./routes/pasteurisation.routes";
 
 import { getProfile } from "../features/domain/profile/loaders/getProfile";
 import storageRoutes from "./routes/storage.routes";
+import pasteurRoutes from "./routes/pasteur.routes";
 
 const appRouter = createBrowserRouter([
 	{
@@ -41,6 +42,7 @@ const appRouter = createBrowserRouter([
 			...userRoutes,
 			...producerRoutes,
 			...storageRoutes,
+			...pasteurRoutes,
 			{
 				path: "profile",
 				lazy: {

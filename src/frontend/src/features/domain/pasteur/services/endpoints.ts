@@ -15,6 +15,18 @@ const PaginatedListPasteurEndpoint = makeEndpoint({
 	path: "/api/v1/pasteur/",
 	alias: "v1_pasteur_list_paginated",
 	requestFormat: "json",
+	parameters: [
+		{
+			name: "page",
+			type: "Query",
+			schema: z.number().int().optional(),
+		},
+		{
+			name: "page_size",
+			type: "Query",
+			schema: z.number().int().optional(),
+		},
+	],
 	response: schemas.PaginatedListPasteurSchema,
 });
 
@@ -27,7 +39,7 @@ const GetPasteurEndpoint = makeEndpoint({
 		{
 			name: "id",
 			type: "Path",
-			schema: z.number().int(),
+			schema: z.string(),
 		},
 	],
 	response: schemas.PasteurSchema,
@@ -50,7 +62,7 @@ const CreatePasteurEndpoint = makeEndpoint({
 
 const PatchPasteurEndpoint = makeEndpoint({
 	method: "put",
-	path: "/api/v1/pasteur/:id/",
+	path: "/api/v1/pasteur/:uuid/",
 	alias: "v1_pasteur_update",
 	requestFormat: "json",
 	parameters: [
@@ -60,9 +72,9 @@ const PatchPasteurEndpoint = makeEndpoint({
 			schema: schemas.PatchPasteurFormSchema,
 		},
 		{
-			name: "id",
+			name: "uuid",
 			type: "Path",
-			schema: z.number().int(),
+			schema: z.string().uuid(),
 		},
 	],
 	response: schemas.PasteurSchema,

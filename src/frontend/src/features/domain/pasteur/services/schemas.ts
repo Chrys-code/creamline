@@ -4,7 +4,6 @@ import { tTyped } from "../../../../configs/i18n";
 const tCommon = tTyped("common");
 
 const BasePasteurSchema = z.object({
-	uuid: z.string().uuid().optional(),
 	name: z.string({ message: tCommon("errors.input_is_required") }),
 });
 
@@ -25,8 +24,8 @@ const PaginatedListPasteurSchema = z
 	})
 	.passthrough();
 
+const PasteurFormSchema = BasePasteurSchema;
 const CreatePasteurFormSchema = BasePasteurSchema;
-
 const PatchPasteurFormSchema = BasePasteurSchema.extend({
 	uuid: z.string().uuid(),
 }).partial();
@@ -35,6 +34,7 @@ const schemas = {
 	PasteurSchema,
 	ListPasteurSchema,
 	PaginatedListPasteurSchema,
+	PasteurFormSchema,
 	CreatePasteurFormSchema,
 	PatchPasteurFormSchema,
 };

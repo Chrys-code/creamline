@@ -1,0 +1,21 @@
+{
+	"edit_pasteur": {
+		"page_titles": {
+			"create": "New pasteur",
+			"edit": "Edit pasteur"
+		},
+		"form_sections": {
+			"form_title": "Pasteur details"
+		},
+		"input_labels": {
+			"name": "Pasteur name"
+		},
+		"notifications": {
+			"success": "Pasteur saved!",
+			"error": "Could not save Pasteur!"
+		}
+	},
+	"list_pasteurs": {
+		"page_title": "Pasteurs"
+	}
+}

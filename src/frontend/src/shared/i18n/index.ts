@@ -8,6 +8,7 @@ import storageEn from "./en/storage.json";
 import dashboardEn from "./en/dashboard.json";
 import milkCollectionEn from "./en/milkCollection.json";
 import pasteurisationEn from "./en/pasteurisedMilk.json";
+import pasteurEn from "./en/pasteur.json";
 
 export const translationEn = {
 	common: commonEn,
@@ -20,6 +21,7 @@ export const translationEn = {
 	dashboard: dashboardEn,
 	milkCollection: milkCollectionEn,
 	pasteurisation: pasteurisationEn,
+	pasteur: pasteurEn,
 };
 
 import commonHu from "./hu/common.json";
@@ -32,6 +34,7 @@ import storageHu from "./hu/storage.json";
 import dashboardHu from "./hu/dashboard.json";
 import milkCollectionHu from "./hu/milkCollection.json";
 import pasteurisationHu from "./hu/pasteurisedMilk.json";
+import pasteurHu from "./hu/pasteur.json";
 
 export const translationHu = {
 	common: commonHu,
@@ -44,4 +47,5 @@ export const translationHu = {
 	dashboard: dashboardHu,
 	milkCollection: milkCollectionHu,
 	pasteurisation: pasteurisationHu,
+	pasteur: pasteurHu,
 };

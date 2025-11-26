@@ -10,3 +10,4 @@ export type StorageTranslations = typeof translationEn.storage;
 export type DashboardTranslations = typeof translationEn.dashboard;
 export type MilkCollectionTranslations = typeof translationEn.milkCollection;
 export type PasteurisedMilkTranslations = typeof translationEn.pasteurisation;
+export type PasteurTranslations = typeof translationEn.pasteur;

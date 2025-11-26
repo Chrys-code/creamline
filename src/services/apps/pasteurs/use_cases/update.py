@@ -1,5 +1,4 @@
 import logging
-from typing import Dict
 
 from apps.pasteurs.models import Pasteur
 
@@ -8,17 +7,17 @@ logger = logging.getLogger(__name__)
 
 
 def _update(instance: Pasteur) -> Pasteur:
-    updated_pasteur = instance.save()
+    instance.save()
 
-    return updated_pasteur
+    return instance
 
 
 def update_pasteur(
     instance: Pasteur,
-    validated_data: Dict,
+    name: str,
 ) -> Pasteur:
-    for field, value in validated_data.items():
-        setattr(instance, field, value)
+    if name is not None:
+        setattr(instance, "name", name)
 
     updated_pasteur = _update(instance=instance)
 
