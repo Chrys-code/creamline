@@ -1,0 +1,19 @@
+{
+	"edit_product_definition": {
+		"page_title": {
+			"create": "Ùj termék leírás",
+			"edit": "Termék leírás szerkesztése"
+		},
+		"input_labels": {
+			"name": "Név",
+			"type": "Típus"
+		},
+		"notifications": {
+			"success": "Termék leírás elmentve!",
+			"error": "Termék leírást nem tudtuk elmenteni!"
+		}
+	},
+	"list_product_definition": {
+		"page_title": "Termék leírások"
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"edit_product_definition": {
+		"page_title": {
+			"create": "Create product definition",
+			"edit": "Edit product definition"
+		},
+		"input_labels": {
+			"name": "Name",
+			"type": "Type"
+		},
+		"notifications": {
+			"success": "Product definition saved!",
+			"error": "Could not save Product definition!"
+		}
+	},
+	"list_product_definition": {
+		"page_title": "Product definitions"
+	}
+}

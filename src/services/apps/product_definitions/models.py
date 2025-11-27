@@ -1,14 +1,15 @@
 import uuid
 
+from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from django.db import models
 
 
 class ProductDefinition(models.Model):
     class ProductDefinitionTypes(models.TextChoices):
-        CREAM = "CREAM", "cream"
-        WHOLEMILK = "WHOLE MILK", "whole milk"
-        SKIMMEDMILK = "SKIMMED MILK", "skimmed milk"
+        CREAM = "CREAM", _("cream")
+        WHOLEMILK = "WHOLE MILK", _("whole milk")
+        SKIMMEDMILK = "SKIMMED MILK", _("skimmed milk")
 
     uuid = models.UUIDField(
         default=uuid.uuid4, unique=True, editable=False, primary_key=False

@@ -12,8 +12,8 @@ export const listPaginatedProducers = async ({ request }: LoaderFunctionArgs) =>
 		});
 
 		return { data: producerResponse, page };
-	} catch (err) {
-		throw new Error("Could not get producers list" + err);
+	} catch {
+		throw new Error("Could not get producers list");
 	}
 };
 

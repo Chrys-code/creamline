@@ -19,6 +19,7 @@ i18n.use(LanguageDetector)
 				milkCollection: translations.translationEn.milkCollection,
 				pasteurisation: translations.translationEn.pasteurisation,
 				pasteur: translations.translationEn.pasteur,
+				productDefinition: translations.translationEn.productDefinition,
 			},
 			hu: {
 				common: translations.translationHu.common,
@@ -32,6 +33,7 @@ i18n.use(LanguageDetector)
 				milkCollection: translations.translationHu.milkCollection,
 				pasteurisation: translations.translationHu.pasteurisation,
 				pasteur: translations.translationHu.pasteur,
+				productDefinition: translations.translationHu.productDefinition,
 			},
 		},
 		fallbackLng: "hu",
@@ -57,6 +59,7 @@ export const namespaces = [
 	"milkCollection",
 	"pasteurisation",
 	"pasteur",
+	"productDefinition",
 ] as const;
 
 export type NamespaceKey = (typeof namespaces)[number];
@@ -73,6 +76,7 @@ export type NamespaceMap = {
 	milkCollection: TranslationTypes.MilkCollectionTranslations;
 	pasteurisation: TranslationTypes.PasteurisedMilkTranslations;
 	pasteur: TranslationTypes.PasteurTranslations;
+	productDefinition: TranslationTypes.ProductDefinitionTranslations;
 };
 
 // Flattens nested keys into dot notations
