@@ -2,11 +2,10 @@ import type React from "react";
 import type { EditPasteurisationProps } from "./EditPasteurisation.types";
 
 import PageHeader from "../../../shared/components/pageHeader/index";
+import PasteurisationForm from "../../../features/domain/pasteurisation/forms/pasteurisationForm";
 
 import { useLoaderData, useNavigate } from "react-router";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-
-import PasteurisationForm from "../../../features/composite/pasteurisationForm";
 
 const EditPasteurisation: React.FC = () => {
 	const { pasteurOptions, storageOptions, productDefinitionOptions, selectedItem } =

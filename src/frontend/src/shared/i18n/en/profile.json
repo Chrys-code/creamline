@@ -5,7 +5,8 @@
 			"last_name": "Lastname"
 		},
 		"notifications": {
-			"update_success": "Profile updated!"
+			"success": "Profile updated!",
+			"error": "Could not save profile!"
 		}
 	}
 }

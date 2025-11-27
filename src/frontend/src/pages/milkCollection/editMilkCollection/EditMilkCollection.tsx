@@ -1,12 +1,11 @@
 import type { EditMilkCollectionProps } from "./EditMilkCollection.types";
 
 import PageHeader from "../../../shared/components/pageHeader";
+import MilkCollectionForm from "../../../features/domain/milk/forms/milkCollectionForm";
 
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-
-import MilkCollectionForm from "../../../features/composite/milkCollectionForm";
 
 const EditMilkCollection: React.FC = () => {
 	const { producerOptions, storageOptions, selectedItem } =

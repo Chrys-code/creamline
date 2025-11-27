@@ -1,127 +1,14 @@
 import type React from "react";
-import type { PatchProfileFormSchema } from "../../features/domain/profile/types";
-import type { ProfileProps } from "./Profile.types";
-import styles from "./Profile.module.scss";
+import type { Profile } from "../../features/domain/profile/types";
 
-import Button from "../../shared/components/button";
-import Form from "../../shared/components/form";
-import InputField from "../../shared/components/inputField";
+import ProfileForm from "../../features/domain/profile/forms/profileForm";
 
-import { useState } from "react";
-import { useRouteLoaderData, useRevalidator } from "react-router";
-import { useTypedTranslation } from "../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { v4 as uuid } from "uuid";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-import schemas from "../../features/domain/profile/services/schemas";
-import { toast } from "react-toastify";
-import { profileClient } from "../../features/domain/profile/services/client";
+import { useLoaderData } from "react-router";
 
 const Profile: React.FC = () => {
-	const pt = useTypedTranslation("profile");
-	const ct = useTypedTranslation("common");
-	const data = useRouteLoaderData("app") as ProfileProps;
-	const revalidator = useRevalidator();
-	const [isEditing, setIsEditing] = useState(false);
+	const profile = useLoaderData<Profile>();
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors, isSubmitting },
-		setError,
-		clearErrors,
-	} = useForm<PatchProfileFormSchema>({
-		resolver: zodResolver(schemas.PatchProfileFormSchema),
-	});
-
-	const handleEditClick = () => {
-		setIsEditing(!isEditing);
-	};
-
-	const onSubmit = async (formData: PatchProfileFormSchema) => {
-		try {
-			await profileClient.v1_profile_update(formData);
-			toast.success(pt("profile.notifications.update_success"));
-		} catch (err: any) {
-			if (err.response?.data) {
-				const responseData = err.response.data;
-				if (responseData.first_name)
-					setError("first_name", { message: responseData.first_name[0] });
-				if (responseData.last_name)
-					setError("last_name", { message: responseData.last_name[0] });
-			}
-		}
-
-		revalidator.revalidate();
-		setIsEditing(!isEditing);
-	};
-
-	const renderFormActions = () => {
-		if (!isEditing) return null;
-
-		return (
-			<div className={styles.actions}>
-				<Button style="secondary" type="button" onClick={handleEditClick}>
-					{ct("common.cancel")}
-				</Button>
-				<Button style="primary" type="submit" disabled={isSubmitting}>
-					{ct("common.save")}
-				</Button>
-			</div>
-		);
-	};
-
-	const containerStyle = `${styles.container}`;
-
-	return (
-		<div className={containerStyle}>
-			<div className={styles.profileImage}></div>
-			<Form
-				actionElements={renderFormActions()}
-				onSubmit={handleSubmit(onSubmit, (err) => console.log({ err }))}
-			>
-				<section>
-					<InputField
-						id={uuid()}
-						{...register("first_name", { onChange: () => clearErrors("first_name") })}
-						type="text"
-						label={pt("profile.input_labels.first_name")}
-						defaultValue={data.profile.first_name}
-						error={errors.first_name?.message}
-						disabled={!isEditing}
-					/>
-					<InputField
-						id={uuid()}
-						{...register("last_name", { onChange: () => clearErrors("last_name") })}
-						type="text"
-						label={pt("profile.input_labels.last_name")}
-						defaultValue={data.profile.last_name}
-						error={errors.last_name?.message}
-						disabled={!isEditing}
-					/>
-					<InputField
-						id={uuid()}
-						name="email"
-						type="text"
-						label="Email"
-						defaultValue={data.profile.email}
-						disabled={true}
-					/>
-					{!isEditing && (
-						<>
-							<div className={styles.editAaction}>
-								<span></span>
-								<Button style="secondary" type="button" onClick={handleEditClick}>
-									{ct("common.edit")}
-								</Button>
-							</div>
-						</>
-					)}
-				</section>
-			</Form>
-		</div>
-	);
+	return <ProfileForm profile={profile} />;
 };
 
 export default Profile;

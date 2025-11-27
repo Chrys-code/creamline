@@ -2,7 +2,7 @@ import type React from "react";
 import type { EditProductDefinitionProps } from "./EditProductDefinition.types";
 
 import PageHeader from "../../../shared/components/pageHeader";
-import ProductDefinitionForm from "../../../features/composite/productDefinitionForm/components/ProductDefinitionForm";
+import ProductDefinitionForm from "../../../features/domain/productDefinition/forms/productDefinitionForm";
 
 import { useLoaderData } from "react-router";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";

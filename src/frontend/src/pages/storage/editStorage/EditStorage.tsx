@@ -2,7 +2,7 @@ import type React from "react";
 import type { Storage } from "../../../features/domain/storage/types";
 
 import PageHeader from "../../../shared/components/pageHeader";
-import StorageForm from "../../../features/composite/storageForm";
+import StorageForm from "../../../features/domain/storage/forms/storageForm";
 
 import { useLoaderData } from "react-router";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";

@@ -12,6 +12,7 @@ export interface InputFieldProps {
 	placeholder?: string;
 	error?: string | null;
 	disabled?: boolean;
+	readOnly?: boolean;
 
 	step?: string; // only for number type
 

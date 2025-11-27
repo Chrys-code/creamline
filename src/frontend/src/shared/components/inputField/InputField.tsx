@@ -12,6 +12,7 @@ const InputField: React.FC<InputFieldProps> = ({
 	step,
 	error,
 	disabled,
+	readOnly = false,
 	...props
 }: InputFieldProps) => {
 	const inputStyle = `${styles.input} ${error && styles.error} ${disabled && styles.disabled}`;
@@ -34,6 +35,7 @@ const InputField: React.FC<InputFieldProps> = ({
 				step={numberInputStep}
 				placeholder={placeholder}
 				autoComplete="off"
+				readOnly={readOnly}
 			/>
 			{error && <span>{error}</span>}
 		</div>

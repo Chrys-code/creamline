@@ -50,6 +50,7 @@ const appRouter = createBrowserRouter([
 				lazy: {
 					Component: async () => (await import("../pages/profile/Profile")).default,
 				},
+				loader: getProfile,
 			},
 		],
 	},

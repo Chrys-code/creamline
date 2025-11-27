@@ -2,7 +2,7 @@ import type React from "react";
 import type { Producer } from "../../../features/domain/producer/types";
 
 import PageHeader from "../../../shared/components/pageHeader";
-import ProducerForm from "../../../features/composite/producerForm/components/ProducerForm";
+import ProducerForm from "../../../features/domain/producer/forms/producerForm";
 
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { useLoaderData } from "react-router";

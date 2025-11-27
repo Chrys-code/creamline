@@ -1,0 +1,34 @@
+.container {
+	width: 80%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 3rem;
+	margin: 0 auto;
+}
+
+.profileImage {
+	width: 6rem;
+	height: 6rem;
+	background-color: var(--color-primary-100);
+	border-radius: var(--border-wrapper-radius);
+}
+
+.actions {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.editAaction {
+	margin-top: 2rem;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+}

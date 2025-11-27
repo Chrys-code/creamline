@@ -2,7 +2,7 @@ import type React from "react";
 import type { Pasteur } from "../../../features/domain/pasteur/types";
 
 import PageHeader from "../../../shared/components/pageHeader";
-import PasteurForm from "../../../features/composite/pasteurForm/components/PasteurForm";
+import PasteurForm from "../../../features/domain/pasteur/forms/pasteurForm";
 
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { useLoaderData, useNavigate } from "react-router";

@@ -10,7 +10,7 @@ const BaseProfileSchema = z
 	.passthrough();
 
 const ProfileSchema = BaseProfileSchema.extend({
-	email: z.string().max(255).email().nullish(),
+	email: z.string().max(255).email(),
 	uuid: z.string().uuid(),
 });
 

@@ -5,7 +5,8 @@
 			"last_name": "Családnév"
 		},
 		"notifications": {
-			"update_success": "Profil frissítve!"
+			"success": "Profil frissítve!",
+			"error": "Profilt nem tudtuk elmenteni!"
 		}
 	}
 }

@@ -2,7 +2,7 @@ import type React from "react";
 import type { EditUserProps } from "./EditUser.types";
 
 import PageHeader from "../../../shared/components/pageHeader";
-import UserForm from "../../../features/composite/userForm";
+import UserForm from "../../../features/domain/user/forms/userForm";
 
 import { useLoaderData, useNavigate } from "react-router";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";

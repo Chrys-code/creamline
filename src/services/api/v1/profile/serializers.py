@@ -25,9 +25,9 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
 
-        email = validated_data.pop("email")
-        first_name = validated_data.pop("first_name")
-        last_name = validated_data.pop("last_name")
+        email = validated_data.get("email", None)
+        first_name = validated_data.get("first_name", None)
+        last_name = validated_data.get("last_name", None)
 
         profile = update_profile(
             instance=instance, email=email, first_name=first_name, last_name=last_name
