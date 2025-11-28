@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from api.v1.storage.views import StorageViewSet
@@ -57,4 +57,5 @@ router.register(
 urlpatterns = [
     *router.urls,
     path("profile/", ProfileDetailView.as_view(), name="profile-detail"),
+    path("analytics/", include(("api.v1.analytics.urls", "analytics"))),
 ]
