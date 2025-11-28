@@ -89,6 +89,16 @@ const MilkTrendAnalytics = makeEndpoint({
 			type: "Query",
 			schema: z.enum(["day", "week", "month", "quarter", "year"]).optional(),
 		},
+		{
+			name: "range",
+			type: "Query",
+			schema: z.number().optional(),
+		},
+		{
+			name: "producer_uuid",
+			type: "Query",
+			schema: z.string().uuid().optional(),
+		},
 	],
 	response: z.array(schemas.MilkTrendSchema),
 });

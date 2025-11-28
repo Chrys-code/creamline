@@ -49,7 +49,7 @@ const milkCollectionRoutes = [
 			Component: async () =>
 				(await import("../../pages/milkCollection/milkCollection/MilkCollection")).default,
 		},
-		loader: getPaginatedMilkList,
+		loader: async () => adaptProducersToProducerOptions(await listProducers()),
 	},
 ];
 

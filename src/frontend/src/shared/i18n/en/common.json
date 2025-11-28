@@ -28,7 +28,7 @@
 		"volume": "Volume"
 	},
 	"intervals": {
-		"day": "today",
+		"day": "day",
 		"week": "week",
 		"month": "month",
 		"quarter": "quarter",

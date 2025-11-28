@@ -8,7 +8,7 @@ import Button from "../../../shared/components/base/button";
 import IconButton from "../../../shared/components/base/iconButton";
 
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import { useMilkSummary } from "../../../features/domain/milk/hooks/useMilkSummary";
 import { useMilkTrend } from "../../../features/domain/milk/hooks/useMilkTrend";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
@@ -19,12 +19,26 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 	}))
 );
 
+const INTERVAL_LIMITS = {
+	day: 90,
+	week: 52,
+	month: 24,
+	quarter: 12,
+	year: 5,
+};
+
 const MilkCollection: React.FC = () => {
-	const [selectedInterval, setSelectedInterval] = useState<IntervalTypes>("day");
+	const producerOptions = useLoaderData<{ id: string; value: string }[]>();
+
 	const navigate = useNavigate();
 	const tCommon = useTypedTranslation("common");
 	const tMilkCollection = useTypedTranslation("milkCollection");
-	const { data: milkTrendData } = useMilkTrend(selectedInterval);
+
+	const [selectedInterval, setSelectedInterval] = useState<IntervalTypes>("day");
+	const [selectedRange, setSelectedRange] = useState<number>(1);
+	const [selectedProducer, setSelectedProducer] = useState<string>();
+
+	const { data: milkTrendData } = useMilkTrend(selectedInterval, selectedRange, selectedProducer);
 	const { data: milkSummaryData } = useMilkSummary();
 
 	const headerActionElement = (
@@ -39,6 +53,12 @@ const MilkCollection: React.FC = () => {
 		{ id: "month", value: tCommon("intervals.month") },
 		{ id: "year", value: tCommon("intervals.year") },
 	];
+
+	const maxRange = INTERVAL_LIMITS[selectedInterval] || 1;
+	const rangeOptions = Array.from({ length: maxRange }, (_, i) => ({
+		id: i + 1,
+		value: `${i + 1}`,
+	}));
 
 	return (
 		<>
@@ -73,6 +93,12 @@ const MilkCollection: React.FC = () => {
 				intervalOptions={intervalOptions}
 				selectedInterval={selectedInterval}
 				onIntervalChange={(e) => setSelectedInterval(e.target.value as IntervalTypes)}
+				rangeOptions={rangeOptions}
+				selectedRange={selectedRange}
+				onRangeChange={(e) => setSelectedRange(Number(e.target.value))}
+				producerOptions={producerOptions}
+				selectedProducer={selectedProducer}
+				onProducerChange={(e) => setSelectedProducer(e.target.value)}
 			/>
 
 			<div className={styles.center}>

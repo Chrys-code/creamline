@@ -7,7 +7,7 @@ setup:
 # DEV App commands
 
 build:
-	docker-compose -f dockerfiles/docker-compose.dev.yml  build --no-cache 
+	docker-compose -f dockerfiles/docker-compose.dev.yml build --no-cache 
 
 start:
 	docker-compose -f dockerfiles/docker-compose.dev.yml -p creamline-dev up -d
