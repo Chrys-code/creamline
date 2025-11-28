@@ -4,7 +4,7 @@ import type { Milk } from "../../../features/domain/milk/types";
 import PageHeader from "../../../shared/components/pageHeader";
 import PaginatedList from "../../../shared/components/paginatedList";
 import MilkCard from "../../../features/domain/milk/components/milkCard";
-import IconButton from "../../../shared/components/iconButton";
+import IconButton from "../../../shared/components/base/iconButton";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -51,6 +51,7 @@ const ListMilkCollection: React.FC = () => {
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>
+
 			<PaginatedList
 				items={data.results}
 				itemCount={data.count}

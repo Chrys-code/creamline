@@ -27,6 +27,13 @@
 		"acid_level": "SH⁰",
 		"more_or_less_than_50": "több / kevesebb mint 50"
 	},
+	"intervals": {
+		"day": "napi",
+		"week": "heti",
+		"month": "havi",
+		"quarter": "negyedév",
+		"year": "év"
+	},
 	"errors": {
 		"input_gte_0": "Az értéknek több mint 0-nak kell lennie",
 		"input_gte_absolute_zero": "Az értéknek több mint abszolút zérónak kell lennie",

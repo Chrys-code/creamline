@@ -1,11 +1,11 @@
 import type { MilkCollectionFormProps } from "./MilkCollectionForm.types.ts";
 import styles from "./MilkCollectionForm.module.scss";
 
-import Form from "../../../../../../shared/components/form";
-import Dropdown from "../../../../../../shared/components/dropdown";
-import IconButton from "../../../../../../shared/components/iconButton";
-import InputField from "../../../../../../shared/components/inputField";
-import Button from "../../../../../../shared/components/button";
+import Form from "../../../../../../shared/components/base/form";
+import Dropdown from "../../../../../../shared/components/base/dropdown";
+import IconButton from "../../../../../../shared/components/base/iconButton";
+import InputField from "../../../../../../shared/components/base/inputField";
+import Button from "../../../../../../shared/components/base/button";
 
 import React from "react";
 import { useNavigate } from "react-router";

@@ -2,10 +2,10 @@ import type React from "react";
 import type { PasteurisationFormProps } from "./PasteurisationForm.types.ts";
 import styles from "./PasteurisationForm.module.scss";
 
-import Form from "../../../../../../shared/components/form";
-import Dropdown from "../../../../../../shared/components/dropdown";
-import InputField from "../../../../../../shared/components/inputField";
-import Button from "../../../../../../shared/components/button";
+import Form from "../../../../../../shared/components/base/form";
+import Dropdown from "../../../../../../shared/components/base/dropdown";
+import InputField from "../../../../../../shared/components/base/inputField";
+import Button from "../../../../../../shared/components/base/button";
 
 import { useNavigate } from "react-router";
 import { v4 as uuid } from "uuid";

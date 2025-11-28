@@ -1,10 +1,10 @@
 import type React from "react";
-import type { ProfileFormProps } from "./ProfileForm.types.ts";
+import type { ProfileFormProps } from "./ProfileForm.types";
 import styles from "./ProfileForm.module.scss";
 
-import Form from "../../../../../../shared/components/form";
-import InputField from "../../../../../../shared/components/inputField";
-import Button from "../../../../../../shared/components/button";
+import Form from "../../../../../../shared/components/base/form";
+import InputField from "../../../../../../shared/components/base/inputField";
+import Button from "../../../../../../shared/components/base/button";
 
 import { useProfileForm } from "../hooks/useProfileForm";
 import { v4 as uuid } from "uuid";

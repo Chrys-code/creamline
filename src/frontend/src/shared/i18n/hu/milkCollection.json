@@ -1,4 +1,8 @@
 {
+	"milk_collection": {
+		"page_title": "Tejátvétel",
+		"see_milk_collections": "Tejátvételek megtekintése"
+	},
 	"edit_milk_collection": {
 		"page_title": {
 			"create": "Új tejátvétel",

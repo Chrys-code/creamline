@@ -2,7 +2,7 @@ import type { ListStoragesProps } from "./ListStorages.types";
 import type { Storage } from "../../../features/domain/storage/types";
 
 import PageHeader from "../../../shared/components/pageHeader";
-import IconButton from "../../../shared/components/iconButton";
+import IconButton from "../../../shared/components/base/iconButton";
 import PaginatedList from "../../../shared/components/paginatedList";
 
 import React from "react";

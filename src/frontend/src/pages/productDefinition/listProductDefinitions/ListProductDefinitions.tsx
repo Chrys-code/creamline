@@ -1,13 +1,14 @@
-import type { ListProductDefinitionsProps } from "./ListProductDefinitions.types.ts";
+import type { ListProductDefinitionsProps } from "./ListProductDefinitions.types";
+import type { ProductDefinition } from "../../../features/domain/productDefinition/types";
 
-import { useLoaderData, useNavigate } from "react-router";
-import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation.js";
-import IconButton from "../../../shared/components/iconButton/IconButton.js";
-import type { ProductDefinition } from "../../../features/domain/productDefinition/types/index.js";
-import PageHeader from "../../../shared/components/pageHeader/PageHeader.js";
-import PaginatedList from "../../../shared/components/paginatedList/PaginatedList.js";
+import IconButton from "../../../shared/components/base/iconButton";
+import PageHeader from "../../../shared/components/pageHeader";
+import PaginatedList from "../../../shared/components/paginatedList";
+import ProductDefinitionCard from "../../../features/domain/productDefinition/components/productDefinitionCard";
+
 import React from "react";
-import ProductDefinitionCard from "../../../features/domain/productDefinition/components/productDefinitionCard/ProductDefinitionCard.js";
+import { useLoaderData, useNavigate } from "react-router";
+import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

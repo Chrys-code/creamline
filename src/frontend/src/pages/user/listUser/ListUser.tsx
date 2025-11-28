@@ -4,7 +4,7 @@ import type { User } from "../../../features/domain/user/types";
 import PageHeader from "../../../shared/components/pageHeader";
 import PaginatedList from "../../../shared/components/paginatedList";
 import UserCard from "../../../features/domain/user/components/userCard";
-import IconButton from "../../../shared/components/iconButton";
+import IconButton from "../../../shared/components/base//iconButton";
 
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";

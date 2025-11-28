@@ -14,12 +14,19 @@ import { getProfile } from "../features/domain/profile/loaders/getProfile";
 import storageRoutes from "./routes/storage.routes";
 import pasteurRoutes from "./routes/pasteur.routes";
 import productDefinitionRoutes from "./routes/productDefinition.routes";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const appRouter = createBrowserRouter([
 	{
 		id: "app",
 		path: "/",
-		element: <AppLayout />,
+		element: (
+			<QueryClientProvider client={queryClient}>
+				<AppLayout />
+			</QueryClientProvider>
+		),
 		loader: async () => {
 			try {
 				const profile = await getProfile();

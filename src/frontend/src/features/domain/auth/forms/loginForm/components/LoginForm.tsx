@@ -1,9 +1,9 @@
 import type React from "react";
 import styles from "./LoginForm.module.scss";
 
-import Form from "../../../../../../shared/components/form/Form";
-import Button from "../../../../../../shared/components/button/Button";
-import InputField from "../../../../../../shared/components/inputField/InputField";
+import Form from "../../../../../../shared/components/base/form/Form";
+import Button from "../../../../../../shared/components/base/button/Button";
+import InputField from "../../../../../../shared/components/base/inputField/InputField";
 
 import { useLoginForm } from "../hooks/useLoginForm";
 import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";

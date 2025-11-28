@@ -72,11 +72,34 @@ const PatchMilkEndpoint = makeEndpoint({
 	response: schemas.MilkSchema,
 });
 
+const MilkSummaryAnalytics = makeEndpoint({
+	method: "get",
+	path: "/api/v1/analytics/milk/summary/",
+	alias: "getMilkSummary",
+	response: schemas.MilkSummarySchema,
+});
+
+const MilkTrendAnalytics = makeEndpoint({
+	method: "get",
+	path: "/api/v1/analytics/milk/trend/",
+	alias: "getMilkTrend",
+	parameters: [
+		{
+			name: "interval",
+			type: "Query",
+			schema: z.enum(["day", "week", "month", "quarter", "year"]).optional(),
+		},
+	],
+	response: z.array(schemas.MilkTrendSchema),
+});
+
 const endpoints = makeApi([
 	PaginatedListMilkEndpoint,
 	GetMilkEndpoint,
 	CreateMilkEndpoint,
 	PatchMilkEndpoint,
+	MilkSummaryAnalytics,
+	MilkTrendAnalytics,
 ]);
 
 export function createApiClient(baseUrl: string, options?: ZodiosOptions) {

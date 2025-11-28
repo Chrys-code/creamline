@@ -2,7 +2,7 @@ import type { PaginationProps } from "./Pagination.types.ts";
 import styles from "./Pagination.module.scss";
 
 import React from "react";
-import IconButton from "../iconButton";
+import IconButton from "../base/iconButton";
 
 const MdChevronLeft = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({ default: mod.MdChevronLeft }))

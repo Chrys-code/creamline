@@ -47,11 +47,28 @@ const PatchMilkFormSchema = MilkBaseSchema.extend({
 	uuid: z.string().uuid(),
 }).partial();
 
+const MilkSummarySchema = z.object({
+	today_total: z.number(),
+	today_change: z.number(),
+	last_7_days_total: z.number(),
+	last_7_days_change: z.number(),
+	last_30_days_total: z.number(),
+	last_30_days_change: z.number(),
+	pickups_today: z.number(),
+});
+
+export const MilkTrendSchema = z.object({
+	date: z.string(), // ISO date string
+	total_liters: z.number(),
+});
+
 const schemas = {
 	MilkSchema,
 	PaginatedListMilkSchema,
 	CreateMilkFormSchema,
 	PatchMilkFormSchema,
+	MilkSummarySchema,
+	MilkTrendSchema,
 };
 
 export default schemas;

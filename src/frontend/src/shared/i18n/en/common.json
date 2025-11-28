@@ -17,7 +17,7 @@
 	},
 	"units": {
 		"kg_short": "kg",
-		"liter": "liter(s)",
+		"liter": "liter",
 		"celsius": "celsius",
 		"positive_or_negative": "positive / negative",
 		"acid_level": "SH⁰",
@@ -26,6 +26,13 @@
 	"utilities": {
 		"storage": "Storage",
 		"volume": "Volume"
+	},
+	"intervals": {
+		"day": "today",
+		"week": "week",
+		"month": "month",
+		"quarter": "quarter",
+		"year": "year"
 	},
 	"errors": {
 		"input_gte_0": "Volume must be above 0",

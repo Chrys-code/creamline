@@ -2,7 +2,7 @@ import type React from "react";
 import type { DashboardProps } from "./Dashboard.types";
 import styles from "./Dashboard.module.scss";
 
-import Button from "../../shared/components/button";
+import Button from "../../shared/components/base/button";
 
 import { useNavigate, useRouteLoaderData } from "react-router";
 import { useTypedTranslation } from "../../shared/hooks/useTypedTranslation/useTypedTranslation";

@@ -1,4 +1,8 @@
 {
+	"milk_collection": {
+		"page_title": "Milk collection",
+		"see_milk_collections": "See milk collections"
+	},
 	"edit_milk_collection": {
 		"page_title": {
 			"create": "Create milk collection",

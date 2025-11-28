@@ -2,11 +2,11 @@ import type React from "react";
 import type { UserFormProps } from "./UserForm.types";
 import styles from "./UserForm.module.scss";
 
-import Form from "../../../../../../shared/components/form/Form";
-import Dropdown from "../../../../../../shared/components/dropdown/Dropdown";
-import InputField from "../../../../../../shared/components/inputField/InputField";
-import Button from "../../../../../../shared/components/button/Button";
-import Chip from "../../../../../../shared/components/chip/Chip";
+import Form from "../../../../../../shared/components/base/form/Form";
+import Dropdown from "../../../../../../shared/components/base/dropdown/Dropdown";
+import InputField from "../../../../../../shared/components/base/inputField/InputField";
+import Button from "../../../../../../shared/components/base/button/Button";
+import Chip from "../../../../../../shared/components/base/chip/Chip";
 
 import { useNavigate } from "react-router";
 import { useUserForm } from "../hooks/useUserForm";
@@ -108,7 +108,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, userGroups }: UserFormProps) 
 				)}
 				<Dropdown
 					name="roleSelectionDropdown"
-					placeholder="Select position"
+					placeholder={tCommon("common.select")}
 					label={tUser("edit_user.input_labels.position") + ":"}
 					id={uuid()}
 					onChange={handleRoleDropdownChange}

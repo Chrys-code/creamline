@@ -1,13 +1,13 @@
 import type React from "react";
 import type { StorageFormProps } from "./StorageForm.types.ts";
 
-import Form from "../../../../../../shared/components/form";
-import InputField from "../../../../../../shared/components/inputField";
-import Dropdown from "../../../../../../shared/components/dropdown/Dropdown.js";
-import Button from "../../../../../../shared/components/button";
+import Form from "../../../../../../shared/components/base/form";
+import InputField from "../../../../../../shared/components/base/inputField";
+import Dropdown from "../../../../../../shared/components/base/dropdown";
+import Button from "../../../../../../shared/components/base/button";
 
 import { useNavigate } from "react-router";
-import { useStorageForm } from "../hooks/useStorageForm.js";
+import { useStorageForm } from "../hooks/useStorageForm";
 import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { v4 as uuid } from "uuid";
 
@@ -48,7 +48,7 @@ const StorageForm: React.FC<StorageFormProps> = ({
 				<Dropdown
 					id={uuid()}
 					{...register("type", { onChange: () => clearErrors("type") })}
-					placeholder="select"
+					placeholder={tCommon("common.select")}
 					options={storageTypeOptions}
 					error={errors.type?.message}
 				/>

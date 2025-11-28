@@ -3,7 +3,7 @@ import type { ListPasteurisationProps } from "./ListPasteurisation.types";
 import PageHeader from "../../../shared/components/pageHeader";
 import PaginatedList from "../../../shared/components/paginatedList";
 import PasteurisationCard from "../../../features/domain/pasteurisation/components/pasteurisationCard";
-import IconButton from "../../../shared/components/iconButton";
+import IconButton from "../../../shared/components/base/iconButton";
 
 import React from "react";
 import { useTranslation } from "react-i18next";

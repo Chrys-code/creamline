@@ -1,8 +1,10 @@
-import React from "react";
 import type { HeaderProps } from "./Header.types";
 import styles from "./Header.module.scss";
-import i18n from "../../../configs/i18n";
+
+import React from "react";
 import LanguageSelector from "../languageSelector";
+
+import i18n from "../../../configs/i18n";
 
 const MdCheckBoxOutlineBlank = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

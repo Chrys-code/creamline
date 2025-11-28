@@ -1,14 +1,14 @@
 import type React from "react";
-import type { ProductDefinitionFormProps } from "./ProductDefinitionForm.types.ts";
+import type { ProductDefinitionFormProps } from "./ProductDefinitionForm.types";
 
-import Button from "../../../../../../shared/components/button/index.js";
-import Form from "../../../../../../shared/components/form/index.js";
-import InputField from "../../../../../../shared/components/inputField/index.js";
-import Dropdown from "../../../../../../shared/components/dropdown/index.js";
+import Button from "../../../../../../shared/components/base/button";
+import Form from "../../../../../../shared/components/base/form";
+import InputField from "../../../../../../shared/components/base/inputField";
+import Dropdown from "../../../../../../shared/components/base/dropdown";
 
 import { useNavigate } from "react-router";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation.js";
-import { useProductDefinitionForm } from "../hooks/useProductDefinitionForm.js";
+import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { useProductDefinitionForm } from "../hooks/useProductDefinitionForm";
 import { v4 as uuid } from "uuid";
 
 const ProductDefinitionForm: React.FC<ProductDefinitionFormProps> = ({
@@ -48,7 +48,7 @@ const ProductDefinitionForm: React.FC<ProductDefinitionFormProps> = ({
 				<Dropdown
 					id={uuid()}
 					{...register("type", { onChange: () => clearErrors("type") })}
-					placeholder="select"
+					placeholder={tCommon("common.select")}
 					label={tProductDefinition("edit_product_definition.input_labels.type")}
 					options={productDefinitionTypeOptions}
 					error={errors.type?.message}

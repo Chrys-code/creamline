@@ -43,6 +43,14 @@ const milkCollectionRoutes = [
 			selectedItem: (await getMilk(args)) || null,
 		}),
 	},
+	{
+		path: "milk-collection-analytics",
+		lazy: {
+			Component: async () =>
+				(await import("../../pages/milkCollection/milkCollection/MilkCollection")).default,
+		},
+		loader: getPaginatedMilkList,
+	},
 ];
 
 export default milkCollectionRoutes;

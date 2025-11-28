@@ -2,7 +2,7 @@ import type { ListPasteursProps } from "./ListPasteurs.types.ts";
 import type { Pasteur } from "../../../features/domain/pasteur/types";
 
 import PageHeader from "../../../shared/components/pageHeader";
-import IconButton from "../../../shared/components/iconButton";
+import IconButton from "../../../shared/components/base/iconButton";
 import PaginatedList from "../../../shared/components/paginatedList";
 
 import React from "react";
