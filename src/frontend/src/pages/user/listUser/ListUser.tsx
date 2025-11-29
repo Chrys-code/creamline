@@ -9,6 +9,7 @@ import IconButton from "../../../shared/components/base//iconButton";
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -26,7 +27,7 @@ const ListUser: React.FC = () => {
 	} = useLoaderData<UserListProps>();
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate("create")}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.user.create)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -48,7 +49,7 @@ const ListUser: React.FC = () => {
 				<UserCard
 					name={`${result.profile?.first_name} ${result.profile?.last_name}`}
 					groups={getUserGroupNames(userGroups, result.groups)}
-					onClick={() => navigate(`edit/${result.uuid}`)}
+					onClick={() => navigate(NAVIGATION_ROUTES.user.edit + result.uuid)}
 				/>
 			</li>
 		);

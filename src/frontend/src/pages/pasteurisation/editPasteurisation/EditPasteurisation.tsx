@@ -13,19 +13,13 @@ const EditPasteurisation: React.FC = () => {
 	const tPasteurisation = useTypedTranslation("pasteurisation");
 	const navigate = useNavigate();
 
-	const isEdit = window.location.pathname.includes("/edit/");
-	const pageTitle = isEdit
+	const pageTitle = selectedItem
 		? tPasteurisation("edit_pasteurisation.page_titles.edit")
 		: tPasteurisation("edit_pasteurisation.page_titles.create");
 
 	return (
 		<>
-			<PageHeader
-				title={pageTitle}
-				onNavigateBack={() =>
-					selectedItem ? navigate("/pasteurised-milk/") : navigate(-1)
-				}
-			/>
+			<PageHeader title={pageTitle} onNavigateBack={() => navigate(-1)} />
 			<PasteurisationForm
 				key={selectedItem?.uuid}
 				pasteurisation={selectedItem}

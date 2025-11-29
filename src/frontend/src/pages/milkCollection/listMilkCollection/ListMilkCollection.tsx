@@ -10,6 +10,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { useLoaderData, useNavigate } from "react-router";
+import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -24,7 +25,7 @@ const ListMilkCollection: React.FC = () => {
 	const { data, page } = useLoaderData<ListMilkCollectionProps>();
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate("/milk-collection/create")}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.milkCollection.create)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -39,7 +40,7 @@ const ListMilkCollection: React.FC = () => {
 					month: "long",
 					day: "numeric",
 				})}
-				onClick={() => navigate(`/milk-collection/edit/${result.uuid}`)}
+				onClick={() => navigate(NAVIGATION_ROUTES.milkCollection.edit + result.uuid)}
 			/>
 		</li>
 	);

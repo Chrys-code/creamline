@@ -13,8 +13,7 @@ const EditMilkCollection: React.FC = () => {
 	const navigate = useNavigate();
 	const mct = useTypedTranslation("milkCollection");
 
-	const isEdit = Boolean(selectedItem);
-	const pageTitle = isEdit
+	const pageTitle = selectedItem
 		? mct("edit_milk_collection.page_title.edit")
 		: mct("edit_milk_collection.page_title.create");
 

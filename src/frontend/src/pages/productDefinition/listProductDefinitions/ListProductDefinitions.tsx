@@ -9,6 +9,7 @@ import ProductDefinitionCard from "../../../features/domain/productDefinition/co
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -24,7 +25,7 @@ const ListProductDefinitions: React.FC = () => {
 	const tProductDefinition = useTypedTranslation("productDefinition");
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate("create")}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.productDefinition.create)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -35,7 +36,7 @@ const ListProductDefinitions: React.FC = () => {
 				<ProductDefinitionCard
 					name={item.name}
 					type={item.type_label}
-					onClick={() => navigate(`edit/${item.uuid}`)}
+					onClick={() => navigate(NAVIGATION_ROUTES.productDefinition.edit + item.uuid)}
 				/>
 			</li>
 		);

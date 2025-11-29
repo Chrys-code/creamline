@@ -12,8 +12,7 @@ const EditPasteur: React.FC = () => {
 	const tPasteur = useTypedTranslation("pasteur");
 	const pasteur = useLoaderData<Pasteur>();
 
-	const isEdit = window.location.pathname.includes("/edit/");
-	const pageTitle = isEdit
+	const pageTitle = pasteur
 		? tPasteur("edit_pasteur.page_titles.edit")
 		: tPasteur("edit_pasteur.page_titles.create");
 

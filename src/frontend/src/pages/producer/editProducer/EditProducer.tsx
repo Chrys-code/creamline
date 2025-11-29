@@ -11,8 +11,7 @@ const EditProducer: React.FC = () => {
 	const producer = useLoaderData<Producer>();
 	const tProducer = useTypedTranslation("producer");
 
-	const isEdit = window.location.pathname.includes("/edit/");
-	const pageTitle = isEdit
+	const pageTitle = producer
 		? tProducer("edit_producer.page_titles.edit")
 		: tProducer("edit_producer.page_titles.create");
 

@@ -9,6 +9,7 @@ import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import StorageCard from "../../../features/domain/storage/components/storageCard";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -24,7 +25,7 @@ const ListStorages: React.FC = () => {
 	} = useLoaderData<ListStoragesProps>();
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate("create")}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.storage.create)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -35,7 +36,7 @@ const ListStorages: React.FC = () => {
 				<StorageCard
 					name={item.name}
 					type={item.type}
-					onClick={() => navigate(`edit/${item.uuid}`)}
+					onClick={() => navigate(NAVIGATION_ROUTES.storage.edit + item.uuid)}
 				/>
 			</li>
 		);

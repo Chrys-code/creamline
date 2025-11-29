@@ -5,15 +5,15 @@ import AuthLayout from "../shared/layouts/authLayout";
 import ErrorLayout from "../shared/layouts/errorLayout";
 import Dashboard from "../pages/dashboard/Dashboard";
 
-import milkCollectionRoutes from "./routes/milkCollection.routes";
+import milkCollectionRoutes from "./routes/processes/milkCollection.routes";
+import pasteurisationRoutes from "./routes/processes/pasteurisation.routes";
 import userRoutes from "./routes/user.routes";
-import producerRoutes from "./routes/producer.routes";
-import pasteurisationRoutes from "./routes/pasteurisation.routes";
+import producerRoutes from "./routes/utilities/producer.routes";
 
 import { getProfile } from "../features/domain/profile/loaders/getProfile";
-import storageRoutes from "./routes/storage.routes";
-import pasteurRoutes from "./routes/pasteur.routes";
-import productDefinitionRoutes from "./routes/productDefinition.routes";
+import storageRoutes from "./routes/utilities/storage.routes";
+import pasteurRoutes from "./routes/utilities/pasteur.routes";
+import productDefinitionRoutes from "./routes/utilities/productDefinition.routes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();

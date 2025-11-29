@@ -12,8 +12,7 @@ const EditProductDefinition: React.FC = () => {
 		useLoaderData<EditProductDefinitionProps>();
 	const tProductDefinition = useTypedTranslation("productDefinition");
 
-	const isEdit = window.location.pathname.includes("/edit/");
-	const pageTitle = isEdit
+	const pageTitle = productDefinition
 		? tProductDefinition("edit_product_definition.page_title.edit")
 		: tProductDefinition("edit_product_definition.page_title.create");
 

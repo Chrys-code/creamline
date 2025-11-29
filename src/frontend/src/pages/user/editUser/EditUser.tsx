@@ -18,10 +18,7 @@ const EditUser: React.FC = () => {
 
 	return (
 		<>
-			<PageHeader
-				title={pageTitle}
-				onNavigateBack={() => (selectedItem ? navigate("/users/") : navigate(-1))}
-			/>
+			<PageHeader title={pageTitle} onNavigateBack={() => navigate(-1)} />
 			<UserForm key={selectedItem?.uuid} user={selectedItem} userGroups={userGroups} />
 		</>
 	);

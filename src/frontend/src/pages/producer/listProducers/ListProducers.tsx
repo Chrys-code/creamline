@@ -9,6 +9,7 @@ import IconButton from "../../../shared/components/base/iconButton";
 
 import { useLoaderData, useNavigate } from "react-router";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -24,7 +25,7 @@ const ListProducers: React.FC = () => {
 	const tProducer = useTypedTranslation("producer");
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate("create")}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.producer.create)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -35,7 +36,7 @@ const ListProducers: React.FC = () => {
 				<ProducerCard
 					name={item.name}
 					address={item.address}
-					onClick={() => navigate(`edit/${item.uuid}`)}
+					onClick={() => navigate(NAVIGATION_ROUTES.producer.edit + item.uuid)}
 				/>
 			</li>
 		);

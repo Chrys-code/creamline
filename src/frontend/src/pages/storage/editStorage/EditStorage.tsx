@@ -15,8 +15,7 @@ const EditStorage: React.FC = () => {
 
 	const tStorage = useTypedTranslation("storage");
 
-	const isEdit = window.location.pathname.includes("/edit/");
-	const pageTitle = isEdit
+	const pageTitle = storage
 		? tStorage("edit_storage.page_title.edit")
 		: tStorage("edit_storage.page_title.create");
 

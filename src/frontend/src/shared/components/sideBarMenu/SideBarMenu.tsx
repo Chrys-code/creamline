@@ -4,6 +4,7 @@ import styles from "./SideBarMenu.module.scss";
 
 import { NavLink } from "react-router";
 import { useTypedTranslation } from "../../hooks/useTypedTranslation/useTypedTranslation.js";
+import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 	const tNavigation = useTypedTranslation("navigation");
@@ -16,7 +17,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 			<ul>
 				<li>
 					<NavLink
-						to="/"
+						to={NAVIGATION_ROUTES.app}
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
 						<span>{tNavigation("sidebar.home")}</span>
@@ -24,7 +25,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 				</li>
 				<li>
 					<NavLink
-						to="/users"
+						to={NAVIGATION_ROUTES.user.list}
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
 						<span>{tNavigation("sidebar.users")}</span>
@@ -36,7 +37,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 			<ul>
 				<li>
 					<NavLink
-						to="/milk-collection"
+						to={NAVIGATION_ROUTES.milkCollection.root}
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
 						<span>
@@ -47,7 +48,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 				<ul>
 					<li>
 						<NavLink
-							to="/milk-collection/list"
+							to={NAVIGATION_ROUTES.milkCollection.list}
 							className={({ isActive }) => (isActive ? styles.active : undefined)}
 						>
 							<span>
@@ -59,7 +60,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 					</li>
 					<li>
 						<NavLink
-							to="/milk-collection/create"
+							to={NAVIGATION_ROUTES.milkCollection.create}
 							className={({ isActive }) => (isActive ? styles.active : undefined)}
 						>
 							<span>
@@ -72,7 +73,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 				</ul>
 				<li>
 					<NavLink
-						to="/pasteurised-milk"
+						to={NAVIGATION_ROUTES.pasteuriation.list}
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
 						<span>{tNavigation("sidebar.processes.pasteurisation")}</span>
@@ -84,7 +85,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 			<ul>
 				<li>
 					<NavLink
-						to="/producer"
+						to={NAVIGATION_ROUTES.producer.list}
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
 						<span>{tNavigation("sidebar.utilities.producer")}</span>
@@ -92,7 +93,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 				</li>
 				<li>
 					<NavLink
-						to="/storage"
+						to={NAVIGATION_ROUTES.storage.list}
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
 						<span>{tNavigation("sidebar.utilities.storage")}</span>
@@ -100,7 +101,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 				</li>
 				<li>
 					<NavLink
-						to="/pasteur"
+						to={NAVIGATION_ROUTES.pasteur.list}
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
 						<span>{tNavigation("sidebar.utilities.pasteur")}</span>
@@ -108,7 +109,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 				</li>
 				<li>
 					<NavLink
-						to="/product-definition"
+						to={NAVIGATION_ROUTES.productDefinition.list}
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
 						<span>{tNavigation("sidebar.utilities.product_definitions")}</span>

@@ -1,17 +1,18 @@
 import type { LoaderFunctionArgs } from "react-router";
-import { listPaginatedProductDefinitions } from "../../features/domain/productDefinition/loaders/listProductDefinitions";
-import { getProductDefinition } from "../../features/domain/productDefinition/loaders/getProductDefinition";
-import { getProductDefinitionOptions } from "../../features/domain/productDefinition/loaders/getProductDefinitionOptions";
-import { adaptProductDefinitionsOptionsToProductDefinitionOptions } from "../../features/domain/productDefinition/adapters";
+import { listPaginatedProductDefinitions } from "../../../features/domain/productDefinition/loaders/listProductDefinitions";
+import { getProductDefinition } from "../../../features/domain/productDefinition/loaders/getProductDefinition";
+import { getProductDefinitionOptions } from "../../../features/domain/productDefinition/loaders/getProductDefinitionOptions";
+import { adaptProductDefinitionsOptionsToProductDefinitionOptions } from "../../../features/domain/productDefinition/adapters";
+import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const productDefinitionRoutes = [
 	{
-		path: "product-definition",
+		path: NAVIGATION_ROUTES.productDefinition.list,
 		lazy: {
 			Component: async () =>
 				(
 					await import(
-						"../../pages/productDefinition/listProductDefinitions/ListProductDefinitions"
+						"../../../pages/productDefinition/listProductDefinitions/ListProductDefinitions"
 					)
 				).default,
 		},
@@ -20,12 +21,12 @@ const productDefinitionRoutes = [
 		}),
 	},
 	{
-		path: "product-definition/create",
+		path: NAVIGATION_ROUTES.productDefinition.create,
 		lazy: {
 			Component: async () =>
 				(
 					await import(
-						"../../pages/productDefinition/editProductDefinition/EditProductDefinition"
+						"../../../pages/productDefinition/editProductDefinition/EditProductDefinition"
 					)
 				).default,
 		},
@@ -37,12 +38,12 @@ const productDefinitionRoutes = [
 		}),
 	},
 	{
-		path: "product-definition/edit/:id",
+		path: NAVIGATION_ROUTES.productDefinition.edit + ":id",
 		lazy: {
 			Component: async () =>
 				(
 					await import(
-						"../../pages/productDefinition/editProductDefinition/EditProductDefinition"
+						"../../../pages/productDefinition/editProductDefinition/EditProductDefinition"
 					)
 				).default,
 		},

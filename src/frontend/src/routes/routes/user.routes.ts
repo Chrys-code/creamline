@@ -3,10 +3,11 @@ import getPaginatedUserList from "../../features/domain/user/loaders/listUsers";
 import { getUser } from "../../features/domain/user/loaders/getUser";
 import { listUserGroups } from "../../features/domain/user/features/userGroups/loaders/listUserGroups";
 import { adaptUserGroupsForUserGroupOptions } from "../../features/domain/user/features/userGroups/adapters";
+import { NAVIGATION_ROUTES } from "../../configs/navigation";
 
 const userManagementRoutes = [
 	{
-		path: "users",
+		path: NAVIGATION_ROUTES.user.list,
 		lazy: {
 			Component: async () => (await import("../../pages/user/listUser/ListUser")).default,
 		},
@@ -16,7 +17,7 @@ const userManagementRoutes = [
 		}),
 	},
 	{
-		path: "users/create",
+		path: NAVIGATION_ROUTES.user.create,
 		lazy: {
 			Component: async () => (await import("../../pages/user/editUser/EditUser")).default,
 		},
@@ -26,7 +27,7 @@ const userManagementRoutes = [
 		}),
 	},
 	{
-		path: "users/edit/:id",
+		path: NAVIGATION_ROUTES.user.edit + ":id",
 		lazy: {
 			Component: async () => (await import("../../pages/user/editUser/EditUser")).default,
 		},

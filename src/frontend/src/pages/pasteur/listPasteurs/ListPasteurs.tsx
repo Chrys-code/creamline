@@ -9,6 +9,7 @@ import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import PasteurCard from "../../../features/domain/pasteur/components/pasteurCard/PasteurCard";
+import { NAVIGATION_ROUTES } from "../../../configs/navigation.js";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -24,7 +25,7 @@ const ListPasteurs: React.FC = () => {
 	const tPasteur = useTypedTranslation("pasteur");
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate("create")}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.pasteur.create)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -32,7 +33,10 @@ const ListPasteurs: React.FC = () => {
 	const pasteurListItem = (item: Pasteur) => {
 		return (
 			<li key={item.uuid} tabIndex={0}>
-				<PasteurCard name={item.name} onClick={() => navigate(`edit/${item.uuid}`)} />
+				<PasteurCard
+					name={item.name}
+					onClick={() => navigate(NAVIGATION_ROUTES.pasteur.edit + item.uuid)}
+				/>
 			</li>
 		);
 	};

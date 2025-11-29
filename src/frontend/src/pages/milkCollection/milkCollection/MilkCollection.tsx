@@ -12,6 +12,7 @@ import { useMilkSummary } from "../../../features/domain/milk/hooks/useMilkSumma
 import { useMilkTrend } from "../../../features/domain/milk/hooks/useMilkTrend";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { getOffsetDate } from "../../../shared/helpers/getDate/getDate";
+import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -40,7 +41,7 @@ const MilkCollection: React.FC = () => {
 	const { data: milkSummaryData } = useMilkSummary();
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate("/milk-collection/create")}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.milkCollection.create)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);

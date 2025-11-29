@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useLoaderData, useNavigate } from "react-router";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import type { Pasteurisation } from "../../../features/domain/pasteurisation/types";
+import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -24,7 +25,7 @@ const ListPasteurisation: React.FC = () => {
 	const { data, page } = useLoaderData<ListPasteurisationProps>();
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate("create")}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.pasteuriation.create)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -41,7 +42,7 @@ const ListPasteurisation: React.FC = () => {
 					day: "numeric",
 				})}
 				temperature={result.temperature}
-				onClick={() => navigate(`edit/${result.uuid}`)}
+				onClick={() => navigate(NAVIGATION_ROUTES.pasteuriation.edit + result.uuid)}
 			/>
 		</li>
 	);
@@ -50,7 +51,7 @@ const ListPasteurisation: React.FC = () => {
 		<>
 			<PageHeader
 				title={pt("list_pasteurisation.page_title")}
-				onNavigateBack={() => navigate("/")}
+				onNavigateBack={() => navigate(-1)}
 				actionElement={headerActionElement}
 			/>
 			<PaginatedList
