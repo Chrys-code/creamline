@@ -9,7 +9,11 @@
 		"home": "Home",
 		"processes": {
 			"section_title": "Processes",
-			"milk_collection": "Milk collections",
+			"milk_collection": {
+				"milk_collection": "Milk collection",
+				"milk_collection_list": "Milk collections",
+				"milk_collection_create": "New milk collection"
+			},
 			"pasteurisation": "Pasteurisations"
 		},
 		"utilities": {

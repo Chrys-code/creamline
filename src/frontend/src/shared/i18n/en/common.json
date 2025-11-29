@@ -3,11 +3,13 @@
 		"save": "Save",
 		"back": "Back",
 		"select": "Select",
+		"all": "All",
 		"cancel": "Cancel",
 		"edit": "Edit",
 		"optional": "Optional",
 		"yes": "Yes",
-		"no": "No"
+		"no": "No",
+		"filters": "Filters"
 	},
 	"qualities": {
 		"temperature": "Temperature",

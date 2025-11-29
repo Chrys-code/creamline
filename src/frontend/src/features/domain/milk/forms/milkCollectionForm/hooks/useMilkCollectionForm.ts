@@ -42,7 +42,7 @@ export const useMilkCollectionForm = (milk: Milk | null) => {
 		try {
 			await milkClient.v1_milk_create(formData);
 			toast.success(mct("edit_milk_collection.notifications.success"));
-			navigate("/milk-collection");
+			navigate("/milk-collection/list");
 		} catch (err: any) {
 			if (err.response?.data) {
 				const responseData = err.response.data;

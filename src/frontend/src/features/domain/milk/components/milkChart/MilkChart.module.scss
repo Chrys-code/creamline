@@ -1,12 +1,72 @@
-.filters {
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-start;
-	gap: 1rem;
+@import "../../../../../styles/breakpoints.scss";
 
+.filterContainer {
+	width: 100%;
 	padding: 1rem;
 	background-color: var(--color-primary-50);
 	border-radius: var(--border-wrapper-radius);
+
+	.filterHeader {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+
+		button {
+			svg {
+				transform: rotateZ(90deg);
+				transition: transform var(--animation-duration) var(--animation-timing);
+			}
+		}
+	}
+
+	.filters {
+		width: 100%;
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		grid-gap: 1rem;
+		min-height: 0px;
+		max-height: 0rem;
+		overflow-y: hidden;
+		transition: max-height var(--animation-duration) var(--animation-timing);
+	}
+}
+
+.active {
+	.filterHeader {
+		button {
+			svg {
+				transform: rotateZ(-90deg);
+			}
+		}
+	}
+
+	.filters {
+		min-height: 0px;
+		max-height: 110rem;
+		transition: max-height var(--animation-duration) var(--animation-timing);
+	}
+}
+
+@media (min-width: $breakpoint-tablet) {
+	.filterContainer {
+		.filterHeader {
+			button {
+				display: none;
+			}
+		}
+		.filters {
+			grid-template-columns: repeat(2, 1fr);
+			overflow: visible;
+			max-height: 110rem;
+		}
+	}
+}
+
+@media (min-width: $breakpoint-desktop) {
+	.filterContainer {
+		.filters {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
 }

@@ -13,6 +13,14 @@ const milkCollectionRoutes = [
 		path: "milk-collection",
 		lazy: {
 			Component: async () =>
+				(await import("../../pages/milkCollection/milkCollection/MilkCollection")).default,
+		},
+		loader: async () => adaptProducersToProducerOptions(await listProducers()),
+	},
+	{
+		path: "milk-collection/list",
+		lazy: {
+			Component: async () =>
 				(await import("../../pages/milkCollection/listMilkCollection/ListMilkCollection"))
 					.default,
 		},
@@ -42,14 +50,6 @@ const milkCollectionRoutes = [
 			storageOptions: adaptStoragesToStorageOptions(await listStorages()),
 			selectedItem: (await getMilk(args)) || null,
 		}),
-	},
-	{
-		path: "milk-collection-analytics",
-		lazy: {
-			Component: async () =>
-				(await import("../../pages/milkCollection/milkCollection/MilkCollection")).default,
-		},
-		loader: async () => adaptProducersToProducerOptions(await listProducers()),
 	},
 ];
 

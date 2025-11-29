@@ -3,11 +3,13 @@
 		"save": "Mentés",
 		"back": "Vissza",
 		"select": "Válasszon",
+		"all": "Összes",
 		"cancel": "Mégse",
 		"edit": "Szerkesztés",
 		"optional": "Opcionális",
 		"yes": "Igen",
-		"no": "Nem"
+		"no": "Nem",
+		"filters": "Filters"
 	},
 	"utilities": {
 		"storage": "Raktár",

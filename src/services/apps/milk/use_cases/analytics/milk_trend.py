@@ -1,18 +1,10 @@
 from datetime import timedelta, datetime
-from dateutil.relativedelta import relativedelta
 
 from django.db.models.functions import TruncDate, TruncWeek, TruncMonth, TruncQuarter, TruncYear
 from django.db.models import Sum
+from django.utils.dateparse import parse_date
 
 from apps.milk.models import Milk
-
-INTERVAL_LIMITS = {
-    "day": 90,  # max 90 days
-    "week": 52,  # max 52 weeks
-    "month": 24,  # max 24 months
-    "quarter": 12,  # max 12 quarters (3 years)
-    "year": 5,  # max 5 years
-}
 
 TRUNC_MAP = {
     "day": TruncDate("created_at"),
@@ -22,46 +14,38 @@ TRUNC_MAP = {
     "year": TruncYear("created_at"),
 }
 
-def _get_start_date(interval, range, today):
-    # Get start date based on range
-    if interval == "day":
-        return today - timedelta(days=range)
-    elif interval == "week":
-        return today - timedelta(weeks=range)
-    elif interval == "month":
-        return today - relativedelta(months=range)
-    elif interval == "quarter":
-        return today - relativedelta(months=3 * range)
-    elif interval == "year":
-        return today - relativedelta(years=range)
-    return today
-
-
 def milk_trend_data(
+    start_date: str,
+    end_date: str,
     interval: str = "day",
-    range: int = 30,
     producer_uuid: str | None = None,
 ):
-    if interval not in INTERVAL_LIMITS:
-        raise ValueError("Invalid interval")
     if interval not in TRUNC_MAP:
         raise ValueError("Invalid interval")
 
-    # Enforcing range
-    max_range = INTERVAL_LIMITS[interval]
-    range = min(range, max_range)
+    # Set a week date range from today as default
+    default_end_date = datetime.now().date()
+    default_start_date = default_end_date - timedelta(days=7)
 
-    today = datetime.now().date()
+    start_date_parsed = parse_date(start_date) if start_date else default_start_date
+    end_date_parsed = parse_date(end_date) if end_date else default_end_date
 
-    # Get start date based on range
-    start_date = _get_start_date(interval=interval, range=range, today=today)
+    if not start_date_parsed:
+        raise ValueError("Start date missing")
+    if not end_date_parsed:
+        raise ValueError("End date missing")
 
-    qs = Milk.objects.filter(created_at__date__gte=start_date)
+    # Validate start and end date
+    if start_date_parsed > end_date_parsed:
+        raise ValueError("Start cannot be bigger than end date")
+
+    qs = Milk.objects.filter(
+        created_at__date__gte=start_date_parsed, created_at__date__lte=end_date_parsed
+    )
 
     # Optional producer filtering
-    if producer_uuid:
+    if producer_uuid and producer_uuid.lower() != "all":
         qs = qs.filter(producer__uuid=producer_uuid)
-
 
     qs = qs.annotate(period=TRUNC_MAP[interval])
 

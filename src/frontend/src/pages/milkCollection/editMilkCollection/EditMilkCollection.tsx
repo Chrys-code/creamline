@@ -13,17 +13,14 @@ const EditMilkCollection: React.FC = () => {
 	const navigate = useNavigate();
 	const mct = useTypedTranslation("milkCollection");
 
-	const isEdit = window.location.pathname.includes("/edit/");
+	const isEdit = Boolean(selectedItem);
 	const pageTitle = isEdit
 		? mct("edit_milk_collection.page_title.edit")
 		: mct("edit_milk_collection.page_title.create");
 
 	return (
 		<>
-			<PageHeader
-				title={pageTitle}
-				onNavigateBack={() => (selectedItem ? navigate("/milk-collection/") : navigate(-1))}
-			/>
+			<PageHeader title={pageTitle} onNavigateBack={() => navigate(-1)} />
 			<MilkCollectionForm
 				milk={selectedItem}
 				producerOptions={producerOptions}

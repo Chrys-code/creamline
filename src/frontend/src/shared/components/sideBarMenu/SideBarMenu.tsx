@@ -39,9 +39,37 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 						to="/milk-collection"
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
-						<span>{tNavigation("sidebar.processes.milk_collection")}</span>
+						<span>
+							{tNavigation("sidebar.processes.milk_collection.milk_collection")}
+						</span>
 					</NavLink>
 				</li>
+				<ul>
+					<li>
+						<NavLink
+							to="/milk-collection/list"
+							className={({ isActive }) => (isActive ? styles.active : undefined)}
+						>
+							<span>
+								{tNavigation(
+									"sidebar.processes.milk_collection.milk_collection_list"
+								)}
+							</span>
+						</NavLink>
+					</li>
+					<li>
+						<NavLink
+							to="/milk-collection/create"
+							className={({ isActive }) => (isActive ? styles.active : undefined)}
+						>
+							<span>
+								{tNavigation(
+									"sidebar.processes.milk_collection.milk_collection_create"
+								)}
+							</span>
+						</NavLink>
+					</li>
+				</ul>
 				<li>
 					<NavLink
 						to="/pasteurised-milk"

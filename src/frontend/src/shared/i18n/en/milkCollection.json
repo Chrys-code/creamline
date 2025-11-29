@@ -1,7 +1,12 @@
 {
 	"milk_collection": {
 		"page_title": "Milk collection",
-		"see_milk_collections": "See milk collections"
+		"filters": {
+			"interval": "Interval",
+			"producer": "Producer",
+			"start_date": "Start date",
+			"end_date": "End date"
+		}
 	},
 	"edit_milk_collection": {
 		"page_title": {

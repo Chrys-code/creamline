@@ -46,11 +46,7 @@ const MilkCollectionForm: React.FC<MilkCollectionFormProps> = ({
 	const renderFormActions = (): React.ReactNode => {
 		if (milk) {
 			return (
-				<Button
-					type="button"
-					style="secondary"
-					onClick={() => navigate("/milk-collection/")}
-				>
+				<Button type="button" style="secondary" onClick={() => navigate(-1)}>
 					{tCommon("common.back")}
 				</Button>
 			);

@@ -1,7 +1,12 @@
 {
 	"milk_collection": {
 		"page_title": "Tejátvétel",
-		"see_milk_collections": "Tejátvételek megtekintése"
+		"filters": {
+			"interval": "Felosztás",
+			"producer": "Termelő",
+			"start_date": "Kezdete",
+			"end_date": "Vége"
+		}
 	},
 	"edit_milk_collection": {
 		"page_title": {

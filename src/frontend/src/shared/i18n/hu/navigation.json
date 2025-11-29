@@ -9,7 +9,11 @@
 		"home": "Főoldal",
 		"processes": {
 			"section_title": "Folyamatok",
-			"milk_collection": "Tejátvételek",
+			"milk_collection": {
+				"milk_collection": "Tejátvétel",
+				"milk_collection_list": "Tejátvételek",
+				"milk_collection_create": "Új tejátvétel"
+			},
 			"pasteurisation": "Pasztőrözések"
 		},
 		"utilities": {

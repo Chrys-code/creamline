@@ -6,14 +6,17 @@ import { adaptMilkTrendDateToLanguage } from "../adapters";
 
 export function useMilkTrend(
 	interval: IntervalTypes = "day",
-	range: number,
+	start_date?: string,
+	end_date?: string,
 	producer_uuid?: string
 ) {
 	return useQuery({
-		queryKey: ["milkTrend", interval, range, producer_uuid],
+		queryKey: ["milkTrend", start_date, end_date, interval, producer_uuid],
 		queryFn: async () =>
 			adaptMilkTrendDateToLanguage(
-				await milkClient.getMilkTrend({ queries: { interval, range, producer_uuid } })
+				await milkClient.getMilkTrend({
+					queries: { interval, start_date, end_date, producer_uuid },
+				})
 			),
 		refetchInterval: 10000,
 		staleTime: 5000,

@@ -24,7 +24,7 @@ const ListMilkCollection: React.FC = () => {
 	const { data, page } = useLoaderData<ListMilkCollectionProps>();
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate("create")}>
+		<IconButton onClick={() => navigate("/milk-collection/create")}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -39,7 +39,7 @@ const ListMilkCollection: React.FC = () => {
 					month: "long",
 					day: "numeric",
 				})}
-				onClick={() => navigate(`edit/${result.uuid}`)}
+				onClick={() => navigate(`/milk-collection/edit/${result.uuid}`)}
 			/>
 		</li>
 	);

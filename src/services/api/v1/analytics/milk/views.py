@@ -17,13 +17,17 @@ class MilkTrendAnalyticsView(views.APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        start_date = request.query_params.get("start_date")
+        end_date = request.query_params.get("end_date")
         interval = request.query_params.get("interval", "day")
-        range = request.query_params.get("range", 30)
         producer_uuid = request.query_params.get("producer_uuid")
 
         try:
             trend_data = milk_trend_data(
-                interval=interval, range=int(range), producer_uuid=producer_uuid
+                start_date=start_date,
+                end_date=end_date,
+                interval=interval,
+                producer_uuid=producer_uuid,
             )
         except ValueError:
             return Response({"error": "Invalid interval"}, status=400)
