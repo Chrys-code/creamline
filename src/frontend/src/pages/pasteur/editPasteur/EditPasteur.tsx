@@ -20,7 +20,7 @@ const EditPasteur: React.FC = () => {
 	return (
 		<>
 			<PageHeader title={pageTitle} onNavigateBack={() => navigate(-1)} />
-			<PasteurForm pasteur={pasteur} />
+			<PasteurForm key={pasteur?.uuid} pasteur={pasteur} />
 		</>
 	);
 };

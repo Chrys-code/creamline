@@ -19,7 +19,7 @@ const EditProducer: React.FC = () => {
 	return (
 		<>
 			<PageHeader title={pageTitle} />
-			<ProducerForm producer={producer} />
+			<ProducerForm key={producer?.uuid} producer={producer} />
 		</>
 	);
 };

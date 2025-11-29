@@ -22,6 +22,7 @@ const EditMilkCollection: React.FC = () => {
 		<>
 			<PageHeader title={pageTitle} onNavigateBack={() => navigate(-1)} />
 			<MilkCollectionForm
+				key={selectedItem?.uuid}
 				milk={selectedItem}
 				producerOptions={producerOptions}
 				storageOptions={storageOptions}

@@ -21,6 +21,7 @@ const EditProductDefinition: React.FC = () => {
 		<>
 			<PageHeader title={pageTitle} />
 			<ProductDefinitionForm
+				key={productDefinition?.uuid}
 				productDefinition={productDefinition}
 				productDefinitionTypeOptions={productDefinitionTypeOptions}
 			/>

@@ -23,7 +23,11 @@ const EditStorage: React.FC = () => {
 	return (
 		<>
 			<PageHeader title={pageTitle} />
-			<StorageForm storage={storage} storageTypeOptions={storageTypeOptions} />
+			<StorageForm
+				key={storage?.uuid}
+				storage={storage}
+				storageTypeOptions={storageTypeOptions}
+			/>
 		</>
 	);
 };

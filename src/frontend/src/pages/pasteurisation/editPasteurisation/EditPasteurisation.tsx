@@ -27,6 +27,7 @@ const EditPasteurisation: React.FC = () => {
 				}
 			/>
 			<PasteurisationForm
+				key={selectedItem?.uuid}
 				pasteurisation={selectedItem}
 				pasteurOptions={pasteurOptions}
 				storageOptions={storageOptions}
