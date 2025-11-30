@@ -1,6 +1,9 @@
 from rest_framework import serializers
 
-from apps.pasteurisation.use_cases.validation import InvalidDatesError, PasteurisationException
+from apps.pasteurisation.use_cases.validation import (
+    InvalidDatesError,
+    PasteurisationException,
+)
 from apps.product_definitions.models import ProductDefinition
 from apps.storages.models import Storage
 from apps.pasteurs.models import Pasteur
@@ -78,7 +81,9 @@ class PasteurisationSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         try:
-            milk = update_pasteurisation(instance=instance, validated_data=validated_data)
+            milk = update_pasteurisation(
+                instance=instance, validated_data=validated_data
+            )
             return milk
 
         except PasteurisationException as e:

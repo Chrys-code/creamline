@@ -4,9 +4,7 @@ from rest_framework.test import APIClient
 
 from apps.users.models import CustomUser
 
-pytest_plugins = [
-    "apps.product_definitions.tests.fixtures"
-]
+pytest_plugins = ["apps.product_definitions.tests.fixtures"]
 
 
 @pytest.fixture

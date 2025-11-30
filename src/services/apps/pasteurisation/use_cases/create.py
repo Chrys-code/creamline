@@ -94,7 +94,11 @@ def create_pasteurisation(
     target_storage = validated_data["target_storage"]
     product_definition = validated_data["product_definition"]
 
-    validate_create_pasteurisation(start_date=validated_data["start_date"], end_date=validated_data["end_date"], logger=logger)
+    validate_create_pasteurisation(
+        start_date=validated_data["start_date"],
+        end_date=validated_data["end_date"],
+        logger=logger,
+    )
 
     created_pasteurisation = _create(
         **validated_data,

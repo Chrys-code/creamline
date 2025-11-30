@@ -13,6 +13,7 @@ class MilkSummaryAnalyticsView(views.APIView):
         data = milk_summary_data()
         return Response(data)
 
+
 class MilkTrendAnalyticsView(views.APIView):
     permission_classes = [IsAuthenticated]
 

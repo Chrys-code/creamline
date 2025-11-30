@@ -29,6 +29,7 @@ def test_create_product_definition_missing_created_by_does_not_save():
             name=product_definition_data["name"], created_by=None  # type: ignore[attr-defined]
         )
 
+
 def test_create_product_definition_missing_name_does_not_save(test_user):
     with pytest.raises(IntegrityError):
         create_product_definition(

@@ -21,9 +21,7 @@ def _create(
     return pasteur
 
 
-def create_pasteur(
-    name: str, created_by: "CustomUser"
-) -> Pasteur:
+def create_pasteur(name: str, created_by: "CustomUser") -> Pasteur:
     created_pasteur = _create(
         name=name,
         created_by=created_by,

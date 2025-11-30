@@ -25,11 +25,12 @@ class InvalidDatesError(PasteurisationException):
     default_detail = _("Start date must come before end date.")
     default_code = "invalid_dates"
 
+
 def _validate_duration(
-        start_date: dt.date,
-        end_date: dt.date,
-        instance_uuid: Optional[UUID] = None,
-        logger: Optional[logging.Logger] = None
+    start_date: dt.date,
+    end_date: dt.date,
+    instance_uuid: Optional[UUID] = None,
+    logger: Optional[logging.Logger] = None,
 ) -> None:
     if start_date > end_date:
         if logger:
@@ -45,23 +46,23 @@ def _validate_duration(
 
 
 def validate_create_pasteurisation(
-    start_date: dt.date,
-    end_date: dt.date,
-    logger: Optional[logging.Logger] = None
+    start_date: dt.date, end_date: dt.date, logger: Optional[logging.Logger] = None
 ) -> None:
     if logger is None:
         logger = logging.getLogger(f"{__name__}-create_validation")
- 
+
     _validate_duration(start_date=start_date, end_date=end_date, logger=logger)
 
 
 def validate_update_pasteurisation(
-    instance: Pasteurisation,
-    logger: Optional[logging.Logger] = None
+    instance: Pasteurisation, logger: Optional[logging.Logger] = None
 ) -> None:
     if logger is None:
         logger = logging.getLogger(f"{__name__}-update_validation")
 
     _validate_duration(
-        start_date=instance.start_date, end_date=instance.end_date, instance_uuid=instance.uuid, logger=logger
+        start_date=instance.start_date,
+        end_date=instance.end_date,
+        instance_uuid=instance.uuid,
+        logger=logger,
     )

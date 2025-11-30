@@ -7,9 +7,7 @@ pytestmark = pytest.mark.django_db()
 
 
 def test_delete_product_definition_updates_instance(product_definition, test_user):
-    delete_product_definition(
-        instance=product_definition, deleted_by=test_user
-    )
+    delete_product_definition(instance=product_definition, deleted_by=test_user)
     updated_db_instance = ProductDefinition.objects.get(uuid=product_definition.uuid)
 
     assert isinstance(updated_db_instance, ProductDefinition)
@@ -24,6 +22,7 @@ def test_delete_product_definition_missing_delete_by_does_not_update_instance(
         delete_product_definition(
             instance=product_definition, deleted_by=None  # type: ignore[attr-defined]
         )
+
 
 def test_delete_product_definition_missing_instance_does_not_update_instance(
     test_user,

@@ -1,6 +1,12 @@
 from datetime import timedelta, datetime
 
-from django.db.models.functions import TruncDate, TruncWeek, TruncMonth, TruncQuarter, TruncYear
+from django.db.models.functions import (
+    TruncDate,
+    TruncWeek,
+    TruncMonth,
+    TruncQuarter,
+    TruncYear,
+)
 from django.db.models import Sum
 from django.utils.dateparse import parse_date
 
@@ -13,6 +19,7 @@ TRUNC_MAP = {
     "quarter": TruncQuarter("created_at"),
     "year": TruncYear("created_at"),
 }
+
 
 def milk_trend_data(
     start_date: str,

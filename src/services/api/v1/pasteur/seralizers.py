@@ -13,9 +13,7 @@ class PasteurSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         name = validated_data["name"]
 
-        pasteur = create_pasteur(
-            name=name, created_by=self.context["request"].user
-        )
+        pasteur = create_pasteur(name=name, created_by=self.context["request"].user)
         return pasteur
 
     def update(self, instance, validated_data):

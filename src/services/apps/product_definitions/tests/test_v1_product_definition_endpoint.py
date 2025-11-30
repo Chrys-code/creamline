@@ -2,7 +2,9 @@ from rest_framework import status
 from rest_framework.reverse import reverse
 
 
-def test_product_definition_v1_list_endpoint_unauthenticated_client_returns_403(api_client):
+def test_product_definition_v1_list_endpoint_unauthenticated_client_returns_403(
+    api_client,
+):
     url = reverse("api:v1:product-definition-list")
 
     response = api_client.get(url)
@@ -17,7 +19,9 @@ def test_product_definition_v1_list_endpoint_returns_200(authenticated_client):
     assert response.status_code == status.HTTP_200_OK
 
 
-def test_product_definition_v1_detail_endpoint_unauthenticated_client_returns_403(api_client, product_definition):
+def test_product_definition_v1_detail_endpoint_unauthenticated_client_returns_403(
+    api_client, product_definition
+):
     url = reverse("api:v1:product-definition-detail", args=[product_definition.uuid])
 
     response = api_client.get(url)
@@ -34,7 +38,9 @@ def test_product_definition_v1_detail_endpoint_returns_200(
     assert response.status_code == status.HTTP_200_OK
 
 
-def test_product_definition_v1_detail_delete_endpoint_unauthenticated_client_returns_403(api_client, product_definition):
+def test_product_definition_v1_detail_delete_endpoint_unauthenticated_client_returns_403(
+    api_client, product_definition
+):
     url = reverse("api:v1:product-definition-detail", args=[product_definition.uuid])
 
     response = api_client.delete(url)
@@ -51,7 +57,9 @@ def test_product_definition_v1_detail_delete_endpoint_returns_200(
     assert response.status_code == status.HTTP_204_NO_CONTENT
 
 
-def test_product_definition_v1_all_endpoint_unauthenticated_client_returns_403(api_client):
+def test_product_definition_v1_all_endpoint_unauthenticated_client_returns_403(
+    api_client,
+):
     url = reverse("api:v1:product-definition-list-no-pagination")
 
     response = api_client.get(url)
@@ -66,7 +74,9 @@ def test_product_definition_v1_all_endpoint_returns_200(authenticated_client):
     assert response.status_code == status.HTTP_200_OK
 
 
-def test_product_definition_v1_types_endpoint_unauthenticated_client_returns_403(api_client):
+def test_product_definition_v1_types_endpoint_unauthenticated_client_returns_403(
+    api_client,
+):
     url = reverse("api:v1:product-definition-list-types")
 
     response = api_client.get(url)
