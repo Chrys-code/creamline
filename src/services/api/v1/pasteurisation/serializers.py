@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from apps.pasteurisation.use_cases.validation import InvalidDatesError, PasteurisationException
 from apps.product_definitions.models import ProductDefinition
 from apps.storages.models import Storage
 from apps.pasteurs.models import Pasteur
@@ -61,11 +62,25 @@ class PasteurisationSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        pasteurisation = create_pasteurisation(
-            validated_data=validated_data, created_by=self.context["request"].user
-        )
-        return pasteurisation
+        try:
+            pasteurisation = create_pasteurisation(
+                validated_data=validated_data, created_by=self.context["request"].user
+            )
+
+            return pasteurisation
+
+        except PasteurisationException as e:
+            if isinstance(e, InvalidDatesError):
+                raise e
+
+        except Exception as e:
+            raise e
 
     def update(self, instance, validated_data):
-        milk = update_pasteurisation(instance=instance, validated_data=validated_data)
-        return milk
+        try:
+            milk = update_pasteurisation(instance=instance, validated_data=validated_data)
+            return milk
+
+        except PasteurisationException as e:
+            if isinstance(e, InvalidDatesError):
+                raise e

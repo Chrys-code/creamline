@@ -3,6 +3,8 @@ import datetime as dt
 from typing import TypedDict, TYPE_CHECKING
 
 from apps.pasteurisation.models import Pasteurisation
+from apps.pasteurisation.use_cases.validation import validate_create_pasteurisation
+
 from apps.storages.models import Storage
 from apps.pasteurs.models import Pasteur
 from apps.product_definitions.models import ProductDefinition
@@ -91,6 +93,8 @@ def create_pasteurisation(
     source_storage = validated_data["source_storage"]
     target_storage = validated_data["target_storage"]
     product_definition = validated_data["product_definition"]
+
+    validate_create_pasteurisation(start_date=validated_data["start_date"], end_date=validated_data["end_date"], logger=logger)
 
     created_pasteurisation = _create(
         **validated_data,

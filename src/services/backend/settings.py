@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_spectacular",
+    "apps.healthcheck",
     "apps.users",
     "apps.users.features.profiles",
     "apps.users.features.user_groups",

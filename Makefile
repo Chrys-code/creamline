@@ -21,6 +21,9 @@ make-migrations:
 migrate:
 	docker-compose -f dockerfiles/docker-compose.dev.yml -p creamline-dev exec backend python3 manage.py migrate
 
+test:
+	docker-compose -f dockerfiles/docker-compose.dev.yml -p creamline-dev exec backend pytest
+
 deps-export:
 	cd src/services && poetry export --with dev --without-hashes -f requirements.txt -o requirements.txt
 

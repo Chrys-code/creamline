@@ -28,7 +28,7 @@ class ProductDefinitionViewSet(ModelViewSet):
     }
 
     def get_queryset(self):
-        return ProductDefinition.objects.all().filter(deleted_at=None)
+        return ProductDefinition.objects.all().filter(deleted_at=None).order_by("name")
 
     def get_serializer_class(self):
         return self.serializer_classes.get(
