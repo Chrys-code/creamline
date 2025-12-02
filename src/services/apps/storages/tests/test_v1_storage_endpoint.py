@@ -31,9 +31,7 @@ def test_storage_v1_detail_endpoint_unauthenticated_client_returns_403(
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
 
-def test_storage_v1_detail_endpoint_returns_200(
-    authenticated_client, storage
-):
+def test_storage_v1_detail_endpoint_returns_200(authenticated_client, storage):
     client, _ = authenticated_client
     url = reverse("api:v1:storage-detail", args=[storage.uuid])
 
@@ -50,9 +48,7 @@ def test_storage_v1_detail_delete_endpoint_unauthenticated_client_returns_403(
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
 
-def test_storage_v1_detail_delete_endpoint_returns_200(
-    authenticated_client, storage
-):
+def test_storage_v1_detail_delete_endpoint_returns_200(authenticated_client, storage):
     client, _ = authenticated_client
     url = reverse("api:v1:storage-detail", args=[storage.uuid])
 

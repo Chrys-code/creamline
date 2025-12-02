@@ -23,9 +23,7 @@ def test_update_storage_saves_instance(storage, storage_payload, test_user):
     assert db_instance.created_by == test_user
 
 
-def test_update_storage_missing_name_skips_attribute(
-    storage, test_user
-):
+def test_update_storage_missing_name_skips_attribute(storage, test_user):
     original_name = storage.name
     original_type = storage.type
 

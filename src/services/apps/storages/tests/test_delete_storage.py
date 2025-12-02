@@ -19,9 +19,7 @@ def test_delete_storage_missing_delete_by_does_not_update_instance(
     storage,
 ):
     with pytest.raises(AttributeError):
-        delete_storage(
-            instance=storage, deleted_by=None  # type: ignore[attr-defined]
-        )
+        delete_storage(instance=storage, deleted_by=None)  # type: ignore[attr-defined]
 
 
 def test_delete_storage_missing_instance_does_not_update_instance(

@@ -6,9 +6,7 @@ from apps.storages.models import Storage
 @pytest.fixture
 def storage(test_user):
     created = Storage.objects.create(
-        name="test_storage",
-        type=Storage.StorageTypes.SILO,
-        created_by=test_user
+        name="test_storage", type=Storage.StorageTypes.SILO, created_by=test_user
     )
 
     return created
@@ -17,9 +15,7 @@ def storage(test_user):
 @pytest.fixture
 def storage_2(test_user):
     created = Storage.objects.create(
-        name="test_storage_2",
-        type=Storage.StorageTypes.TUB,
-        created_by=test_user
+        name="test_storage_2", type=Storage.StorageTypes.TUB, created_by=test_user
     )
 
     return created

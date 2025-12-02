@@ -10,10 +10,10 @@ pytestmark = pytest.mark.django_db()
 
 def test_create_producer_saves_instance(test_user, producer_payload):
     created = create_producer(
-        name=producer_payload["name"], 
+        name=producer_payload["name"],
         address=producer_payload["address"],
         contact_email=producer_payload["contact_email"],
-        created_by=test_user
+        created_by=test_user,
     )
     db_instance = Producer.objects.get(uuid=created.uuid)
 
@@ -53,10 +53,11 @@ def test_create_producer_missing_address_does_not_save(test_user, producer_paylo
             created_by=test_user,
         )
 
+
 def test_create_producer_missing_contact_email_saves(test_user, producer_payload):
-        create_producer(
-            name=producer_payload["name"],
-            address=producer_payload["address"],
-            contact_email=None,  # type: ignore[attr-defined]
-            created_by=test_user,
-        )
+    create_producer(
+        name=producer_payload["name"],
+        address=producer_payload["address"],
+        contact_email=None,  # type: ignore[attr-defined]
+        created_by=test_user,
+    )

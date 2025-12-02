@@ -13,7 +13,7 @@ start:
 	docker-compose -f dockerfiles/docker-compose.dev.yml -p creamline-dev up -d
 
 # Run black formatter
-code-format:
+run-black-formatter:
 	cd src/services && poetry run black .
 
 make-migrations:

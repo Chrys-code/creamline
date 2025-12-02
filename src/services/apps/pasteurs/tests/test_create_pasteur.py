@@ -9,9 +9,7 @@ pytestmark = pytest.mark.django_db()
 
 
 def test_create_pasteur_saves_instance(test_user, pasteur_payload):
-    created = create_pasteur(
-        name=pasteur_payload["name"], created_by=test_user
-    )
+    created = create_pasteur(name=pasteur_payload["name"], created_by=test_user)
     db_instance = Pasteur.objects.get(uuid=created.uuid)
 
     assert isinstance(created, Pasteur)

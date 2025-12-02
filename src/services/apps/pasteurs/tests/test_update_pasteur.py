@@ -9,9 +9,7 @@ pytestmark = pytest.mark.django_db()
 def test_update_pasteur_saves_instance(pasteur, pasteur_payload, test_user):
     original_name = pasteur.name
 
-    updated = update_pasteur(
-        instance=pasteur, name=pasteur_payload["name"]
-    )
+    updated = update_pasteur(instance=pasteur, name=pasteur_payload["name"])
     db_instance = Pasteur.objects.get(uuid=updated.uuid)
 
     assert isinstance(updated, Pasteur)
@@ -23,9 +21,7 @@ def test_update_pasteur_saves_instance(pasteur, pasteur_payload, test_user):
 def test_update_pasteur_missing_name_skips_attribute(pasteur, test_user):
     original_name = pasteur.name
 
-    updated = update_pasteur(
-        instance=pasteur, name=None  # type: ignore[attr-defined]
-    )
+    updated = update_pasteur(instance=pasteur, name=None)  # type: ignore[attr-defined]
     db_instance = Pasteur.objects.get(uuid=updated.uuid)
 
     assert isinstance(updated, Pasteur)

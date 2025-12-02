@@ -15,7 +15,9 @@ def _create(name: str, type: Storage.StorageTypes, created_by: "CustomUser") -> 
     return storage
 
 
-def create_storage(name: str, type: Storage.StorageTypes, created_by: "CustomUser") -> Storage:
+def create_storage(
+    name: str, type: Storage.StorageTypes, created_by: "CustomUser"
+) -> Storage:
     created_storage = _create(name=name, type=type, created_by=created_by)
 
     logger.info(
