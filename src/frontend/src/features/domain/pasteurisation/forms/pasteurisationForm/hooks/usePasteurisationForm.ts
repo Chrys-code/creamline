@@ -48,7 +48,7 @@ export const usePasteurisationForm = (pasteurisation: Pasteurisation | null) => 
 		try {
 			await pasteurisationClient.v1_pasteurisation_create(formData);
 			toast.success(tPasteurisation("edit_pasteurisation.notifications.success"));
-			navigate("/pasteurised-milk");
+			navigate("/pasteurisation/list");
 		} catch (err: any) {
 			if (err.response?.data) {
 				const responseData = err.response.data;

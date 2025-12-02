@@ -1,6 +1,5 @@
 import logging
 import datetime as dt
-from uuid import UUID
 from typing import TypedDict, TYPE_CHECKING
 
 from apps.pasteurisation.models import Pasteurisation
@@ -18,20 +17,9 @@ logger = logging.getLogger(__name__)
 
 class CreatePasteurisationData(TypedDict):
     pasteur: Pasteur
-    pasteur_uuid: UUID
-    pasteur_name: str
-
     source_storage: Storage
-    source_storage_uuid: UUID
-    source_storage_name: str
-
     target_storage: Storage
-    target_storage_uuid: UUID
-    target_storage_name: str
-
     product_definition: ProductDefinition
-    product_definition_uuid: UUID
-    product_definition_name: str
 
     volume_kg: float
     volume_liters: float
@@ -45,17 +33,9 @@ class CreatePasteurisationData(TypedDict):
 
 def _create(
     pasteur: Pasteur,
-    pasteur_uuid: UUID,
-    pasteur_name: str,
     source_storage: Storage,
-    source_storage_uuid: UUID,
-    source_storage_name: str,
     target_storage: Storage,
-    target_storage_uuid: UUID,
-    target_storage_name: str,
     product_definition: ProductDefinition,
-    product_definition_uuid: UUID,
-    product_definition_name: str,
     volume_kg: float,
     volume_liters: float,
     temperature: float,
@@ -65,17 +45,9 @@ def _create(
 ) -> Pasteurisation:
     pasteurisation = Pasteurisation.objects.create(
         pasteur=pasteur,
-        pasteur_uuid=pasteur_uuid,
-        pasteur_name=pasteur_name,
         source_storage=source_storage,
-        source_storage_uuid=source_storage_uuid,
-        source_storage_name=source_storage_name,
         target_storage=target_storage,
-        target_storage_uuid=target_storage_uuid,
-        target_storage_name=target_storage_name,
         product_definition=product_definition,
-        product_definition_name=product_definition_name,
-        product_definition_uuid=product_definition_uuid,
         volume_kg=volume_kg,
         volume_liters=volume_liters,
         temperature=temperature,
@@ -103,17 +75,9 @@ def create_pasteurisation(
 
     created_pasteurisation = _create(
         pasteur=pasteur,
-        pasteur_uuid=pasteur.uuid,
-        pasteur_name=pasteur.name,
         source_storage=source_storage,
-        source_storage_uuid=source_storage.uuid,
-        source_storage_name=source_storage.name,
         target_storage=target_storage,
-        target_storage_uuid=target_storage.uuid,
-        target_storage_name=target_storage.name,
         product_definition=product_definition,
-        product_definition_uuid=product_definition.uuid,
-        product_definition_name=product_definition.name,
         volume_kg=validated_data["volume_kg"],
         volume_liters=validated_data["volume_liters"],
         temperature=validated_data["temperature"],
