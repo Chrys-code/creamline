@@ -8,7 +8,7 @@ from apps.storages.use_cases.create import create_storage
 pytestmark = pytest.mark.django_db()
 
 
-def test_create_storage_saves_instance(test_user, storage_payload):
+def test_create_storage_saves(test_user, storage_payload):
 
     created = create_storage(
         name=storage_payload["name"], type=storage_payload["type"], created_by=test_user

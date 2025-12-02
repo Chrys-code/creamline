@@ -6,7 +6,7 @@ from apps.storages.use_cases.update import update_storage
 pytestmark = pytest.mark.django_db()
 
 
-def test_update_storage_saves_instance(storage, storage_payload, test_user):
+def test_update_storage_saves(storage, storage_payload, test_user):
     original_name = storage.name
     original_type = storage.type
 

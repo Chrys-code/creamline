@@ -6,7 +6,7 @@ from apps.pasteurs.use_cases.update import update_pasteur
 pytestmark = pytest.mark.django_db()
 
 
-def test_update_pasteur_saves_instance(pasteur, pasteur_payload, test_user):
+def test_update_pasteur_saves(pasteur, pasteur_payload, test_user):
     original_name = pasteur.name
 
     updated = update_pasteur(instance=pasteur, name=pasteur_payload["name"])

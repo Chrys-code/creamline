@@ -8,7 +8,7 @@ from apps.product_definitions.use_cases.create import create_product_definition
 pytestmark = pytest.mark.django_db()
 
 
-def test_create_product_definition_saves_instance(test_user):
+def test_create_product_definition_saves(test_user):
     product_definition_data = {"name": "whole milk"}
 
     created = create_product_definition(

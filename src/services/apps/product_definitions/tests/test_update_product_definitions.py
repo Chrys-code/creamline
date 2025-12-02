@@ -6,7 +6,7 @@ from apps.product_definitions.use_cases.update import update_product_definition
 pytestmark = pytest.mark.django_db()
 
 
-def test_update_product_definition_saves_instance(product_definition, test_user):
+def test_update_product_definition_saves(product_definition, test_user):
     original_name = product_definition.name
     product_definition_data = {"name": "whole milk"}
 

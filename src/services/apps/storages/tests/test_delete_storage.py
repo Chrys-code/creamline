@@ -6,7 +6,7 @@ from apps.storages.use_cases.delete import delete_storage
 pytestmark = pytest.mark.django_db()
 
 
-def test_delete_storage_updates_instance(storage, test_user):
+def test_delete_storage_updates(storage, test_user):
     delete_storage(instance=storage, deleted_by=test_user)
     instance = Storage.objects.get(uuid=storage.uuid)
 
@@ -15,14 +15,14 @@ def test_delete_storage_updates_instance(storage, test_user):
     assert instance.deleted_by == test_user
 
 
-def test_delete_storage_missing_delete_by_does_not_update_instance(
+def test_delete_storage_missing_delete_by_does_not_update(
     storage,
 ):
     with pytest.raises(AttributeError):
         delete_storage(instance=storage, deleted_by=None)  # type: ignore[attr-defined]
 
 
-def test_delete_storage_missing_instance_does_not_update_instance(
+def test_delete_storage_missing_instance_does_not_update(
     test_user,
 ):
     with pytest.raises(AttributeError):

@@ -6,7 +6,7 @@ from apps.product_definitions.use_cases.delete import delete_product_definition
 pytestmark = pytest.mark.django_db()
 
 
-def test_delete_product_definition_updates_instance(product_definition, test_user):
+def test_delete_product_definition_updates(product_definition, test_user):
     delete_product_definition(instance=product_definition, deleted_by=test_user)
     updated_db_instance = ProductDefinition.objects.get(uuid=product_definition.uuid)
 
@@ -15,7 +15,7 @@ def test_delete_product_definition_updates_instance(product_definition, test_use
     assert updated_db_instance.deleted_by == test_user
 
 
-def test_delete_product_definition_missing_delete_by_does_not_update_instance(
+def test_delete_product_definition_missing_delete_by_does_not_update(
     product_definition,
 ):
     with pytest.raises(AttributeError):
@@ -24,7 +24,7 @@ def test_delete_product_definition_missing_delete_by_does_not_update_instance(
         )
 
 
-def test_delete_product_definition_missing_instance_does_not_update_instance(
+def test_delete_product_definition_missing_instance_does_not_update(
     test_user,
 ):
     with pytest.raises(AttributeError):

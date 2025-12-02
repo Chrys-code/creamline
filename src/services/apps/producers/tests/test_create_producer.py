@@ -8,7 +8,7 @@ from apps.producers.use_cases.create import create_producer
 pytestmark = pytest.mark.django_db()
 
 
-def test_create_producer_saves_instance(test_user, producer_payload):
+def test_create_producer_saves(test_user, producer_payload):
     created = create_producer(
         name=producer_payload["name"],
         address=producer_payload["address"],

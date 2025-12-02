@@ -6,7 +6,7 @@ from apps.producers.use_cases.update import update_producer
 pytestmark = pytest.mark.django_db()
 
 
-def test_update_producer_saves_instance(producer, producer_payload, test_user):
+def test_update_producer_saves(producer, producer_payload, test_user):
     updated = update_producer(
         instance=producer,
         name=producer_payload["name"],
