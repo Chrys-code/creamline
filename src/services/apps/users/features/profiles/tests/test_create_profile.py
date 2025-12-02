@@ -23,6 +23,7 @@ def test_create_profile_saves(test_user, profile_payload):
     assert db_instance.last_name == profile_payload["last_name"]
     assert db_instance.user == test_user
 
+
 def test_create_profile_missing_profile_image_saves(test_user, profile_payload):
     created = create_profile(
         profile_image=None,

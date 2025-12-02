@@ -31,9 +31,15 @@ class PasteurisationSerializer(serializers.ModelSerializer):
     )
 
     pasteur_name = serializers.CharField(source="pasteur.name", read_only=True)
-    product_definition_name = serializers.CharField(source="product_definition.name", read_only=True)
-    source_storage_name = serializers.CharField(source="source_storage.name", read_only=True)
-    target_storage_name = serializers.CharField(source="target_storage.name", read_only=True)
+    product_definition_name = serializers.CharField(
+        source="product_definition.name", read_only=True
+    )
+    source_storage_name = serializers.CharField(
+        source="source_storage.name", read_only=True
+    )
+    target_storage_name = serializers.CharField(
+        source="target_storage.name", read_only=True
+    )
 
     class Meta:
         model = Pasteurisation

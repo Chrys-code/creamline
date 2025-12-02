@@ -44,3 +44,5 @@ def update_user_workflow(
         instance=user.profile, email=email, first_name=first_name, last_name=last_name
     )
     set_user_groups(user=updated_user, group_ids=group_ids)
+
+    return user

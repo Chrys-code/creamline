@@ -14,7 +14,7 @@ def test_update_profile_saves(profile, profile_payload, test_user):
         instance=profile,
         email=test_user.email,
         first_name=profile_payload["first_name"],
-        last_name=profile_payload["last_name"]
+        last_name=profile_payload["last_name"],
     )
     db_instance = Profile.objects.get(uuid=updated.uuid)
 

@@ -6,6 +6,7 @@ from apps.users.models import CustomUser
 
 pytest_plugins = [
     "apps.users.features.profiles.tests.fixtures",
+    "apps.users.features.user_groups.tests.fixtures",
     "apps.product_definitions.tests.fixtures",
     "apps.pasteurisation.tests.fixtures",
     "apps.storages.tests.fixtures",
