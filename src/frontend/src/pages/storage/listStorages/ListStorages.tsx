@@ -35,7 +35,7 @@ const ListStorages: React.FC = () => {
 			<li key={item.uuid} tabIndex={0}>
 				<StorageCard
 					name={item.name}
-					type={item.type}
+					type={item.type_label}
 					onClick={() => navigate(NAVIGATION_ROUTES.storage.edit + item.uuid)}
 				/>
 			</li>
