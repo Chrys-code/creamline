@@ -17,43 +17,36 @@ class PasteurisationSerializer(serializers.ModelSerializer):
     pasteur = serializers.SlugRelatedField(
         slug_field="uuid", queryset=Pasteur.objects.all()
     )
-    pasteur_uuid = serializers.CharField(required=False)
-    pasteur_name = serializers.CharField(required=False)
 
     product_definition = serializers.SlugRelatedField(
         slug_field="uuid", queryset=ProductDefinition.objects.all()
     )
-    product_definition_uuid = serializers.CharField(required=False)
-    product_definition_name = serializers.CharField(required=False)
 
     source_storage = serializers.SlugRelatedField(
         slug_field="uuid", queryset=Storage.objects.all()
     )
-    source_storage_uuid = serializers.CharField(required=False)
-    source_storage_name = serializers.CharField(required=False)
 
     target_storage = serializers.SlugRelatedField(
         slug_field="uuid", queryset=Storage.objects.all()
     )
-    target_storage_uuid = serializers.CharField(required=False)
-    target_storage_name = serializers.CharField(required=False)
+
+    pasteur_name = serializers.CharField(source="pasteur.name", read_only=True)
+    product_definition_name = serializers.CharField(source="product_definition.name", read_only=True)
+    source_storage_name = serializers.CharField(source="source_storage.name", read_only=True)
+    target_storage_name = serializers.CharField(source="target_storage.name", read_only=True)
 
     class Meta:
         model = Pasteurisation
         fields = [
             "uuid",
             "pasteur",
-            "pasteur_uuid",
-            "pasteur_name",
             "product_definition",
-            "product_definition_uuid",
-            "product_definition_name",
             "source_storage",
-            "source_storage_name",
-            "source_storage_uuid",
             "target_storage",
+            "pasteur_name",
+            "product_definition_name",
+            "source_storage_name",
             "target_storage_name",
-            "target_storage_uuid",
             "volume_kg",
             "volume_liters",
             "temperature",

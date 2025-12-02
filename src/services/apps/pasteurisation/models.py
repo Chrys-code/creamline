@@ -22,9 +22,6 @@ class Pasteurisation(models.Model):
         null=True,
         blank=True,
     )
-    pasteur_uuid = models.CharField(max_length=255, editable=False)
-    pasteur_name = models.CharField(max_length=255, editable=False)
-
     source_storage = models.ForeignKey(
         Storage,
         related_name="originated_pasteurisation",
@@ -33,9 +30,6 @@ class Pasteurisation(models.Model):
         null=True,
         blank=True,
     )
-    source_storage_uuid = models.CharField(max_length=255, editable=False)
-    source_storage_name = models.CharField(max_length=255, editable=False)
-
     target_storage = models.ForeignKey(
         Storage,
         related_name="targeted_pasteurisation",
@@ -44,9 +38,6 @@ class Pasteurisation(models.Model):
         null=True,
         blank=True,
     )
-    target_storage_uuid = models.CharField(max_length=255, editable=False)
-    target_storage_name = models.CharField(max_length=255, editable=False)
-
     product_definition = models.ForeignKey(
         ProductDefinition,
         related_name="pasteurisation",
@@ -55,8 +46,6 @@ class Pasteurisation(models.Model):
         null=True,
         blank=True,
     )
-    product_definition_uuid = models.CharField(max_length=255, editable=False)
-    product_definition_name = models.CharField(max_length=255, editable=False)
 
     volume_kg = models.FloatField(validators=[MinValueValidator(1.00)])
     volume_liters = models.FloatField(validators=[MinValueValidator(1.00)])
