@@ -7,3 +7,5 @@ export type PaginatedStorageList = z.infer<typeof schemas.PaginatedListStorageSc
 export type StorageFormSchema = z.infer<typeof schemas.StorageFormSchema>;
 export type CreateStorageFormSchema = z.infer<typeof schemas.CreateStorageFormSchema>;
 export type UpdateStorageFormSchema = z.infer<typeof schemas.PatchStorageFormSchema>;
+
+export type StorageType = z.infer<typeof schemas.StorageTypesSchema>;

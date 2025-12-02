@@ -79,3 +79,18 @@ class StorageViewSet(viewsets.ModelViewSet):
         queryset = self.get_queryset().order_by("name")
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+    @action(detail=False, methods=["get"], url_path="types")
+    def list_types(self, _request):
+        """
+        Returns the stored enum options as Storage type options
+        """
+
+        data = [
+            {
+                "value": choice.value,
+                "label": str(choice.label),
+            }
+            for choice in Storage.StorageTypes
+        ]
+        return Response(data)

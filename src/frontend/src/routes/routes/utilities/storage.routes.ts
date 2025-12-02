@@ -1,10 +1,12 @@
 import type { LoaderFunctionArgs } from "react-router";
 import { listPaginatedStorages } from "../../../features/domain/storage/loaders/listStorages";
 import { getStorage } from "../../../features/domain/storage/loaders/getStorage";
-import { listStorageTypes } from "../../../features/domain/storage/features/storageType/loaders/listStorageTypes";
-import { adaptStorageTypesForStorageTypeOptions } from "../../../features/domain/storage/features/storageType/adapters";
-import { adaptStorageToEditorForm } from "../../../features/domain/storage/adapters";
+import {
+	adaptStorageToEditorForm,
+	adaptStorageTypesForStorageTypeOptions,
+} from "../../../features/domain/storage/adapters";
 import { NAVIGATION_ROUTES } from "../../../configs/navigation";
+import { listStorageTypes } from "../../../features/domain/storage/loaders/getStorageTypes";
 
 const storageRoutes = [
 	{

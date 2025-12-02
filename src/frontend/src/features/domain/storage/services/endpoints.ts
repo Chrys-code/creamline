@@ -80,12 +80,21 @@ const PatchStorageEndpoint = makeEndpoint({
 	response: schemas.StorageSchema,
 });
 
+const GetStorageOptionsEndpoint = makeEndpoint({
+	method: "get",
+	path: "/api/v1/storage/types/",
+	alias: "v1_storage_types_retrieve",
+	requestFormat: "json",
+	response: z.array(schemas.StorageTypesSchema),
+});
+
 const endpoints = makeApi([
 	PaginatedListStorageEndpoint,
 	ListStorageEndpoint,
 	GetStorageEndpoint,
 	CreateStorageEndpoint,
 	PatchStorageEndpoint,
+	GetStorageOptionsEndpoint,
 ]);
 
 export function createApiClient(baseUrl: string, options?: ZodiosOptions) {

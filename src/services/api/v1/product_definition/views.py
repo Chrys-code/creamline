@@ -14,7 +14,6 @@ from apps.product_definitions.use_cases.delete import delete_product_definition
 
 
 class ProductDefinitionViewSet(ModelViewSet):
-    queryset = ProductDefinition.objects.all()
     permission_classes = [IsAuthenticated]
     pagination_class = StandardPagePagination
     lookup_field = "uuid"

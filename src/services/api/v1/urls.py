@@ -7,7 +7,6 @@ from api.v1.pasteur.views import PasteurViewSet
 from api.v1.pasteurisation.views import PasteurisationViewSet
 from api.v1.producer.views import ProducerViewSet
 from api.v1.product_definition.views import ProductDefinitionViewSet
-from api.v1.storage_type.views import StorageTypeViewSet
 from api.v1.users.views import UserViewSet
 from api.v1.milk.views import MilkViewSet
 
@@ -21,11 +20,6 @@ router.register(
     "storage",
     StorageViewSet,
     basename="storage",
-)
-router.register(
-    "storage-types",
-    StorageTypeViewSet,
-    basename="storage-type",
 )
 router.register(
     "milk",

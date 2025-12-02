@@ -1,24 +1,22 @@
 import uuid
 
+from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from django.db import models
 
-from apps.storages.features.storage_types.models import StorageType
-
 
 class Storage(models.Model):
+    class StorageTypes(models.TextChoices):
+        SILO = "SILO", _("silo")
+        TUB = "TUB", _("tub")
+        CONTAINER = "CONTAINER", _("container")
+
     uuid = models.UUIDField(
         default=uuid.uuid4, unique=True, editable=False, primary_key=False
     )
 
     name = models.CharField(max_length=255)
-    type = models.ForeignKey(
-        StorageType,
-        related_name="storage",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-    )
+    type = models.CharField(max_length=255, choices=StorageTypes.choices)
 
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(

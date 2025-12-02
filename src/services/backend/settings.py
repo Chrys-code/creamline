@@ -78,7 +78,6 @@ INSTALLED_APPS = [
     "apps.authentication",
     "apps.producers",
     "apps.storages",
-    "apps.storages.features.storage_types",
     "apps.milk",
     "apps.pasteurisation",
     "apps.pasteurs",

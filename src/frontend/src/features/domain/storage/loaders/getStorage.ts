@@ -11,6 +11,6 @@ export const getStorage = async ({ params }: LoaderFunctionArgs): Promise<Storag
 
 		return storageResponse;
 	} catch {
-		throw new Error("Failed to load producer");
+		throw new Error("Failed to load storages");
 	}
 };
