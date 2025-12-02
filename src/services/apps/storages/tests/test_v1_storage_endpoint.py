@@ -1,6 +1,5 @@
 import pytest
 from rest_framework import status
-from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
 pytestmark = pytest.mark.django_db()

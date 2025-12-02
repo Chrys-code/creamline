@@ -7,7 +7,8 @@ from apps.users.models import CustomUser
 pytest_plugins = [
     "apps.product_definitions.tests.fixtures",
     "apps.pasteurisation.tests.fixtures",
-    "apps.storages.tests.fixtures"
+    "apps.storages.tests.fixtures",
+    "apps.pasteurs.tests.fixtures"
 ]
 
 
