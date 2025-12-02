@@ -8,7 +8,8 @@ pytest_plugins = [
     "apps.product_definitions.tests.fixtures",
     "apps.pasteurisation.tests.fixtures",
     "apps.storages.tests.fixtures",
-    "apps.pasteurs.tests.fixtures"
+    "apps.pasteurs.tests.fixtures",
+    "apps.producers.tests.fixtures"
 ]
 
 
