@@ -55,12 +55,8 @@ class Pasteurisation(models.Model):
         null=True,
         blank=True,
     )
+    product_definition_uuid = models.CharField(max_length=255, editable=False)
     product_definition_name = models.CharField(max_length=255, editable=False)
-    product_definition_type = models.CharField(
-        choices=ProductDefinition.ProductDefinitionTypes.choices,
-        max_length=255,
-        editable=False,
-    )
 
     volume_kg = models.FloatField(validators=[MinValueValidator(1.00)])
     volume_liters = models.FloatField(validators=[MinValueValidator(1.00)])
