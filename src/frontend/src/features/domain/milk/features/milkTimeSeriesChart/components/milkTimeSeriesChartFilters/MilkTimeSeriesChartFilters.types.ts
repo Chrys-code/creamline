@@ -1,8 +1,8 @@
 import type React from "react";
-import type { IntervalTypes, MilkTrend } from "../../types";
+import type { IntervalTypes } from "../../../../../../../shared/types";
 
-export interface MilkChartProps {
-	chartData: MilkTrend[];
+export interface MilkTimeSeriesChartFiltersProps {
+	isOpen?: boolean;
 	selectedStartDate: string;
 	onStartDateChange: (_e: React.ChangeEvent<HTMLInputElement>) => void;
 	selectedEndDate: string;

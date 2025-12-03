@@ -57,9 +57,14 @@ const MilkSummarySchema = z.object({
 	pickups_today: z.number(),
 });
 
-export const MilkTrendSchema = z.object({
+const MilkTrendSchema = z.object({
 	date: z.string(), // ISO date string
 	total_liters: z.number(),
+});
+
+const MilkSegmentedByProducerSchema = z.object({
+	name: z.string(),
+	value: z.number(),
 });
 
 const schemas = {
@@ -69,6 +74,7 @@ const schemas = {
 	PatchMilkFormSchema,
 	MilkSummarySchema,
 	MilkTrendSchema,
+	MilkSegmentedByProducerSchema,
 };
 
 export default schemas;

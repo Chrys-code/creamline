@@ -4,6 +4,9 @@ from rest_framework.permissions import IsAuthenticated
 
 from apps.milk.use_cases.analytics.milk_summary import milk_summary_data
 from apps.milk.use_cases.analytics.milk_trend import milk_trend_data
+from apps.milk.use_cases.analytics.milk_segmented_by_producer import (
+    get_milk_segmented_by_producer,
+)
 
 
 class MilkSummaryAnalyticsView(views.APIView):
@@ -33,3 +36,16 @@ class MilkTrendAnalyticsView(views.APIView):
         except ValueError:
             return Response({"error": "Invalid interval"}, status=400)
         return Response(trend_data)
+
+
+class MilkSegmentedByProducer(views.APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        interval = request.query_params.get("interval", "day")
+
+        try:
+            segmented_data = get_milk_segmented_by_producer(interval=interval)
+        except ValueError:
+            return Response({"error": "Invalid interval"}, status=400)
+        return Response(segmented_data)

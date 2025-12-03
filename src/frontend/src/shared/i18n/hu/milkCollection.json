@@ -6,6 +6,14 @@
 			"producer": "Termelő",
 			"start_date": "Kezdete",
 			"end_date": "Vége"
+		},
+		"analytics": {
+			"producer_segmentation": {
+				"title": "Termelő eloszlás"
+			},
+			"trend": {
+				"title": "Időrendi eloszlás"
+			}
 		}
 	},
 	"edit_milk_collection": {

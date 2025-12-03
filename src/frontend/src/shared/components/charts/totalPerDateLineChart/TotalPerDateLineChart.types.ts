@@ -7,4 +7,5 @@ export interface TotalPerDateLineChartProps {
 	xAxisDataYey?: string;
 	yAsixDatKey?: string;
 	maxHeight?: number;
+	withAxis?: boolean;
 }

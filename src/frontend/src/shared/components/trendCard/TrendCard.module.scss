@@ -10,7 +10,6 @@
 
 	background-color: var(--color-neutral-0);
 	box-shadow: var(--box-shadow-bottom);
-	border: 2px solid var(--color-primary-100);
 	border-radius: var(--border-container-radius);
 	padding: 0.5rem;
 
@@ -20,6 +19,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
+		height: 100%;
 	}
 
 	> div:first-of-type {

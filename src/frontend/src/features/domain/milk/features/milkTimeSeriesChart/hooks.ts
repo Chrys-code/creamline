@@ -1,10 +1,10 @@
-import type { IntervalTypes } from "../types";
+import type { IntervalTypes } from "../../../../../shared/types";
 
 import { useQuery } from "@tanstack/react-query";
-import { milkClient } from "../services/client";
-import { adaptMilkTrendDateToLanguage } from "../adapters";
+import { milkClient } from "../../services/client";
+import { adaptMilkTrendDateToLanguage } from "../../adapters";
 
-export function useMilkTrend(
+export function useMilkTimeSeries(
 	interval: IntervalTypes = "day",
 	start_date?: string,
 	end_date?: string,
@@ -16,7 +16,8 @@ export function useMilkTrend(
 			adaptMilkTrendDateToLanguage(
 				await milkClient.getMilkTrend({
 					queries: { interval, start_date, end_date, producer_uuid },
-				})
+				}),
+				interval
 			),
 		refetchInterval: 10000,
 		staleTime: 5000,

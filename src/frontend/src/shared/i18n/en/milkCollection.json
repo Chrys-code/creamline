@@ -6,6 +6,14 @@
 			"producer": "Producer",
 			"start_date": "Start date",
 			"end_date": "End date"
+		},
+		"analytics": {
+			"producer_segmentation": {
+				"title": "Producer segmentation"
+			},
+			"trend": {
+				"title": "Time series"
+			}
 		}
 	},
 	"edit_milk_collection": {

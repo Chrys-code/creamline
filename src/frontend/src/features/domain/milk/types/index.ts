@@ -9,5 +9,3 @@ export type PatchMilkFormSchema = z.infer<typeof schemas.PatchMilkFormSchema>;
 
 export type MilkTrend = z.infer<typeof schemas.MilkTrendSchema>;
 export type MilkSummary = z.infer<typeof schemas.MilkSummarySchema>;
-
-export type IntervalTypes = "day" | "week" | "month" | "quarter" | "year";

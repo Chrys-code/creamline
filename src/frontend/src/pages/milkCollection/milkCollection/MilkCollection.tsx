@@ -1,17 +1,18 @@
-import type { IntervalTypes } from "../../../features/domain/milk/types";
 import styles from "./MilkCollection.module.scss";
+import type { IntervalTypes } from "../../../shared/types";
+
+import MilkTimeSeriesChart from "../../../features/domain/milk/features/milkTimeSeriesChart";
+import MilkPieChart from "../../../features/domain/milk/components/milkPieChart";
 
 import PageHeader from "../../../shared/components/pageHeader";
 import TrendCard from "../../../shared/components/trendCard";
-import MilkChart from "../../../features/domain/milk/components/milkChart";
 import IconButton from "../../../shared/components/base/iconButton";
 
 import React, { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { useMilkSummary } from "../../../features/domain/milk/hooks/useMilkSummary";
-import { useMilkTrend } from "../../../features/domain/milk/hooks/useMilkTrend";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { getOffsetDate } from "../../../shared/helpers/getDate/getDate";
+import { useMilkSegmentedByProducers } from "../../../features/domain/milk/hooks/useMilkSegmentedByProducers";
 import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
@@ -27,18 +28,14 @@ const MilkCollection: React.FC = () => {
 	const tCommon = useTypedTranslation("common");
 	const tMilkCollection = useTypedTranslation("milkCollection");
 
-	const [selectedStartDate, setSelectedStartDate] = useState<string>(getOffsetDate(-7));
-	const [selectedEndDate, setSelectedEndDate] = useState<string>(getOffsetDate(0));
-	const [selectedInterval, setSelectedInterval] = useState<IntervalTypes>("day");
-	const [selectedProducer, setSelectedProducer] = useState<string>("all");
+	const [selectMilkSegmentedByProducerInterval, setSelectMilkSegmentedByProducerInterval] =
+		useState<IntervalTypes>("day");
 
-	const { data: milkTrendData } = useMilkTrend(
-		selectedInterval,
-		selectedStartDate,
-		selectedEndDate,
-		selectedProducer
-	);
 	const { data: milkSummaryData } = useMilkSummary();
+
+	const { data: milkSegmedByProducer } = useMilkSegmentedByProducers(
+		selectMilkSegmentedByProducerInterval
+	);
 
 	const headerActionElement = (
 		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.milkCollection.create)}>
@@ -85,19 +82,17 @@ const MilkCollection: React.FC = () => {
 				/>
 			</div>
 
-			<MilkChart
-				chartData={milkTrendData || []}
-				selectedStartDate={selectedStartDate}
-				onStartDateChange={(e) => setSelectedStartDate(e.target.value)}
-				selectedEndDate={selectedEndDate}
-				onEndDateChange={(e) => setSelectedEndDate(e.target.value)}
-				intervalOptions={intervalOptions}
-				selectedInterval={selectedInterval}
-				onIntervalChange={(e) => setSelectedInterval(e.target.value as IntervalTypes)}
-				producerOptions={producerOptionsWithAll}
-				selectedProducer={selectedProducer}
-				onProducerChange={(e) => setSelectedProducer(e.target.value)}
-			/>
+			<div className={styles.chartRow}>
+				<MilkTimeSeriesChart producerOptions={producerOptionsWithAll} />
+				<MilkPieChart
+					chartData={milkSegmedByProducer || []}
+					intervalOptions={intervalOptions}
+					selectedInterval={selectMilkSegmentedByProducerInterval}
+					onIntervalChange={(value) =>
+						setSelectMilkSegmentedByProducerInterval(value as IntervalTypes)
+					}
+				/>
+			</div>
 		</>
 	);
 };
