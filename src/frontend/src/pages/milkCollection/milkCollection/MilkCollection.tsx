@@ -1,18 +1,16 @@
 import styles from "./MilkCollection.module.scss";
-import type { IntervalTypes } from "../../../shared/types";
 
 import MilkTimeSeriesChart from "../../../features/domain/milk/features/milkTimeSeriesChart";
-import MilkPieChart from "../../../features/domain/milk/components/milkPieChart";
+import MilkSegmentedPieChart from "../../../features/domain/milk/features/milkSegmentedPieChart";
 
 import PageHeader from "../../../shared/components/pageHeader";
 import TrendCard from "../../../shared/components/trendCard";
 import IconButton from "../../../shared/components/base/iconButton";
 
-import React, { useState } from "react";
+import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { useMilkSummary } from "../../../features/domain/milk/hooks/useMilkSummary";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { useMilkSegmentedByProducers } from "../../../features/domain/milk/hooks/useMilkSegmentedByProducers";
 import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
@@ -28,14 +26,7 @@ const MilkCollection: React.FC = () => {
 	const tCommon = useTypedTranslation("common");
 	const tMilkCollection = useTypedTranslation("milkCollection");
 
-	const [selectMilkSegmentedByProducerInterval, setSelectMilkSegmentedByProducerInterval] =
-		useState<IntervalTypes>("day");
-
 	const { data: milkSummaryData } = useMilkSummary();
-
-	const { data: milkSegmedByProducer } = useMilkSegmentedByProducers(
-		selectMilkSegmentedByProducerInterval
-	);
 
 	const headerActionElement = (
 		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.milkCollection.create)}>
@@ -46,12 +37,6 @@ const MilkCollection: React.FC = () => {
 	const producerOptionsWithAll = [
 		{ id: "all", value: tCommon("common.all") },
 		...producerOptions,
-	];
-	const intervalOptions = [
-		{ id: "day", value: tCommon("intervals.day") },
-		{ id: "week", value: tCommon("intervals.week") },
-		{ id: "month", value: tCommon("intervals.month") },
-		{ id: "year", value: tCommon("intervals.year") },
 	];
 
 	return (
@@ -84,14 +69,7 @@ const MilkCollection: React.FC = () => {
 
 			<div className={styles.chartRow}>
 				<MilkTimeSeriesChart producerOptions={producerOptionsWithAll} />
-				<MilkPieChart
-					chartData={milkSegmedByProducer || []}
-					intervalOptions={intervalOptions}
-					selectedInterval={selectMilkSegmentedByProducerInterval}
-					onIntervalChange={(value) =>
-						setSelectMilkSegmentedByProducerInterval(value as IntervalTypes)
-					}
-				/>
+				<MilkSegmentedPieChart />
 			</div>
 		</>
 	);

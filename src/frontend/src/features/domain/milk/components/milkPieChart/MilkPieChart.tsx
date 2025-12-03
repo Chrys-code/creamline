@@ -1,11 +1,11 @@
 import type React from "react";
 import type { MilkPieChartProps } from "./MilkPieChart.types.ts";
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import { v4 as uuid } from "uuid";
 
 import styles from "./MilkPieChart.module.scss";
 import ChartHeader from "../../../../../shared/components/charts/chartHeader/ChartHeader.js";
 import { useTypedTranslation } from "../../../../../shared/hooks/useTypedTranslation/useTypedTranslation.js";
+import SegmentedPieChart from "../../../../../shared/components/charts/segmentedPieChart/SegmentedPieChart.js";
 
 const MilkPieChart: React.FC<MilkPieChartProps> = ({
 	chartData,
@@ -15,35 +15,22 @@ const MilkPieChart: React.FC<MilkPieChartProps> = ({
 }: MilkPieChartProps) => {
 	const tMilkCollection = useTypedTranslation("milkCollection");
 
-	const COLORS = ["#8884d8", "#82ca9d", "#ffc658"];
-
 	return (
 		<div className={styles.container}>
 			<ChartHeader
 				title={tMilkCollection("milk_collection.analytics.producer_segmentation.title")}
 			/>
-			<ResponsiveContainer width={"100%"} height={"100%"}>
-				<PieChart responsive>
-					<Tooltip />
-					<Pie
-						data={chartData}
-						dataKey="value"
-						nameKey="name"
-						cx="50%"
-						cy="50%"
-						outerRadius={"100%"}
-						innerRadius={"40%"}
-					>
-						{chartData?.map((entry, index) => (
-							<Cell key={`cell-${index}`} fill={COLORS[index]} />
-						))}
-					</Pie>
-				</PieChart>
-			</ResponsiveContainer>
+			<SegmentedPieChart
+				data={chartData}
+				width="40%"
+				nameKey="name"
+				dataKey="value"
+				aspectRatio={1}
+			/>
 			<div className={styles.chartFooter}>
 				{intervalOptions.map((option) => {
 					const chipStyle =
-						selectedInterval === option.value
+						selectedInterval === option.id
 							? `${styles.optionChip} ${styles.selected}`
 							: styles.optionChip;
 					return (

@@ -1,11 +1,10 @@
-export interface TotalPerDateLineChartProps {
+export interface SegmentedPieChartProps {
 	data: {
 		[key: string]: string | number;
 	}[];
 	width: number | `${number}%`;
 	aspectRatio?: number;
-	xAxisDataYey?: string;
-	yAsixDatKey?: string;
+	nameKey: string;
+	dataKey: string;
 	maxHeight?: number;
-	withAxis?: boolean;
 }

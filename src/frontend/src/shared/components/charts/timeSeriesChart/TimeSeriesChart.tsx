@@ -1,9 +1,9 @@
 import type React from "react";
-import type { TotalPerDateLineChartProps } from "./TotalPerDateLineChart.types.js";
+import type { TimeSeriesChartProps } from "./TimeSeriesChart.types";
 
 import { XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from "recharts";
 
-const TotalPerDateLineChart: React.FC<TotalPerDateLineChartProps> = ({
+const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({
 	data,
 	width,
 	aspectRatio = 1.618,
@@ -11,7 +11,7 @@ const TotalPerDateLineChart: React.FC<TotalPerDateLineChartProps> = ({
 	yAsixDatKey = "total",
 	maxHeight = 300,
 	withAxis,
-}: TotalPerDateLineChartProps) => {
+}: TimeSeriesChartProps) => {
 	return (
 		<ResponsiveContainer width={width} aspect={aspectRatio} maxHeight={maxHeight}>
 			<AreaChart data={data}>
@@ -34,4 +34,4 @@ const TotalPerDateLineChart: React.FC<TotalPerDateLineChartProps> = ({
 	);
 };
 
-export default TotalPerDateLineChart;
+export default TimeSeriesChart;

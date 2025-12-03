@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { milkClient } from "../services/client";
-import type { IntervalTypes } from "../../../../shared/types";
+import { milkClient } from "../../services/client";
+import type { IntervalTypes } from "../../../../../shared/types";
 
 export function useMilkSegmentedByProducers(interval: IntervalTypes = "day") {
 	return useQuery({

@@ -2,15 +2,15 @@ import styles from "./MilkTimeSeriesChart.module.scss";
 import type { IntervalTypes } from "../../../../../../../shared/types";
 
 import MilkTimeSeriesChartFilters from "../milkTimeSeriesChartFilters";
+
 import ChartHeader from "../../../../../../../shared/components/charts/chartHeader";
-import TotalPerDateLineChart from "../../../../../../../shared/components/charts/totalPerDateLineChart";
 import Button from "../../../../../../../shared/components/base/button";
 import IconButton from "../../../../../../../shared/components/base/iconButton";
+import TimeSeriesChart from "../../../../../../../shared/components/charts/timeSeriesChart";
 
-import React from "react";
+import React, { useState } from "react";
 import { useMilkTimeSeries } from "../../hooks";
 import { getOffsetDate } from "../../../../../../../shared/helpers/getDate/getDate";
-import { useState } from "react";
 import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 
 type ProducerOptions = { id: string; value: string }[];
@@ -90,7 +90,7 @@ const MilkTimeSeriesChartContainer: React.FC<{ producerOptions: ProducerOptions 
 				selectedProducer={selectedProducer}
 				onProducerChange={(e) => setSelectedProducer(e.target.value)}
 			/>
-			<TotalPerDateLineChart
+			<TimeSeriesChart
 				width={"100%"}
 				withAxis={withAxis}
 				data={milkTrendData || []}
