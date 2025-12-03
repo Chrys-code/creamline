@@ -9,7 +9,7 @@ export function useMilkSegmentedByProducers(interval: IntervalTypes = "day") {
 			await milkClient.getMilkSegmentedByProducers({
 				queries: { interval },
 			}),
-		refetchInterval: 10000,
-		staleTime: 5000,
+		refetchInterval: 60000,
+		staleTime: 30000,
 	});
 }

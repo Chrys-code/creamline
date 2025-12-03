@@ -19,7 +19,7 @@ export function useMilkTimeSeries(
 				}),
 				interval
 			),
-		refetchInterval: 10000,
-		staleTime: 5000,
+		refetchInterval: 60000,
+		staleTime: 30000,
 	});
 }
