@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <title>Milk Time Series Report</title>
     <style>
-        body { font-family: sans-serif; margin: 2cm; }
+        body { font-family: sans-serif; }
         h1 { text-align: center; margin-bottom: 1rem; }
 
         /* Table styles */
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; page-break-inside: auto; }
         th, td { border: 1px solid #333; padding: 0.5rem; text-align: center; }
-
-        /* Multipage handling */
         thead { display: table-header-group; }
         tfoot { display: table-footer-group; }
-        tr { page-break-inside: avoid; }
+        tr { page-break-inside: avoid;  page-break-after: auto; }
 
         /* Header/footer for each page */
         @page {
@@ -23,6 +21,8 @@
             @top-center { content: "Milk Time Series Report"; font-weight: bold; }
             @bottom-center { content: "Page " counter(page) " of " counter(pages); }
         }
+
+        h2 { margin-top: 2rem; }
     </style>
 </head>
 <body>
@@ -37,6 +37,8 @@
     {% endif %}
 </p>
 
+<!-- Summary table -->
+<h2>Summary</h2>
 <table>
     <thead>
         <tr>
@@ -45,7 +47,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for row in data %}
+        {% for row in data.summary %}
         <tr>
             <td>{{ row.date }}</td>
             <td>{{ row.total_liters }}</td>
@@ -53,6 +55,31 @@
         {% endfor %}
     </tbody>
 </table>
+
+<!-- Individual instances table -->
+{% if data.instances %}
+<h2>Milk Collections</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Date & Time</th>
+            <th>Producer</th>
+            <th>Liters</th>
+            <th>Storage</th> 
+        </tr>
+    </thead>
+    <tbody>
+        {% for milk in data.instances %}
+        <tr>
+            <td>{{ milk.created_at }}</td>
+            <td>{{ milk.producer__name }}</td>
+            <td>{{ milk.volume_liters }}</td>
+            <td>{{ milk.storage__name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
 
 </body>
 </html>
