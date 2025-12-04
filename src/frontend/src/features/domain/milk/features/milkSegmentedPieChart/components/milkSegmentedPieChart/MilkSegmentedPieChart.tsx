@@ -16,13 +16,12 @@ const MilkSegmentedPieChart: React.FC = () => {
 	const tMilkCollection = useTypedTranslation("milkCollection");
 
 	const intervalOptions = [
-		{ id: "day", value: tCommon("intervals.day") },
 		{ id: "week", value: tCommon("intervals.week") },
 		{ id: "month", value: tCommon("intervals.month") },
 		{ id: "year", value: tCommon("intervals.year") },
 	];
 
-	const [selectedInterval, setSelectedInterval] = useState<IntervalTypes>("day");
+	const [selectedInterval, setSelectedInterval] = useState<IntervalTypes>("week");
 	const { data: milkSegmedByProducer } = useMilkSegmentedByProducers(selectedInterval);
 
 	return (
