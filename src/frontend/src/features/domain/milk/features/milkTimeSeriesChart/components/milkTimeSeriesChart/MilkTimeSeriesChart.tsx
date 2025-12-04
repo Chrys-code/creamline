@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { useMilkTimeSeries } from "../../hooks";
 import { getOffsetDate } from "../../../../../../../shared/helpers/getDate/getDate";
 import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { useExportMilkTimeSeries } from "../../../../../../pdfExport/hooks/useMilkTimeSeriesDownload";
 
 type ProducerOptions = { id: string; value: string }[];
 
@@ -59,7 +60,17 @@ const MilkTimeSeriesChartContainer: React.FC<{ producerOptions: ProducerOptions 
 
 	const renderChartHeaderActions = () => (
 		<>
-			<Button type="button" onClick={() => console.log("HA!")}>
+			<Button
+				type="button"
+				onClick={() =>
+					useExportMilkTimeSeries({
+						start_date: selectedStartDate,
+						end_date: selectedEndDate,
+						interval: selectedInterval,
+						producer_uuid: selectedProducer,
+					})
+				}
+			>
 				Export
 			</Button>
 			<IconButton onClick={() => setWithAxis((withAxis) => !withAxis)}>
