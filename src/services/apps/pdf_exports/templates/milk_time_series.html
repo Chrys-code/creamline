@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Milk Time Series Report</title>
+    <style>
+        body { font-family: sans-serif; margin: 2cm; }
+        h1 { text-align: center; margin-bottom: 1rem; }
+
+        /* Table styles */
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { border: 1px solid #333; padding: 0.5rem; text-align: center; }
+
+        /* Multipage handling */
+        thead { display: table-header-group; }
+        tfoot { display: table-footer-group; }
+        tr { page-break-inside: avoid; }
+
+        /* Header/footer for each page */
+        @page {
+            size: A4;
+            margin: 2cm;
+            @top-center { content: "Milk Time Series Report"; font-weight: bold; }
+            @bottom-center { content: "Page " counter(page) " of " counter(pages); }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Milk Time Series Report</h1>
+
+<p>
+    <strong>Interval:</strong> {{ params.interval }}<br>
+    <strong>Start:</strong> {{ params.start_date }} — <strong>End:</strong> {{ params.end_date }}<br>
+    {% if params.producer_uuid and params.producer_uuid != "all" %}
+        <strong>Producer:</strong> {{ params.producer_uuid }}
+    {% endif %}
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Total Liters</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in data %}
+        <tr>
+            <td>{{ row.date }}</td>
+            <td>{{ row.total_liters }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

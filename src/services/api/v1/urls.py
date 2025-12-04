@@ -52,4 +52,5 @@ urlpatterns = [
     *router.urls,
     path("profile/", ProfileDetailView.as_view(), name="profile-detail"),
     path("analytics/", include(("api.v1.analytics.urls", "analytics"))),
+    path("pdf/", include(("api.v1.pdf.urls", "pdf"))),
 ]

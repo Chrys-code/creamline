@@ -1,4 +1,5 @@
 from datetime import timedelta, datetime
+from typing import Optional
 
 from django.db.models.functions import (
     TruncDate,
@@ -21,51 +22,48 @@ TRUNC_MAP = {
 }
 
 
-def milk_trend_data(
-    start_date: str,
-    end_date: str,
+def milk_time_series_analytics(
+    start_date: Optional[str],
+    end_date: Optional[str],
     interval: str = "day",
     producer_uuid: str | None = None,
 ):
     if interval not in TRUNC_MAP:
         raise ValueError("Invalid interval")
 
+    start_date_parsed = parse_date(start_date) if start_date else None
+    end_date_parsed = parse_date(end_date) if end_date else None
+
     # Set a week date range from today as default
     default_end_date = datetime.now().date()
     default_start_date = default_end_date - timedelta(days=7)
 
-    start_date_parsed = parse_date(start_date) if start_date else default_start_date
-    end_date_parsed = parse_date(end_date) if end_date else default_end_date
+    start_date_final = start_date_parsed or default_start_date
+    end_date_final = end_date_parsed or default_end_date
 
-    if not start_date_parsed:
-        raise ValueError("Start date missing")
-    if not end_date_parsed:
-        raise ValueError("End date missing")
+    # Create indexable dates + Milk Model Meta support for performance
+    start_dt = datetime.combine(start_date_final, datetime.min.time())
+    end_dt = datetime.combine(end_date_final, datetime.max.time())
 
     # Validate start and end date
-    if start_date_parsed > end_date_parsed:
+    if start_dt > end_dt:
         raise ValueError("Start cannot be bigger than end date")
 
-    qs = Milk.objects.filter(
-        created_at__date__gte=start_date_parsed, created_at__date__lte=end_date_parsed
-    )
+    qs = Milk.objects.filter(created_at__gte=start_dt, created_at__lte=end_dt)
 
     # Optional producer filtering
     if producer_uuid and producer_uuid.lower() != "all":
         qs = qs.filter(producer__uuid=producer_uuid)
 
-    qs = qs.annotate(period=TRUNC_MAP[interval])
-
     data = (
-        qs.values("period")
+        qs.annotate(period=TRUNC_MAP[interval])
+        .values("period")
         .annotate(total_liters=Sum("volume_liters"))
         .order_by("period")
     )
 
     # Convert period to ISO string for frontend
-    trend_data = [
+    return  [
         {"date": row["period"].isoformat(), "total_liters": row["total_liters"] or 0}
         for row in data
     ]
-
-    return trend_data

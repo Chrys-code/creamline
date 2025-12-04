@@ -9,6 +9,15 @@ from apps.producers.models import Producer
 
 
 class Milk(models.Model):
+    class Meta:
+        """
+        Meta indexes for analytics performance
+        """
+        indexes = [
+            models.Index(fields=["created_at"]),
+            models.Index(fields=["producer", "created_at"])
+        ]
+
     uuid = models.UUIDField(
         default=uuid.uuid4, unique=True, editable=False, primary_key=False
     )

@@ -82,6 +82,8 @@ INSTALLED_APPS = [
     "apps.pasteurisation",
     "apps.pasteurs",
     "apps.product_definitions",
+    "apps.analytics",
+    "apps.pdf_exports"
 ]
 
 MIDDLEWARE = [
