@@ -5,7 +5,7 @@ import { milkClient } from "../../services/client";
 import { adaptMilkTrendDateToLanguage } from "../../adapters";
 
 export function useMilkTimeSeries(
-	interval: IntervalTypes = "day",
+	interval: IntervalTypes = "week",
 	start_date?: string,
 	end_date?: string,
 	producer_uuid?: string
