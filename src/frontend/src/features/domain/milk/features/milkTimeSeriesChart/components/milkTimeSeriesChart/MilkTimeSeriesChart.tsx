@@ -4,7 +4,6 @@ import type { IntervalTypes } from "../../../../../../../shared/types";
 import MilkTimeSeriesChartFilters from "../milkTimeSeriesChartFilters";
 
 import ChartHeader from "../../../../../../../shared/components/charts/chartHeader";
-import Button from "../../../../../../../shared/components/base/button";
 import IconButton from "../../../../../../../shared/components/base/iconButton";
 import TimeSeriesChart from "../../../../../../../shared/components/charts/timeSeriesChart";
 
@@ -15,6 +14,12 @@ import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedT
 import { useExportMilkTimeSeries } from "../../../../../../pdfExport/hooks/useMilkTimeSeriesDownload";
 
 type ProducerOptions = { id: string; value: string }[];
+
+const MdOutlineFileDownload = React.lazy(() =>
+	import("react-icons/md").then((mod) => ({
+		default: mod.MdOutlineFileDownload,
+	}))
+);
 
 const MdOutlineFilterAlt = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -60,7 +65,7 @@ const MilkTimeSeriesChartContainer: React.FC<{ producerOptions: ProducerOptions 
 
 	const renderChartHeaderActions = () => (
 		<>
-			<Button
+			<IconButton
 				type="button"
 				onClick={() =>
 					useExportMilkTimeSeries({
@@ -71,8 +76,8 @@ const MilkTimeSeriesChartContainer: React.FC<{ producerOptions: ProducerOptions 
 					})
 				}
 			>
-				Export
-			</Button>
+				<MdOutlineFileDownload size={"1.25rem"} />
+			</IconButton>
 			<IconButton onClick={() => setWithAxis((withAxis) => !withAxis)}>
 				<RxCornerBottomLeft size={"1.25rem"} />
 			</IconButton>
