@@ -101,16 +101,16 @@ export const useUserForm = (user: User) => {
 		await createUser(formData);
 	};
 
-	const addGroup = (group: number) => {
+	const addGroup = (group: string) => {
 		const currentGroups = getValues("groups");
 		const updatedGrous = currentGroups.concat(group);
 		setValue("groups", updatedGrous);
 	};
 
-	const removeGroup = (groupId: number) => {
+	const removeGroup = (groupId: string) => {
 		const currentGroups = getValues("groups");
 		const updatedGroups = currentGroups.filter(
-			(currentGroup: number) => currentGroup !== groupId
+			(currentGroup: string) => currentGroup !== groupId
 		);
 		setValue("groups", updatedGroups);
 	};

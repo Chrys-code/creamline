@@ -4,9 +4,9 @@ import { adaptUserGroupsForUserGroupOptions } from "../../adapters/index";
 
 describe("adaptUserGroupsForOptions", () => {
 	const userGroupsResponse = [
-		{ id: 1, name: "Manager" },
-		{ id: 2, name: "Milk-Collector" },
-		{ id: 3, name: "Pasteuriser" },
+		{ uuid: "234sdfd", name: "Manager" },
+		{ uuid: "564fgh", name: "Milk-Collector" },
+		{ uuid: "56456", name: "Pasteuriser" },
 	];
 
 	it("should return empty list if input is undefined", () => {
@@ -29,9 +29,9 @@ describe("adaptUserGroupsForOptions", () => {
 
 	it("should return the correct format", () => {
 		const correctFormat = [
-			{ id: 1, value: "Manager" },
-			{ id: 2, value: "Milk-Collector" },
-			{ id: 3, value: "Pasteuriser" },
+			{ id: "234sdfd", value: "Manager" },
+			{ id: "564fgh", value: "Milk-Collector" },
+			{ id: "56456", value: "Pasteuriser" },
 		];
 
 		const value = adaptUserGroupsForUserGroupOptions(userGroupsResponse);

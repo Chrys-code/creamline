@@ -10,6 +10,7 @@ import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { NAVIGATION_ROUTES } from "../../../configs/navigation";
+import type { UserGroup } from "../../../features/domain/user/features/userGroups/types";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -33,11 +34,11 @@ const ListUser: React.FC = () => {
 	);
 
 	const getUserGroupNames = (
-		allUserGroups: { id: number; name: string }[],
-		activeUserGroups: number[]
+		allUserGroups: UserGroup[],
+		activeUserGroupIds: string[]
 	): string[] => {
 		const activeUserGroupObjects = allUserGroups.filter((userGroup) =>
-			activeUserGroups.includes(userGroup.id)
+			activeUserGroupIds.includes(userGroup.uuid)
 		);
 
 		return activeUserGroupObjects.map((obj) => obj.name);

@@ -6,7 +6,7 @@ export const adaptUserGroupsForUserGroupOptions = (userGroups: UserGroup[]) => {
 
 	const groups = userGroups.map((group) => {
 		return {
-			id: group.id,
+			id: group.uuid,
 			value: group.name,
 		};
 	});

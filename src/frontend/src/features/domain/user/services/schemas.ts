@@ -22,7 +22,7 @@ const BaseUserSchema = z.object({
 		.string()
 		.max(255, { message: tCommon("errors.input_length_lte") })
 		.email(),
-	groups: z.array(z.number()),
+	groups: z.array(z.string()),
 	is_active: z.boolean().optional(),
 	is_staff: z.boolean().nullish(),
 	profile: UserProfileSchema,

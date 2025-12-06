@@ -1,24 +1,20 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from apps.users.features.user_groups.common.translation_keys import (
-    USER_GROUP_TYPE_TRANSLATION_KEYS,
-)
-from common.has_group import HasGroup
 from apps.users.features.user_groups.models import GroupMetadata
+
+from common.has_group import HasGroup
 
 
 class UserGroupsView(APIView):
     permission_classes = [HasGroup.Manager]
 
-    def get(self, request, *args, **kwargs):
+    def get(self, _request, *args, **kwargs):
         groups = GroupMetadata.objects.all()
         data = [
             {
-                "id": group.id,
-                "name": USER_GROUP_TYPE_TRANSLATION_KEYS.get(
-                    group.code_name, group.code_name
-                ),
+                "uuid": group.uuid,
+                "name": GroupMetadata.GroupTypes[group.code_name.upper()].label,
             }
             for group in groups
         ]

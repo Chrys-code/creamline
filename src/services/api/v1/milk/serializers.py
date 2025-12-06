@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from apps.milk.use_cases.validation import InvalidVolumePairError, MilkException
 from apps.storages.models import Storage
 from apps.producers.models import Producer
 
@@ -12,24 +13,20 @@ class MilkSerializer(serializers.ModelSerializer):
     producer = serializers.SlugRelatedField(
         slug_field="uuid", queryset=Producer.objects.all()
     )
-    producer_uuid = serializers.CharField(required=False)
-    producer_name = serializers.CharField(required=False)
+    producer_name = serializers.CharField(source="producer.name", required=False)
 
     storage = serializers.SlugRelatedField(
         slug_field="uuid", queryset=Storage.objects.all()
     )
-    storage_uuid = serializers.CharField(required=False)
-    storage_name = serializers.CharField(required=False)
+    storage_name = serializers.CharField(source="storage.name", required=False)
 
     class Meta:
         model = Milk
         fields = [
             "uuid",
             "producer",
-            "producer_uuid",
             "producer_name",
             "storage",
-            "storage_uuid",
             "storage_name",
             "volume_kg",
             "volume_liters",
@@ -43,11 +40,20 @@ class MilkSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        milk = create_milk(
-            validated_data=validated_data, created_by=self.context["request"].user
-        )
-        return milk
+        try:
+            milk = create_milk(
+                validated_data=validated_data, created_by=self.context["request"].user
+            )
+            return milk
+        except MilkException as e:
+            if isinstance(e, InvalidVolumePairError):
+                raise serializers.ValidationError({"message": e.default_detail})
 
     def update(self, instance, validated_data):
-        milk = update_milk(instance=instance, validated_data=validated_data)
-        return milk
+        try:
+            milk = update_milk(instance=instance, validated_data=validated_data)
+            return milk
+
+        except MilkException as e:
+            if isinstance(e, InvalidVolumePairError):
+                raise serializers.ValidationError({"message": e.default_detail})

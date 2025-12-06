@@ -1,4 +1,6 @@
 import logging
+
+from uuid import UUID
 from typing import cast
 
 from django.contrib.auth import get_user_model
@@ -49,7 +51,7 @@ def create_user_workflow(
     profile_image: str | None,
     first_name: str,
     last_name: str,
-    group_ids: list[str],
+    group_metadata_uuids: list[UUID],
 ):
     user = _create_user(email=email, password=password)
     create_profile(
@@ -59,6 +61,6 @@ def create_user_workflow(
         last_name=last_name,
         user=user,
     )
-    set_user_groups(user=user, group_ids=group_ids)
+    set_user_groups(user=user, group_metadata_uuids=group_metadata_uuids)
 
     return user

@@ -24,10 +24,10 @@ class MilkTimeSeriesAnalyticsView(views.APIView):
         reader = MilkTimeSeriesReader()
 
         params = {
-            "start_date":request.query_params.get("start_date"),
-            "end_date":request.query_params.get("end_date"),
-            "interval":request.query_params.get("interval", "day"),
-            "producer_uuid":request.query_params.get("producer_uuid")
+            "start_date": request.query_params.get("start_date"),
+            "end_date": request.query_params.get("end_date"),
+            "interval": request.query_params.get("interval", "day"),
+            "producer_uuid": request.query_params.get("producer_uuid"),
         }
 
         try:

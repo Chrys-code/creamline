@@ -21,10 +21,8 @@ const MilkBaseSchema = z.object({
 
 const MilkSchema = MilkBaseSchema.extend({
 	uuid: z.string().uuid(),
-	producer_uuid: z.string().uuid(),
-	producer_name: z.string(),
 
-	storage_uuid: z.string().uuid(),
+	producer_name: z.string(),
 	storage_name: z.string(),
 
 	created_at: z.string(),

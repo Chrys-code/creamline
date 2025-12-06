@@ -7,7 +7,7 @@ pytestmark = pytest.mark.django_db()
 
 
 def test_create_user_workflow_saves(user_groups):
-    g1, g2, _ = user_groups
+    g1, g2, _, gm1, gm2, _ = user_groups
 
     created = create_user_workflow(
         email="test@user.com",
@@ -15,7 +15,7 @@ def test_create_user_workflow_saves(user_groups):
         profile_image=None,
         first_name="test",
         last_name="user",
-        group_ids=[g1.id, g2.id],
+        group_metadata_uuids=[gm1.uuid, gm2.uuid],
     )
 
     db_instance = CustomUser.objects.get(uuid=created.uuid)

@@ -8,7 +8,7 @@ pytestmark = pytest.mark.django_db()
 
 
 def test_update_user_workflow_saves(user_groups):
-    g1, g2, g3 = user_groups
+    g1, g2, g3, gm1, gm2, gm3 = user_groups
 
     user = create_user_workflow(
         email="test@user.com",
@@ -16,7 +16,7 @@ def test_update_user_workflow_saves(user_groups):
         profile_image=None,
         first_name="test",
         last_name="user",
-        group_ids=[g1.id, g2.id],
+        group_metadata_uuids=[gm1.uuid, gm2.uuid],
     )
 
     updated_user = update_user_workflow(
@@ -24,7 +24,7 @@ def test_update_user_workflow_saves(user_groups):
         email="test_edited@user.com",
         first_name="test_edited",
         last_name="user_edited",
-        group_ids=[g3.id],
+        group_metadata_uuids=[gm3.uuid],
     )
 
     assert isinstance(updated_user, CustomUser)

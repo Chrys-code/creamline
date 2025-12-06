@@ -1,4 +1,5 @@
 import logging
+from uuid import UUID
 
 from django.contrib.auth import get_user_model
 
@@ -37,12 +38,12 @@ def update_user_workflow(
     email: str | None,
     first_name: str | None,
     last_name: str | None,
-    group_ids: list[str],
+    group_metadata_uuids: list[UUID],
 ):
     updated_user = _update_user(instance=user, email=email)
     update_profile(
         instance=user.profile, email=email, first_name=first_name, last_name=last_name
     )
-    set_user_groups(user=updated_user, group_ids=group_ids)
+    set_user_groups(user=updated_user, group_metadata_uuids=group_metadata_uuids)
 
     return user

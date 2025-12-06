@@ -31,16 +31,16 @@ const UserForm: React.FC<UserFormProps> = ({ user, userGroups }: UserFormProps) 
 	} = useUserForm(user);
 
 	const handleRoleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		addGroup(Number(e.target.value));
+		addGroup(e.target.value);
 		e.target.value = "init";
 	};
 
 	const renderGroups = () => {
-		return watch("groups").map((group: number) => {
-			const userGroup = userGroups.find((userGroup) => userGroup.id === Number(group));
+		return watch("groups").map((group: string) => {
+			const userGroup = userGroups.find((userGroup) => userGroup.id === group);
 			if (userGroup) {
 				return (
-					<li key={uuid()} onClick={() => removeGroup(Number(group))}>
+					<li key={uuid()} onClick={() => removeGroup(group)}>
 						<Chip text={userGroup?.value} />
 					</li>
 				);
@@ -63,10 +63,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, userGroups }: UserFormProps) 
 	};
 
 	return (
-		<Form
-			onSubmit={handleSubmit(onSubmit, () => console.log(errors))}
-			actionElements={renderFormActions()}
-		>
+		<Form onSubmit={handleSubmit(onSubmit)} actionElements={renderFormActions()}>
 			<section>
 				<InputField
 					id={uuid()}

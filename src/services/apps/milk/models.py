@@ -13,9 +13,10 @@ class Milk(models.Model):
         """
         Meta indexes for analytics performance
         """
+
         indexes = [
             models.Index(fields=["created_at"]),
-            models.Index(fields=["producer", "created_at"])
+            models.Index(fields=["producer", "created_at"]),
         ]
 
     uuid = models.UUIDField(
@@ -29,8 +30,6 @@ class Milk(models.Model):
         editable=False,
         null=False,
     )
-    producer_uuid = models.CharField(max_length=255, editable=False)
-    producer_name = models.CharField(max_length=255, editable=False)
 
     volume_kg = models.FloatField(validators=[MinValueValidator(1.00)])
     volume_liters = models.FloatField(validators=[MinValueValidator(1.00)])
@@ -42,8 +41,6 @@ class Milk(models.Model):
         editable=False,
         null=False,
     )
-    storage_uuid = models.CharField(max_length=255, editable=False)
-    storage_name = models.CharField(max_length=255, editable=False)
 
     acid_content = models.FloatField(validators=[MinValueValidator(0.00)], blank=True)
     aflatoxin = models.BooleanField(blank=True)

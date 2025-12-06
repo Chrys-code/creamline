@@ -63,7 +63,7 @@ def milk_time_series_analytics(
     )
 
     # Convert period to ISO string for frontend
-    return  [
+    return [
         {"date": row["period"].isoformat(), "total_liters": row["total_liters"] or 0}
         for row in data
     ]

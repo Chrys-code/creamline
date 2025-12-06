@@ -83,7 +83,7 @@ INSTALLED_APPS = [
     "apps.pasteurs",
     "apps.product_definitions",
     "apps.analytics",
-    "apps.pdf_exports"
+    "apps.pdf_exports",
 ]
 
 MIDDLEWARE = [

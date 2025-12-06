@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group
 
 from rest_framework import serializers
 
 from apps.users.features.profiles.models import Profile
+from apps.users.features.user_groups.models import GroupMetadata
 from apps.users.use_cases.create import create_user_workflow
 from apps.users.use_cases.update import update_user_workflow
 
@@ -17,13 +17,39 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ["first_name", "last_name"]
 
 
-class UserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, required=True)
-    is_staff = serializers.BooleanField(read_only=True)
+class UserReadSerializer(serializers.ModelSerializer):
+    is_staff = serializers.BooleanField()
     profile = ProfileSerializer()
-    groups = serializers.PrimaryKeyRelatedField(
-        many=True,
-        queryset=Group.objects.all(),
+
+    groups = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = [
+            "uuid",
+            "email",
+            "password",
+            "is_active",
+            "is_staff",
+            "profile",
+            "groups",
+        ]
+
+    def get_groups(self, obj):
+        groups = obj.groups.all()
+        group_metadatas = GroupMetadata.objects.all()
+
+        return [meta.uuid for meta in group_metadatas.filter(group__in=groups)]
+
+
+class UserWriteSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(required=True)
+    profile = ProfileSerializer()
+
+    groups = serializers.ListField(
+        child=serializers.UUIDField(),
+        required=False,
+        help_text="List of GroupMetadata UUIDs",
     )
 
     class Meta:
@@ -46,8 +72,7 @@ class UserSerializer(serializers.ModelSerializer):
         first_name = profile["first_name"]
         last_name = profile["last_name"]
 
-        groups = validated_data.pop("groups", [])
-        group_ids = [g.id for g in groups]
+        group_metadata_uuids = validated_data.pop("groups", [])
 
         created_user = create_user_workflow(
             email=email,
@@ -55,28 +80,24 @@ class UserSerializer(serializers.ModelSerializer):
             profile_image=None,
             first_name=first_name,
             last_name=last_name,
-            group_ids=group_ids,
+            group_metadata_uuids=group_metadata_uuids,
         )
 
         return created_user
 
     def update(self, instance, validated_data):
         email = validated_data.pop("email")
-        groups = validated_data.pop("groups", None)
+        group_metadata_uuids = validated_data.pop("groups", [])
         profile_data = validated_data.pop("profile")
         first_name = profile_data["first_name"]
         last_name = profile_data["last_name"]
-        group_ids = []
-
-        if groups is not None:
-            group_ids = [g.id for g in groups]
 
         update_user_workflow(
             user=instance,
             email=email,
             first_name=first_name,
             last_name=last_name,
-            group_ids=group_ids,
+            group_metadata_uuids=group_metadata_uuids,
         )
 
         return instance

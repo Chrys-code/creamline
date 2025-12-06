@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const UserGroupBaseSchema = z.object({
-	id: z.number(),
+	uuid: z.string().uuid(),
 	name: z.string(),
 });
 
