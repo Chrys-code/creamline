@@ -31,6 +31,10 @@ class PasteurViewSet(ModelViewSet):
 
     @action(detail=False, methods=["get"], url_path="all")
     def list_no_pagination(self, _request):
+        """
+        Returns pasteurs without pagination ordered by name to be used in dropdowns.
+        """
+
         # Disable pagination for this action
         self.pagination_class = None
 

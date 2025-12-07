@@ -27,6 +27,9 @@ class ProducerViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=["get"], url_path="all")
     def list_no_pagination(self, _request):
+        """
+        Returns producers without pagination ordered by name to be used in dropdowns.
+        """
         # Disable pagination for this action
         self.pagination_class = None
 
