@@ -8,10 +8,11 @@ import appRouter from "./routes/router";
 import { ToastContainer } from "react-toastify";
 
 import "./configs/i18n";
+import { toastConfig } from "./configs/ToastConfig";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
-		<ToastContainer />
+		<ToastContainer {...toastConfig} />
 		<RouterProvider router={appRouter} />
 	</StrictMode>
 );
