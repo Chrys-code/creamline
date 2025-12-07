@@ -5,10 +5,10 @@ import { listProducers } from "../../../features/domain/producer/loaders/listPro
 import { getMilk } from "../../../features/domain/milk/loaders/getMilk";
 import { listStorages } from "../../../features/domain/storage/loaders/listStorages";
 
-import { adaptProducersToProducerOptions } from "../../../features/domain/milk/adapters";
 import { adaptStoragesToStorageOptions } from "../../../features/domain/storage/adapters";
 import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 import { milkTranslationLoader } from "../../../features/domain/milk/loaders/translation";
+import { adaptProducersToProducerOptions } from "../../../features/domain/producer/adapters";
 
 const milkCollectionRoutes: RouteObject = {
 	id: "milk",
