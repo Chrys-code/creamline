@@ -1,5 +1,10 @@
 import type { IntervalTypes } from "../../types";
 
+/**
+ * Used to format dates for selected chart intervals.
+ * @param interval Example: "day" | "week" | "month" | "quarter" | "year"
+ * @returns Intl.DateTimeFormatOptions
+ */
 export const getLocaleDateFormatForChart = (interval: IntervalTypes) => {
 	switch (interval) {
 		case "day":

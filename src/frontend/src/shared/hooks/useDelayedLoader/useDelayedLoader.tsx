@@ -1,6 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigation } from "react-router";
 
+/**
+ * Used to determine if the navigation has been loading for too long to start showing a loader.
+ * Once the loader is shown it will be shown for a minimum duration to avoid flashing the loader or as long as the navigation is still loading.
+ * @param showDelay How much time should be spent before turning on.
+ * @param minDuration The minimum duration the loader should be shown.
+ * @returns true when navigation state been loading longer than showDelay param.
+ */
 export function useDelayedLoader(showDelay = 200, minDuration = 1000) {
 	const navigation = useNavigation();
 	const [showLoading, setShowLoading] = useState(false);

@@ -1,3 +1,9 @@
+/**
+ * Used to convert volumes from liter to kg or reverse.
+ * @param liters Volume in liter
+ * @param kg Volume in kg
+ * @returns The provided volume's counterpart as string up to 2 floating points
+ */
 function convertMilkLiterAndKg({ liters, kg }: { liters?: number; kg?: number }): string {
 	if (liters) {
 		return milkLitersToKg(liters);
