@@ -56,11 +56,11 @@ def milk_summary_data():
     prev_month_total = _sum_liters(prev_month_qs)
 
     return {
-        "today_total": today_total,
+        "today_total": round(today_total),
         "today_change": _pct_change(today_total, yesterday_total),
-        "last_7_days_total": week_total,
+        "last_7_days_total": round(week_total),
         "last_7_days_change": _pct_change(week_total, prev_week_total),
-        "last_30_days_total": month_total,
+        "last_30_days_total": round(month_total),
         "last_30_days_change": _pct_change(month_total, prev_month_total),
         "pickups_today": today_qs.count(),
     }
