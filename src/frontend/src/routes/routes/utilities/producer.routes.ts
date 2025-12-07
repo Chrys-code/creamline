@@ -1,35 +1,41 @@
-import type { LoaderFunctionArgs } from "react-router";
+import type { LoaderFunctionArgs, RouteObject } from "react-router";
 import { listPaginatedProducers } from "../../../features/domain/producer/loaders/listProducers";
 import { getProducer } from "../../../features/domain/producer/loaders/getProducer";
 import { NAVIGATION_ROUTES } from "../../../configs/navigation";
+import { producerTranslationLoader } from "../../../features/domain/producer/loaders/translation";
 
-const producerRoutes = [
-	{
-		path: NAVIGATION_ROUTES.producer.list,
-		lazy: {
-			Component: async () =>
-				(await import("../../../pages/producer/listProducers/ListProducers")).default,
+const producerRoutes: RouteObject = {
+	id: "producer",
+	path: "/",
+	loader: producerTranslationLoader,
+	children: [
+		{
+			path: NAVIGATION_ROUTES.producer.list,
+			lazy: {
+				Component: async () =>
+					(await import("../../../pages/producer/listProducers/ListProducers")).default,
+			},
+			loader: async (args: LoaderFunctionArgs) => ({
+				data: await listPaginatedProducers(args),
+			}),
 		},
-		loader: async (args: LoaderFunctionArgs) => ({
-			data: await listPaginatedProducers(args),
-		}),
-	},
-	{
-		path: NAVIGATION_ROUTES.producer.create,
-		lazy: {
-			Component: async () =>
-				(await import("../../../pages/producer/editProducer/EditProducer")).default,
+		{
+			path: NAVIGATION_ROUTES.producer.create,
+			lazy: {
+				Component: async () =>
+					(await import("../../../pages/producer/editProducer/EditProducer")).default,
+			},
+			loader: getProducer,
 		},
-		loader: getProducer,
-	},
-	{
-		path: NAVIGATION_ROUTES.producer.edit + ":id",
-		lazy: {
-			Component: async () =>
-				(await import("../../../pages/producer/editProducer/EditProducer")).default,
+		{
+			path: NAVIGATION_ROUTES.producer.edit + ":id",
+			lazy: {
+				Component: async () =>
+					(await import("../../../pages/producer/editProducer/EditProducer")).default,
+			},
+			loader: getProducer,
 		},
-		loader: getProducer,
-	},
-];
+	],
+};
 
 export default producerRoutes;

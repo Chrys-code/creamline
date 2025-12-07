@@ -15,6 +15,8 @@ import storageRoutes from "./routes/utilities/storage.routes";
 import pasteurRoutes from "./routes/utilities/pasteur.routes";
 import productDefinitionRoutes from "./routes/utilities/productDefinition.routes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { authTranslationLoader } from "../features/domain/auth/loaders/translation";
+import { profileTranslationLoader } from "../features/domain/profile/loaders/translation";
 
 const queryClient = new QueryClient();
 
@@ -45,19 +47,27 @@ const appRouter = createBrowserRouter([
 				index: true,
 				element: <Dashboard />,
 			},
-			...milkCollectionRoutes,
-			...pasteurisationRoutes,
-			...userRoutes,
-			...producerRoutes,
-			...storageRoutes,
-			...pasteurRoutes,
-			...productDefinitionRoutes,
+			milkCollectionRoutes,
+			pasteurisationRoutes,
+			userRoutes,
+			producerRoutes,
+			storageRoutes,
+			pasteurRoutes,
+			productDefinitionRoutes,
 			{
-				path: "profile",
-				lazy: {
-					Component: async () => (await import("../pages/profile/Profile")).default,
-				},
-				loader: getProfile,
+				id: "profile",
+				path: "/",
+				loader: profileTranslationLoader,
+				children: [
+					{
+						path: "profile",
+						lazy: {
+							Component: async () =>
+								(await import("../pages/profile/Profile")).default,
+						},
+						loader: getProfile,
+					},
+				],
 			},
 		],
 	},
@@ -65,6 +75,7 @@ const appRouter = createBrowserRouter([
 		id: "login",
 		path: "/login",
 		element: <AuthLayout />,
+		loader: authTranslationLoader,
 		children: [
 			{
 				index: true,

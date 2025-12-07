@@ -12,8 +12,16 @@ export const listPaginatedProducers = async ({ request }: LoaderFunctionArgs) =>
 		});
 
 		return { data: producerResponse, page };
-	} catch {
-		throw new Error("Could not get producers list");
+	} catch (err: any) {
+		if (err.response) {
+			const status = err.response.status || 500;
+			const statusText = err.response.statusText || "Unknown error";
+			const body = err.response.data ? JSON.stringify(err.response.data) : null;
+
+			throw new Response(body, { status, statusText });
+		}
+
+		throw new Response("Could not get producers list", { status: 500 });
 	}
 };
 
@@ -21,7 +29,15 @@ export const listProducers = async () => {
 	try {
 		const producerResponse = await producerClient.v1_producer_list();
 		return producerResponse;
-	} catch {
-		throw new Error("Could not get producers");
+	} catch (err: any) {
+		if (err.response) {
+			const status = err.response.status || 500;
+			const statusText = err.response.detail || "Unknown error";
+			const body = err.response.data ? JSON.stringify(err.response.data) : null;
+
+			throw new Response(body, { status, statusText });
+		}
+
+		throw new Response("Could not get producers", { status: 500 });
 	}
 };

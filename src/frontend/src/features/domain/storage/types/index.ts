@@ -9,3 +9,6 @@ export type CreateStorageFormSchema = z.infer<typeof schemas.CreateStorageFormSc
 export type UpdateStorageFormSchema = z.infer<typeof schemas.PatchStorageFormSchema>;
 
 export type StorageType = z.infer<typeof schemas.StorageTypesSchema>;
+
+import storageTranslations from "../i18n";
+export type StorageTranslations = typeof storageTranslations.en;

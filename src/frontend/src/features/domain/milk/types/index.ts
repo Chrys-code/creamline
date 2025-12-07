@@ -9,3 +9,6 @@ export type PatchMilkFormSchema = z.infer<typeof schemas.PatchMilkFormSchema>;
 
 export type MilkTrend = z.infer<typeof schemas.MilkTrendSchema>;
 export type MilkSummary = z.infer<typeof schemas.MilkSummarySchema>;
+
+import milkTranslations from "../i18n";
+export type MilkTranslations = typeof milkTranslations.en;

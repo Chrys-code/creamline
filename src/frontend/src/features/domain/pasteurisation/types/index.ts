@@ -8,3 +8,6 @@ export type PaginatedPasteurisationListSchema = z.infer<
 
 export type CreatePasteurisationFormSchema = z.infer<typeof schemas.CreatePasteurisationFormSchema>;
 export type PatchPasteurisationFormSchema = z.infer<typeof schemas.PatchPasteurisationFormSchema>;
+
+import pasterisationTranslations from "../i18n";
+export type PasterisationTranslations = typeof pasterisationTranslations.en;

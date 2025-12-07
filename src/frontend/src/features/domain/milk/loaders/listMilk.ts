@@ -12,7 +12,15 @@ export const getPaginatedMilkList = async ({ request }: LoaderFunctionArgs) => {
 		});
 
 		return { data: milkResponse, page };
-	} catch {
-		throw new Error("Could not get milk list");
+	} catch (err: any) {
+		if (err.response) {
+			const status = err.response.status || 500;
+			const statusText = err.response.statusText || "Unknown error";
+			const body = err.response.data ? JSON.stringify(err.response.data) : null;
+
+			throw new Response(body, { status, statusText });
+		}
+
+		throw new Response("Could not get milk list", { status: 500 });
 	}
 };

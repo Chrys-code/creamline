@@ -23,12 +23,11 @@ def _create(
         CustomUser,
         User(
             email=email,
-            password=password,
             is_staff=False,
             is_active=True,
         ),
     )
-
+    user.set_password(password)
     user.save()
 
     return user

@@ -9,31 +9,13 @@ i18n.use(LanguageDetector)
 		resources: {
 			en: {
 				common: translations.translationEn.common,
-				auth: translations.translationEn.auth,
 				navigation: translations.translationEn.navigation,
-				users: translations.translationEn.users,
-				profile: translations.translationEn.profile,
-				producer: translations.translationEn.producer,
-				storage: translations.translationEn.storage,
 				dashboard: translations.translationEn.dashboard,
-				milkCollection: translations.translationEn.milkCollection,
-				pasteurisation: translations.translationEn.pasteurisation,
-				pasteur: translations.translationEn.pasteur,
-				productDefinition: translations.translationEn.productDefinition,
 			},
 			hu: {
 				common: translations.translationHu.common,
-				auth: translations.translationHu.auth,
 				navigation: translations.translationHu.navigation,
-				users: translations.translationHu.users,
-				profile: translations.translationHu.profile,
-				producer: translations.translationHu.producer,
-				storage: translations.translationHu.storage,
 				dashboard: translations.translationHu.dashboard,
-				milkCollection: translations.translationHu.milkCollection,
-				pasteurisation: translations.translationHu.pasteurisation,
-				pasteur: translations.translationHu.pasteur,
-				productDefinition: translations.translationHu.productDefinition,
 			},
 		},
 		fallbackLng: "hu",
@@ -45,12 +27,23 @@ export const commonTranslations = translations.translationEn.common;
 export default i18n;
 
 import type * as TranslationTypes from "../shared/i18n/types";
+import type { AuthTranslations } from "../features/domain/auth/types";
+import type { MilkTranslations } from "../features/domain/milk/types";
+import type { PasterisationTranslations } from "../features/domain/pasteurisation/types";
+import type { PasteurTranslations } from "../features/domain/pasteur/types";
+import type { ProducerTranslations } from "../features/domain/producer/types";
+import type { ProductDefinitionTranslations } from "../features/domain/productDefinition/types";
+import type { ProfileTranslations } from "../features/domain/profile/types";
+import type { StorageTranslations } from "../features/domain/storage/types";
+import type { UserTranslations } from "../features/domain/user/types";
 import i18next from "i18next";
 
 export const namespaces = [
+	// Shared
 	"common",
 	"auth",
 	"navigation",
+	// Domain
 	"users",
 	"profile",
 	"producer",
@@ -66,17 +59,17 @@ export type NamespaceKey = (typeof namespaces)[number];
 
 export type NamespaceMap = {
 	common: TranslationTypes.CommonTranslations;
-	auth: TranslationTypes.AuthTranslations;
+	auth: AuthTranslations;
 	navigation: TranslationTypes.NavigationTranslations;
-	users: TranslationTypes.UserTranslations;
-	profile: TranslationTypes.ProfileTranslations;
-	producer: TranslationTypes.ProducerTranslations;
-	storage: TranslationTypes.StorageTranslations;
+	users: UserTranslations;
+	profile: ProfileTranslations;
+	producer: ProducerTranslations;
+	storage: StorageTranslations;
 	dashboard: TranslationTypes.DashboardTranslations;
-	milkCollection: TranslationTypes.MilkCollectionTranslations;
-	pasteurisation: TranslationTypes.PasteurisedMilkTranslations;
-	pasteur: TranslationTypes.PasteurTranslations;
-	productDefinition: TranslationTypes.ProductDefinitionTranslations;
+	milkCollection: MilkTranslations;
+	pasteurisation: PasterisationTranslations;
+	pasteur: PasteurTranslations;
+	productDefinition: ProductDefinitionTranslations;
 };
 
 // Flattens nested keys into dot notations

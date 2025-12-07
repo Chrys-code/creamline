@@ -7,3 +7,6 @@ export type PaginatedPasteurList = z.infer<typeof schemas.PaginatedListPasteurSc
 export type PasteurFormSchema = z.infer<typeof schemas.PasteurFormSchema>;
 export type CreatePasteurFormSchema = z.infer<typeof schemas.CreatePasteurFormSchema>;
 export type UpdatePasteurFormSchema = z.infer<typeof schemas.PatchPasteurFormSchema>;
+
+import pasteurTranslations from "../i18n";
+export type PasteurTranslations = typeof pasteurTranslations.en;

@@ -16,3 +16,6 @@ export type UpdateProductDefinitionFormSchema = z.infer<
 >;
 
 export type ProductDefinitionOptions = z.infer<typeof schemas.ProductDefinitionOptionsSchema>;
+
+import productDefinitionTranslations from "../i18n";
+export type ProductDefinitionTranslations = typeof productDefinitionTranslations.en;

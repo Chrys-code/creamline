@@ -7,3 +7,6 @@ export type PaginatedProducerList = z.infer<typeof schemas.PaginatedListProducer
 export type ProducerFormSchema = z.infer<typeof schemas.ProducerFromSchema>;
 export type CreateProducerFormSchema = z.infer<typeof schemas.CreateProducerFormSchema>;
 export type UpdateProducerFormSchema = z.infer<typeof schemas.PatchProducerFormSchema>;
+
+import producerTranslations from "../i18n";
+export type ProducerTranslations = typeof producerTranslations.en;

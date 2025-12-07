@@ -28,7 +28,6 @@ class UserReadSerializer(serializers.ModelSerializer):
         fields = [
             "uuid",
             "email",
-            "password",
             "is_active",
             "is_staff",
             "profile",
