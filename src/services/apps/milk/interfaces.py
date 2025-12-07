@@ -1,11 +1,11 @@
-from apps.analytics.use_cases.milk_time_series_analytics import (
+from apps.milk.use_cases.analytics.milk_time_series_analytics import (
     milk_time_series_analytics,
 )
 
 
 class MilkTimeSeriesReader:
     """
-    Exposes a clean interface for other bounded contexts (pdf_exports)
+    Exposes an interface for other bounded contexts (pdf_exports)
     """
 
     def get(self, params: dict):

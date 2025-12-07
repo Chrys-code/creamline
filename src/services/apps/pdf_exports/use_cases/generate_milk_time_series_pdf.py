@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse
 
 from weasyprint import HTML
-from apps.analytics.interfaces import MilkTimeSeriesReader
+from apps.milk.interfaces import MilkTimeSeriesReader
 from apps.milk.models import Milk
 
 

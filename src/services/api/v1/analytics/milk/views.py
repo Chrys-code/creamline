@@ -2,7 +2,7 @@ from rest_framework import views
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
-from apps.analytics.interfaces import MilkTimeSeriesReader
+from apps.milk.interfaces import MilkTimeSeriesReader
 from apps.milk.use_cases.analytics.milk_summary import milk_summary_data
 from apps.milk.use_cases.analytics.milk_segmented_by_producer import (
     get_milk_segmented_by_producer,
