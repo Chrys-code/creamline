@@ -11,9 +11,13 @@ def test_update_milk_saves(milk, milk_payload, test_user):
     db_instance = Milk.objects.get(uuid=updated.uuid)
 
     assert isinstance(updated, Milk)
+    assert db_instance.producer == milk_payload["producer"]
+    assert db_instance.storage == milk_payload["storage"]
     assert db_instance.volume_kg == milk_payload["volume_kg"]
     assert db_instance.volume_liters == milk_payload["volume_liters"]
     assert db_instance.acid_content == milk_payload["acid_content"]
+    assert db_instance.aflatoxin == milk_payload["aflatoxin"]
+    assert db_instance.inhibitory_residue == milk_payload["inhibitory_residue"]
     assert db_instance.temperature == milk_payload["temperature"]
     assert db_instance.created_by == test_user
 
@@ -28,6 +32,13 @@ def test_update_milk_missing_value_skips_attribute(milk, milk_payload, test_user
     db_instance = Milk.objects.get(uuid=updated.uuid)
 
     assert isinstance(updated, Milk)
+    assert db_instance.producer == milk_payload["producer"]
+    assert db_instance.storage == milk_payload["storage"]
+    assert db_instance.acid_content == milk_payload["acid_content"]
+    assert db_instance.aflatoxin == milk_payload["aflatoxin"]
+    assert db_instance.inhibitory_residue == milk_payload["inhibitory_residue"]
+    assert db_instance.temperature == milk_payload["temperature"]
+
     assert db_instance.volume_kg == original_volume_kg
     assert db_instance.volume_liters == original_volume_liters
     assert db_instance.created_by == test_user

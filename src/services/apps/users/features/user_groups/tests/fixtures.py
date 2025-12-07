@@ -1,8 +1,40 @@
 import pytest
 
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, Permission
 
+from apps.users.models import CustomUser
+from apps.users.features.user_groups.constants import GROUPS_AND_PERMISSIONS
 from apps.users.features.user_groups.models import GroupMetadata
+
+
+@pytest.fixture
+def setup_groups(db):
+    for (code_name, name), permission_codenames in GROUPS_AND_PERMISSIONS.items():
+        group, _ = Group.objects.get_or_create(name=name)
+        GroupMetadata.objects.get_or_create(
+            group=group, code_name=code_name, display_name=name
+        )
+
+        perms = Permission.objects.filter(codename__in=permission_codenames)
+        group.permissions.set(perms)
+
+
+@pytest.fixture
+def create_group_user(setup_groups, db):
+    """
+    Factory fixture to create a user and assign a group.
+    Usage:
+        user = create_group_user('Manager', email='manager@test.com')
+    """
+
+    def _create(group_name, email, password="testpass123"):
+        group = Group.objects.get(name=group_name)
+        user = CustomUser.objects.create_user(email=email, password=password)  # type: ignore[attr-defined]
+        user.groups.add(group)
+        user.save()
+        return user
+
+    return _create
 
 
 @pytest.fixture

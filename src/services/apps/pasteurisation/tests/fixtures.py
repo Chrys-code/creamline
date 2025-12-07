@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import pytest
 
 from apps.pasteurisation.models import Pasteurisation
@@ -14,8 +14,8 @@ def pasteurisation(test_user, pasteur, storage, storage_2, product_definition, d
         volume_kg=1000,
         volume_liters=1000,
         temperature=15,
-        start_date=datetime.now().date(),
-        end_date=datetime.now().date() + timedelta(minutes=10),
+        start_date=datetime.now(timezone.utc),
+        end_date=datetime.now(timezone.utc) + timedelta(minutes=10),
         created_by=test_user,
     )
 
@@ -23,15 +23,15 @@ def pasteurisation(test_user, pasteur, storage, storage_2, product_definition, d
 
 
 @pytest.fixture
-def pasteuriation_payload(pasteur, storage, storage_2, product_definition):
+def pasteurisation_payload(pasteur, storage, storage_2, product_definition):
     return {
         "pasteur": pasteur,
         "source_storage": storage,
         "target_storage": storage_2,
         "product_definition": product_definition,
-        "volume_kg": 1000.00,
-        "volume_liters": 1000.00,
-        "temperature": 15.00,
-        "start_date": datetime.now().date(),
-        "end_date": datetime.now().date() + timedelta(minutes=10),
+        "volume_kg": 1100.00,
+        "volume_liters": 1100.00,
+        "temperature": 17.00,
+        "start_date": datetime.now(timezone.utc),
+        "end_date": datetime.now(timezone.utc) + timedelta(minutes=10),
     }

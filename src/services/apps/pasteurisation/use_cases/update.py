@@ -18,7 +18,8 @@ def update_pasteurisation(
     validated_data: Dict,
 ) -> Pasteurisation:
     for field, value in validated_data.items():
-        setattr(instance, field, value)
+        if value is not None:
+            setattr(instance, field, value)
 
     validate_update_pasteurisation(instance=instance, logger=logger)
 
