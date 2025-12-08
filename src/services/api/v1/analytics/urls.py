@@ -5,6 +5,7 @@ from api.v1.analytics.milk.views import (
     MilkTimeSeriesAnalyticsView,
     MilkSegmentedByProducer,
 )
+from api.v1.analytics.pasteurisation.views import PasteurisationSummaryAnalyticsView
 
 milkRoutes = [
     path("milk/summary/", MilkSummaryAnalyticsView.as_view()),
@@ -12,4 +13,8 @@ milkRoutes = [
     path("milk/by-producers/", MilkSegmentedByProducer.as_view()),
 ]
 
-urlpatterns = [*milkRoutes]
+pasteurisationRoutes = [
+    path("pasteurisation/summary/", PasteurisationSummaryAnalyticsView.as_view()),
+]
+
+urlpatterns = [*milkRoutes, *pasteurisationRoutes]

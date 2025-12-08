@@ -17,7 +17,7 @@ def _pct_change(current, previous):
     return round(((current - previous) / previous) * 100, 2)
 
 
-def milk_summary_data():
+def milk_interval_comparison_data():
 
     # Main periods
     today = now().date()
@@ -58,9 +58,8 @@ def milk_summary_data():
     return {
         "today_total": round(today_total),
         "today_change": _pct_change(today_total, yesterday_total),
-        "last_7_days_total": round(week_total),
-        "last_7_days_change": _pct_change(week_total, prev_week_total),
-        "last_30_days_total": round(month_total),
-        "last_30_days_change": _pct_change(month_total, prev_month_total),
-        "pickups_today": today_qs.count(),
+        "last_week_total": round(week_total),
+        "last_week_change": _pct_change(week_total, prev_week_total),
+        "last_month_total": round(month_total),
+        "last_month_change": _pct_change(month_total, prev_month_total),
     }

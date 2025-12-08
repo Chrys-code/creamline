@@ -1,5 +1,6 @@
 .container {
 	width: 100%;
+	height: 100%;
 	background-color: white;
 	padding: 1rem;
 	box-shadow: var(--box-shadow-bottom);
@@ -8,4 +9,10 @@
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
+
+	> .chartHeaderWrapper {
+		&:last-child {
+			margin-top: "1rem";
+		}
+	}
 }

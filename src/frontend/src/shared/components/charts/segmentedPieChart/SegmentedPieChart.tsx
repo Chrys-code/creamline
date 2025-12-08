@@ -6,20 +6,13 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 const SegmentedPieChart: React.FC<SegmentedPieChartProps> = ({
 	data,
 	width,
-	aspectRatio = 1.618,
 	nameKey = "name",
 	dataKey = "value",
-	maxHeight = 300,
 }: SegmentedPieChartProps) => {
 	const COLORS = ["#8884d8", "#82ca9d", "#ffc658"];
 
 	return (
-		<ResponsiveContainer
-			width={width}
-			height={"100%"}
-			maxHeight={maxHeight}
-			aspect={aspectRatio}
-		>
+		<ResponsiveContainer width={width} height={"100%"} aspect={1}>
 			<PieChart responsive>
 				<Tooltip />
 				<Pie

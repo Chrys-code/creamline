@@ -1,23 +1,33 @@
-from rest_framework import views
+from rest_framework import views, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 from apps.milk.interfaces import MilkTimeSeriesReader
-from apps.milk.use_cases.analytics.milk_summary import milk_summary_data
+from apps.milk.use_cases.analytics.milk_interval_comparison import milk_interval_comparison_data
 from apps.milk.use_cases.analytics.milk_segmented_by_producer import (
     get_milk_segmented_by_producer,
 )
 
 
 class MilkSummaryAnalyticsView(views.APIView):
+    """
+    Used for interval comparison breakdown.
+    Compares Milk collected in intervals to previous intervals. 
+    E.g Today compared to yesterday or this week compared to previous week.
+    Returns SUM of liters collected and its percentage increase compared to previous interval.
+    """
     permission_classes = [IsAuthenticated]
 
     def get(self, _request):
-        data = milk_summary_data()
+        data = milk_interval_comparison_data()
         return Response(data)
 
 
 class MilkTimeSeriesAnalyticsView(views.APIView):
+    """
+    Used for Time Series (line) charts.
+    Returns the Milk collected value (SUM) in selected range aggregated to selected intervals.
+    """
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -33,11 +43,15 @@ class MilkTimeSeriesAnalyticsView(views.APIView):
         try:
             time_series_data = reader.get(params)
         except ValueError:
-            return Response({"error": "Invalid interval"}, status=400)
+            return Response({"detail": "Invalid interval"}, status=status.HTTP_400_BAD_REQUEST)
         return Response(time_series_data)
 
 
 class MilkSegmentedByProducer(views.APIView):
+    """
+    Used for Pie charts.
+    Returns the Milk collected (all time) segmented by producers aggregated to selected interval.
+    """
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -46,5 +60,7 @@ class MilkSegmentedByProducer(views.APIView):
         try:
             segmented_data = get_milk_segmented_by_producer(interval=interval)
         except ValueError:
-            return Response({"error": "Invalid interval"}, status=400)
+            return Response(
+                {"detail": "Invalid interval"}, status=status.HTTP_400_BAD_REQUEST
+            )
         return Response(segmented_data)

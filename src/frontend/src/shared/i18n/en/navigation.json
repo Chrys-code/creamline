@@ -14,7 +14,11 @@
 				"milk_collection_list": "Milk collections",
 				"milk_collection_create": "New milk collection"
 			},
-			"pasteurisation": "Pasteurisations"
+			"pasteurisation": {
+				"pasteurisation": "Pasteurisation",
+				"pasteurisation_list": "Pasteurisations",
+				"pasteurisation_create": "New pasteurisation"
+			}
 		},
 		"utilities": {
 			"section_title": "Utilities",

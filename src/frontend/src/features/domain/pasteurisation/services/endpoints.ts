@@ -73,11 +73,19 @@ const PatchPasteurisedMilkEndpoint = makeEndpoint({
 	response: schemas.Pasteurisation,
 });
 
+const PasteurisationSummaryAnalytics = makeEndpoint({
+	method: "get",
+	path: "/api/v1/analytics/pasteurisation/summary/",
+	alias: "getPasteurisationSummary",
+	response: schemas.PasteurisationSummarySchema,
+});
+
 const endpoints = makeApi([
 	ListPasteurisedMilkEndpoint,
 	GetPasteurisedMilkEndpoint,
 	CreatePasteurisedMilkEndpoint,
 	PatchPasteurisedMilkEndpoint,
+	PasteurisationSummaryAnalytics,
 ]);
 
 export function createApiClient(baseUrl: string, options?: ZodiosOptions) {

@@ -3,6 +3,7 @@ import type { IntervalTypes } from "../../../../../../../shared/types";
 
 export interface MilkTimeSeriesChartFiltersProps {
 	isOpen?: boolean;
+	isDisabled?: boolean;
 	selectedStartDate: string;
 	onStartDateChange: (_e: React.ChangeEvent<HTMLInputElement>) => void;
 	selectedEndDate: string;

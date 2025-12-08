@@ -7,6 +7,7 @@ import { v4 as uuid } from "uuid";
 const MilkSegmentedPieChartFooter: React.FC<MilkSegmentedPieChartFooterProps> = ({
 	intervalOptions,
 	selectedInterval,
+	isDisabled,
 	onIntervalChange,
 }: MilkSegmentedPieChartFooterProps) => {
 	return (
@@ -22,6 +23,7 @@ const MilkSegmentedPieChartFooter: React.FC<MilkSegmentedPieChartFooterProps> = 
 						onClick={() => onIntervalChange(option.id)}
 						className={chipStyle}
 						type="button"
+						disabled={isDisabled}
 					>
 						{option.value}
 					</button>

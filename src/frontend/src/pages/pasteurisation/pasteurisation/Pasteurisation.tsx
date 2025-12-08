@@ -1,7 +1,6 @@
-import styles from "./MilkCollection.module.scss";
+import styles from "./Pasteurisation.module.scss";
 
 import MilkTimeSeriesChart from "../../../features/domain/milk/features/milkTimeSeriesChart";
-import MilkSegmentedPieChart from "../../../features/domain/milk/features/milkSegmentedPieChart";
 
 import PageHeader from "../../../shared/components/pageHeader";
 import TrendCard from "../../../shared/components/trendCard";
@@ -9,7 +8,7 @@ import IconButton from "../../../shared/components/base/iconButton";
 
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
-import { useMilkSummary } from "../../../features/domain/milk/hooks/useMilkSummary";
+import { usePasteurisationSummary } from "../../../features/domain/pasteurisation/hooks/usePasteurisationSummary";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
@@ -19,14 +18,14 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 	}))
 );
 
-const MilkCollection: React.FC = () => {
+const Pasteurisation: React.FC = () => {
 	const producerOptions = useLoaderData<{ id: string; value: string }[]>();
 
 	const navigate = useNavigate();
 	const tCommon = useTypedTranslation("common");
-	const tMilkCollection = useTypedTranslation("milkCollection");
+	const tPasteurisation = useTypedTranslation("pasteurisation");
 
-	const { data: milkSummaryData } = useMilkSummary();
+	const { data: pasteurisationSummaryData } = usePasteurisationSummary();
 
 	const headerActionElement = (
 		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.milkCollection.create)}>
@@ -42,37 +41,36 @@ const MilkCollection: React.FC = () => {
 	return (
 		<>
 			<PageHeader
-				title={tMilkCollection("milk_collection.page_title")}
+				title={tPasteurisation("pasteurisation.page_title")}
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>
 			<div className={styles.row}>
 				<TrendCard
 					title={tCommon("intervals.day")}
-					value={milkSummaryData?.today_total || 0}
+					value={pasteurisationSummaryData?.today_total || 0}
 					unit={tCommon("units.liter")}
-					percentageChange={milkSummaryData?.today_change}
+					percentageChange={pasteurisationSummaryData?.today_change}
 				/>
 				<TrendCard
 					title={tCommon("intervals.week")}
-					value={milkSummaryData?.last_week_total || 0}
+					value={pasteurisationSummaryData?.last_week_total || 0}
 					unit={tCommon("units.liter")}
-					percentageChange={milkSummaryData?.last_week_change}
+					percentageChange={pasteurisationSummaryData?.last_week_change}
 				/>
 				<TrendCard
 					title={tCommon("intervals.month")}
-					value={milkSummaryData?.last_month_total || 0}
+					value={pasteurisationSummaryData?.last_month_total || 0}
 					unit={tCommon("units.liter")}
-					percentageChange={milkSummaryData?.last_month_change}
+					percentageChange={pasteurisationSummaryData?.last_month_change}
 				/>
 			</div>
 
 			<div className={styles.chartRow}>
 				<MilkTimeSeriesChart producerOptions={producerOptionsWithAll} />
-				<MilkSegmentedPieChart />
 			</div>
 		</>
 	);
 };
 
-export default MilkCollection;
+export default Pasteurisation;

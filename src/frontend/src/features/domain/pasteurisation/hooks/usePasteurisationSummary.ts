@@ -1,0 +1,11 @@
+import { useQuery } from "@tanstack/react-query";
+import pasteurisationClient from "../services/client";
+
+export function usePasteurisationSummary() {
+	return useQuery({
+		queryKey: ["pasteurisationSummary"],
+		queryFn: async () => pasteurisationClient.getPasteurisationSummary(),
+		refetchInterval: 10000,
+		staleTime: 5000,
+	});
+}

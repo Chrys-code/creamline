@@ -1,4 +1,18 @@
 {
+	"pasteurisation": {
+		"page_title": "Pasteurisation",
+		"filters": {
+			"interval": "Interval",
+			"producer": "Producer",
+			"start_date": "Start date",
+			"end_date": "End date"
+		},
+		"analytics": {
+			"trend": {
+				"title": "Time series"
+			}
+		}
+	},
 	"edit_pasteurisation": {
 		"page_titles": {
 			"create": "Create pasteurisation",

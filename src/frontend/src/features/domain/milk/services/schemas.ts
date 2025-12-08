@@ -48,11 +48,10 @@ const PatchMilkFormSchema = MilkBaseSchema.extend({
 const MilkSummarySchema = z.object({
 	today_total: z.number(),
 	today_change: z.number(),
-	last_7_days_total: z.number(),
-	last_7_days_change: z.number(),
-	last_30_days_total: z.number(),
-	last_30_days_change: z.number(),
-	pickups_today: z.number(),
+	last_week_total: z.number(),
+	last_week_change: z.number(),
+	last_month_total: z.number(),
+	last_month_change: z.number(),
 });
 
 const MilkTrendSchema = z.object({

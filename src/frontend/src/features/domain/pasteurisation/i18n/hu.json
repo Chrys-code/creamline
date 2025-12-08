@@ -1,4 +1,18 @@
 {
+	"pasteurisation": {
+		"page_title": "Pasztőrözés",
+		"filters": {
+			"interval": "Felosztás",
+			"producer": "Termelő",
+			"start_date": "Kezdete",
+			"end_date": "Vége"
+		},
+		"analytics": {
+			"trend": {
+				"title": "Időrendi eloszlás"
+			}
+		}
+	},
 	"edit_pasteurisation": {
 		"page_titles": {
 			"create": "Új pasztőrözés",

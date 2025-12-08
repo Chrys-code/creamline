@@ -14,7 +14,11 @@
 				"milk_collection_list": "Tejátvételek",
 				"milk_collection_create": "Új tejátvétel"
 			},
-			"pasteurisation": "Pasztőrözések"
+			"pasteurisation": {
+				"pasteurisation": "Pasztőrözés",
+				"pasteurisation_list": "Pasztőrözések",
+				"pasteurisation_create": "Új pasztőrözés"
+			}
 		},
 		"utilities": {
 			"section_title": "Könyvtárak",

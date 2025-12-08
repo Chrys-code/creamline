@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 
 import { useMilkSegmentedByProducers } from "../../hooks";
+import Loader from "../../../../../../../shared/components/base/loader";
 
 const MilkSegmentedPieChart: React.FC = () => {
 	const tCommon = useTypedTranslation("common");
@@ -22,23 +23,27 @@ const MilkSegmentedPieChart: React.FC = () => {
 	];
 
 	const [selectedInterval, setSelectedInterval] = useState<IntervalTypes>("week");
-	const { data: milkSegmedByProducer } = useMilkSegmentedByProducers(selectedInterval);
+	const { data: milkSegmedByProducer, isLoading } = useMilkSegmentedByProducers(selectedInterval);
 
 	return (
 		<div className={styles.container}>
 			<ChartHeader
 				title={tMilkCollection("milk_collection.analytics.producer_segmentation.title")}
 			/>
-			<SegmentedPieChart
-				data={milkSegmedByProducer || []}
-				width="40%"
-				nameKey="name"
-				dataKey="value"
-				aspectRatio={1}
-			/>
+			{isLoading ? (
+				<Loader />
+			) : (
+				<SegmentedPieChart
+					data={milkSegmedByProducer || []}
+					width={200}
+					nameKey="name"
+					dataKey="value"
+				/>
+			)}
 			<MilkSegmentedPieChartFooter
 				intervalOptions={intervalOptions}
 				selectedInterval={selectedInterval}
+				isDisabled={isLoading}
 				onIntervalChange={(value) => setSelectedInterval(value as IntervalTypes)}
 			/>
 		</div>

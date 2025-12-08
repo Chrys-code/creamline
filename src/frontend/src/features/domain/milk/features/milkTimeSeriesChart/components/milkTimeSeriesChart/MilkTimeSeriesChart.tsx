@@ -12,6 +12,7 @@ import { useMilkTimeSeries } from "../../hooks";
 import { getOffsetDate } from "../../../../../../../shared/helpers/getDate/getDate";
 import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { useExportMilkTimeSeries } from "../../../../../../pdfExport/hooks/useMilkTimeSeriesDownload";
+import Loader from "../../../../../../../shared/components/base/loader";
 
 type ProducerOptions = { id: string; value: string }[];
 
@@ -56,7 +57,7 @@ const MilkTimeSeriesChartContainer: React.FC<{ producerOptions: ProducerOptions 
 	const [selectedInterval, setSelectedInterval] = useState<IntervalTypes>("day");
 	const [selectedProducer, setSelectedProducer] = useState<string>("all");
 
-	const { data: milkTrendData } = useMilkTimeSeries(
+	const { data: milkTrendData, isLoading } = useMilkTimeSeries(
 		selectedInterval,
 		selectedStartDate,
 		selectedEndDate,
@@ -75,10 +76,11 @@ const MilkTimeSeriesChartContainer: React.FC<{ producerOptions: ProducerOptions 
 						producer_uuid: selectedProducer,
 					})
 				}
+				disabled={isLoading}
 			>
 				<MdOutlineFileDownload size={"1.25rem"} />
 			</IconButton>
-			<IconButton onClick={() => setWithAxis((withAxis) => !withAxis)}>
+			<IconButton onClick={() => setWithAxis((withAxis) => !withAxis)} disabled={isLoading}>
 				<RxCornerBottomLeft size={"1.25rem"} />
 			</IconButton>
 			<IconButton onClick={() => setIsOpen((isOpen) => !isOpen)}>
@@ -95,6 +97,7 @@ const MilkTimeSeriesChartContainer: React.FC<{ producerOptions: ProducerOptions 
 			/>
 			<MilkTimeSeriesChartFilters
 				isOpen={filterIsOpen}
+				isDisabled={isLoading}
 				selectedStartDate={selectedStartDate}
 				onStartDateChange={(e) => setSelectedStartDate(e.target.value)}
 				selectedEndDate={selectedEndDate}
@@ -106,14 +109,19 @@ const MilkTimeSeriesChartContainer: React.FC<{ producerOptions: ProducerOptions 
 				selectedProducer={selectedProducer}
 				onProducerChange={(e) => setSelectedProducer(e.target.value)}
 			/>
-			<TimeSeriesChart
-				width={"100%"}
-				withAxis={withAxis}
-				data={milkTrendData || []}
-				xAxisDataYey="date"
-				yAsixDatKey="total_liters"
-				aspectRatio={2}
-			/>
+			{isLoading ? (
+				<Loader />
+			) : (
+				<TimeSeriesChart
+					width={"100%"}
+					maxHeight={300}
+					withAxis={withAxis}
+					data={milkTrendData || []}
+					xAxisDataYey="date"
+					yAsixDatKey="total_liters"
+					aspectRatio={1.8}
+				/>
+			)}
 		</div>
 	);
 };

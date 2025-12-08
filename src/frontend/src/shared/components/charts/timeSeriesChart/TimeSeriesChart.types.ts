@@ -3,9 +3,10 @@ export interface TimeSeriesChartProps {
 		[key: string]: string | number;
 	}[];
 	width: number | `${number}%`;
+	height?: number | `${number}%`;
+	maxHeight?: number;
 	aspectRatio?: number;
 	xAxisDataYey?: string;
 	yAsixDatKey?: string;
-	maxHeight?: number;
 	withAxis?: boolean;
 }

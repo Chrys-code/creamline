@@ -73,12 +73,40 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
 				</ul>
 				<li>
 					<NavLink
-						to={NAVIGATION_ROUTES.pasteuriation.list}
+						to={NAVIGATION_ROUTES.pasteuriation.root}
 						className={({ isActive }) => (isActive ? styles.active : undefined)}
 					>
-						<span>{tNavigation("sidebar.processes.pasteurisation")}</span>
+						<span>
+							{tNavigation("sidebar.processes.pasteurisation.pasteurisation")}
+						</span>
 					</NavLink>
 				</li>
+				<ul>
+					<li>
+						<NavLink
+							to={NAVIGATION_ROUTES.pasteuriation.list}
+							className={({ isActive }) => (isActive ? styles.active : undefined)}
+						>
+							<span>
+								{tNavigation(
+									"sidebar.processes.pasteurisation.pasteurisation_list"
+								)}
+							</span>
+						</NavLink>
+					</li>
+					<li>
+						<NavLink
+							to={NAVIGATION_ROUTES.pasteuriation.create}
+							className={({ isActive }) => (isActive ? styles.active : undefined)}
+						>
+							<span>
+								{tNavigation(
+									"sidebar.processes.pasteurisation.pasteurisation_create"
+								)}
+							</span>
+						</NavLink>
+					</li>
+				</ul>
 			</ul>
 
 			<h3>{tNavigation("sidebar.utilities.section_title")}</h3>

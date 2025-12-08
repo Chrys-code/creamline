@@ -56,6 +56,15 @@ const PaginatedPasteurisationListSchema = z
 	})
 	.passthrough();
 
+const PasteurisationSummarySchema = z.object({
+	today_total: z.number(),
+	today_change: z.number(),
+	last_week_total: z.number(),
+	last_week_change: z.number(),
+	last_month_total: z.number(),
+	last_month_change: z.number(),
+});
+
 const CreatePasteurisationFormSchema = BasePasteurisationSchema;
 
 const PatchPasteurisationFormSchema = BasePasteurisationSchema.extend({
@@ -67,6 +76,7 @@ const schemas = {
 	PaginatedPasteurisationListSchema,
 	CreatePasteurisationFormSchema,
 	PatchPasteurisationFormSchema,
+	PasteurisationSummarySchema,
 };
 
 export default schemas;

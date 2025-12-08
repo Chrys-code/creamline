@@ -10,6 +10,7 @@ import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedT
 
 const MilkTimeSeriesChartFilters: React.FC<MilkTimeSeriesChartFiltersProps> = ({
 	isOpen = false,
+	isDisabled,
 	selectedStartDate,
 	onStartDateChange,
 	selectedEndDate,
@@ -39,6 +40,7 @@ const MilkTimeSeriesChartFilters: React.FC<MilkTimeSeriesChartFiltersProps> = ({
 					options={intervalOptions}
 					defaultValue={selectedInterval}
 					onChange={(e) => onIntervalChange(e)}
+					disabled={isDisabled}
 				/>
 				<Dropdown
 					id={uuid()}
@@ -48,6 +50,7 @@ const MilkTimeSeriesChartFilters: React.FC<MilkTimeSeriesChartFiltersProps> = ({
 					options={producerOptions}
 					defaultValue={selectedProducer}
 					onChange={(e) => onProducerChange(e)}
+					disabled={isDisabled}
 				/>
 				<InputField
 					id={uuid()}
@@ -56,6 +59,7 @@ const MilkTimeSeriesChartFilters: React.FC<MilkTimeSeriesChartFiltersProps> = ({
 					type="date"
 					defaultValue={selectedStartDate}
 					onChange={(e) => onStartDateChange(e)}
+					disabled={isDisabled}
 				/>
 				<InputField
 					id={uuid()}
@@ -64,6 +68,7 @@ const MilkTimeSeriesChartFilters: React.FC<MilkTimeSeriesChartFiltersProps> = ({
 					type="date"
 					defaultValue={selectedEndDate}
 					onChange={(e) => onEndDateChange(e)}
+					disabled={isDisabled}
 				/>
 			</div>
 		</div>

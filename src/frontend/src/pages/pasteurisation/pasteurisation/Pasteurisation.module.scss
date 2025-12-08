@@ -21,9 +21,3 @@
 	gap: 1rem;
 	min-height: 21.5rem;
 }
-
-@media (min-width: $breakpoint-tablet) {
-	.chartRow {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
