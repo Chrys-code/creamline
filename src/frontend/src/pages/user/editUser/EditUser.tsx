@@ -10,11 +10,11 @@ import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/u
 const EditUser: React.FC = () => {
 	const { selectedItem, userGroups } = useLoaderData<EditUserProps>();
 	const navigate = useNavigate();
-	const ut = useTypedTranslation("users");
+	const tUser = useTypedTranslation("users");
 
 	const pageTitle = selectedItem
-		? ut("edit_user.page_title.edit")
-		: ut("edit_user.page_title.create");
+		? tUser("edit_user.page_title.edit")
+		: tUser("edit_user.page_title.create");
 
 	return (
 		<>

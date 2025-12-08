@@ -3,8 +3,8 @@ import styles from "./PaginatedList.module.scss";
 
 import Pagination from "../pagination/";
 import { useNavigate } from "react-router";
-import { useDelayedLoader } from "../../hooks/useDelayedLoader/useDelayedLoader.js";
-import Loader from "../base/loader/Loader.js";
+import { useDelayedLoader } from "../../hooks/useDelayedLoader/useDelayedLoader";
+import Loader from "../base/loader/Loader";
 
 function PaginatedList<T>({
 	items,

@@ -1,10 +1,12 @@
 import type { LoaderFunctionArgs, RouteObject } from "react-router";
-import getPaginatedUserList from "../../features/domain/user/loaders/listUsers";
+import { NAVIGATION_ROUTES } from "../../configs/navigation";
+
 import { getUser } from "../../features/domain/user/loaders/getUser";
 import { listUserGroups } from "../../features/domain/user/features/userGroups/loaders/listUserGroups";
-import { adaptUserGroupsForUserGroupOptions } from "../../features/domain/user/features/userGroups/adapters";
-import { NAVIGATION_ROUTES } from "../../configs/navigation";
 import { userTranslationLoader } from "../../features/domain/user/loaders/translation";
+import getPaginatedUserList from "../../features/domain/user/loaders/listUsers";
+
+import { adaptUserGroupsForUserGroupOptions } from "../../features/domain/user/features/userGroups/adapters";
 
 const userManagementRoutes: RouteObject = {
 	id: "user",
