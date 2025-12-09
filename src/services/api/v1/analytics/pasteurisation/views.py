@@ -1,10 +1,13 @@
-from rest_framework import views
+from rest_framework import views, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
-from apps.milk.interfaces import MilkTimeSeriesReader
+from apps.pasteurisation.interfaces import PasteurisationTimeSeriesReader
 from apps.pasteurisation.use_cases.analytics.pasteurisation_interval_comparison import (
     pasteurisation_interval_comparison_data
+)
+from apps.pasteurisation.use_cases.analytics.pasteurisation_segmented_by_pasteur import (
+    get_pasteurisation_segmented_by_pasteur
 )
 
 
@@ -32,12 +35,13 @@ class PasteurisationTimeSeriesAnalyticsView(views.APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        reader = MilkTimeSeriesReader()
+        reader = PasteurisationTimeSeriesReader()
 
         params = {
             "start_date": request.query_params.get("start_date"),
             "end_date": request.query_params.get("end_date"),
             "interval": request.query_params.get("interval", "day"),
+            "pasteur_uuid": request.query_params.get("pasteur_uuid"),
         }
 
         try:
@@ -45,3 +49,23 @@ class PasteurisationTimeSeriesAnalyticsView(views.APIView):
         except ValueError:
             return Response({"detail": "Invalid interval"}, status=400)
         return Response(time_series_data)
+
+
+class PasteurisationSegmentedByPasteur(views.APIView):
+    """
+    Used for Pie charts.
+    Returns the volume of liters pasteurised segmented by pasteur in selected interval preceeding current date.
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        interval = request.query_params.get("interval", "day")
+
+        try:
+            segmented_data = get_pasteurisation_segmented_by_pasteur(interval=interval)
+        except ValueError:
+            return Response(
+                {"detail": "Invalid interval"}, status=status.HTTP_400_BAD_REQUEST
+            )
+        return Response(segmented_data)

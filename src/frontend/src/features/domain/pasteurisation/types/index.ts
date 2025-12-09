@@ -10,6 +10,10 @@ export type CreatePasteurisationFormSchema = z.infer<typeof schemas.CreatePasteu
 export type PatchPasteurisationFormSchema = z.infer<typeof schemas.PatchPasteurisationFormSchema>;
 
 export type PasteurisationSummary = z.infer<typeof schemas.PasteurisationSummarySchema>;
+export type PasteurisationTimeSeries = z.infer<typeof schemas.PasteurisationTimeSeriesSchema>;
+export type PasteurisationSegmentedByPasteur = z.infer<
+	typeof schemas.PasteurisationSegmentedByPasteurSchema
+>;
 
 import pasterisationTranslations from "../i18n";
 export type PasterisationTranslations = typeof pasterisationTranslations.en;

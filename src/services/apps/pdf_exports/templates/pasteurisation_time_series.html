@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pasteurisation Time Series Report</title>
+    <style>
+        body { font-family: sans-serif; }
+        h1 { text-align: center; margin-bottom: 1rem; }
+
+        /* Table styles */
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; page-break-inside: auto; }
+        th, td { border: 1px solid #333; padding: 0.5rem; text-align: center; }
+        thead { display: table-header-group; }
+        tfoot { display: table-footer-group; }
+        tr { page-break-inside: avoid;  page-break-after: auto; }
+
+        /* Header/footer for each page */
+        @page {
+            size: A4;
+            margin: 2cm;
+            @top-center { content: "Pasteurisation Time Series Report"; font-weight: bold; }
+            @bottom-center { content: "Page " counter(page) " of " counter(pages); }
+        }
+
+        h2 { margin-top: 2rem; }
+    </style>
+</head>
+<body>
+
+<h1>Pasteurisation Time Series Report</h1>
+
+<p>
+    <strong>Interval:</strong> {{ params.interval }}<br>
+    <strong>Start:</strong> {{ params.start_date }} — <strong>End:</strong> {{ params.end_date }}<br>
+    {% if params.pasteur_uuid and params.pasteur_uuid != "all" %}
+        <strong>Pasteur:</strong> {{ params.pasteur_uuid }}
+    {% endif %}
+</p>
+
+<!-- Summary table -->
+<h2>Summary</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Total Liters</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in data.time_series_data %}
+        <tr>
+            <td>{{ row.date }}</td>
+            <td>{{ row.total_liters }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Individual instances table -->
+{% if data.instances %}
+<h2>Pasteurisations</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Date & Time</th>
+            <th>Pasteur</th>
+            <th>Volume (liters)</th>
+            <th>Temperature (celsius)</th>
+            <th>Storage Path</th> 
+            <th>Start Date</th> 
+            <th>End Date</th> 
+        </tr>
+    </thead>
+    <tbody>
+        {% for pasteurisation in data.instances %}
+        <tr>
+            <td>{{ pasteurisation.created_at }}</td>
+            <td>{{ pasteurisation.pasteur__name }}</td>
+            <td>{{ pasteurisation.volume_liters }}</td>
+            <td>{{ pasteurisation.temperature }}</td>
+            <td>{{ pasteurisation.source_storage__name }} -> {{ pasteurisation.target_storage__name }}</td>
+            <td>{{ pasteurisation.start_date }}</td>
+            <td>{{ pasteurisation.end_date }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+</body>
+</html>

@@ -8,6 +8,9 @@
 			"end_date": "Vége"
 		},
 		"analytics": {
+			"pasteur_segmentation": {
+				"title": "Pasztőr eloszlás"
+			},
 			"trend": {
 				"title": "Időrendi eloszlás"
 			}

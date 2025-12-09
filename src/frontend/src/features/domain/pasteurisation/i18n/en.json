@@ -8,6 +8,9 @@
 			"end_date": "End date"
 		},
 		"analytics": {
+			"pasteur_segmentation": {
+				"title": "Pasteur segmentation"
+			},
 			"trend": {
 				"title": "Time series"
 			}

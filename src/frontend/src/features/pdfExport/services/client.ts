@@ -38,6 +38,19 @@ class PdfClient {
 		);
 		return response.data;
 	}
+
+	async generatePasteurisationTimeSeriesPdf(
+		params: Record<string, any>,
+		signal?: AbortSignal
+	): Promise<Blob> {
+		const response = await this.axiosInstance.post(
+			"/pasteurisation/generate-pasteurisation-time-series-pdf",
+			params,
+
+			{ withCredentials: true, signal }
+		);
+		return response.data;
+	}
 }
 
 const pdfClient = new PdfClient("/api/v1/pdf");

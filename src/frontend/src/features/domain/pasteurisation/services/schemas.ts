@@ -65,6 +65,16 @@ const PasteurisationSummarySchema = z.object({
 	last_month_change: z.number(),
 });
 
+const PasteurisationTimeSeriesSchema = z.object({
+	date: z.string(), // ISO Date
+	total_liters: z.number(),
+});
+
+const PasteurisationSegmentedByPasteurSchema = z.object({
+	name: z.string(),
+	value: z.number(),
+});
+
 const CreatePasteurisationFormSchema = BasePasteurisationSchema;
 
 const PatchPasteurisationFormSchema = BasePasteurisationSchema.extend({
@@ -77,6 +87,8 @@ const schemas = {
 	CreatePasteurisationFormSchema,
 	PatchPasteurisationFormSchema,
 	PasteurisationSummarySchema,
+	PasteurisationTimeSeriesSchema,
+	PasteurisationSegmentedByPasteurSchema,
 };
 
 export default schemas;

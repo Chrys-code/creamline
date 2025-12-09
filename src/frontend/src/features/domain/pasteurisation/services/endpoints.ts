@@ -80,12 +80,57 @@ const PasteurisationSummaryAnalytics = makeEndpoint({
 	response: schemas.PasteurisationSummarySchema,
 });
 
+const PasteurisationTimeSeriesAnalytics = makeEndpoint({
+	method: "get",
+	path: "/api/v1/analytics/pasteurisation/time-series/",
+	alias: "getPasteurisationTimeSeriesAnalytics",
+	parameters: [
+		{
+			name: "start_date",
+			type: "Query",
+			schema: z.string().optional(),
+		},
+		{
+			name: "end_date",
+			type: "Query",
+			schema: z.string().optional(),
+		},
+		{
+			name: "interval",
+			type: "Query",
+			schema: z.enum(["day", "week", "month", "quarter", "year"]).optional(),
+		},
+		{
+			name: "pasteur_uuid",
+			type: "Query",
+			schema: z.string().optional(),
+		},
+	],
+	response: z.array(schemas.PasteurisationTimeSeriesSchema),
+});
+
+const PasteurisationSegmentedByPasteurAnalytics = makeEndpoint({
+	method: "get",
+	path: "/api/v1/analytics/pasteurisation/by-pasteurs/",
+	alias: "getPasteurisationSegmentedByPasteurs",
+	parameters: [
+		{
+			name: "interval",
+			type: "Query",
+			schema: z.enum(["day", "week", "month", "quarter", "year"]).optional(),
+		},
+	],
+	response: z.array(schemas.PasteurisationSegmentedByPasteurSchema),
+});
+
 const endpoints = makeApi([
 	ListPasteurisedMilkEndpoint,
 	GetPasteurisedMilkEndpoint,
 	CreatePasteurisedMilkEndpoint,
 	PatchPasteurisedMilkEndpoint,
 	PasteurisationSummaryAnalytics,
+	PasteurisationTimeSeriesAnalytics,
+	PasteurisationSegmentedByPasteurAnalytics,
 ]);
 
 export function createApiClient(baseUrl: string, options?: ZodiosOptions) {

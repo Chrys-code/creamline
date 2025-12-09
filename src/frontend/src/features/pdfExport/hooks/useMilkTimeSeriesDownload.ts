@@ -1,7 +1,7 @@
 import pdfClient from "../services";
-import type { TimeSeriesExportParams } from "../types";
+import type { MilkTimeSeriesExportParams } from "../types";
 
-export const useExportMilkTimeSeries = async (params: TimeSeriesExportParams) => {
+export const useExportMilkTimeSeries = async (params: MilkTimeSeriesExportParams) => {
 	try {
 		const blob = await pdfClient.generateMilkTimeSeriesPdf(params);
 

@@ -4,12 +4,12 @@ from django.db.models import Sum
 from rest_framework.response import Response
 from rest_framework import status
 
-from apps.milk.models import Milk
+from apps.pasteurisation.models import Pasteurisation
 
 
-def get_milk_segmented_by_producer(interval: str = "day"):
+def get_pasteurisation_segmented_by_pasteur(interval: str = "day"):
     """
-    Returns the total liters of milk collected from each producer in
+    Returns the total volume of liters pasteurised in each pasteur for
     selected interval.
     
     :param interval: time period back from current day
@@ -32,17 +32,17 @@ def get_milk_segmented_by_producer(interval: str = "day"):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-    # Query milk grouped by producer
+    # Query Pasteurisation grouped by pasteur
     results = (
-        Milk.objects.filter(created_at__range=(start, now))
-        .values("producer__name")
+        Pasteurisation.objects.filter(created_at__range=(start, now))
+        .values("pasteur__name")
         .annotate(total=Sum("volume_liters"))
-        .order_by("producer__name")
+        .order_by("pasteur__name")
     )
 
     # Format for Recharts
     chart_data = [
-        {"name": r["producer__name"], "value": r["total"] or 0} for r in results
+        {"name": r["pasteur__name"], "value": r["total"] or 0} for r in results
     ]
 
     return chart_data

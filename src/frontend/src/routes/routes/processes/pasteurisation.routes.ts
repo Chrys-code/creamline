@@ -10,8 +10,6 @@ import { adaptProductDefinitionsToProductDefinitionOptions } from "../../../feat
 import { adaptPasteursToPasteurOptions } from "../../../features/domain/pasteur/adapters";
 import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 import { pasterisationTranslationLoader } from "../../../features/domain/pasteurisation/loaders/translation";
-import { adaptProducersToProducerOptions } from "../../../features/domain/producer/adapters";
-import { listProducers } from "../../../features/domain/producer/loaders/listProducers";
 
 const pasteurisationRoutes: RouteObject = {
 	id: "pasteurisation",
@@ -26,7 +24,7 @@ const pasteurisationRoutes: RouteObject = {
 					(await import("../../../pages/pasteurisation/pasteurisation/Pasteurisation"))
 						.default,
 			},
-			loader: async () => adaptProducersToProducerOptions(await listProducers()),
+			loader: async () => adaptPasteursToPasteurOptions(await listPasteurs()),
 		},
 		{
 			path: NAVIGATION_ROUTES.pasteuriation.list,

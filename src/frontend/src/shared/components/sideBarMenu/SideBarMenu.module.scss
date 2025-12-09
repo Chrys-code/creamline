@@ -5,6 +5,7 @@
 	top: var(--header-height);
 	left: 0;
 	right: 0;
+	overflow-x: scroll;
 	bottom: 0;
 
 	display: flex;
@@ -18,6 +19,16 @@
 	transform: translateX(-100%);
 	transition: transform var(--animation-duration) var(--animation-timing);
 	z-index: 50;
+
+	/* For WebKit browsers (Chrome, Safari, Edge) */
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* For Firefox */
+
+	scrollbar-width: none;
+	/* hides scrollbar but still scrollable */
 
 	> h2 {
 		margin-bottom: 0.5rem;

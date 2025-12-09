@@ -1,7 +1,6 @@
 import styles from "./Pasteurisation.module.scss";
 
-import MilkTimeSeriesChart from "../../../features/domain/milk/features/milkTimeSeriesChart";
-
+import PasteurisationTimeSeriesChart from "../../../features/domain/pasteurisation/features/pasteurisationTimeSeriesChart";
 import PageHeader from "../../../shared/components/pageHeader";
 import TrendCard from "../../../shared/components/trendCard";
 import IconButton from "../../../shared/components/base/iconButton";
@@ -11,6 +10,7 @@ import { useLoaderData, useNavigate } from "react-router";
 import { usePasteurisationSummary } from "../../../features/domain/pasteurisation/hooks/usePasteurisationSummary";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { NAVIGATION_ROUTES } from "../../../configs/navigation";
+import PasteurisationSegmentedPieChart from "../../../features/domain/pasteurisation/features/pasteurisationSegmentedPieChart";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -19,7 +19,7 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 );
 
 const Pasteurisation: React.FC = () => {
-	const producerOptions = useLoaderData<{ id: string; value: string }[]>();
+	const pasteurOptions = useLoaderData<{ id: string; value: string }[]>();
 
 	const navigate = useNavigate();
 	const tCommon = useTypedTranslation("common");
@@ -33,10 +33,7 @@ const Pasteurisation: React.FC = () => {
 		</IconButton>
 	);
 
-	const producerOptionsWithAll = [
-		{ id: "all", value: tCommon("common.all") },
-		...producerOptions,
-	];
+	const pasteurOptionsWithAll = [{ id: "all", value: tCommon("common.all") }, ...pasteurOptions];
 
 	return (
 		<>
@@ -67,7 +64,8 @@ const Pasteurisation: React.FC = () => {
 			</div>
 
 			<div className={styles.chartRow}>
-				<MilkTimeSeriesChart producerOptions={producerOptionsWithAll} />
+				<PasteurisationTimeSeriesChart pasteurOptions={pasteurOptionsWithAll} />
+				<PasteurisationSegmentedPieChart />
 			</div>
 		</>
 	);

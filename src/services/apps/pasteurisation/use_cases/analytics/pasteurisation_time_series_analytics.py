@@ -11,7 +11,9 @@ from django.db.models.functions import (
 from django.db.models import Sum
 from django.utils.dateparse import parse_date
 
-from apps.milk.models import Milk
+from apps.pasteurisation.models import Pasteurisation
+
+
 
 TRUNC_MAP = {
     "day": TruncDate("created_at"),
@@ -22,11 +24,11 @@ TRUNC_MAP = {
 }
 
 
-def milk_time_series_analytics(
+def pasteurisation_time_series_analytics(
     start_date: Optional[str],
     end_date: Optional[str],
     interval: str = "day",
-    producer_uuid: str | None = None,
+    pasteur_uuid: str | None = None,
 ):
     if interval not in TRUNC_MAP:
         raise ValueError("Invalid interval")
@@ -49,11 +51,11 @@ def milk_time_series_analytics(
     if start_dt > end_dt:
         raise ValueError("Start cannot be bigger than end date")
 
-    qs = Milk.objects.filter(created_at__gte=start_dt, created_at__lte=end_dt)
+    qs = Pasteurisation.objects.filter(created_at__gte=start_dt, created_at__lte=end_dt)
 
     # Optional producer filtering
-    if producer_uuid and producer_uuid.lower() != "all":
-        qs = qs.filter(producer__uuid=producer_uuid)
+    if pasteur_uuid and pasteur_uuid.lower() != "all":
+        qs = qs.filter(pasteur__uuid=pasteur_uuid)
 
     data = (
         qs.annotate(period=TRUNC_MAP[interval])
