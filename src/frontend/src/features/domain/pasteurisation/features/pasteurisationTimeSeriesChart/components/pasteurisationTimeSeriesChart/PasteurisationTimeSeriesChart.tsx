@@ -7,11 +7,11 @@ import ChartHeader from "../../../../../../../shared/components/charts/chartHead
 import IconButton from "../../../../../../../shared/components/base/iconButton";
 import TimeSeriesChart from "../../../../../../../shared/components/charts/timeSeriesChart";
 
+import Loader from "../../../../../../../shared/components/base/loader";
 import React, { useState } from "react";
 import { getOffsetDate } from "../../../../../../../shared/helpers/getDate/getDate";
 import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { usePasteurisationTimeSeries } from "../../hooks";
-import Loader from "../../../../../../../shared/components/base/loader";
 import { useExportPasteurisationTimeSeries } from "../../../../../../pdfExport/hooks/usePasteurisationTimeSeriesDownload";
 
 type PasteurOptions = { id: string; value: string }[];

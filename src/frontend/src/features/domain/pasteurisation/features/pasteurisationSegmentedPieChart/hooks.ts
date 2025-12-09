@@ -11,5 +11,6 @@ export function usePasteurisationSegmentedByProducers(interval: IntervalTypes = 
 			}),
 		refetchInterval: 60000,
 		staleTime: 30000,
+		refetchOnMount: "always",
 	});
 }

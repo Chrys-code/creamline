@@ -1,5 +1,7 @@
 import styles from "./MilkCollection.module.scss";
 
+import { NAVIGATION_ROUTES } from "../../../configs/navigation";
+
 import MilkTimeSeriesChart from "../../../features/domain/milk/features/milkTimeSeriesChart";
 import MilkSegmentedPieChart from "../../../features/domain/milk/features/milkSegmentedPieChart";
 
@@ -11,7 +13,6 @@ import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { useMilkSummary } from "../../../features/domain/milk/hooks/useMilkSummary";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

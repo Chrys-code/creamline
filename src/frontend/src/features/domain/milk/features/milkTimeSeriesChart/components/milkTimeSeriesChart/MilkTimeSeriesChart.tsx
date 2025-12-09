@@ -6,13 +6,13 @@ import MilkTimeSeriesChartFilters from "../milkTimeSeriesChartFilters";
 import ChartHeader from "../../../../../../../shared/components/charts/chartHeader";
 import IconButton from "../../../../../../../shared/components/base/iconButton";
 import TimeSeriesChart from "../../../../../../../shared/components/charts/timeSeriesChart";
+import Loader from "../../../../../../../shared/components/base/loader";
 
 import React, { useState } from "react";
 import { useMilkTimeSeries } from "../../hooks";
 import { getOffsetDate } from "../../../../../../../shared/helpers/getDate/getDate";
 import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { useExportMilkTimeSeries } from "../../../../../../pdfExport/hooks/useMilkTimeSeriesDownload";
-import Loader from "../../../../../../../shared/components/base/loader";
 
 type ProducerOptions = { id: string; value: string }[];
 

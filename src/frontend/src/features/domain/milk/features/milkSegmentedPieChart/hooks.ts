@@ -11,5 +11,6 @@ export function useMilkSegmentedByProducers(interval: IntervalTypes = "day") {
 			}),
 		refetchInterval: 60000,
 		staleTime: 30000,
+		refetchOnMount: "always",
 	});
 }

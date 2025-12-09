@@ -21,5 +21,6 @@ export function usePasteurisationTimeSeries(
 			),
 		refetchInterval: 60000,
 		staleTime: 30000,
+		refetchOnMount: "always",
 	});
 }

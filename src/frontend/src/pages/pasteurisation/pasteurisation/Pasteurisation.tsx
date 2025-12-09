@@ -1,6 +1,9 @@
 import styles from "./Pasteurisation.module.scss";
 
+import { NAVIGATION_ROUTES } from "../../../configs/navigation";
+
 import PasteurisationTimeSeriesChart from "../../../features/domain/pasteurisation/features/pasteurisationTimeSeriesChart";
+import PasteurisationSegmentedPieChart from "../../../features/domain/pasteurisation/features/pasteurisationSegmentedPieChart";
 import PageHeader from "../../../shared/components/pageHeader";
 import TrendCard from "../../../shared/components/trendCard";
 import IconButton from "../../../shared/components/base/iconButton";
@@ -9,8 +12,6 @@ import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { usePasteurisationSummary } from "../../../features/domain/pasteurisation/hooks/usePasteurisationSummary";
 import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
-import PasteurisationSegmentedPieChart from "../../../features/domain/pasteurisation/features/pasteurisationSegmentedPieChart";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
