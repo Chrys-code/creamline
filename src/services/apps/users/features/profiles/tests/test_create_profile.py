@@ -8,7 +8,7 @@ pytestmark = pytest.mark.django_db()
 
 def test_create_profile_saves(test_user, profile_payload):
     created = create_profile(
-        profile_image=profile_payload["profile_image"],
+        profile_image=None,
         email=test_user.email,
         first_name=profile_payload["first_name"],
         last_name=profile_payload["last_name"],
@@ -17,7 +17,7 @@ def test_create_profile_saves(test_user, profile_payload):
     db_instance = Profile.objects.get(uuid=created.uuid)
 
     assert isinstance(created, Profile)
-    assert db_instance.profile_image == profile_payload["profile_image"]
+    assert db_instance.profile_image == None
     assert db_instance.email == test_user.email
     assert db_instance.first_name == profile_payload["first_name"]
     assert db_instance.last_name == profile_payload["last_name"]

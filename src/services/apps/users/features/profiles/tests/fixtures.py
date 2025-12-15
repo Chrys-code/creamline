@@ -20,7 +20,6 @@ def profile(test_user, db):
 @pytest.fixture
 def profile_payload():
     return {
-        "profile_image": None,
         "first_name": "Test_Payload",
         "last_name": "User_Payload",
     }
