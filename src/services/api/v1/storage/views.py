@@ -3,6 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
+from api.v1.permissions import StrictDjangoModelPermissions
 from apps.storages.models import Storage
 from apps.storages.use_cases.delete import delete_storage
 
@@ -11,7 +12,7 @@ from api.v1.storage import serializers
 
 
 class StorageViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, StrictDjangoModelPermissions]
     pagination_class = StandardPagePagination
     lookup_field = "uuid"
 

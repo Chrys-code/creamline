@@ -9,6 +9,7 @@ GROUPS_AND_PERMISSIONS = {
         "add_pasteur",
         "change_pasteur",
         "view_pasteur",
+        "delete_pasteur",
         "add_producer",
         "change_producer",
         "view_producer",

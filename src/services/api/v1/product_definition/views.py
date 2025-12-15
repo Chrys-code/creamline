@@ -7,6 +7,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
 from api.v1.pagination import StandardPagePagination
+from api.v1.permissions import StrictDjangoModelPermissions
 from api.v1.product_definition import serializers
 
 from apps.product_definitions.models import ProductDefinition
@@ -14,7 +15,7 @@ from apps.product_definitions.use_cases.delete import delete_product_definition
 
 
 class ProductDefinitionViewSet(ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, StrictDjangoModelPermissions]
     pagination_class = StandardPagePagination
     lookup_field = "uuid"
 

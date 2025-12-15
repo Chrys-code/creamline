@@ -14,14 +14,6 @@ def test_producer_v1_list_endpoint_unauthenticated_client_returns_403(
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
 
-def test_producer_v1_list_endpoint_returns_200(authenticated_client):
-    client, _ = authenticated_client
-    url = reverse("api:v1:producer-list")
-
-    response = client.get(url)
-    assert response.status_code == status.HTTP_200_OK
-
-
 def test_producer_v1_detail_endpoint_unauthenticated_client_returns_403(
     api_client, producer
 ):
@@ -31,29 +23,31 @@ def test_producer_v1_detail_endpoint_unauthenticated_client_returns_403(
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
 
-def test_producer_v1_detail_endpoint_returns_200(authenticated_client, producer):
-    client, _ = authenticated_client
-    url = reverse("api:v1:producer-detail", args=[producer.uuid])
+def test_producer_v1_create_endpoint_unauthenticated_client_returns_403(
+    api_client, producer_payload
+):
+    url = reverse("api:v1:producer-list")
 
-    response = client.get(url)
-    assert response.status_code == status.HTTP_200_OK
+    response = api_client.post(url, producer_payload)
+    assert response.status_code == status.HTTP_403_FORBIDDEN
 
 
-def test_producer_v1_detail_delete_endpoint_unauthenticated_client_returns_403(
+def test_producer_v1_update_endpoint_unauthenticated_client_returns_403(
+    api_client, producer_payload, producer
+):
+    url = reverse("api:v1:producer-detail",  args=[producer.uuid])
+
+    response = api_client.patch(url, producer_payload)
+    assert response.status_code == status.HTTP_403_FORBIDDEN
+
+
+def test_producer_v1_delete_endpoint_unauthenticated_client_returns_403(
     api_client, producer
 ):
     url = reverse("api:v1:producer-detail", args=[producer.uuid])
 
     response = api_client.delete(url)
     assert response.status_code == status.HTTP_403_FORBIDDEN
-
-
-def test_producer_v1_detail_delete_endpoint_returns_200(authenticated_client, producer):
-    client, _ = authenticated_client
-    url = reverse("api:v1:producer-detail", args=[producer.uuid])
-
-    response = client.delete(url)
-    assert response.status_code == status.HTTP_204_NO_CONTENT
 
 
 def test_producer_v1_all_endpoint_unauthenticated_client_returns_403(
@@ -65,9 +59,9 @@ def test_producer_v1_all_endpoint_unauthenticated_client_returns_403(
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
 
-def test_producer_v1_all_endpoint_returns_200(authenticated_client):
+def test_producer_v1_all_endpoint_returns_403(authenticated_client):
     client, _ = authenticated_client
     url = reverse("api:v1:producer-list-no-pagination")
 
     response = client.get(url)
-    assert response.status_code == status.HTTP_200_OK
+    assert response.status_code == status.HTTP_403_FORBIDDEN

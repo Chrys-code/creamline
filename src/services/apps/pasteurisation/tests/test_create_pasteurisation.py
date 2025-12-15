@@ -6,9 +6,12 @@ from apps.pasteurisation.use_cases.create import create_pasteurisation
 pytestmark = pytest.mark.django_db()
 
 
-def test_create_pasteuriation_saves(test_user, pasteurisation_payload):
+def test_create_pasteuriation_saves(
+    test_user, create_pasteurisation_data
+):
+
     created = create_pasteurisation(
-        validated_data=pasteurisation_payload, created_by=test_user
+        validated_data=create_pasteurisation_data, created_by=test_user
     )
 
     db_instance = Pasteurisation.objects.get(uuid=created.uuid)

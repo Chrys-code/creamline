@@ -23,6 +23,20 @@ def milk(test_user, producer, storage):
 @pytest.fixture
 def milk_payload(test_user, producer, storage):
     return {
+        "producer": producer.uuid,
+        "storage": storage.uuid,
+        "volume_kg": 900.00,
+        "volume_liters": 900.00,
+        "acid_content": 5.5,
+        "aflatoxin": False,
+        "inhibitory_residue": False,
+        "temperature": 10,
+        "created_by": test_user,
+    }
+
+@pytest.fixture
+def create_milk_data(test_user, producer, storage):
+    return {
         "producer": producer,
         "storage": storage,
         "volume_kg": 900.00,

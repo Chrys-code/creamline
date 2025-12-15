@@ -4,7 +4,7 @@ from apps.users.features.profiles.models import Profile
 
 
 @pytest.fixture
-def profile(test_user):
+def profile(test_user, db):
     created = Profile.objects.create(
         user=test_user,
         email=test_user.email,

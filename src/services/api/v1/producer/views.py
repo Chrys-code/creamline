@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 from api.v1.pagination import StandardPagePagination
+from api.v1.permissions import StrictDjangoModelPermissions
 from api.v1.producer import serializers
 
 from apps.producers.models import Producer
@@ -12,7 +13,7 @@ from apps.producers.use_cases.delete import delete_producer
 
 class ProducerViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ProducerSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, StrictDjangoModelPermissions]
     pagination_class = StandardPagePagination
     lookup_field = "uuid"
 
