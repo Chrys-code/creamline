@@ -15,7 +15,7 @@ const storageRoutes: RouteObject = {
 	loader: storageTranslationLoader,
 	children: [
 		{
-			path: NAVIGATION_ROUTES.storage.list,
+			path: NAVIGATION_ROUTES.storage.list.path,
 			lazy: {
 				Component: async () =>
 					(await import("../../../pages/storage/listStorages/ListStorages")).default,
@@ -25,7 +25,7 @@ const storageRoutes: RouteObject = {
 			}),
 		},
 		{
-			path: NAVIGATION_ROUTES.storage.create,
+			path: NAVIGATION_ROUTES.storage.create.path,
 			lazy: {
 				Component: async () =>
 					(await import("../../../pages/storage/editStorage/EditStorage")).default,
@@ -38,7 +38,7 @@ const storageRoutes: RouteObject = {
 			}),
 		},
 		{
-			path: NAVIGATION_ROUTES.storage.edit + ":id",
+			path: NAVIGATION_ROUTES.storage.edit.path + ":id",
 			lazy: {
 				Component: async () =>
 					(await import("../../../pages/storage/editStorage/EditStorage")).default,

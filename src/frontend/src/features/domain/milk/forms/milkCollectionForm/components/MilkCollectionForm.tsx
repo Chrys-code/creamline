@@ -12,6 +12,7 @@ import { useNavigate } from "react-router";
 import { useMilkCollectionForm } from "../hooks/useMilkCollectionForm";
 import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation.js";
 import { v4 as uuid } from "uuid";
+import { NAVIGATION_ROUTES } from "../../../../../../configs/navigation.js";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -81,7 +82,7 @@ const MilkCollectionForm: React.FC<MilkCollectionFormProps> = ({
 					/>
 					<IconButton
 						type="button"
-						onClick={() => navigate("/producer/create")}
+						onClick={() => navigate(NAVIGATION_ROUTES.producer.create.path)}
 						disabled={!!milk}
 					>
 						<MdOutlineAddCircleOutline size="1.5rem" />

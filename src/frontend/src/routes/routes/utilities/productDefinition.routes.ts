@@ -12,7 +12,7 @@ const productDefinitionRoutes: RouteObject = {
 	loader: productDefinitionTranslationLoader,
 	children: [
 		{
-			path: NAVIGATION_ROUTES.productDefinition.list,
+			path: NAVIGATION_ROUTES.productDefinition.list.path,
 			lazy: {
 				Component: async () =>
 					(
@@ -26,7 +26,7 @@ const productDefinitionRoutes: RouteObject = {
 			}),
 		},
 		{
-			path: NAVIGATION_ROUTES.productDefinition.create,
+			path: NAVIGATION_ROUTES.productDefinition.create.path,
 			lazy: {
 				Component: async () =>
 					(
@@ -44,7 +44,7 @@ const productDefinitionRoutes: RouteObject = {
 			}),
 		},
 		{
-			path: NAVIGATION_ROUTES.productDefinition.edit + ":id",
+			path: NAVIGATION_ROUTES.productDefinition.edit.path + ":id",
 			lazy: {
 				Component: async () =>
 					(

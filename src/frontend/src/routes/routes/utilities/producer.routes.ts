@@ -10,7 +10,7 @@ const producerRoutes: RouteObject = {
 	loader: producerTranslationLoader,
 	children: [
 		{
-			path: NAVIGATION_ROUTES.producer.list,
+			path: NAVIGATION_ROUTES.producer.list.path,
 			lazy: {
 				Component: async () =>
 					(await import("../../../pages/producer/listProducers/ListProducers")).default,
@@ -20,7 +20,7 @@ const producerRoutes: RouteObject = {
 			}),
 		},
 		{
-			path: NAVIGATION_ROUTES.producer.create,
+			path: NAVIGATION_ROUTES.producer.create.path,
 			lazy: {
 				Component: async () =>
 					(await import("../../../pages/producer/editProducer/EditProducer")).default,
@@ -28,7 +28,7 @@ const producerRoutes: RouteObject = {
 			loader: getProducer,
 		},
 		{
-			path: NAVIGATION_ROUTES.producer.edit + ":id",
+			path: NAVIGATION_ROUTES.producer.edit.path + ":id",
 			lazy: {
 				Component: async () =>
 					(await import("../../../pages/producer/editProducer/EditProducer")).default,

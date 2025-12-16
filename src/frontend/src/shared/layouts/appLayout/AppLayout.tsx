@@ -2,13 +2,18 @@ import type React from "react";
 import type { AppLayoutProps } from "./AppLayout.types";
 import styles from "./AppLayout.module.scss";
 
-import { Outlet } from "react-router";
+import { NAVIGATION_ROUTES } from "../../../configs/navigation";
+
 import Header from "../../components/header";
 import MobileFooterNav from "../../components/mobileFooterNav";
-import { useState } from "react";
 import SideBarMenu from "../../components/sideBarMenu/SideBarMenu";
 
+import { Outlet, useRouteLoaderData } from "react-router";
+import { useState } from "react";
+import { getRoutesForRoles } from "../../helpers/getNavigationRoutesForRoles/getNavigationRoutesForRoles";
+
 const AppLayout: React.FC<AppLayoutProps> = ({ children }: AppLayoutProps) => {
+	const { profile } = useRouteLoaderData("app");
 	const [navigationIsOpen, setNavigationIsOpen] = useState(false);
 
 	return (
@@ -17,7 +22,15 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }: AppLayoutProps) => {
 				onMenuClick={() => setNavigationIsOpen((navigationIsOpen) => !navigationIsOpen)}
 			/>
 			<div className={styles.container}>
-				<SideBarMenu isOpen={navigationIsOpen} />
+				<SideBarMenu
+					options={getRoutesForRoles({
+						routes: NAVIGATION_ROUTES,
+						userGroups: profile.groups,
+						ignoredRoutes: ["login", "profile"],
+					})}
+					isOpen={navigationIsOpen}
+					setIsOpen={setNavigationIsOpen}
+				/>
 				<main className={styles.main}>
 					<Outlet />
 					{children}

@@ -1,149 +1,77 @@
 import type React from "react";
+import type { NAVIGATION_ROUTE } from "../../types";
 import type { MobileNavProps } from "./SideBarMenu.types";
 import styles from "./SideBarMenu.module.scss";
 
 import { NavLink } from "react-router";
+import { Fragment } from "react";
 import { useTypedTranslation } from "../../hooks/useTypedTranslation/useTypedTranslation.js";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
+import { v4 as uuid } from "uuid";
 
-const SideBarMenu: React.FC<MobileNavProps> = ({ isOpen }: MobileNavProps) => {
+const SideBarMenu: React.FC<MobileNavProps> = ({ options, isOpen, setIsOpen }: MobileNavProps) => {
 	const tNavigation = useTypedTranslation("navigation");
 
 	const navigationStyle = isOpen ? `${styles.container} ${styles.open}` : styles.container;
 
+	const renderLink = (route: { title: string; path: string }): React.ReactNode => (
+		<li key={uuid()}>
+			<NavLink
+				to={route.path}
+				onClick={() => setIsOpen(false)}
+				className={({ isActive }) => (isActive ? styles.active : undefined)}
+			>
+				<span>{route.title}</span>
+			</NavLink>
+		</li>
+	);
+
+	const renderOptions = (options: Record<string, NAVIGATION_ROUTE>) => {
+		const elements = [];
+
+		for (const key in options) {
+			const route = options[key];
+
+			// If has root, render with sub routes inside
+			if ("root" in route) {
+				const subRouteElements = [];
+
+				//  Render routes on subKeys
+				for (const subKey in route) {
+					// Ignore "root" as its used as parent
+					if (subKey === "root") continue;
+					const subRoute = route[subKey];
+
+					if (subRoute.path && subRoute.title) {
+						subRouteElements.push(renderLink(subRoute));
+					}
+				}
+
+				elements.push(
+					<Fragment key={uuid()}>
+						{renderLink(route.root)}
+						<ul>{subRouteElements}</ul>
+					</Fragment>
+				);
+
+				continue;
+			}
+
+			for (const subKey in route) {
+				const subRoute = route[subKey];
+
+				if (subRoute.path && subRoute.title) {
+					elements.push(renderLink(subRoute));
+				}
+			}
+		}
+
+		return elements;
+	};
+
 	return (
 		<aside className={navigationStyle}>
 			<h3>{tNavigation("sidebar.title")}</h3>
-			<ul>
-				<li>
-					<NavLink
-						to={NAVIGATION_ROUTES.app}
-						className={({ isActive }) => (isActive ? styles.active : undefined)}
-					>
-						<span>{tNavigation("sidebar.home")}</span>
-					</NavLink>
-				</li>
-				<li>
-					<NavLink
-						to={NAVIGATION_ROUTES.user.list}
-						className={({ isActive }) => (isActive ? styles.active : undefined)}
-					>
-						<span>{tNavigation("sidebar.users")}</span>
-					</NavLink>
-				</li>
-			</ul>
-
-			<h3>{tNavigation("sidebar.processes.section_title")}</h3>
-			<ul>
-				<li>
-					<NavLink
-						to={NAVIGATION_ROUTES.milkCollection.root}
-						className={({ isActive }) => (isActive ? styles.active : undefined)}
-					>
-						<span>
-							{tNavigation("sidebar.processes.milk_collection.milk_collection")}
-						</span>
-					</NavLink>
-				</li>
-				<ul>
-					<li>
-						<NavLink
-							to={NAVIGATION_ROUTES.milkCollection.list}
-							className={({ isActive }) => (isActive ? styles.active : undefined)}
-						>
-							<span>
-								{tNavigation(
-									"sidebar.processes.milk_collection.milk_collection_list"
-								)}
-							</span>
-						</NavLink>
-					</li>
-					<li>
-						<NavLink
-							to={NAVIGATION_ROUTES.milkCollection.create}
-							className={({ isActive }) => (isActive ? styles.active : undefined)}
-						>
-							<span>
-								{tNavigation(
-									"sidebar.processes.milk_collection.milk_collection_create"
-								)}
-							</span>
-						</NavLink>
-					</li>
-				</ul>
-				<li>
-					<NavLink
-						to={NAVIGATION_ROUTES.pasteuriation.root}
-						className={({ isActive }) => (isActive ? styles.active : undefined)}
-					>
-						<span>
-							{tNavigation("sidebar.processes.pasteurisation.pasteurisation")}
-						</span>
-					</NavLink>
-				</li>
-				<ul>
-					<li>
-						<NavLink
-							to={NAVIGATION_ROUTES.pasteuriation.list}
-							className={({ isActive }) => (isActive ? styles.active : undefined)}
-						>
-							<span>
-								{tNavigation(
-									"sidebar.processes.pasteurisation.pasteurisation_list"
-								)}
-							</span>
-						</NavLink>
-					</li>
-					<li>
-						<NavLink
-							to={NAVIGATION_ROUTES.pasteuriation.create}
-							className={({ isActive }) => (isActive ? styles.active : undefined)}
-						>
-							<span>
-								{tNavigation(
-									"sidebar.processes.pasteurisation.pasteurisation_create"
-								)}
-							</span>
-						</NavLink>
-					</li>
-				</ul>
-			</ul>
-
-			<h3>{tNavigation("sidebar.utilities.section_title")}</h3>
-			<ul>
-				<li>
-					<NavLink
-						to={NAVIGATION_ROUTES.producer.list}
-						className={({ isActive }) => (isActive ? styles.active : undefined)}
-					>
-						<span>{tNavigation("sidebar.utilities.producer")}</span>
-					</NavLink>
-				</li>
-				<li>
-					<NavLink
-						to={NAVIGATION_ROUTES.storage.list}
-						className={({ isActive }) => (isActive ? styles.active : undefined)}
-					>
-						<span>{tNavigation("sidebar.utilities.storage")}</span>
-					</NavLink>
-				</li>
-				<li>
-					<NavLink
-						to={NAVIGATION_ROUTES.pasteur.list}
-						className={({ isActive }) => (isActive ? styles.active : undefined)}
-					>
-						<span>{tNavigation("sidebar.utilities.pasteur")}</span>
-					</NavLink>
-				</li>
-				<li>
-					<NavLink
-						to={NAVIGATION_ROUTES.productDefinition.list}
-						className={({ isActive }) => (isActive ? styles.active : undefined)}
-					>
-						<span>{tNavigation("sidebar.utilities.product_definitions")}</span>
-					</NavLink>
-				</li>
-			</ul>
+			<ul>{renderOptions(options)}</ul>
 		</aside>
 	);
 };

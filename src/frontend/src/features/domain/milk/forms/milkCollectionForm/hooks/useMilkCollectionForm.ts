@@ -11,6 +11,7 @@ import { milkClient } from "../../../services/client";
 import schemas from "../../../services/schemas";
 
 import convertMilkLiterAndKg from "../../../../../../shared/helpers/literToKg/literToKg";
+import { NAVIGATION_ROUTES } from "../../../../../../configs/navigation";
 
 export const useMilkCollectionForm = (milk: Milk | null) => {
 	const navigate = useNavigate();
@@ -42,7 +43,7 @@ export const useMilkCollectionForm = (milk: Milk | null) => {
 		try {
 			await milkClient.createMilk(formData);
 			toast.success(mct("edit_milk_collection.notifications.success"));
-			navigate("/milk-collection/list");
+			navigate(NAVIGATION_ROUTES.milkCollection.list.path);
 		} catch (err: any) {
 			if (err.response?.data) {
 				const responseData = err.response.data;

@@ -25,7 +25,7 @@ const ListPasteurs: React.FC = () => {
 	const tPasteur = useTypedTranslation("pasteur");
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.pasteur.create)}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.pasteur.create.path)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -35,7 +35,7 @@ const ListPasteurs: React.FC = () => {
 			<li key={item.uuid} tabIndex={0}>
 				<PasteurCard
 					name={item.name}
-					onClick={() => navigate(NAVIGATION_ROUTES.pasteur.edit + item.uuid)}
+					onClick={() => navigate(NAVIGATION_ROUTES.pasteur.edit.path + item.uuid)}
 				/>
 			</li>
 		);

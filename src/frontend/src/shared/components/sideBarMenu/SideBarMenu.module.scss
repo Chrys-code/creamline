@@ -18,7 +18,7 @@
 
 	transform: translateX(-100%);
 	transition: transform var(--animation-duration) var(--animation-timing);
-	z-index: 50;
+	z-index: 100;
 
 	/* For WebKit browsers (Chrome, Safari, Edge) */
 	&::-webkit-scrollbar {

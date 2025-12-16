@@ -18,7 +18,7 @@ const pasteurisationRoutes: RouteObject = {
 	children: [
 		{
 			index: true,
-			path: NAVIGATION_ROUTES.pasteuriation.root,
+			path: NAVIGATION_ROUTES.pasteuriation.root.path,
 			lazy: {
 				Component: async () =>
 					(await import("../../../pages/pasteurisation/pasteurisation/Pasteurisation"))
@@ -27,7 +27,7 @@ const pasteurisationRoutes: RouteObject = {
 			loader: async () => adaptPasteursToPasteurOptions(await listPasteurs()),
 		},
 		{
-			path: NAVIGATION_ROUTES.pasteuriation.list,
+			path: NAVIGATION_ROUTES.pasteuriation.list.path,
 			lazy: {
 				Component: async () =>
 					(
@@ -39,7 +39,7 @@ const pasteurisationRoutes: RouteObject = {
 			loader: getPaginatedPasteuriationList,
 		},
 		{
-			path: NAVIGATION_ROUTES.pasteuriation.create,
+			path: NAVIGATION_ROUTES.pasteuriation.create.path,
 			lazy: {
 				Component: async () =>
 					(
@@ -57,7 +57,7 @@ const pasteurisationRoutes: RouteObject = {
 			}),
 		},
 		{
-			path: NAVIGATION_ROUTES.pasteuriation.edit + ":id",
+			path: NAVIGATION_ROUTES.pasteuriation.edit.path + ":id",
 			lazy: {
 				Component: async () =>
 					(

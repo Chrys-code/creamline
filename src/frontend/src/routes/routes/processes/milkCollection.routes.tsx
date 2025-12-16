@@ -16,7 +16,7 @@ const milkCollectionRoutes: RouteObject = {
 	loader: milkTranslationLoader,
 	children: [
 		{
-			path: NAVIGATION_ROUTES.milkCollection.root,
+			path: NAVIGATION_ROUTES.milkCollection.root.path,
 			lazy: {
 				Component: async () =>
 					(await import("../../../pages/milkCollection/milkCollection/MilkCollection"))
@@ -25,7 +25,7 @@ const milkCollectionRoutes: RouteObject = {
 			loader: async () => adaptProducersToProducerOptions(await listProducers()),
 		},
 		{
-			path: NAVIGATION_ROUTES.milkCollection.list,
+			path: NAVIGATION_ROUTES.milkCollection.list.path,
 			lazy: {
 				Component: async () =>
 					(
@@ -37,7 +37,7 @@ const milkCollectionRoutes: RouteObject = {
 			loader: getPaginatedMilkList,
 		},
 		{
-			path: NAVIGATION_ROUTES.milkCollection.create,
+			path: NAVIGATION_ROUTES.milkCollection.create.path,
 			lazy: {
 				Component: async () =>
 					(
@@ -52,7 +52,7 @@ const milkCollectionRoutes: RouteObject = {
 			}),
 		},
 		{
-			path: NAVIGATION_ROUTES.milkCollection.edit + ":id",
+			path: NAVIGATION_ROUTES.milkCollection.edit.path + ":id",
 			lazy: {
 				Component: async () =>
 					(

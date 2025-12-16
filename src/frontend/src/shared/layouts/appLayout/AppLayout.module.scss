@@ -38,6 +38,6 @@
 @media (min-width: $breakpoint-desktop) {
 	.main {
 		height: calc(100vh - var(--header-height));
-		padding-bottom: 1rem;
+		padding-bottom: 0rem;
 	}
 }

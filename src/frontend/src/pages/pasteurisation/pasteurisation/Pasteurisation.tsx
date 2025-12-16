@@ -29,7 +29,7 @@ const Pasteurisation: React.FC = () => {
 	const { data: pasteurisationSummaryData } = usePasteurisationSummary();
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.milkCollection.create)}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.milkCollection.create.path)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);

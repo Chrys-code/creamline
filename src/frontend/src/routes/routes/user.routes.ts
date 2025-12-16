@@ -14,7 +14,7 @@ const userManagementRoutes: RouteObject = {
 	loader: userTranslationLoader,
 	children: [
 		{
-			path: NAVIGATION_ROUTES.user.list,
+			path: NAVIGATION_ROUTES.user.list.path,
 			lazy: {
 				Component: async () => (await import("../../pages/user/listUser/ListUser")).default,
 			},
@@ -24,7 +24,7 @@ const userManagementRoutes: RouteObject = {
 			}),
 		},
 		{
-			path: NAVIGATION_ROUTES.user.create,
+			path: NAVIGATION_ROUTES.user.create.path,
 			lazy: {
 				Component: async () => (await import("../../pages/user/editUser/EditUser")).default,
 			},
@@ -34,7 +34,7 @@ const userManagementRoutes: RouteObject = {
 			}),
 		},
 		{
-			path: NAVIGATION_ROUTES.user.edit + ":id",
+			path: NAVIGATION_ROUTES.user.edit.path + ":id",
 			lazy: {
 				Component: async () => (await import("../../pages/user/editUser/EditUser")).default,
 			},

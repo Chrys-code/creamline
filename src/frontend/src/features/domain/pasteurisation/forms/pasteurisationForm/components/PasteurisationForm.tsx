@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 import { v4 as uuid } from "uuid";
 import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { usePasteurisationForm } from "../hooks/usePasteurisationForm.js";
+import { NAVIGATION_ROUTES } from "../../../../../../configs/navigation.js";
 
 const PasteurisationForm: React.FC<PasteurisationFormProps> = ({
 	pasteurisation,
@@ -38,7 +39,7 @@ const PasteurisationForm: React.FC<PasteurisationFormProps> = ({
 				<Button
 					type="button"
 					style="secondary"
-					onClick={() => navigate("/pasteurised-milk")}
+					onClick={() => navigate(NAVIGATION_ROUTES.pasteuriation.list.path)}
 				>
 					{tCommon("common.back")}
 				</Button>

@@ -25,7 +25,7 @@ const ListStorages: React.FC = () => {
 	} = useLoaderData<ListStoragesProps>();
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.storage.create)}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.storage.create.path)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -36,7 +36,7 @@ const ListStorages: React.FC = () => {
 				<StorageCard
 					name={item.name}
 					type={item.type_label}
-					onClick={() => navigate(NAVIGATION_ROUTES.storage.edit + item.uuid)}
+					onClick={() => navigate(NAVIGATION_ROUTES.storage.edit.path + item.uuid)}
 				/>
 			</li>
 		);

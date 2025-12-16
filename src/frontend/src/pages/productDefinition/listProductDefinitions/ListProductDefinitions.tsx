@@ -25,7 +25,7 @@ const ListProductDefinitions: React.FC = () => {
 	const tProductDefinition = useTypedTranslation("productDefinition");
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.productDefinition.create)}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.productDefinition.create.path)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -36,7 +36,9 @@ const ListProductDefinitions: React.FC = () => {
 				<ProductDefinitionCard
 					name={item.name}
 					type={item.type_label}
-					onClick={() => navigate(NAVIGATION_ROUTES.productDefinition.edit + item.uuid)}
+					onClick={() =>
+						navigate(NAVIGATION_ROUTES.productDefinition.edit.path + item.uuid)
+					}
 				/>
 			</li>
 		);

@@ -23,6 +23,7 @@ const LogoutEndpoint = makeEndpoint({
 	path: "/api/logout/",
 	alias: "logout",
 	requestFormat: "json",
+	parameters: [],
 	response: z.void(),
 });
 

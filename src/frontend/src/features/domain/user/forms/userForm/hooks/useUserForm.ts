@@ -14,6 +14,7 @@ import { userClient } from "../../../services/client";
 import userSchemas from "../../../services/schemas";
 
 import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { NAVIGATION_ROUTES } from "../../../../../../configs/navigation";
 
 export const useUserForm = (user: User) => {
 	const navigate = useNavigate();
@@ -56,7 +57,7 @@ export const useUserForm = (user: User) => {
 		try {
 			await userClient.createUser(formData);
 			toast.success(tUser("edit_user.notifications.success"));
-			navigate("/users");
+			navigate(NAVIGATION_ROUTES.user.list.path);
 		} catch (err: any) {
 			if (err.response?.data) {
 				const responseData = err.response.data;
@@ -76,7 +77,7 @@ export const useUserForm = (user: User) => {
 		try {
 			await userClient.updateUser(formData, { params: { uuid: id } });
 			toast.success(tUser("edit_user.notifications.success"));
-			navigate("/users");
+			navigate(NAVIGATION_ROUTES.user.list.path);
 		} catch (err: any) {
 			if (err.response?.data) {
 				const responseData = err.response.data;

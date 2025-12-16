@@ -5,6 +5,10 @@ import React from "react";
 import LanguageSelector from "../languageSelector";
 
 import i18n from "../../../configs/i18n";
+import { authClient } from "../../../features/domain/auth/services/client";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
+import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const MdCheckBoxOutlineBlank = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -14,8 +18,12 @@ const MdCheckBoxOutlineBlank = React.lazy(() =>
 const MdOutlineMenu = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({ default: mod.MdOutlineMenu }))
 );
+const MdOutlineLogout = React.lazy(() =>
+	import("react-icons/md").then((mod) => ({ default: mod.MdOutlineLogout }))
+);
 
 const Header: React.FC<HeaderProps> = ({ onMenuClick }: HeaderProps) => {
+	const navigate = useNavigate();
 	// @ts-expect-error supportedLngs is set to readOnly string[]
 	const supportedLanguages = i18n.options.supportedLngs?.filter((l: string) => l !== "cimode");
 
@@ -35,6 +43,16 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }: HeaderProps) => {
 		window.location.reload();
 	};
 
+	const handleLogout = async () => {
+		try {
+			// @ts-expect-error no body required on post request
+			await authClient.logout();
+			navigate(NAVIGATION_ROUTES.login);
+		} catch {
+			toast.error("Someting went wrong");
+		}
+	};
+
 	return (
 		<div className={styles.container}>
 			<MdCheckBoxOutlineBlank size="2rem" fill="white" />
@@ -44,7 +62,10 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }: HeaderProps) => {
 					currentLanguageCode={i18n.language}
 					onChange={handleLanguageChange}
 				/>
-				<button onClick={onMenuClick}>
+				<button onClick={() => handleLogout()}>
+					<MdOutlineLogout size="1.5rem" fill="white" />
+				</button>
+				<button className={styles.mobileMenu} onClick={onMenuClick}>
 					<MdOutlineMenu size="2rem" fill="white" />
 				</button>
 			</div>

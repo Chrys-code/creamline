@@ -25,7 +25,7 @@ const ListMilkCollection: React.FC = () => {
 	const { data, page } = useLoaderData<ListMilkCollectionProps>();
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.milkCollection.create)}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.milkCollection.create.path)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -40,7 +40,7 @@ const ListMilkCollection: React.FC = () => {
 					month: "long",
 					day: "numeric",
 				})}
-				onClick={() => navigate(NAVIGATION_ROUTES.milkCollection.edit + result.uuid)}
+				onClick={() => navigate(NAVIGATION_ROUTES.milkCollection.edit.path + result.uuid)}
 			/>
 		</li>
 	);

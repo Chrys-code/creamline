@@ -28,7 +28,7 @@ const ListUser: React.FC = () => {
 	} = useLoaderData<UserListProps>();
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.user.create)}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.user.create.path)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -50,7 +50,7 @@ const ListUser: React.FC = () => {
 				<UserCard
 					name={`${result.profile?.first_name} ${result.profile?.last_name}`}
 					groups={getUserGroupNames(userGroups, result.groups)}
-					onClick={() => navigate(NAVIGATION_ROUTES.user.edit + result.uuid)}
+					onClick={() => navigate(NAVIGATION_ROUTES.user.edit.path + result.uuid)}
 				/>
 			</li>
 		);

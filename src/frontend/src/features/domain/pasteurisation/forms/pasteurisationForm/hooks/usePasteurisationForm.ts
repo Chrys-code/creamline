@@ -11,6 +11,7 @@ import pasteurisationClient from "../../../services/client";
 import schemas from "../../../services/schemas";
 
 import convertMilkLiterAndKg from "../../../../../../shared/helpers/literToKg/literToKg";
+import { NAVIGATION_ROUTES } from "../../../../../../configs/navigation";
 
 export const usePasteurisationForm = (pasteurisation: Pasteurisation | null) => {
 	const navigate = useNavigate();
@@ -48,7 +49,7 @@ export const usePasteurisationForm = (pasteurisation: Pasteurisation | null) => 
 		try {
 			await pasteurisationClient.createPasteurisation(formData);
 			toast.success(tPasteurisation("edit_pasteurisation.notifications.success"));
-			navigate("/pasteurisation/list");
+			navigate(NAVIGATION_ROUTES.pasteuriation.list.path);
 		} catch (err: any) {
 			if (err.response?.data) {
 				const responseData = err.response.data;

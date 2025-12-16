@@ -10,7 +10,7 @@ const pasteurRoutes: RouteObject = {
 	loader: pasteurTranslationLoader,
 	children: [
 		{
-			path: NAVIGATION_ROUTES.pasteur.list,
+			path: NAVIGATION_ROUTES.pasteur.list.path,
 			lazy: {
 				Component: async () =>
 					(await import("../../../pages/pasteur/listPasteurs/ListPasteurs")).default,
@@ -20,7 +20,7 @@ const pasteurRoutes: RouteObject = {
 			}),
 		},
 		{
-			path: NAVIGATION_ROUTES.pasteur.create,
+			path: NAVIGATION_ROUTES.pasteur.create.path,
 			lazy: {
 				Component: async () =>
 					(await import("../../../pages/pasteur/editPasteur/EditPasteur")).default,
@@ -28,7 +28,7 @@ const pasteurRoutes: RouteObject = {
 			loader: getPasteur,
 		},
 		{
-			path: NAVIGATION_ROUTES.pasteur.edit + ":id",
+			path: NAVIGATION_ROUTES.pasteur.edit.path + ":id",
 			lazy: {
 				Component: async () =>
 					(await import("../../../pages/pasteur/editPasteur/EditPasteur")).default,

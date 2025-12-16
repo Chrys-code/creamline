@@ -1,42 +1,120 @@
+import { tTyped } from "./i18n";
+
+const tNavigation = tTyped("navigation");
+
 export const NAVIGATION_ROUTES = {
-	app: "/",
-	login: "/login",
-	profile: "/profile",
+	app: {
+		requiredRoles: null,
+		path: "/",
+		title: "Dashboard",
+	},
+	login: {
+		requiredRoles: null,
+		path: "/login",
+	},
+	profile: {
+		requiredRoles: null,
+		path: "/profile",
+	},
 	user: {
-		list: "/users",
-		create: "/user/create",
-		edit: "/user/edit/",
+		requiredRoles: ["Manager"],
+		list: {
+			path: "/users",
+			title: tNavigation("sidebar.users"),
+		},
+		create: {
+			path: "/user/create",
+		},
+		edit: {
+			path: "/user/edit/",
+		},
 	},
 	milkCollection: {
-		root: "/milk-collection",
-		list: "/milk-collection/list",
-		create: "/milk-collection/create",
-		edit: "/milk-collection/edit/",
+		requiredRoles: ["Manager", "Milk collector"],
+		root: {
+			path: "/milk-collection",
+			title: tNavigation("sidebar.processes.milk_collection.milk_collection"),
+		},
+		list: {
+			path: "/milk-collection/list",
+			title: tNavigation("sidebar.processes.milk_collection.milk_collection_list"),
+		},
+		create: {
+			path: "/milk-collection/create",
+			title: tNavigation("sidebar.processes.milk_collection.milk_collection_create"),
+		},
+		edit: {
+			path: "/milk-collection/edit/",
+		},
 	},
 	pasteuriation: {
-		root: "/pasteurisation",
-		list: "/pasteurisation/list",
-		create: "/pasteurisation/create",
-		edit: "/pasteurisation/edit/",
+		requiredRoles: ["Manager", "Pasteuriser"],
+		root: {
+			path: "/pasteurisation",
+			title: tNavigation("sidebar.processes.pasteurisation.pasteurisation"),
+		},
+		list: {
+			path: "/pasteurisation/list",
+			title: tNavigation("sidebar.processes.pasteurisation.pasteurisation_list"),
+		},
+		create: {
+			path: "/pasteurisation/create",
+			title: tNavigation("sidebar.processes.pasteurisation.pasteurisation_create"),
+		},
+		edit: {
+			path: "/pasteurisation/edit/",
+		},
 	},
 	producer: {
-		list: "/producers",
-		create: "/producer/create",
-		edit: "/producer/edit/",
+		requiredRoles: ["Manager", "Milk collector"],
+		list: {
+			path: "/producers",
+			title: tNavigation("sidebar.utilities.producer"),
+		},
+		create: {
+			path: "/producer/create",
+		},
+		edit: {
+			path: "/producer/edit/",
+		},
 	},
 	storage: {
-		list: "/storages",
-		create: "/storage/create",
-		edit: "/storage/edit/",
+		requiredRoles: ["Manager"],
+		list: {
+			path: "/storages",
+			title: tNavigation("sidebar.utilities.storage"),
+		},
+		create: {
+			path: "/storage/create",
+		},
+		edit: {
+			path: "/storage/edit/",
+		},
 	},
 	pasteur: {
-		list: "/pasteurs",
-		create: "/pasteur/create",
-		edit: "/pasteur/edit/",
+		requiredRoles: ["Manager"],
+		list: {
+			path: "/pasteurs",
+			title: tNavigation("sidebar.utilities.pasteur"),
+		},
+		create: {
+			path: "/pasteur/create",
+		},
+		edit: {
+			path: "/pasteur/edit/",
+		},
 	},
 	productDefinition: {
-		list: "/product-definitions",
-		create: "/product-definition/create",
-		edit: "/product-definition/edit/",
+		requiredRoles: ["Manager"],
+		list: {
+			path: "/product-definitions",
+			title: tNavigation("sidebar.utilities.product_definitions"),
+		},
+		create: {
+			path: "/product-definition/create",
+		},
+		edit: {
+			path: "/product-definition/edit/",
+		},
 	},
 };

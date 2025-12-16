@@ -25,7 +25,7 @@ const ListPasteurisation: React.FC = () => {
 	const { data, page } = useLoaderData<ListPasteurisationProps>();
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.pasteuriation.create)}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.pasteuriation.create.path)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -42,7 +42,7 @@ const ListPasteurisation: React.FC = () => {
 					day: "numeric",
 				})}
 				temperature={result.temperature}
-				onClick={() => navigate(NAVIGATION_ROUTES.pasteuriation.edit + result.uuid)}
+				onClick={() => navigate(NAVIGATION_ROUTES.pasteuriation.edit.path + result.uuid)}
 			/>
 		</li>
 	);

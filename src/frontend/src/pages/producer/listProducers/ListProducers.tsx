@@ -25,7 +25,7 @@ const ListProducers: React.FC = () => {
 	const tProducer = useTypedTranslation("producer");
 
 	const headerActionElement = (
-		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.producer.create)}>
+		<IconButton onClick={() => navigate(NAVIGATION_ROUTES.producer.create.path)}>
 			<MdOutlineAddCircleOutline size={"1rem"} />
 		</IconButton>
 	);
@@ -36,7 +36,7 @@ const ListProducers: React.FC = () => {
 				<ProducerCard
 					name={item.name}
 					address={item.address}
-					onClick={() => navigate(NAVIGATION_ROUTES.producer.edit + item.uuid)}
+					onClick={() => navigate(NAVIGATION_ROUTES.producer.edit.path + item.uuid)}
 				/>
 			</li>
 		);
