@@ -7,6 +7,7 @@ import { NavLink } from "react-router";
 import { Fragment } from "react";
 import { useTypedTranslation } from "../../hooks/useTypedTranslation/useTypedTranslation.js";
 import { v4 as uuid } from "uuid";
+import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const SideBarMenu: React.FC<MobileNavProps> = ({ options, isOpen, setIsOpen }: MobileNavProps) => {
 	const tNavigation = useTypedTranslation("navigation");
@@ -71,7 +72,13 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ options, isOpen, setIsOpen }: M
 	return (
 		<aside className={navigationStyle}>
 			<h3>{tNavigation("sidebar.title")}</h3>
-			<ul>{renderOptions(options)}</ul>
+			<ul>
+				{renderLink({
+					path: NAVIGATION_ROUTES.app.path,
+					title: NAVIGATION_ROUTES.app.title,
+				})}
+				{renderOptions(options)}
+			</ul>
 		</aside>
 	);
 };

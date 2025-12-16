@@ -1,5 +1,4 @@
 from django.urls import path, include
-from django.contrib import admin
 
 from drf_spectacular.views import SpectacularAPIView
 
@@ -16,8 +15,6 @@ urlpatterns = [
     path("roles/", auth_views.GetRolesView.as_view(), name="roles"),
     # Domain endpoints
     path("user-groups/", UserGroupsView.as_view(), name="user-groups"),
-    # Admin
-    path("admin/", admin.site.urls),
     # API schema
     path("schema/", SpectacularAPIView.as_view()),
     # Other versioned API endpoints

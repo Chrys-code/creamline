@@ -1,3 +1,4 @@
+import { USER_GROUPS } from "./constants";
 import { tTyped } from "./i18n";
 
 const tNavigation = tTyped("navigation");
@@ -17,7 +18,7 @@ export const NAVIGATION_ROUTES = {
 		path: "/profile",
 	},
 	user: {
-		requiredRoles: ["Manager"],
+		requiredRoles: [USER_GROUPS.MANAGER],
 		list: {
 			path: "/users",
 			title: tNavigation("sidebar.users"),
@@ -30,7 +31,7 @@ export const NAVIGATION_ROUTES = {
 		},
 	},
 	milkCollection: {
-		requiredRoles: ["Manager", "Milk collector"],
+		requiredRoles: [USER_GROUPS.MANAGER, USER_GROUPS.MILK_COLLECTOR],
 		root: {
 			path: "/milk-collection",
 			title: tNavigation("sidebar.processes.milk_collection.milk_collection"),
@@ -48,7 +49,7 @@ export const NAVIGATION_ROUTES = {
 		},
 	},
 	pasteuriation: {
-		requiredRoles: ["Manager", "Pasteuriser"],
+		requiredRoles: [USER_GROUPS.MANAGER, USER_GROUPS.PASTEURISER],
 		root: {
 			path: "/pasteurisation",
 			title: tNavigation("sidebar.processes.pasteurisation.pasteurisation"),
@@ -66,7 +67,7 @@ export const NAVIGATION_ROUTES = {
 		},
 	},
 	producer: {
-		requiredRoles: ["Manager", "Milk collector"],
+		requiredRoles: [USER_GROUPS.MANAGER, USER_GROUPS.MILK_COLLECTOR],
 		list: {
 			path: "/producers",
 			title: tNavigation("sidebar.utilities.producer"),
@@ -79,7 +80,7 @@ export const NAVIGATION_ROUTES = {
 		},
 	},
 	storage: {
-		requiredRoles: ["Manager"],
+		requiredRoles: [USER_GROUPS.MANAGER],
 		list: {
 			path: "/storages",
 			title: tNavigation("sidebar.utilities.storage"),
@@ -92,7 +93,7 @@ export const NAVIGATION_ROUTES = {
 		},
 	},
 	pasteur: {
-		requiredRoles: ["Manager"],
+		requiredRoles: [USER_GROUPS.MANAGER],
 		list: {
 			path: "/pasteurs",
 			title: tNavigation("sidebar.utilities.pasteur"),
@@ -105,7 +106,7 @@ export const NAVIGATION_ROUTES = {
 		},
 	},
 	productDefinition: {
-		requiredRoles: ["Manager"],
+		requiredRoles: [USER_GROUPS.MANAGER],
 		list: {
 			path: "/product-definitions",
 			title: tNavigation("sidebar.utilities.product_definitions"),

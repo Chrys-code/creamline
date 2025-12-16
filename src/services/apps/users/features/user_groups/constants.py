@@ -32,6 +32,7 @@ GROUPS_AND_PERMISSIONS = {
         "add_milk",
         "view_milk",
         "view_storage",
+        "view_producer"
     ],
     ("pasteuriser", "Pasteuriser"): [
         "add_pasteurisation",
