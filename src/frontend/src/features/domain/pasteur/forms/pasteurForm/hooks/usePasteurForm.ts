@@ -31,7 +31,7 @@ export const usePasteurForm = (pasteur: Pasteur | null) => {
 
 	const createPasteur = async (formData: CreatePasteurFormSchema): Promise<void> => {
 		try {
-			await pasteurClient.v1_pasteur_create(formData);
+			await pasteurClient.createPasteur(formData);
 			toast.success(tPasteur("edit_pasteur.notifications.success"));
 			navigate(-1);
 		} catch (err: any) {
@@ -45,7 +45,7 @@ export const usePasteurForm = (pasteur: Pasteur | null) => {
 
 	const updatePasteur = async (formData: UpdatePasteurFormSchema, id: string): Promise<void> => {
 		try {
-			await pasteurClient.v1_pasteur_update(formData, { params: { uuid: id } });
+			await pasteurClient.updatePasteur(formData, { params: { uuid: id } });
 			toast.success(tPasteur("edit_pasteur.notifications.success"));
 			navigate(-1);
 		} catch (err: any) {

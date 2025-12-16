@@ -46,7 +46,7 @@ export const usePasteurisationForm = (pasteurisation: Pasteurisation | null) => 
 
 	const onSubmit = async (formData: CreatePasteurisationFormSchema): Promise<void> => {
 		try {
-			await pasteurisationClient.v1_pasteurisation_create(formData);
+			await pasteurisationClient.createPasteurisation(formData);
 			toast.success(tPasteurisation("edit_pasteurisation.notifications.success"));
 			navigate("/pasteurisation/list");
 		} catch (err: any) {

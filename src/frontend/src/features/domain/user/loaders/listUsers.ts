@@ -7,7 +7,7 @@ const getPaginatedUserList = async ({ request }: LoaderFunctionArgs) => {
 		const page = Number(url.searchParams.get("page")) || 1;
 		const page_size = Number(import.meta.env.VITE_PAGINATION_PAGE_SIZE) || 0;
 
-		const userResponse = await userClient.v1_users_list({
+		const userResponse = await userClient.getPaginatedUsersList({
 			queries: { page, page_size },
 		});
 

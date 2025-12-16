@@ -5,7 +5,7 @@ import schemas from "./schemas";
 const GetProductDefinition = makeEndpoint({
 	method: "get",
 	path: "/api/v1/product-definition/:uuid/",
-	alias: "v1_product_definition_retrieve",
+	alias: "getProductDefinition",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -20,7 +20,7 @@ const GetProductDefinition = makeEndpoint({
 const PaginatedListProductDefinitionEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/product-definition/",
-	alias: "v1_product_definition_list_paginated",
+	alias: "getPaginatedProductDefinitionList",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -40,7 +40,7 @@ const PaginatedListProductDefinitionEndpoint = makeEndpoint({
 const ListProductDefinition = makeEndpoint({
 	method: "get",
 	path: "/api/v1/product-definition/all",
-	alias: "v1_product_definition_list",
+	alias: "getProductDefinitionList",
 	requestFormat: "json",
 	response: schemas.ListProductDefinitionSchema,
 });
@@ -48,7 +48,7 @@ const ListProductDefinition = makeEndpoint({
 const CreateProductDefinitionEndpoint = makeEndpoint({
 	method: "post",
 	path: "/api/v1/product-definition/",
-	alias: "v1_product_definition_create",
+	alias: "createProductDefinition",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -61,9 +61,9 @@ const CreateProductDefinitionEndpoint = makeEndpoint({
 });
 
 const PatchProductDefinitionEndpoint = makeEndpoint({
-	method: "put",
+	method: "patch",
 	path: "/api/v1/product-definition/:uuid/",
-	alias: "v1_product_definition_update",
+	alias: "updateProductDefinition",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -83,7 +83,7 @@ const PatchProductDefinitionEndpoint = makeEndpoint({
 const GetProductDefinitionOptinosEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/product-definition/types/",
-	alias: "v1_product_definition_types_retrieve",
+	alias: "getProductDefinitionTypes",
 	requestFormat: "json",
 	response: z.array(schemas.ProductDefinitionOptionsSchema),
 });

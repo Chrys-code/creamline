@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import { getOffsetDate } from "../../../../../../../shared/helpers/getDate/getDate";
 import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { usePasteurisationTimeSeries } from "../../hooks";
-import { useExportPasteurisationTimeSeries } from "../../../../../../pdfExport/hooks/usePasteurisationTimeSeriesDownload";
+import { useExportPasteurisationTimeSeries } from "../../../../../../../services/pdfExport/hooks/usePasteurisationTimeSeriesDownload";
 
 type PasteurOptions = { id: string; value: string }[];
 

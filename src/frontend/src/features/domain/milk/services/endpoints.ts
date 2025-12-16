@@ -2,10 +2,10 @@ import z from "zod";
 import { makeApi, makeEndpoint, Zodios, type ZodiosOptions } from "@zodios/core";
 import schemas from "./schemas";
 
-const PaginatedListMilkEndpoint = makeEndpoint({
+const PaginatedMilkListEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/milk/",
-	alias: "v1_milk_list_paginated",
+	alias: "getPaginatedMilkList",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -25,7 +25,7 @@ const PaginatedListMilkEndpoint = makeEndpoint({
 const GetMilkEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/milk/:id/",
-	alias: "v1_milk_retrieve",
+	alias: "getMilk",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -40,7 +40,7 @@ const GetMilkEndpoint = makeEndpoint({
 const CreateMilkEndpoint = makeEndpoint({
 	method: "post",
 	path: "/api/v1/milk/",
-	alias: "v1_milk_create",
+	alias: "createMilk",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -53,9 +53,9 @@ const CreateMilkEndpoint = makeEndpoint({
 });
 
 const PatchMilkEndpoint = makeEndpoint({
-	method: "put",
+	method: "patch",
 	path: "/api/v1/milk/:id/",
-	alias: "v1_milk_update",
+	alias: "updateMilk",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -72,17 +72,17 @@ const PatchMilkEndpoint = makeEndpoint({
 	response: schemas.MilkSchema,
 });
 
-const MilkSummaryAnalytics = makeEndpoint({
+const GetMilkSummaryAnalyticsEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/analytics/milk/summary/",
-	alias: "getMilkSummary",
+	alias: "getGetMilkSummaryAnalytics",
 	response: schemas.MilkSummarySchema,
 });
 
-const MilkTrendAnalytics = makeEndpoint({
+const GetMilkTimeSeriesAnalyticsEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/analytics/milk/trend/",
-	alias: "getMilkTrend",
+	alias: "getGetMilkTimeSeriesAnalytics",
 	parameters: [
 		{
 			name: "start_date",
@@ -108,10 +108,10 @@ const MilkTrendAnalytics = makeEndpoint({
 	response: z.array(schemas.MilkTrendSchema),
 });
 
-const MilkSegmentedByProducersAnalytics = makeEndpoint({
+const GetMilkAnalyticsSegmentedByProducersEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/analytics/milk/by-producers/",
-	alias: "getMilkSegmentedByProducers",
+	alias: "getMilkAnalyticsSegmentedByProducers",
 	parameters: [
 		{
 			name: "interval",
@@ -123,13 +123,13 @@ const MilkSegmentedByProducersAnalytics = makeEndpoint({
 });
 
 const endpoints = makeApi([
-	PaginatedListMilkEndpoint,
+	PaginatedMilkListEndpoint,
 	GetMilkEndpoint,
 	CreateMilkEndpoint,
 	PatchMilkEndpoint,
-	MilkSummaryAnalytics,
-	MilkTrendAnalytics,
-	MilkSegmentedByProducersAnalytics,
+	GetMilkSummaryAnalyticsEndpoint,
+	GetMilkTimeSeriesAnalyticsEndpoint,
+	GetMilkAnalyticsSegmentedByProducersEndpoint,
 ]);
 
 export function createApiClient(baseUrl: string, options?: ZodiosOptions) {

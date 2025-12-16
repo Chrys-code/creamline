@@ -5,7 +5,7 @@ import { makeApi, makeEndpoint, Zodios, type ZodiosOptions } from "@zodios/core"
 const PaginatedListStorageEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/storage/",
-	alias: "v1_storage_list_paginated",
+	alias: "getPaginatedStorageList",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -25,7 +25,7 @@ const PaginatedListStorageEndpoint = makeEndpoint({
 const ListStorageEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/storage/all",
-	alias: "v1_storage_list",
+	alias: "getStorageList",
 	requestFormat: "json",
 	response: z.array(schemas.StorageSchema),
 });
@@ -33,7 +33,7 @@ const ListStorageEndpoint = makeEndpoint({
 const GetStorageEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/storage/:uuid/",
-	alias: "v1_storage_retrieve",
+	alias: "getStorage",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -48,7 +48,7 @@ const GetStorageEndpoint = makeEndpoint({
 const CreateStorageEndpoint = makeEndpoint({
 	method: "post",
 	path: "/api/v1/storage/",
-	alias: "v1_storage_create",
+	alias: "createStorage",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -61,9 +61,9 @@ const CreateStorageEndpoint = makeEndpoint({
 });
 
 const PatchStorageEndpoint = makeEndpoint({
-	method: "put",
+	method: "patch",
 	path: "/api/v1/storage/:uuid/",
-	alias: "v1_storage_update",
+	alias: "updateStorage",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -83,7 +83,7 @@ const PatchStorageEndpoint = makeEndpoint({
 const GetStorageOptionsEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/storage/types/",
-	alias: "v1_storage_types_retrieve",
+	alias: "getStorageTypes",
 	requestFormat: "json",
 	response: z.array(schemas.StorageTypesSchema),
 });

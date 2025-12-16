@@ -8,7 +8,7 @@ export const getUser = async ({ params }: LoaderFunctionArgs): Promise<User | nu
 		const { id } = params;
 		if (!id) return null;
 
-		const userResponse = await userClient.v1_users_retrieve({ params: { uuid: id } });
+		const userResponse = await userClient.getUser({ params: { uuid: id } });
 
 		return userResponse;
 	} catch {

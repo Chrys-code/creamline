@@ -5,7 +5,7 @@ import schemas from "./schemas";
 const PaginatedListProducerEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/producer/",
-	alias: "v1_producer_list_paginated",
+	alias: "getPaginatedProducerList",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -25,7 +25,7 @@ const PaginatedListProducerEndpoint = makeEndpoint({
 const ListProducerEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/producer/all",
-	alias: "v1_producer_list",
+	alias: "getProducerList",
 	requestFormat: "json",
 	response: z.array(schemas.ProducerSchema),
 });
@@ -33,7 +33,7 @@ const ListProducerEndpoint = makeEndpoint({
 const GetProducerEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/producer/:uuid/",
-	alias: "v1_producer_retrieve",
+	alias: "getProducer",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -61,9 +61,9 @@ const CreateProducerEndpoint = makeEndpoint({
 });
 
 const PatchProducerEndpoint = makeEndpoint({
-	method: "put",
+	method: "patch",
 	path: "/api/v1/producer/:uuid/",
-	alias: "v1_producer_update",
+	alias: "updateProducer",
 	requestFormat: "json",
 	parameters: [
 		{

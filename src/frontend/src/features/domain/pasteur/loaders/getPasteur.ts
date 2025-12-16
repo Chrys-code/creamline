@@ -6,7 +6,7 @@ export const getPasteur = async ({ params }: LoaderFunctionArgs) => {
 		const { id } = params;
 		if (!id) return null;
 
-		const pasteurResponse = await pasteurClient.v1_pasteur_retrieve({ params: { id } });
+		const pasteurResponse = await pasteurClient.getPasteur({ params: { id } });
 		return pasteurResponse;
 	} catch {
 		throw new Error("Could not get pasteur");

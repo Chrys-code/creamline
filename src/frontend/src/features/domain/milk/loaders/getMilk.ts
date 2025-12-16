@@ -6,7 +6,7 @@ export const getMilk = async ({ params }: LoaderFunctionArgs) => {
 		const { id } = params;
 		if (!id) return null;
 
-		const milkResponse = await milkClient.v1_milk_retrieve({ params: { id } });
+		const milkResponse = await milkClient.getMilk({ params: { id } });
 
 		return milkResponse;
 	} catch {

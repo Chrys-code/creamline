@@ -4,7 +4,7 @@ import { milkClient } from "../services/client";
 export function useMilkSummary() {
 	return useQuery({
 		queryKey: ["milkSummary"],
-		queryFn: async () => milkClient.getMilkSummary(),
+		queryFn: async () => milkClient.getGetMilkSummaryAnalytics(),
 		refetchInterval: 10000,
 		staleTime: 5000,
 	});

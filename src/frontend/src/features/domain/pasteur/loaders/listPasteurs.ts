@@ -7,7 +7,7 @@ export const listPaginatedPasteurs = async ({ request }: LoaderFunctionArgs) => 
 		const page = Number(url.searchParams.get("page")) || 1;
 		const page_size = Number(import.meta.env.VITE_PAGINATION_PAGE_SIZE) || 0;
 
-		const pasteurResponse = await pasteurClient.v1_pasteur_list_paginated({
+		const pasteurResponse = await pasteurClient.getPaginatedPasteurList({
 			queries: { page, page_size },
 		});
 
@@ -19,7 +19,7 @@ export const listPaginatedPasteurs = async ({ request }: LoaderFunctionArgs) => 
 
 export const listPasteurs = async () => {
 	try {
-		const pasteursResponse = await pasteurClient.v1_pasteur_list();
+		const pasteursResponse = await pasteurClient.getPasteurList();
 		return pasteursResponse;
 	} catch {
 		throw new Error("Could not get pasteurs");

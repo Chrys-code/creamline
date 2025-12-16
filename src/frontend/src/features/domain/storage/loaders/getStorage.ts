@@ -7,7 +7,7 @@ export const getStorage = async ({ params }: LoaderFunctionArgs): Promise<Storag
 		const { id } = params;
 		if (!id) return null;
 
-		const storageResponse = await storageClient.v1_storage_retrieve({ params: { uuid: id } });
+		const storageResponse = await storageClient.getStorage({ params: { uuid: id } });
 
 		return storageResponse;
 	} catch {

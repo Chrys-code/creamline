@@ -5,7 +5,7 @@ import schemas from "./schemas";
 const ListPasteurEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/pasteur/all",
-	alias: "v1_pasteur_list",
+	alias: "getPasteurList",
 	requestFormat: "json",
 	response: schemas.ListPasteurSchema,
 });
@@ -13,7 +13,7 @@ const ListPasteurEndpoint = makeEndpoint({
 const PaginatedListPasteurEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/pasteur/",
-	alias: "v1_pasteur_list_paginated",
+	alias: "getPaginatedPasteurList",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -33,7 +33,7 @@ const PaginatedListPasteurEndpoint = makeEndpoint({
 const GetPasteurEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/pasteur/:id/",
-	alias: "v1_pasteur_retrieve",
+	alias: "getPasteur",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -48,7 +48,7 @@ const GetPasteurEndpoint = makeEndpoint({
 const CreatePasteurEndpoint = makeEndpoint({
 	method: "post",
 	path: "/api/v1/pasteur/",
-	alias: "v1_pasteur_create",
+	alias: "createPasteur",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -61,9 +61,9 @@ const CreatePasteurEndpoint = makeEndpoint({
 });
 
 const PatchPasteurEndpoint = makeEndpoint({
-	method: "put",
+	method: "patch",
 	path: "/api/v1/pasteur/:uuid/",
-	alias: "v1_pasteur_update",
+	alias: "updatePasteur",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -83,7 +83,7 @@ const PatchPasteurEndpoint = makeEndpoint({
 const DeletePasteurEndpoint = makeEndpoint({
 	method: "delete",
 	path: "/api/v1/pasteur/:id/",
-	alias: "v1_pasteur_delete",
+	alias: "deletePasteur",
 	requestFormat: "json",
 	parameters: [
 		{

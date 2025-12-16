@@ -6,7 +6,7 @@ export function usePasteurisationSegmentedByProducers(interval: IntervalTypes = 
 	return useQuery({
 		queryKey: ["pasteurisationSegmentedByPasteur", interval],
 		queryFn: async () =>
-			await pasteurisationClient.getPasteurisationSegmentedByPasteurs({
+			await pasteurisationClient.getPasteurisationAnalyticsSegmentedByPasteurs({
 				queries: { interval },
 			}),
 		refetchInterval: 60000,

@@ -9,7 +9,7 @@ from apps.milk.use_cases.analytics.milk_segmented_by_producer import (
 )
 
 
-class MilkSummaryAnalyticsView(views.APIView):
+class GetMilkSummaryAnalyticsEndpointView(views.APIView):
     """
     Used for interval comparison breakdown.
     Compares Milk collected in intervals to previous intervals. 

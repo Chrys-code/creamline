@@ -33,7 +33,7 @@ export const useProductDefinitionForm = (productDefinition: ProductDefinition | 
 		formData: CreateProductDefinitionFormSchema
 	): Promise<void> => {
 		try {
-			await productDefinitionClient.v1_product_definition_create(formData);
+			await productDefinitionClient.createProductDefinition(formData);
 			toast.success(tProductDefinition("edit_product_definition.notifications.success"));
 			navigate(-1);
 		} catch (err: any) {
@@ -51,7 +51,7 @@ export const useProductDefinitionForm = (productDefinition: ProductDefinition | 
 		id: string
 	): Promise<void> => {
 		try {
-			await productDefinitionClient.v1_product_definition_update(formData, {
+			await productDefinitionClient.updateProductDefinition(formData, {
 				params: { uuid: id },
 			});
 			toast.success(tProductDefinition("edit_product_definition.notifications.success"));

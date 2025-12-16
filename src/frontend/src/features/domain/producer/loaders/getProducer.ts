@@ -7,7 +7,7 @@ export const getProducer = async ({ params }: LoaderFunctionArgs): Promise<Produ
 		const { id } = params;
 		if (!id) return null;
 
-		const userResponse = await producerClient.v1_producer_retrieve({ params: { uuid: id } });
+		const userResponse = await producerClient.getProducer({ params: { uuid: id } });
 
 		return userResponse;
 	} catch {

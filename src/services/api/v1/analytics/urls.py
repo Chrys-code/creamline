@@ -1,7 +1,7 @@
 from django.urls import path
 
 from api.v1.analytics.milk.views import (
-    MilkSummaryAnalyticsView,
+    GetMilkSummaryAnalyticsEndpointView,
     MilkTimeSeriesAnalyticsView,
     MilkSegmentedByProducer,
 )
@@ -12,7 +12,7 @@ from api.v1.analytics.pasteurisation.views import (
 )
 
 milkRoutes = [
-    path("milk/summary/", MilkSummaryAnalyticsView.as_view()),
+    path("milk/summary/", GetMilkSummaryAnalyticsEndpointView.as_view()),
     path("milk/trend/", MilkTimeSeriesAnalyticsView.as_view()),
     path("milk/by-producers/", MilkSegmentedByProducer.as_view()),
 ]

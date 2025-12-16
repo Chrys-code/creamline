@@ -40,7 +40,7 @@ export const useMilkCollectionForm = (milk: Milk | null) => {
 
 	const onSubmit = async (formData: CreateMilkFormSchema): Promise<void> => {
 		try {
-			await milkClient.v1_milk_create(formData);
+			await milkClient.createMilk(formData);
 			toast.success(mct("edit_milk_collection.notifications.success"));
 			navigate("/milk-collection/list");
 		} catch (err: any) {

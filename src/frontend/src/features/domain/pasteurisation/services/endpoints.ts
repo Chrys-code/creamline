@@ -6,7 +6,7 @@ import schemas from "./schemas";
 const ListPasteurisedMilkEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/pasteurisation/",
-	alias: "v1_pasteurisation_list",
+	alias: "getPasteurisationList",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -26,7 +26,7 @@ const ListPasteurisedMilkEndpoint = makeEndpoint({
 const GetPasteurisedMilkEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/pasteurisation/:id/",
-	alias: "v1_pasteurisation_retrieve",
+	alias: "getPasteurisation",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -41,7 +41,7 @@ const GetPasteurisedMilkEndpoint = makeEndpoint({
 const CreatePasteurisedMilkEndpoint = makeEndpoint({
 	method: "post",
 	path: "/api/v1/pasteurisation/",
-	alias: "v1_pasteurisation_create",
+	alias: "createPasteurisation",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -56,7 +56,7 @@ const CreatePasteurisedMilkEndpoint = makeEndpoint({
 const PatchPasteurisedMilkEndpoint = makeEndpoint({
 	method: "patch",
 	path: "/api/v1/pasteurisation/:id/",
-	alias: "v1_pasteurisation_update",
+	alias: "updatePasteurisation",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -73,14 +73,14 @@ const PatchPasteurisedMilkEndpoint = makeEndpoint({
 	response: schemas.Pasteurisation,
 });
 
-const PasteurisationSummaryAnalytics = makeEndpoint({
+const GetPasteurisationSummaryAnalytics = makeEndpoint({
 	method: "get",
 	path: "/api/v1/analytics/pasteurisation/summary/",
-	alias: "getPasteurisationSummary",
+	alias: "getPasteurisationSummaryAnalytics",
 	response: schemas.PasteurisationSummarySchema,
 });
 
-const PasteurisationTimeSeriesAnalytics = makeEndpoint({
+const GetPasteurisationTimeSeriesAnalytics = makeEndpoint({
 	method: "get",
 	path: "/api/v1/analytics/pasteurisation/time-series/",
 	alias: "getPasteurisationTimeSeriesAnalytics",
@@ -109,10 +109,10 @@ const PasteurisationTimeSeriesAnalytics = makeEndpoint({
 	response: z.array(schemas.PasteurisationTimeSeriesSchema),
 });
 
-const PasteurisationSegmentedByPasteurAnalytics = makeEndpoint({
+const GetPasteurisationSegmentedByPasteurAnalytics = makeEndpoint({
 	method: "get",
 	path: "/api/v1/analytics/pasteurisation/by-pasteurs/",
-	alias: "getPasteurisationSegmentedByPasteurs",
+	alias: "getPasteurisationAnalyticsSegmentedByPasteurs",
 	parameters: [
 		{
 			name: "interval",
@@ -128,9 +128,9 @@ const endpoints = makeApi([
 	GetPasteurisedMilkEndpoint,
 	CreatePasteurisedMilkEndpoint,
 	PatchPasteurisedMilkEndpoint,
-	PasteurisationSummaryAnalytics,
-	PasteurisationTimeSeriesAnalytics,
-	PasteurisationSegmentedByPasteurAnalytics,
+	GetPasteurisationSummaryAnalytics,
+	GetPasteurisationTimeSeriesAnalytics,
+	GetPasteurisationSegmentedByPasteurAnalytics,
 ]);
 
 export function createApiClient(baseUrl: string, options?: ZodiosOptions) {

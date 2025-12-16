@@ -3,7 +3,7 @@ import { productDefinitionClient } from "../services/client";
 export const getProductDefinitionOptions = async () => {
 	try {
 		const productDefinitionOptionsResponse =
-			await productDefinitionClient.v1_product_definition_types_retrieve();
+			await productDefinitionClient.getProductDefinitionTypes();
 
 		return productDefinitionOptionsResponse;
 	} catch {

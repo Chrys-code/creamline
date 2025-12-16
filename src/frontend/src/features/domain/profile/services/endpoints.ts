@@ -4,15 +4,15 @@ import schemas from "./schemas";
 const GetProfileEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/profile/",
-	alias: "v1_profile_retrieve",
+	alias: "getProfile",
 	requestFormat: "json",
 	response: schemas.ProfileSchema,
 });
 
 const PatchProfileEndpoint = makeEndpoint({
-	method: "put",
+	method: "patch",
 	path: "/api/v1/profile/",
-	alias: "v1_profile_update",
+	alias: "updateProfile",
 	requestFormat: "json",
 	parameters: [
 		{

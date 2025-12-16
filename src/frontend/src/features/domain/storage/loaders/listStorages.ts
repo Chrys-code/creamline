@@ -7,7 +7,7 @@ export const listPaginatedStorages = async ({ request }: LoaderFunctionArgs) => 
 		const page = Number(url.searchParams.get("page")) || 1;
 		const page_size = Number(import.meta.env.VITE_PAGINATION_PAGE_SIZE) || 0;
 
-		const storageResponse = await storageClient.v1_storage_list_paginated({
+		const storageResponse = await storageClient.getPaginatedStorageList({
 			queries: { page, page_size },
 		});
 
@@ -19,7 +19,7 @@ export const listPaginatedStorages = async ({ request }: LoaderFunctionArgs) => 
 
 export const listStorages = async () => {
 	try {
-		const storageResponse = await storageClient.v1_storage_list();
+		const storageResponse = await storageClient.getStorageList();
 		return storageResponse;
 	} catch {
 		throw new Error("Could not get storages");

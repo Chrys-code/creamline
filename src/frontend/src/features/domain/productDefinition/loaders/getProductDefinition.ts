@@ -9,10 +9,9 @@ export const getProductDefinition = async ({
 		const { id } = params;
 		if (!id) return null;
 
-		const productDefinitionResponse =
-			await productDefinitionClient.v1_product_definition_retrieve({
-				params: { uuid: id },
-			});
+		const productDefinitionResponse = await productDefinitionClient.getProductDefinition({
+			params: { uuid: id },
+		});
 
 		return productDefinitionResponse;
 	} catch {

@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import { useMilkTimeSeries } from "../../hooks";
 import { getOffsetDate } from "../../../../../../../shared/helpers/getDate/getDate";
 import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { useExportMilkTimeSeries } from "../../../../../../pdfExport/hooks/useMilkTimeSeriesDownload";
+import { useExportMilkTimeSeries } from "../../../../../../../services/pdfExport/hooks/useMilkTimeSeriesDownload";
 
 type ProducerOptions = { id: string; value: string }[];
 

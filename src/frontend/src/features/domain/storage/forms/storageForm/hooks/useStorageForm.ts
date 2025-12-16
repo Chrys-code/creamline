@@ -31,7 +31,7 @@ export const useStorageForm = (storage: Storage | null) => {
 
 	const createStorage = async (formData: CreateStorageFormSchema): Promise<void> => {
 		try {
-			await storageClient.v1_storage_create(formData);
+			await storageClient.createStorage(formData);
 			toast.success(tStorage("edit_storage.notifications.success"));
 			navigate(-1);
 		} catch (err: any) {
@@ -46,7 +46,7 @@ export const useStorageForm = (storage: Storage | null) => {
 
 	const updateStorage = async (formData: UpdateStorageFormSchema, id: string): Promise<void> => {
 		try {
-			await storageClient.v1_storage_update(formData, {
+			await storageClient.updateStorage(formData, {
 				params: { uuid: id },
 			});
 			toast.success(tStorage("edit_storage.notifications.success"));

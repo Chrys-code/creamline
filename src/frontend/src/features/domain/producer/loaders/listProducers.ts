@@ -7,7 +7,7 @@ export const listPaginatedProducers = async ({ request }: LoaderFunctionArgs) =>
 		const page = Number(url.searchParams.get("page")) || 1;
 		const page_size = Number(import.meta.env.VITE_PAGINATION_PAGE_SIZE) || 0;
 
-		const producerResponse = await producerClient.v1_producer_list_paginated({
+		const producerResponse = await producerClient.getPaginatedProducerList({
 			queries: { page, page_size },
 		});
 
@@ -27,7 +27,7 @@ export const listPaginatedProducers = async ({ request }: LoaderFunctionArgs) =>
 
 export const listProducers = async () => {
 	try {
-		const producerResponse = await producerClient.v1_producer_list();
+		const producerResponse = await producerClient.getProducerList();
 		return producerResponse;
 	} catch (err: any) {
 		if (err.response) {

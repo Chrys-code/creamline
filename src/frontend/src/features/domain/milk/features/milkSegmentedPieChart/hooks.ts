@@ -6,7 +6,7 @@ export function useMilkSegmentedByProducers(interval: IntervalTypes = "day") {
 	return useQuery({
 		queryKey: ["milkSegmentedByProducer", interval],
 		queryFn: async () =>
-			await milkClient.getMilkSegmentedByProducers({
+			await milkClient.getMilkAnalyticsSegmentedByProducers({
 				queries: { interval },
 			}),
 		refetchInterval: 60000,

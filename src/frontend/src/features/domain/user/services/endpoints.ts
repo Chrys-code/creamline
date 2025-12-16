@@ -3,10 +3,10 @@ import { makeApi, makeEndpoint, Zodios, type ZodiosOptions } from "@zodios/core"
 
 import schemas from "./schemas";
 
-const ListUserEndpoint = makeEndpoint({
+const PaginatedUserListEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/users/",
-	alias: "v1_users_list",
+	alias: "getPaginatedUsersList",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -26,7 +26,7 @@ const ListUserEndpoint = makeEndpoint({
 const GetUserEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/v1/users/:uuid/",
-	alias: "v1_users_retrieve",
+	alias: "getUser",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -41,7 +41,7 @@ const GetUserEndpoint = makeEndpoint({
 const CreateUserEndpoint = makeEndpoint({
 	method: "post",
 	path: "/api/v1/users/",
-	alias: "v1_users_create",
+	alias: "createUser",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -56,7 +56,7 @@ const CreateUserEndpoint = makeEndpoint({
 const PatchUserEndpoint = makeEndpoint({
 	method: "patch",
 	path: "/api/v1/users/:uuid/",
-	alias: "v1_users_update",
+	alias: "updateUser",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -76,7 +76,7 @@ const PatchUserEndpoint = makeEndpoint({
 const DeleteUserEndpoint = makeEndpoint({
 	method: "delete",
 	path: "/api/v1/users/:uuid/",
-	alias: "v1_users_destroy",
+	alias: "deleteUser",
 	requestFormat: "json",
 	parameters: [
 		{
@@ -89,7 +89,7 @@ const DeleteUserEndpoint = makeEndpoint({
 });
 
 const userEndpoints = makeApi([
-	ListUserEndpoint,
+	PaginatedUserListEndpoint,
 	GetUserEndpoint,
 	CreateUserEndpoint,
 	PatchUserEndpoint,

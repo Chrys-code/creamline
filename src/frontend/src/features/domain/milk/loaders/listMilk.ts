@@ -7,7 +7,7 @@ export const getPaginatedMilkList = async ({ request }: LoaderFunctionArgs) => {
 		const page = Number(url.searchParams.get("page")) || 1;
 		const page_size = Number(import.meta.env.VITE_PAGINATION_PAGE_SIZE) || 0;
 
-		const milkResponse = await milkClient.v1_milk_list_paginated({
+		const milkResponse = await milkClient.getPaginatedMilkList({
 			queries: { page, page_size },
 		});
 

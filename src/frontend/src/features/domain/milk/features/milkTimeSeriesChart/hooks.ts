@@ -14,7 +14,7 @@ export function useMilkTimeSeries(
 		queryKey: ["milkTrend", start_date, end_date, interval, producer_uuid],
 		queryFn: async () =>
 			adaptMilkTrendDateToLanguage(
-				await milkClient.getMilkTrend({
+				await milkClient.getGetMilkTimeSeriesAnalytics({
 					queries: { interval, start_date, end_date, producer_uuid },
 				}),
 				interval

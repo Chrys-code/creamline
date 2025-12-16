@@ -6,7 +6,7 @@ import schemas from "./schemas";
 const ListUserGroupEndpoint = makeEndpoint({
 	method: "get",
 	path: "/api/user-groups/",
-	alias: "get_user_groups",
+	alias: "getUserGroups",
 	requestFormat: "json",
 	response: z.array(schemas.UserGroupBaseSchema),
 });

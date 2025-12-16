@@ -51,7 +51,7 @@ export const useProducerForm = (producer: Producer | null) => {
 		id: string
 	): Promise<void> => {
 		try {
-			await producerClient.v1_producer_update(formData, { params: { uuid: id } });
+			await producerClient.updateProducer(formData, { params: { uuid: id } });
 			toast.success(tProducer("edit_producer.notifications.success"));
 			navigate(-1);
 		} catch (err: any) {

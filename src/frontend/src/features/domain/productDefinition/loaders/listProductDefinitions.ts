@@ -8,7 +8,7 @@ export const listPaginatedProductDefinitions = async ({ request }: LoaderFunctio
 		const page_size = Number(import.meta.env.VITE_PAGINATION_PAGE_SIZE) || 0;
 
 		const productDefinitionResponse =
-			await productDefinitionClient.v1_product_definition_list_paginated({
+			await productDefinitionClient.getPaginatedProductDefinitionList({
 				queries: { page, page_size },
 			});
 
@@ -20,8 +20,7 @@ export const listPaginatedProductDefinitions = async ({ request }: LoaderFunctio
 
 export const listProductDefinitions = async () => {
 	try {
-		const productDefinitionResponse =
-			await productDefinitionClient.v1_product_definition_list();
+		const productDefinitionResponse = await productDefinitionClient.getProductDefinitionList();
 
 		return productDefinitionResponse;
 	} catch {

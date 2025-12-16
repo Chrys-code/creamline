@@ -27,7 +27,7 @@ export const useProfileForm = (profile: Profile) => {
 
 	const onSubmit = async (formData: PatchProfileFormSchema) => {
 		try {
-			await profileClient.v1_profile_update(formData);
+			await profileClient.updateProfile(formData);
 			toast.success(tProfile("profile.notifications.success"));
 		} catch (err: any) {
 			if (err.response?.data) {
