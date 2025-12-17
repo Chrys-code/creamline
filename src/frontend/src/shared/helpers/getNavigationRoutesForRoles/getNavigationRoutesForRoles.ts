@@ -5,38 +5,62 @@ interface GetRoutesForRolesProps {
 	routes: typeof NAVIGATION_ROUTES;
 	userGroups: string[];
 	ignoredRoutes: string[];
+	ignoredRouteKeys?: string[];
 }
 
+/**
+ * Used to get available links to routes depending on user's user groups.
+ * Gets a subset of routes of NAVIGATION_ROUTES depending on user's user groups.
+ * @param routes NAVIGATION_ROUTES, Navigation routes object
+ * @param userGroups User's user groups. e.g Manager
+ * @param ignoredRoutes Route root segments to be ignored from "routes". E.g: Use this to exclude everything in the "user" route.
+ * @param ignoredRouteKeys Ignores route keys such as "root", "list", "create", "edit",
+ * @returns Subset of NAVIGATION_ROUTES as object
+ */
 export const getRoutesForRoles = ({
 	routes,
 	userGroups = [],
 	ignoredRoutes,
-}: GetRoutesForRolesProps) => {
-	const requiredRouteKeys = ["root", "list", "create"];
+	ignoredRouteKeys = ["edit"],
+}: GetRoutesForRolesProps): Record<string, NAVIGATION_ROUTE> => {
 	const result: Record<string, NAVIGATION_ROUTE> = {};
 
 	for (const key in routes) {
 		// @ts-expect-error cannot use string as key
 		const route: NAVIGATION_ROUTE = routes[key];
 
-		// If route has requiredRoles and User has no matching role; skip route
-		if (
-			ignoredRoutes.includes(key) ||
-			(route.requiredRoles &&
-				!route.requiredRoles.some((role: string) => userGroups.includes(role)))
-		) {
-			continue;
+		// If route is ignored, continue iterating
+		if (ignoredRoutes.includes(key)) continue;
+
+		// Duplicate route segment for mutation
+		const filteredRouteSegment = { ...route };
+
+		// Remove requiredRoles from route segment
+		if (Object.hasOwn(filteredRouteSegment, "requiredRoles")) {
+			delete filteredRouteSegment.requiredRoles;
 		}
 
-		// Duplicate route for mutation
-		const filteredRoute = { ...route };
+		// Iterate over sub routes ("root", "list", "create", "edit") in route segment
+		for (const subKey in filteredRouteSegment) {
+			// If ignored, delete and continue
+			if (ignoredRouteKeys.includes(subKey)) {
+				delete filteredRouteSegment[subKey];
+				continue;
+			}
 
-		// Delete keys that are not in requiredRouteKeys
-		for (const subKey in route) {
-			if (!requiredRouteKeys.includes(subKey)) delete filteredRoute[subKey];
+			const userIsNotInAllowedGroups = !filteredRouteSegment[subKey].requiredRoles?.some(
+				(role: string) => userGroups.includes(role)
+			);
+
+			// If route has requiredRoles and User has no matching role;
+			// remove and continue iterating
+			if (userIsNotInAllowedGroups) {
+				delete filteredRouteSegment[subKey];
+				continue;
+			}
 		}
 
-		result[key] = filteredRoute;
+		result[key] = filteredRouteSegment;
 	}
 
 	return result;

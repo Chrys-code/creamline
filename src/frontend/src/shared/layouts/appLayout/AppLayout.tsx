@@ -16,6 +16,14 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }: AppLayoutProps) => {
 	const { profile } = useRouteLoaderData("app");
 	const [navigationIsOpen, setNavigationIsOpen] = useState(false);
 
+	const allowedRoutes = getRoutesForRoles({
+		routes: NAVIGATION_ROUTES,
+		userGroups: profile.groups,
+		ignoredRoutes: ["login", "profile"],
+	});
+
+	console.log({ allowedRoutes });
+
 	return (
 		<>
 			<Header
@@ -23,11 +31,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }: AppLayoutProps) => {
 			/>
 			<div className={styles.container}>
 				<SideBarMenu
-					options={getRoutesForRoles({
-						routes: NAVIGATION_ROUTES,
-						userGroups: profile.groups,
-						ignoredRoutes: ["login", "profile"],
-					})}
+					options={allowedRoutes}
 					isOpen={navigationIsOpen}
 					setIsOpen={setNavigationIsOpen}
 				/>
