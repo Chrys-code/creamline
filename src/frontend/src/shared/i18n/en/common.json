@@ -9,7 +9,8 @@
 		"optional": "Optional",
 		"yes": "Yes",
 		"no": "No",
-		"filters": "Filters"
+		"filters": "Filters",
+		"retry": "Retry"
 	},
 	"qualities": {
 		"temperature": "Temperature",

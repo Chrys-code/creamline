@@ -1,6 +1,10 @@
 import type { LoaderFunctionArgs } from "react-router";
-import { storageClient } from "../services/client";
 import type { Storage } from "../types";
+
+import { storageClient } from "../services/client";
+
+import { getErrorStatusText } from "../../../../shared/helpers/getErrorStatusText/getErrorStatusText";
+import { tTyped } from "../../../../configs/i18n";
 
 export const getStorage = async ({ params }: LoaderFunctionArgs): Promise<Storage | null> => {
 	try {
@@ -10,7 +14,18 @@ export const getStorage = async ({ params }: LoaderFunctionArgs): Promise<Storag
 		const storageResponse = await storageClient.getStorage({ params: { uuid: id } });
 
 		return storageResponse;
-	} catch {
+	} catch (err: any) {
+		if (err.response) {
+			const tNetworkError = tTyped("errors");
+			const status = err.response.status || 500;
+			const message =
+				status !== 500 ? err.response.data.detail : tNetworkError("error_codes.500");
+
+			const statusText = getErrorStatusText(status);
+
+			throw new Response(message, { status, statusText });
+		}
+
 		throw new Error("Failed to load storages");
 	}
 };

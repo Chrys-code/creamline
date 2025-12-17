@@ -1,5 +1,9 @@
 import type { LoaderFunctionArgs } from "react-router";
+
 import { milkClient } from "../services/client";
+
+import { getErrorStatusText } from "../../../../shared/helpers/getErrorStatusText/getErrorStatusText";
+import { tTyped } from "../../../../configs/i18n";
 
 export const getPaginatedMilkList = async ({ request }: LoaderFunctionArgs) => {
 	try {
@@ -14,13 +18,16 @@ export const getPaginatedMilkList = async ({ request }: LoaderFunctionArgs) => {
 		return { data: milkResponse, page };
 	} catch (err: any) {
 		if (err.response) {
+			const tNetworkError = tTyped("errors");
 			const status = err.response.status || 500;
-			const statusText = err.response.statusText || "Unknown error";
-			const body = err.response.data ? JSON.stringify(err.response.data) : null;
+			const message =
+				status !== 500 ? err.response.data.detail : tNetworkError("error_codes.500");
 
-			throw new Response(body, { status, statusText });
+			const statusText = getErrorStatusText(status);
+
+			throw new Response(message, { status, statusText });
 		}
 
-		throw new Response("Could not get milk list", { status: 500 });
+		throw new Error("Could not get milk list");
 	}
 };

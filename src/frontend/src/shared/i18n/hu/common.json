@@ -9,7 +9,8 @@
 		"optional": "Opcionális",
 		"yes": "Igen",
 		"no": "Nem",
-		"filters": "Filters"
+		"filters": "Filters",
+		"retry": "Újra"
 	},
 	"utilities": {
 		"storage": "Raktár",

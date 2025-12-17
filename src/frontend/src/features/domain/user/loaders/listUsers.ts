@@ -1,5 +1,9 @@
 import type { LoaderFunctionArgs } from "react-router";
+
 import { userClient } from "../services/client";
+
+import { getErrorStatusText } from "../../../../shared/helpers/getErrorStatusText/getErrorStatusText";
+import { tTyped } from "../../../../configs/i18n";
 
 const getPaginatedUserList = async ({ request }: LoaderFunctionArgs) => {
 	try {
@@ -12,7 +16,17 @@ const getPaginatedUserList = async ({ request }: LoaderFunctionArgs) => {
 		});
 
 		return { data: userResponse, page };
-	} catch {
+	} catch (err: any) {
+		if (err.response) {
+			const tNetworkError = tTyped("errors");
+			const status = err.response.status || 500;
+			const message =
+				status !== 500 ? err.response.data.detail : tNetworkError("error_codes.500");
+
+			const statusText = getErrorStatusText(status);
+
+			throw new Response(message, { status, statusText });
+		}
 		throw new Error("Could not load users");
 	}
 };

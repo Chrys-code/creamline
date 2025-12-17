@@ -11,11 +11,13 @@ i18n.use(LanguageDetector)
 				common: translations.translationEn.common,
 				navigation: translations.translationEn.navigation,
 				dashboard: translations.translationEn.dashboard,
+				errors: translations.translationEn.errors,
 			},
 			hu: {
 				common: translations.translationHu.common,
 				navigation: translations.translationHu.navigation,
 				dashboard: translations.translationHu.dashboard,
+				errors: translations.translationHu.errors,
 			},
 		},
 		fallbackLng: "hu",
@@ -53,19 +55,22 @@ export const namespaces = [
 	"pasteurisation",
 	"pasteur",
 	"productDefinition",
+	// Network
+	"errors",
 ] as const;
 
 export type NamespaceKey = (typeof namespaces)[number];
 
 export type NamespaceMap = {
 	common: TranslationTypes.CommonTranslations;
-	auth: AuthTranslations;
 	navigation: TranslationTypes.NavigationTranslations;
+	dashboard: TranslationTypes.DashboardTranslations;
+	errors: TranslationTypes.ErrorTranslations;
+	auth: AuthTranslations;
 	users: UserTranslations;
 	profile: ProfileTranslations;
 	producer: ProducerTranslations;
 	storage: StorageTranslations;
-	dashboard: TranslationTypes.DashboardTranslations;
 	milkCollection: MilkTranslations;
 	pasteurisation: PasterisationTranslations;
 	pasteur: PasteurTranslations;

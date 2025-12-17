@@ -9,10 +9,18 @@
 	padding: 2rem;
 
 	h1 {
-		margin-bottom: 0.5rem;
+		margin-bottom: 1rem;
 	}
 
-	p {
+	pre {
 		margin-bottom: 2rem;
+	}
+
+	div {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
 	}
 }

@@ -1,0 +1,14 @@
+{
+	"page": {
+		"title": "Could not load page",
+		"generic_title": "Something went wrong...",
+		"generic_message": "If the issue persists pleace contact the administrators!"
+	},
+	"error_codes": {
+		"400": "Bad request",
+		"401": "Unautorized",
+		"403": "Forbidden",
+		"404": "Not found",
+		"500": "Unkown error"
+	}
+}

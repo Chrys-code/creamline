@@ -1,6 +1,10 @@
 import type { LoaderFunctionArgs } from "react-router";
 import type { Producer } from "../types";
+
 import { producerClient } from "../services/client";
+
+import { getErrorStatusText } from "../../../../shared/helpers/getErrorStatusText/getErrorStatusText";
+import { tTyped } from "../../../../configs/i18n";
 
 export const getProducer = async ({ params }: LoaderFunctionArgs): Promise<Producer | null> => {
 	try {
@@ -10,7 +14,17 @@ export const getProducer = async ({ params }: LoaderFunctionArgs): Promise<Produ
 		const userResponse = await producerClient.getProducer({ params: { uuid: id } });
 
 		return userResponse;
-	} catch {
+	} catch (err: any) {
+		if (err.response) {
+			const tNetworkError = tTyped("errors");
+			const status = err.response.status || 500;
+			const message =
+				status !== 500 ? err.response.data.detail : tNetworkError("error_codes.500");
+
+			const statusText = getErrorStatusText(status);
+
+			throw new Response(message, { status, statusText });
+		}
 		throw new Error("Failed to load producer");
 	}
 };

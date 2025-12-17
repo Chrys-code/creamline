@@ -1,0 +1,14 @@
+{
+	"page": {
+		"title": "Nem tudtuk betöletni az oldalt",
+		"generic_title": "Sajnos valami hiba történt...",
+		"generic_message": "Ha a hiba továbbra is fennáll, kérjük jelezze az adminisztrátorok felé!"
+	},
+	"error_codes": {
+		"400": "Hibás lekérés",
+		"401": "Jogosulatlan hozzéférés",
+		"403": "Hozzáférés megtagadva",
+		"404": "Nem található",
+		"500": "Ismeretlen hiba"
+	}
+}
