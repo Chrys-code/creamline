@@ -37,7 +37,12 @@ export const useProfileForm = (profile: Profile) => {
 				if (responseData.last_name)
 					setError("last_name", { message: responseData.last_name[0] });
 			}
-			toast.error(tProfile("profile.notifications.error"));
+
+			if (err.response?.status !== 500 && err.response?.data.detail) {
+				toast.error(err.response?.data.detail);
+			} else {
+				toast.error(tProfile("profile.notifications.error"));
+			}
 		}
 
 		revalidator.revalidate();

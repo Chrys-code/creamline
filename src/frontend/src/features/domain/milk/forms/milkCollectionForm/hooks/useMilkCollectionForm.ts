@@ -66,7 +66,11 @@ export const useMilkCollectionForm = (milk: Milk | null) => {
 					setError("temperature", { message: responseData.temperature[0] });
 			}
 
-			toast.error(mct("edit_milk_collection.notifications.error"));
+			if (err.response?.status !== 500 && err.response?.data.detail) {
+				toast.error(err.response?.data.detail);
+			} else {
+				toast.error(mct("edit_milk_collection.notifications.error"));
+			}
 		}
 	};
 

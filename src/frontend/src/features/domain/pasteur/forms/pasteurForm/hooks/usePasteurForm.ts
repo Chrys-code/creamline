@@ -39,7 +39,11 @@ export const usePasteurForm = (pasteur: Pasteur | null) => {
 				const responseData = err.response.data;
 				if (responseData.name) setError("name", { message: responseData.name[0] });
 			}
-			toast.error(tPasteur("edit_pasteur.notifications.error"));
+			if (err.response?.status !== 500 && err.response?.data.detail) {
+				toast.error(err.response?.data.detail);
+			} else {
+				toast.error(tPasteur("edit_pasteur.notifications.error"));
+			}
 		}
 	};
 
@@ -53,7 +57,11 @@ export const usePasteurForm = (pasteur: Pasteur | null) => {
 				const responseData = err.response.data;
 				if (responseData.name) setError("name", { message: responseData.name[0] });
 			}
-			toast.error(tPasteur("edit_pasteur.notifications.error"));
+			if (err.response?.status !== 500 && err.response?.data.detail) {
+				toast.error(err.response?.data.detail);
+			} else {
+				toast.error(tPasteur("edit_pasteur.notifications.error"));
+			}
 		}
 	};
 

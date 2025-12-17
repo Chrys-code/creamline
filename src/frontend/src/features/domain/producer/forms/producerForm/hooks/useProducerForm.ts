@@ -42,7 +42,11 @@ export const useProducerForm = (producer: Producer | null) => {
 				if (responseData.contactEmail)
 					setError("contact_email", { message: responseData.contactEmail[0] });
 			}
-			toast.error(tProducer("edit_producer.notifications.error"));
+			if (err.response?.status !== 500 && err.response?.data.detail) {
+				toast.error(err.response?.data.detail);
+			} else {
+				toast.error(tProducer("edit_producer.notifications.error"));
+			}
 		}
 	};
 
@@ -62,7 +66,11 @@ export const useProducerForm = (producer: Producer | null) => {
 				if (responseData.contactEmail)
 					setError("contact_email", { message: responseData.contactEmail[0] });
 			}
-			toast.error(tProducer("edit_producer.notifications.error"));
+			if (err.response?.status !== 500 && err.response?.data.detail) {
+				toast.error(err.response?.data.detail);
+			} else {
+				toast.error(tProducer("edit_producer.notifications.error"));
+			}
 		}
 	};
 

@@ -42,7 +42,12 @@ export const useProductDefinitionForm = (productDefinition: ProductDefinition | 
 				if (responseData.name) setError("name", { message: responseData.name[0] });
 				if (responseData.type) setError("type", { message: responseData.type[0] });
 			}
-			toast.error(tProductDefinition("edit_product_definition.notifications.error"));
+
+			if (err.response?.status !== 500 && err.response?.data.detail) {
+				toast.error(err.response?.data.detail);
+			} else {
+				toast.error(tProductDefinition("edit_product_definition.notifications.error"));
+			}
 		}
 	};
 
@@ -63,7 +68,12 @@ export const useProductDefinitionForm = (productDefinition: ProductDefinition | 
 				if (responseData.name) setError("name", { message: responseData.name[0] });
 				if (responseData.type) setError("type", { message: responseData.type[0] });
 			}
-			toast.error(tProductDefinition("edit_product_definition.notifications.error"));
+
+			if (err.response?.status !== 500 && err.response?.data.detail) {
+				toast.error(err.response?.data.detail);
+			} else {
+				toast.error(tProductDefinition("edit_product_definition.notifications.error"));
+			}
 		}
 	};
 

@@ -69,7 +69,11 @@ export const useUserForm = (user: User) => {
 				if (responseData.password)
 					setError("password", { message: responseData.password[0] });
 			}
-			toast.error(tUser("edit_user.notifications.error"));
+			if (err.response?.status !== 500 && err.response?.data.detail) {
+				toast.error(err.response?.data.detail);
+			} else {
+				toast.error(tUser("edit_user.notifications.error"));
+			}
 		}
 	};
 
@@ -89,7 +93,11 @@ export const useUserForm = (user: User) => {
 				if (responseData.password)
 					setError("password", { message: responseData.password[0] });
 			}
-			toast.error(tUser("edit_user.notifications.error"));
+			if (err.response?.status !== 500 && err.response?.data.detail) {
+				toast.error(err.response?.data.detail);
+			} else {
+				toast.error(tUser("edit_user.notifications.error"));
+			}
 		}
 	};
 

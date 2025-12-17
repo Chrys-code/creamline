@@ -65,7 +65,12 @@ export const usePasteurisationForm = (pasteurisation: Pasteurisation | null) => 
 				if (responseData.temperature)
 					setError("temperature", { message: responseData.temperature[0] });
 			}
-			toast.error(tPasteurisation("edit_pasteurisation.notifications.error"));
+
+			if (err.response?.status !== 500 && err.response?.data.detail) {
+				toast.error(err.response?.data.detail);
+			} else {
+				toast.error(tPasteurisation("edit_pasteurisation.notifications.error"));
+			}
 		}
 	};
 

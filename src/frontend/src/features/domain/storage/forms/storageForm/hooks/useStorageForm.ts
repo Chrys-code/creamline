@@ -40,7 +40,12 @@ export const useStorageForm = (storage: Storage | null) => {
 				if (responseData.name) setError("name", { message: responseData.name[0] });
 				if (responseData.type) setError("type", { message: responseData.type[0] });
 			}
-			toast.error(tStorage("edit_storage.notifications.error"));
+
+			if (err.response?.status !== 500 && err.response?.data.detail) {
+				toast.error(err.response?.data.detail);
+			} else {
+				toast.error(tStorage("edit_storage.notifications.error"));
+			}
 		}
 	};
 
@@ -58,7 +63,12 @@ export const useStorageForm = (storage: Storage | null) => {
 				if (responseData.name) setError("name", { message: responseData.name[0] });
 				if (responseData.type) setError("type", { message: responseData.type[0] });
 			}
-			toast.error(tStorage("edit_storage.notifications.error"));
+
+			if (err.response?.status !== 500 && err.response?.data.detail) {
+				toast.error(err.response?.data.detail);
+			} else {
+				toast.error(tStorage("edit_storage.notifications.error"));
+			}
 		}
 	};
 
