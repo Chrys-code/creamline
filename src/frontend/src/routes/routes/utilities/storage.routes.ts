@@ -8,6 +8,7 @@ import {
 import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 import { listStorageTypes } from "../../../features/domain/storage/loaders/getStorageTypes";
 import { storageTranslationLoader } from "../../../features/domain/storage/loaders/translation";
+import { withUserGroupPermission } from "../../../shared/loaders/withUserGroupPermission";
 
 const storageRoutes: RouteObject = {
 	id: "storage",
@@ -20,9 +21,12 @@ const storageRoutes: RouteObject = {
 				Component: async () =>
 					(await import("../../../pages/storage/listStorages/ListStorages")).default,
 			},
-			loader: async (args: LoaderFunctionArgs) => ({
-				data: await listPaginatedStorages(args),
-			}),
+			loader: withUserGroupPermission(
+				async (args: LoaderFunctionArgs) => ({
+					data: await listPaginatedStorages(args),
+				}),
+				NAVIGATION_ROUTES.storage.list.requiredRoles
+			),
 		},
 		{
 			path: NAVIGATION_ROUTES.storage.create.path,
@@ -30,12 +34,15 @@ const storageRoutes: RouteObject = {
 				Component: async () =>
 					(await import("../../../pages/storage/editStorage/EditStorage")).default,
 			},
-			loader: async () => ({
-				storage: null,
-				storageTypeOptions: adaptStorageTypesForStorageTypeOptions(
-					await listStorageTypes()
-				),
-			}),
+			loader: withUserGroupPermission(
+				async () => ({
+					storage: null,
+					storageTypeOptions: adaptStorageTypesForStorageTypeOptions(
+						await listStorageTypes()
+					),
+				}),
+				NAVIGATION_ROUTES.storage.create.requiredRoles
+			),
 		},
 		{
 			path: NAVIGATION_ROUTES.storage.edit.path + ":id",
@@ -43,12 +50,15 @@ const storageRoutes: RouteObject = {
 				Component: async () =>
 					(await import("../../../pages/storage/editStorage/EditStorage")).default,
 			},
-			loader: async (args: LoaderFunctionArgs) => ({
-				storage: adaptStorageToEditorForm(await getStorage(args)),
-				storageTypeOptions: adaptStorageTypesForStorageTypeOptions(
-					await listStorageTypes()
-				),
-			}),
+			loader: withUserGroupPermission(
+				async (args: LoaderFunctionArgs) => ({
+					storage: adaptStorageToEditorForm(await getStorage(args)),
+					storageTypeOptions: adaptStorageTypesForStorageTypeOptions(
+						await listStorageTypes()
+					),
+				}),
+				NAVIGATION_ROUTES.storage.edit.requiredRoles
+			),
 		},
 	],
 };

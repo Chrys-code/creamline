@@ -7,6 +7,7 @@ import { userTranslationLoader } from "../../features/domain/user/loaders/transl
 import getPaginatedUserList from "../../features/domain/user/loaders/listUsers";
 
 import { adaptUserGroupsForUserGroupOptions } from "../../features/domain/user/features/userGroups/adapters";
+import { withUserGroupPermission } from "../../shared/loaders/withUserGroupPermission";
 
 const userManagementRoutes: RouteObject = {
 	id: "user",
@@ -18,30 +19,39 @@ const userManagementRoutes: RouteObject = {
 			lazy: {
 				Component: async () => (await import("../../pages/user/listUser/ListUser")).default,
 			},
-			loader: async (args: LoaderFunctionArgs) => ({
-				data: await getPaginatedUserList(args),
-				userGroups: await listUserGroups(),
-			}),
+			loader: withUserGroupPermission(
+				async (args: LoaderFunctionArgs) => ({
+					data: await getPaginatedUserList(args),
+					userGroups: await listUserGroups(),
+				}),
+				NAVIGATION_ROUTES.user.list.requiredRoles
+			),
 		},
 		{
 			path: NAVIGATION_ROUTES.user.create.path,
 			lazy: {
 				Component: async () => (await import("../../pages/user/editUser/EditUser")).default,
 			},
-			loader: async () => ({
-				selectedItem: null,
-				userGroups: adaptUserGroupsForUserGroupOptions(await listUserGroups()),
-			}),
+			loader: withUserGroupPermission(
+				async () => ({
+					selectedItem: null,
+					userGroups: adaptUserGroupsForUserGroupOptions(await listUserGroups()),
+				}),
+				NAVIGATION_ROUTES.user.create.requiredRoles
+			),
 		},
 		{
 			path: NAVIGATION_ROUTES.user.edit.path + ":id",
 			lazy: {
 				Component: async () => (await import("../../pages/user/editUser/EditUser")).default,
 			},
-			loader: async (args: LoaderFunctionArgs) => ({
-				selectedItem: await getUser(args),
-				userGroups: adaptUserGroupsForUserGroupOptions(await listUserGroups()),
-			}),
+			loader: withUserGroupPermission(
+				async (args: LoaderFunctionArgs) => ({
+					selectedItem: await getUser(args),
+					userGroups: adaptUserGroupsForUserGroupOptions(await listUserGroups()),
+				}),
+				NAVIGATION_ROUTES.user.edit.requiredRoles
+			),
 		},
 	],
 };

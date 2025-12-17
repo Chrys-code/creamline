@@ -10,6 +10,7 @@ import { adaptProductDefinitionsToProductDefinitionOptions } from "../../../feat
 import { adaptPasteursToPasteurOptions } from "../../../features/domain/pasteur/adapters";
 import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 import { pasterisationTranslationLoader } from "../../../features/domain/pasteurisation/loaders/translation";
+import { withUserGroupPermission } from "../../../shared/loaders/withUserGroupPermission";
 
 const pasteurisationRoutes: RouteObject = {
 	id: "pasteurisation",
@@ -24,7 +25,10 @@ const pasteurisationRoutes: RouteObject = {
 					(await import("../../../pages/pasteurisation/pasteurisation/Pasteurisation"))
 						.default,
 			},
-			loader: async () => adaptPasteursToPasteurOptions(await listPasteurs()),
+			loader: withUserGroupPermission(
+				async () => adaptPasteursToPasteurOptions(await listPasteurs()),
+				NAVIGATION_ROUTES.pasteuriation.root.requiredRoles
+			),
 		},
 		{
 			path: NAVIGATION_ROUTES.pasteuriation.list.path,
@@ -36,7 +40,10 @@ const pasteurisationRoutes: RouteObject = {
 						)
 					).default,
 			},
-			loader: getPaginatedPasteuriationList,
+			loader: withUserGroupPermission(
+				getPaginatedPasteuriationList,
+				NAVIGATION_ROUTES.pasteuriation.list.requiredRoles
+			),
 		},
 		{
 			path: NAVIGATION_ROUTES.pasteuriation.create.path,
@@ -48,13 +55,16 @@ const pasteurisationRoutes: RouteObject = {
 						)
 					).default,
 			},
-			loader: async () => ({
-				pasteurOptions: adaptPasteursToPasteurOptions(await listPasteurs()),
-				storageOptions: adaptStoragesToStorageOptions(await listStorages()),
-				productDefinitionOptions: adaptProductDefinitionsToProductDefinitionOptions(
-					await listProductDefinitions()
-				),
-			}),
+			loader: withUserGroupPermission(
+				async () => ({
+					pasteurOptions: adaptPasteursToPasteurOptions(await listPasteurs()),
+					storageOptions: adaptStoragesToStorageOptions(await listStorages()),
+					productDefinitionOptions: adaptProductDefinitionsToProductDefinitionOptions(
+						await listProductDefinitions()
+					),
+				}),
+				NAVIGATION_ROUTES.pasteuriation.create.requiredRoles
+			),
 		},
 		{
 			path: NAVIGATION_ROUTES.pasteuriation.edit.path + ":id",
@@ -66,14 +76,17 @@ const pasteurisationRoutes: RouteObject = {
 						)
 					).default,
 			},
-			loader: async (args: LoaderFunctionArgs) => ({
-				pasteurOptions: adaptPasteursToPasteurOptions(await listPasteurs()),
-				storageOptions: adaptStoragesToStorageOptions(await listStorages()),
-				productDefinitionOptions: adaptProductDefinitionsToProductDefinitionOptions(
-					await listProductDefinitions()
-				),
-				selectedItem: await getPasteurisation(args),
-			}),
+			loader: withUserGroupPermission(
+				async (args: LoaderFunctionArgs) => ({
+					pasteurOptions: adaptPasteursToPasteurOptions(await listPasteurs()),
+					storageOptions: adaptStoragesToStorageOptions(await listStorages()),
+					productDefinitionOptions: adaptProductDefinitionsToProductDefinitionOptions(
+						await listProductDefinitions()
+					),
+					selectedItem: await getPasteurisation(args),
+				}),
+				NAVIGATION_ROUTES.pasteuriation.edit.requiredRoles
+			),
 		},
 	],
 };

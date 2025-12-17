@@ -3,6 +3,7 @@ import { listPaginatedPasteurs } from "../../../features/domain/pasteur/loaders/
 import { getPasteur } from "../../../features/domain/pasteur/loaders/getPasteur";
 import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 import { pasteurTranslationLoader } from "../../../features/domain/pasteur/loaders/translation";
+import { withUserGroupPermission } from "../../../shared/loaders/withUserGroupPermission";
 
 const pasteurRoutes: RouteObject = {
 	id: "pasteur",
@@ -15,9 +16,12 @@ const pasteurRoutes: RouteObject = {
 				Component: async () =>
 					(await import("../../../pages/pasteur/listPasteurs/ListPasteurs")).default,
 			},
-			loader: async (args: LoaderFunctionArgs) => ({
-				data: await listPaginatedPasteurs(args),
-			}),
+			loader: withUserGroupPermission(
+				async (args: LoaderFunctionArgs) => ({
+					data: await listPaginatedPasteurs(args),
+				}),
+				NAVIGATION_ROUTES.pasteur.list.requiredRoles
+			),
 		},
 		{
 			path: NAVIGATION_ROUTES.pasteur.create.path,
@@ -25,7 +29,10 @@ const pasteurRoutes: RouteObject = {
 				Component: async () =>
 					(await import("../../../pages/pasteur/editPasteur/EditPasteur")).default,
 			},
-			loader: getPasteur,
+			loader: withUserGroupPermission(
+				getPasteur,
+				NAVIGATION_ROUTES.pasteur.create.requiredRoles
+			),
 		},
 		{
 			path: NAVIGATION_ROUTES.pasteur.edit.path + ":id",
@@ -33,7 +40,10 @@ const pasteurRoutes: RouteObject = {
 				Component: async () =>
 					(await import("../../../pages/pasteur/editPasteur/EditPasteur")).default,
 			},
-			loader: getPasteur,
+			loader: withUserGroupPermission(
+				getPasteur,
+				NAVIGATION_ROUTES.pasteur.edit.requiredRoles
+			),
 		},
 	],
 };

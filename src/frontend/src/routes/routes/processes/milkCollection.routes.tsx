@@ -9,6 +9,7 @@ import { adaptStoragesToStorageOptions } from "../../../features/domain/storage/
 import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 import { milkTranslationLoader } from "../../../features/domain/milk/loaders/translation";
 import { adaptProducersToProducerOptions } from "../../../features/domain/producer/adapters";
+import { withUserGroupPermission } from "../../../shared/loaders/withUserGroupPermission";
 
 const milkCollectionRoutes: RouteObject = {
 	id: "milk",
@@ -22,7 +23,10 @@ const milkCollectionRoutes: RouteObject = {
 					(await import("../../../pages/milkCollection/milkCollection/MilkCollection"))
 						.default,
 			},
-			loader: async () => adaptProducersToProducerOptions(await listProducers()),
+			loader: withUserGroupPermission(
+				async () => adaptProducersToProducerOptions(await listProducers()),
+				NAVIGATION_ROUTES.milkCollection.root.requiredRoles
+			),
 		},
 		{
 			path: NAVIGATION_ROUTES.milkCollection.list.path,
@@ -34,7 +38,10 @@ const milkCollectionRoutes: RouteObject = {
 						)
 					).default,
 			},
-			loader: getPaginatedMilkList,
+			loader: withUserGroupPermission(
+				getPaginatedMilkList,
+				NAVIGATION_ROUTES.milkCollection.list.requiredRoles
+			),
 		},
 		{
 			path: NAVIGATION_ROUTES.milkCollection.create.path,
@@ -46,10 +53,13 @@ const milkCollectionRoutes: RouteObject = {
 						)
 					).default,
 			},
-			loader: async () => ({
-				producerOptions: adaptProducersToProducerOptions(await listProducers()),
-				storageOptions: adaptStoragesToStorageOptions(await listStorages()),
-			}),
+			loader: withUserGroupPermission(
+				async () => ({
+					producerOptions: adaptProducersToProducerOptions(await listProducers()),
+					storageOptions: adaptStoragesToStorageOptions(await listStorages()),
+				}),
+				NAVIGATION_ROUTES.milkCollection.create.requiredRoles
+			),
 		},
 		{
 			path: NAVIGATION_ROUTES.milkCollection.edit.path + ":id",
@@ -61,11 +71,14 @@ const milkCollectionRoutes: RouteObject = {
 						)
 					).default,
 			},
-			loader: async (args: LoaderFunctionArgs) => ({
-				producerOptions: adaptProducersToProducerOptions(await listProducers()),
-				storageOptions: adaptStoragesToStorageOptions(await listStorages()),
-				selectedItem: (await getMilk(args)) || null,
-			}),
+			loader: withUserGroupPermission(
+				async (args: LoaderFunctionArgs) => ({
+					producerOptions: adaptProducersToProducerOptions(await listProducers()),
+					storageOptions: adaptStoragesToStorageOptions(await listStorages()),
+					selectedItem: (await getMilk(args)) || null,
+				}),
+				NAVIGATION_ROUTES.milkCollection.edit.requiredRoles
+			),
 		},
 	],
 };

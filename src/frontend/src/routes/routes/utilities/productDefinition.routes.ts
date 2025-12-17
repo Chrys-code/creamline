@@ -5,6 +5,7 @@ import { getProductDefinitionOptions } from "../../../features/domain/productDef
 import { adaptProductDefinitionsOptionsToProductDefinitionOptions } from "../../../features/domain/productDefinition/adapters";
 import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 import { productDefinitionTranslationLoader } from "../../../features/domain/productDefinition/loaders/translation";
+import { withUserGroupPermission } from "../../../shared/loaders/withUserGroupPermission";
 
 const productDefinitionRoutes: RouteObject = {
 	id: "productDefinition",
@@ -21,9 +22,12 @@ const productDefinitionRoutes: RouteObject = {
 						)
 					).default,
 			},
-			loader: async (args: LoaderFunctionArgs) => ({
-				data: await listPaginatedProductDefinitions(args),
-			}),
+			loader: withUserGroupPermission(
+				async (args: LoaderFunctionArgs) => ({
+					data: await listPaginatedProductDefinitions(args),
+				}),
+				NAVIGATION_ROUTES.productDefinition.list.requiredRoles
+			),
 		},
 		{
 			path: NAVIGATION_ROUTES.productDefinition.create.path,
@@ -35,13 +39,16 @@ const productDefinitionRoutes: RouteObject = {
 						)
 					).default,
 			},
-			loader: async () => ({
-				productDefinition: null,
-				productDefinitionTypeOptions:
-					adaptProductDefinitionsOptionsToProductDefinitionOptions(
-						await getProductDefinitionOptions()
-					),
-			}),
+			loader: withUserGroupPermission(
+				async () => ({
+					productDefinition: null,
+					productDefinitionTypeOptions:
+						adaptProductDefinitionsOptionsToProductDefinitionOptions(
+							await getProductDefinitionOptions()
+						),
+				}),
+				NAVIGATION_ROUTES.productDefinition.create.requiredRoles
+			),
 		},
 		{
 			path: NAVIGATION_ROUTES.productDefinition.edit.path + ":id",
@@ -53,13 +60,16 @@ const productDefinitionRoutes: RouteObject = {
 						)
 					).default,
 			},
-			loader: async (args: LoaderFunctionArgs) => ({
-				productDefinition: await getProductDefinition(args),
-				productDefinitionTypeOptions:
-					adaptProductDefinitionsOptionsToProductDefinitionOptions(
-						await getProductDefinitionOptions()
-					),
-			}),
+			loader: withUserGroupPermission(
+				async (args: LoaderFunctionArgs) => ({
+					productDefinition: await getProductDefinition(args),
+					productDefinitionTypeOptions:
+						adaptProductDefinitionsOptionsToProductDefinitionOptions(
+							await getProductDefinitionOptions()
+						),
+				}),
+				NAVIGATION_ROUTES.productDefinition.edit.requiredRoles
+			),
 		},
 	],
 };
