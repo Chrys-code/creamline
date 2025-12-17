@@ -34,7 +34,7 @@ export const NAVIGATION_ROUTES = {
 	},
 	milkCollection: {
 		root: {
-			requiredRoles: [USER_GROUPS.MANAGER, USER_GROUPS.MILK_COLLECTOR],
+			requiredRoles: [USER_GROUPS.MANAGER],
 			path: "/milk-collection",
 			title: tNavigation("sidebar.processes.milk_collection.milk_collection"),
 		},
@@ -55,7 +55,7 @@ export const NAVIGATION_ROUTES = {
 	},
 	pasteuriation: {
 		root: {
-			requiredRoles: [USER_GROUPS.MANAGER, USER_GROUPS.PASTEURISER],
+			requiredRoles: [USER_GROUPS.MANAGER],
 			path: "/pasteurisation",
 			title: tNavigation("sidebar.processes.pasteurisation.pasteurisation"),
 		},
