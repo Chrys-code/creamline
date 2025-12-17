@@ -7,6 +7,7 @@ from apps.milk.use_cases.analytics.milk_interval_comparison import milk_interval
 from apps.milk.use_cases.analytics.milk_segmented_by_producer import (
     get_milk_segmented_by_producer,
 )
+from common.has_group import HasGroup
 
 
 class GetMilkSummaryAnalyticsEndpointView(views.APIView):
@@ -16,7 +17,7 @@ class GetMilkSummaryAnalyticsEndpointView(views.APIView):
     E.g Today compared to yesterday or this week compared to previous week.
     Returns SUM of liters collected and its percentage increase compared to previous interval.
     """
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, HasGroup.Manager]
 
     def get(self, _request):
         data = milk_interval_comparison_data()
@@ -28,7 +29,7 @@ class MilkTimeSeriesAnalyticsView(views.APIView):
     Used for Time Series (line) charts.
     Returns the Milk collected value (SUM) in selected range aggregated to selected intervals.
     """
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, HasGroup.Manager]
 
     def get(self, request):
         reader = MilkTimeSeriesReader()
@@ -52,7 +53,7 @@ class MilkSegmentedByProducer(views.APIView):
     Used for Pie charts.
     Returns the Milk collected (all time) segmented by producers aggregated to selected interval.
     """
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, HasGroup.Manager]
 
     def get(self, request):
         interval = request.query_params.get("interval", "day")

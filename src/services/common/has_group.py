@@ -20,21 +20,21 @@ class HasGroup:
                 code_name=self.code_name, group__in=user.groups.all()
             ).exists()
 
-    class Manager(BasePermission):
+    class Manager(Base):
         """
         Allows access only to users in the 'manager' group.
         """
 
         code_name = "manager"
 
-    class MilkCollector(BasePermission):
+    class MilkCollector(Base):
         """
         Allows access only to users in the 'milk_collector' group.
         """
 
         code_name = "milk_collector"
 
-    class Pasteuriser(BasePermission):
+    class Pasteuriser(Base):
         """
         Allows access only to users in the 'pasteuriser' group.
         """

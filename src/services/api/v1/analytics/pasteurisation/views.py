@@ -9,6 +9,7 @@ from apps.pasteurisation.use_cases.analytics.pasteurisation_interval_comparison 
 from apps.pasteurisation.use_cases.analytics.pasteurisation_segmented_by_pasteur import (
     get_pasteurisation_segmented_by_pasteur
 )
+from common.has_group import HasGroup
 
 
 class PasteurisationSummaryAnalyticsView(views.APIView):
@@ -19,7 +20,7 @@ class PasteurisationSummaryAnalyticsView(views.APIView):
     Returns SUM of liters pasteurised and its percentage increase compared to previous interval.
     """
 
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, HasGroup.Manager]
 
     def get(self, _request):
         data = pasteurisation_interval_comparison_data()
@@ -32,7 +33,7 @@ class PasteurisationTimeSeriesAnalyticsView(views.APIView):
     Returns the Pasteurisations in selected range aggregated to selected intervals.
     """
 
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, HasGroup.Manager]
 
     def get(self, request):
         reader = PasteurisationTimeSeriesReader()
@@ -57,7 +58,7 @@ class PasteurisationSegmentedByPasteur(views.APIView):
     Returns the volume of liters pasteurised segmented by pasteur in selected interval preceeding current date.
     """
 
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, HasGroup.Manager]
 
     def get(self, request):
         interval = request.query_params.get("interval", "day")
