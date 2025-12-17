@@ -20,8 +20,8 @@ interface GetRoutesForRolesProps {
 export const getRoutesForRoles = ({
 	routes,
 	userGroups = [],
-	ignoredRoutes,
-	ignoredRouteKeys = ["edit"],
+	ignoredRoutes = [],
+	ignoredRouteKeys = [],
 }: GetRoutesForRolesProps): Record<string, NAVIGATION_ROUTE> => {
 	const result: Record<string, NAVIGATION_ROUTE> = {};
 
@@ -35,13 +35,11 @@ export const getRoutesForRoles = ({
 		// Duplicate route segment for mutation
 		const filteredRouteSegment = { ...route };
 
-		// Remove requiredRoles from route segment
-		if (Object.hasOwn(filteredRouteSegment, "requiredRoles")) {
-			delete filteredRouteSegment.requiredRoles;
-		}
-
 		// Iterate over sub routes ("root", "list", "create", "edit") in route segment
 		for (const subKey in filteredRouteSegment) {
+			// If route is a top level route without subroutes ignore
+			if (["path", "title", "requiredRoles"].includes(subKey)) continue;
+
 			// If ignored, delete and continue
 			if (ignoredRouteKeys.includes(subKey)) {
 				delete filteredRouteSegment[subKey];
@@ -58,6 +56,11 @@ export const getRoutesForRoles = ({
 				delete filteredRouteSegment[subKey];
 				continue;
 			}
+		}
+
+		// If routeSegment is left without path or subRoutes; skip
+		if (!Object.keys(filteredRouteSegment).length) {
+			continue;
 		}
 
 		result[key] = filteredRouteSegment;

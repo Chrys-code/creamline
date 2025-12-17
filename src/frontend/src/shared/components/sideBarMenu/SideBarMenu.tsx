@@ -7,7 +7,6 @@ import { NavLink } from "react-router";
 import { Fragment } from "react";
 import { useTypedTranslation } from "../../hooks/useTypedTranslation/useTypedTranslation.js";
 import { v4 as uuid } from "uuid";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
 
 const SideBarMenu: React.FC<MobileNavProps> = ({ options, isOpen, setIsOpen }: MobileNavProps) => {
 	const tNavigation = useTypedTranslation("navigation");
@@ -32,11 +31,20 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ options, isOpen, setIsOpen }: M
 		for (const key in options) {
 			const route = options[key];
 
-			// If has root, render with sub routes inside
+			// Collect top level routes without subroutes
+			if ("path" in route) {
+				if (route.path && route.title) {
+					// @ts-expect-error route must have a title
+					elements.push(renderLink(route));
+				}
+				continue;
+			}
+
+			// If it has root, render with sub routes inside
 			if ("root" in route) {
 				const subRouteElements = [];
 
-				//  Render routes on subKeys
+				//  Collect subroutes
 				for (const subKey in route) {
 					// Ignore "root" as its used as parent
 					if (subKey === "root") continue;
@@ -47,6 +55,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ options, isOpen, setIsOpen }: M
 					}
 				}
 
+				// Render subroutes underneath root and add them to collection
 				elements.push(
 					<Fragment key={uuid()}>
 						{renderLink(route.root)}
@@ -57,6 +66,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ options, isOpen, setIsOpen }: M
 				continue;
 			}
 
+			// Collect routes without root path as in subroutes
 			for (const subKey in route) {
 				const subRoute = route[subKey];
 
@@ -72,13 +82,7 @@ const SideBarMenu: React.FC<MobileNavProps> = ({ options, isOpen, setIsOpen }: M
 	return (
 		<aside className={navigationStyle}>
 			<h3>{tNavigation("sidebar.title")}</h3>
-			<ul>
-				{renderLink({
-					path: NAVIGATION_ROUTES.app.path,
-					title: NAVIGATION_ROUTES.app.title,
-				})}
-				{renderOptions(options)}
-			</ul>
+			<ul>{renderOptions(options)}</ul>
 		</aside>
 	);
 };

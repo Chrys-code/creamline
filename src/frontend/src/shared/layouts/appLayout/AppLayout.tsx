@@ -22,8 +22,6 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }: AppLayoutProps) => {
 		ignoredRoutes: ["login", "profile"],
 	});
 
-	console.log({ allowedRoutes });
-
 	return (
 		<>
 			<Header
