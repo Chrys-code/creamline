@@ -3,7 +3,7 @@
 		"page_title": "Pasteurisation",
 		"filters": {
 			"interval": "Interval",
-			"producer": "Producer",
+			"pasteur": "Pasteur",
 			"start_date": "Start date",
 			"end_date": "End date"
 		},

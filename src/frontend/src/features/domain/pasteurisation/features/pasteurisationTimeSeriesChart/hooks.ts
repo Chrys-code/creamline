@@ -1,17 +1,16 @@
-import type { IntervalTypes } from "../../../../../shared/types";
-
 import { useQuery } from "@tanstack/react-query";
 import pasteurisationClient from "../../services/client";
 import { adaptPasteurisationTimeSeriesDateToLanguage } from "../../adapters";
 import { tTyped } from "../../../../../configs/i18n";
 import { toast } from "react-toastify";
+import type { UsePasteurisationTimeSeriesProps } from "./types";
 
-export function usePasteurisationTimeSeries(
-	interval: IntervalTypes = "week",
-	start_date?: string,
-	end_date?: string,
-	pasteur_uuid?: string
-) {
+export function usePasteurisationTimeSeries({
+	interval,
+	start_date,
+	end_date,
+	pasteur_uuid,
+}: UsePasteurisationTimeSeriesProps) {
 	return useQuery({
 		queryKey: ["milkTrend", start_date, end_date, interval, pasteur_uuid],
 		queryFn: async () => {

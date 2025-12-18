@@ -1,4 +1,4 @@
-import type { IntervalTypes } from "../../../../../shared/types";
+import type { UseMilkTimeSeriesProps } from "./types";
 
 import { useQuery } from "@tanstack/react-query";
 import { milkClient } from "../../services/client";
@@ -6,12 +6,12 @@ import { adaptMilkTrendDateToLanguage } from "../../adapters";
 import { toast } from "react-toastify";
 import { tTyped } from "../../../../../configs/i18n";
 
-export function useMilkTimeSeries(
-	interval: IntervalTypes = "week",
-	start_date?: string,
-	end_date?: string,
-	producer_uuid?: string
-) {
+export function useMilkTimeSeries({
+	interval = "week",
+	start_date,
+	end_date,
+	producer_uuid,
+}: UseMilkTimeSeriesProps) {
 	return useQuery({
 		queryKey: ["milkTrend", start_date, end_date, interval, producer_uuid],
 		queryFn: async () => {

@@ -5,4 +5,5 @@ export interface FormProps {
 	children: React.ReactNode;
 	actionElements: React.ReactNode;
 	onSubmit: React.FormEventHandler<HTMLFormElement>;
+	type?: "fullPage" | "dialog";
 }

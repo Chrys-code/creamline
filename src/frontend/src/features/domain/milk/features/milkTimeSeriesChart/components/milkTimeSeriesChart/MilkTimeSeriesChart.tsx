@@ -1,12 +1,13 @@
 import styles from "./MilkTimeSeriesChart.module.scss";
+import type { FilterState } from "../../types";
 import type { IntervalTypes } from "../../../../../../../shared/types";
 
-import MilkTimeSeriesChartFilters from "../milkTimeSeriesChartFilters";
-
+import MilkTimeSeriesChartFilterForm from "../milkTimeSeriesChartFilterForm";
 import ChartHeader from "../../../../../../../shared/components/charts/chartHeader";
 import IconButton from "../../../../../../../shared/components/base/iconButton";
 import TimeSeriesChart from "../../../../../../../shared/components/charts/timeSeriesChart";
 import Loader from "../../../../../../../shared/components/base/loader";
+import Dialog from "../../../../../../../shared/components/dialog";
 
 import React, { useState } from "react";
 import { useMilkTimeSeries } from "../../hooks";
@@ -49,20 +50,22 @@ const MilkTimeSeriesChartContainer: React.FC<{ producerOptions: ProducerOptions 
 		{ id: "year", value: tCommon("intervals.year") },
 	];
 
+	const [withAxis, setWithAxis] = useState(false);
 	const [filterIsOpen, setIsOpen] = useState(false);
 
-	const [withAxis, setWithAxis] = useState(false);
-	const [selectedStartDate, setSelectedStartDate] = useState<string>(getOffsetDate(-7));
-	const [selectedEndDate, setSelectedEndDate] = useState<string>(getOffsetDate(0));
-	const [selectedInterval, setSelectedInterval] = useState<IntervalTypes>("day");
-	const [selectedProducer, setSelectedProducer] = useState<string>("all");
+	const [chartFilterState, setChartFilterState] = useState({
+		startDate: getOffsetDate(-7),
+		endDate: getOffsetDate(0),
+		interval: "day" as IntervalTypes,
+		producer: "all",
+	});
 
-	const { data: milkTrendData, isLoading } = useMilkTimeSeries(
-		selectedInterval,
-		selectedStartDate,
-		selectedEndDate,
-		selectedProducer
-	);
+	const { data: milkTrendData, isLoading } = useMilkTimeSeries({
+		interval: chartFilterState.interval,
+		producer_uuid: chartFilterState.producer,
+		start_date: chartFilterState.startDate,
+		end_date: chartFilterState.endDate,
+	});
 
 	const renderChartHeaderActions = () => (
 		<>
@@ -70,10 +73,10 @@ const MilkTimeSeriesChartContainer: React.FC<{ producerOptions: ProducerOptions 
 				type="button"
 				onClick={() =>
 					useExportMilkTimeSeries({
-						start_date: selectedStartDate,
-						end_date: selectedEndDate,
-						interval: selectedInterval,
-						producer_uuid: selectedProducer,
+						start_date: chartFilterState.startDate,
+						end_date: chartFilterState.endDate,
+						interval: chartFilterState.interval,
+						producer_uuid: chartFilterState.producer,
 					})
 				}
 				disabled={isLoading}
@@ -95,20 +98,6 @@ const MilkTimeSeriesChartContainer: React.FC<{ producerOptions: ProducerOptions 
 				title={tMilkCollection("milk_collection.analytics.trend.title")}
 				actions={renderChartHeaderActions()}
 			/>
-			<MilkTimeSeriesChartFilters
-				isOpen={filterIsOpen}
-				isDisabled={isLoading}
-				selectedStartDate={selectedStartDate}
-				onStartDateChange={(e) => setSelectedStartDate(e.target.value)}
-				selectedEndDate={selectedEndDate}
-				onEndDateChange={(e) => setSelectedEndDate(e.target.value)}
-				intervalOptions={intervalOptions}
-				selectedInterval={selectedInterval}
-				onIntervalChange={(e) => setSelectedInterval(e.target.value as IntervalTypes)}
-				producerOptions={producerOptions}
-				selectedProducer={selectedProducer}
-				onProducerChange={(e) => setSelectedProducer(e.target.value)}
-			/>
 			{isLoading ? (
 				<Loader />
 			) : (
@@ -122,6 +111,16 @@ const MilkTimeSeriesChartContainer: React.FC<{ producerOptions: ProducerOptions 
 					aspectRatio={1.8}
 				/>
 			)}
+			<Dialog title="Filters" isOpen={filterIsOpen} onClose={() => setIsOpen(false)}>
+				<MilkTimeSeriesChartFilterForm
+					isDisabled={isLoading}
+					chartFilterState={chartFilterState}
+					intervalOptions={intervalOptions}
+					producerOptions={producerOptions}
+					onSubmit={(data: FilterState) => setChartFilterState(data)}
+					onClose={() => setIsOpen(false)}
+				/>
+			</Dialog>
 		</div>
 	);
 };

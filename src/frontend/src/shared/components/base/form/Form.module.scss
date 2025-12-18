@@ -17,7 +17,7 @@
 		gap: 1rem;
 	}
 
-	> .formActions {
+	> .fullPageFormActions {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -26,11 +26,23 @@
 		gap: 1rem;
 		background-color: var(--color-neutral-background);
 	}
+
+	> .dialogFormActions {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0;
+		padding-top: 1rem;
+		gap: 1rem;
+		background-color: none;
+		border-top: 1px solid var(--color-neutral-100);
+	}
 }
 
 @media (min-width: $breakpoint-desktop) {
 	.container {
-		> .formActions {
+		> .fullPageFormActions {
 			padding: 1rem;
 			position: sticky;
 			left: 0;

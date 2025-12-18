@@ -3,7 +3,7 @@
 		"page_title": "Pasztőrözés",
 		"filters": {
 			"interval": "Felosztás",
-			"producer": "Termelő",
+			"pasteur": "Pasztőr",
 			"start_date": "Kezdete",
 			"end_date": "Vége"
 		},

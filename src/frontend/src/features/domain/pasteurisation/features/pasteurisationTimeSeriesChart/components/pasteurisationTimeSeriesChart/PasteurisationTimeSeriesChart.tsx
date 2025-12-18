@@ -1,13 +1,14 @@
 import styles from "./PasteurisationTimeSeriesChart.module.scss";
 import type { IntervalTypes } from "../../../../../../../shared/types";
+import type { FilterState } from "../../types";
 
-import PasteurisationTimeSeriesChartFilters from "../pasteurisationTimeSeriesChartFilters";
-
+import PasteurisationTimeSeriesChartFilters from "../pasteurisationTimeSeriesChartFilterForm";
 import ChartHeader from "../../../../../../../shared/components/charts/chartHeader";
 import IconButton from "../../../../../../../shared/components/base/iconButton";
 import TimeSeriesChart from "../../../../../../../shared/components/charts/timeSeriesChart";
-
+import Dialog from "../../../../../../../shared/components/dialog";
 import Loader from "../../../../../../../shared/components/base/loader";
+
 import React, { useState } from "react";
 import { getOffsetDate } from "../../../../../../../shared/helpers/getDate/getDate";
 import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
@@ -49,20 +50,22 @@ const PasteurisationTimeSeriesChartContainer: React.FC<{ pasteurOptions: Pasteur
 		{ id: "year", value: tCommon("intervals.year") },
 	];
 
+	const [withAxis, setWithAxis] = useState(false);
 	const [filterIsOpen, setIsOpen] = useState(false);
 
-	const [withAxis, setWithAxis] = useState(false);
-	const [selectedStartDate, setSelectedStartDate] = useState<string>(getOffsetDate(-7));
-	const [selectedEndDate, setSelectedEndDate] = useState<string>(getOffsetDate(0));
-	const [selectedInterval, setSelectedInterval] = useState<IntervalTypes>("day");
-	const [selectedPasteur, setSelectedPasteur] = useState<string>("all");
+	const [chartFilterState, setChartFilterState] = useState({
+		startDate: getOffsetDate(-7),
+		endDate: getOffsetDate(0),
+		interval: "day" as IntervalTypes,
+		pasteur: "all",
+	});
 
-	const { data: milkTrendData, isLoading } = usePasteurisationTimeSeries(
-		selectedInterval,
-		selectedStartDate,
-		selectedEndDate,
-		selectedPasteur
-	);
+	const { data: milkTrendData, isLoading } = usePasteurisationTimeSeries({
+		interval: chartFilterState.interval,
+		pasteur_uuid: chartFilterState.pasteur,
+		start_date: chartFilterState.startDate,
+		end_date: chartFilterState.endDate,
+	});
 
 	const renderChartHeaderActions = () => (
 		<>
@@ -70,10 +73,10 @@ const PasteurisationTimeSeriesChartContainer: React.FC<{ pasteurOptions: Pasteur
 				type="button"
 				onClick={() =>
 					useExportPasteurisationTimeSeries({
-						start_date: selectedStartDate,
-						end_date: selectedEndDate,
-						interval: selectedInterval,
-						pasteur_uuid: selectedPasteur,
+						start_date: chartFilterState.startDate,
+						end_date: chartFilterState.endDate,
+						interval: chartFilterState.interval,
+						pasteur_uuid: chartFilterState.pasteur,
 					})
 				}
 				disabled={isLoading}
@@ -95,20 +98,7 @@ const PasteurisationTimeSeriesChartContainer: React.FC<{ pasteurOptions: Pasteur
 				title={tPasteurisation("pasteurisation.analytics.trend.title")}
 				actions={renderChartHeaderActions()}
 			/>
-			<PasteurisationTimeSeriesChartFilters
-				isOpen={filterIsOpen}
-				isDisabled={isLoading}
-				selectedStartDate={selectedStartDate}
-				onStartDateChange={(e) => setSelectedStartDate(e.target.value)}
-				selectedEndDate={selectedEndDate}
-				onEndDateChange={(e) => setSelectedEndDate(e.target.value)}
-				intervalOptions={intervalOptions}
-				selectedInterval={selectedInterval}
-				onIntervalChange={(e) => setSelectedInterval(e.target.value as IntervalTypes)}
-				pasteurOptions={pasteurOptions}
-				selectedPasteur={selectedPasteur}
-				onPasteurChange={(e) => setSelectedPasteur(e.target.value)}
-			/>
+
 			{isLoading ? (
 				<Loader />
 			) : (
@@ -122,6 +112,16 @@ const PasteurisationTimeSeriesChartContainer: React.FC<{ pasteurOptions: Pasteur
 					aspectRatio={1.8}
 				/>
 			)}
+			<Dialog title="Filters" isOpen={filterIsOpen} onClose={() => setIsOpen(false)}>
+				<PasteurisationTimeSeriesChartFilters
+					isDisabled={isLoading}
+					chartFilterState={chartFilterState}
+					intervalOptions={intervalOptions}
+					pasteurOptions={pasteurOptions}
+					onSubmit={(data: FilterState) => setChartFilterState(data)}
+					onClose={() => setIsOpen(false)}
+				/>
+			</Dialog>
 		</div>
 	);
 };
