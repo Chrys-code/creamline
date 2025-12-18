@@ -9,6 +9,10 @@ from apps.pasteurisation.use_cases.analytics.pasteurisation_interval_comparison 
 from apps.pasteurisation.use_cases.analytics.pasteurisation_segmented_by_pasteur import (
     get_pasteurisation_segmented_by_pasteur
 )
+from apps.pasteurisation.use_cases.analytics.validation import (
+    InvalidDateError, 
+    PasteurisationAnalyticsException
+)
 from common.has_group import HasGroup
 
 
@@ -47,8 +51,16 @@ class PasteurisationTimeSeriesAnalyticsView(views.APIView):
 
         try:
             time_series_data = reader.get(params)
+        except PasteurisationAnalyticsException as e:
+            if isinstance(e, InvalidDateError):
+                return Response(
+                    {"detail": e.detail}, status=status.HTTP_400_BAD_REQUEST
+                )
+
         except ValueError:
-            return Response({"detail": "Invalid interval"}, status=400)
+            return Response(
+                {"detail": "Invalid interval"}, status=status.HTTP_400_BAD_REQUEST
+            )
         return Response(time_series_data)
 
 

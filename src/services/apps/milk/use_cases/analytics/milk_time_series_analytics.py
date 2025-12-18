@@ -12,6 +12,7 @@ from django.db.models import Sum
 from django.utils.dateparse import parse_date
 
 from apps.milk.models import Milk
+from apps.milk.use_cases.analytics.validation import validate_milk_time_series_input
 
 TRUNC_MAP = {
     "day": TruncDate("created_at"),
@@ -28,6 +29,7 @@ def milk_time_series_analytics(
     interval: str = "day",
     producer_uuid: str | None = None,
 ):
+
     if interval not in TRUNC_MAP:
         raise ValueError("Invalid interval")
 
@@ -40,6 +42,10 @@ def milk_time_series_analytics(
 
     start_date_final = start_date_parsed or default_start_date
     end_date_final = end_date_parsed or default_end_date
+
+    validate_milk_time_series_input(
+        start_date=start_date_final, end_date=end_date_final
+    )
 
     # Create indexable dates + Milk Model Meta support for performance
     start_dt = datetime.combine(start_date_final, datetime.min.time())

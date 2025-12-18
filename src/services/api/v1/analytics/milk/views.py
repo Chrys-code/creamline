@@ -7,6 +7,7 @@ from apps.milk.use_cases.analytics.milk_interval_comparison import milk_interval
 from apps.milk.use_cases.analytics.milk_segmented_by_producer import (
     get_milk_segmented_by_producer,
 )
+from apps.milk.use_cases.analytics.validation import InvalidDateError, MilkAnalyticsException
 from common.has_group import HasGroup
 
 
@@ -43,6 +44,13 @@ class MilkTimeSeriesAnalyticsView(views.APIView):
 
         try:
             time_series_data = reader.get(params)
+
+        except MilkAnalyticsException as e:
+            if isinstance(e, InvalidDateError):
+                return Response(
+                    {"detail": e.detail}, status=status.HTTP_400_BAD_REQUEST
+                )
+
         except ValueError:
             return Response({"detail": "Invalid interval"}, status=status.HTTP_400_BAD_REQUEST)
         return Response(time_series_data)
