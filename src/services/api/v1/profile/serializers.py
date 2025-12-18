@@ -34,3 +34,13 @@ class ProfileSerializer(serializers.ModelSerializer):
         )
 
         return profile
+
+
+class ProfilePreviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = [
+            "profile_image",
+            "first_name",
+            "last_name",
+        ]

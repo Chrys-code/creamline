@@ -36,6 +36,7 @@ def pasteurisation_payload(pasteur, storage, storage_2, product_definition):
         "end_date": datetime.now(timezone.utc) + timedelta(minutes=10),
     }
 
+
 @pytest.fixture
 def create_pasteurisation_data(pasteur, storage, storage_2, product_definition):
     return {

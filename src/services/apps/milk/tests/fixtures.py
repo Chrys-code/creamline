@@ -34,6 +34,7 @@ def milk_payload(test_user, producer, storage):
         "created_by": test_user,
     }
 
+
 @pytest.fixture
 def create_milk_data(test_user, producer, storage):
     return {

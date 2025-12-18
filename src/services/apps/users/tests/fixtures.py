@@ -18,5 +18,5 @@ def update_user_payload():
         "profile.first_name": "Test Edited",
         "profile.last_name": "User Edited",
         "email": "test@user.com",
-        "position": []
+        "position": [],
     }

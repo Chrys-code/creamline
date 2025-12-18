@@ -60,7 +60,9 @@ def test_product_definition_v1_all_endpoint_no_perms_returns_403(authenticated_c
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
 
-def test_product_definition_v1_types_endpoint_no_perms_returns_403(authenticated_client):
+def test_product_definition_v1_types_endpoint_no_perms_returns_403(
+    authenticated_client,
+):
     client, _ = authenticated_client
     url = reverse("api:v1:product-definition-list-types")
 

@@ -22,9 +22,16 @@ const PatchProfileFormSchema = z
 	})
 	.partial();
 
+const ProfilePreviewSchema = z.object({
+	profile_image: z.string().nullable(),
+	first_name: z.string(),
+	last_name: z.string(),
+});
+
 const schemas = {
 	ProfileSchema,
 	PatchProfileFormSchema,
+	ProfilePreviewSchema,
 };
 
 export default schemas;

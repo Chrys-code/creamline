@@ -6,7 +6,9 @@ from rest_framework.reverse import reverse
 pytestmark = pytest.mark.django_db()
 
 
-def test_getProfile_authenticated_returns_the_users_own_profile(authenticated_client, profile):
+def test_getProfile_authenticated_returns_the_users_own_profile(
+    authenticated_client, profile
+):
     client, user = authenticated_client
     url = reverse("api:v1:profile-detail")
 
@@ -15,7 +17,9 @@ def test_getProfile_authenticated_returns_the_users_own_profile(authenticated_cl
     assert str(user.profile.uuid) == response.data["uuid"]
 
 
-def test_updateProfile_authenticated_returns_200(authenticated_client, profile_payload, profile):
+def test_updateProfile_authenticated_returns_200(
+    authenticated_client, profile_payload, profile
+):
     client, _ = authenticated_client
     url = reverse("api:v1:profile-detail")
 

@@ -1,5 +1,5 @@
 from apps.pasteurisation.use_cases.analytics.pasteurisation_time_series_analytics import (
-    pasteurisation_time_series_analytics
+    pasteurisation_time_series_analytics,
 )
 
 

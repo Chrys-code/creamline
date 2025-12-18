@@ -4,14 +4,14 @@ from rest_framework.permissions import IsAuthenticated
 
 from apps.pasteurisation.interfaces import PasteurisationTimeSeriesReader
 from apps.pasteurisation.use_cases.analytics.pasteurisation_interval_comparison import (
-    pasteurisation_interval_comparison_data
+    pasteurisation_interval_comparison_data,
 )
 from apps.pasteurisation.use_cases.analytics.pasteurisation_segmented_by_pasteur import (
-    get_pasteurisation_segmented_by_pasteur
+    get_pasteurisation_segmented_by_pasteur,
 )
 from apps.pasteurisation.use_cases.analytics.validation import (
-    InvalidDateError, 
-    PasteurisationAnalyticsException
+    InvalidDateError,
+    PasteurisationAnalyticsException,
 )
 from common.has_group import HasGroup
 
@@ -19,7 +19,7 @@ from common.has_group import HasGroup
 class PasteurisationSummaryAnalyticsView(views.APIView):
     """
     Used for interval comparison breakdown.
-    Compares Pasteurisation volume in intervals to previous intervals. 
+    Compares Pasteurisation volume in intervals to previous intervals.
     E.g Today compared to yesterday or this week compared to previous week.
     Returns SUM of liters pasteurised and its percentage increase compared to previous interval.
     """

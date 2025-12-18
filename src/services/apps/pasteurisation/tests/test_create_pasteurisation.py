@@ -6,9 +6,7 @@ from apps.pasteurisation.use_cases.create import create_pasteurisation
 pytestmark = pytest.mark.django_db()
 
 
-def test_create_pasteuriation_saves(
-    test_user, create_pasteurisation_data
-):
+def test_create_pasteuriation_saves(test_user, create_pasteurisation_data):
 
     created = create_pasteurisation(
         validated_data=create_pasteurisation_data, created_by=test_user

@@ -45,6 +45,10 @@
 }
 
 @media (min-width: $breakpoint-desktop) {
+	.list {
+		margin-bottom: 0;
+	}
+
 	.floatingMenu {
 		padding: 0.5rem 1rem 2rem 1rem;
 		position: sticky;

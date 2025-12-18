@@ -4,24 +4,29 @@
 	border-radius: var(--border-wrapper-radius);
 	background-color: var(--color-neutral-0);
 	box-shadow: var(--box-shadow-bottom);
-	cursor: pointer;
 
-	> p {
-		margin-bottom: 0.5rem;
-		font-size: var(--fs-body-l);
-		font-weight: bold;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.5rem;
+
+	p {
+		color: var(--color-font-100);
 	}
 
-	> div {
-		width: 100%;
+	.content {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: flex-start;
+		flex: 1;
+	}
+
+	.actionsWrapper {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		justify-content: space-between;
-
-		> p,
-		span {
-			color: var(--color-font-100);
-		}
+		justify-content: flex-end;
+		gap: 0.5rem;
 	}
 }

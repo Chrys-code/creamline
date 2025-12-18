@@ -2,7 +2,7 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from api.v1.storage.views import StorageViewSet
-from api.v1.profile.views import ProfileDetailView
+from api.v1.profile.views import ProfileDetailView, ProfilePreviewView
 from api.v1.pasteur.views import PasteurViewSet
 from api.v1.pasteurisation.views import PasteurisationViewSet
 from api.v1.producer.views import ProducerViewSet
@@ -51,6 +51,7 @@ router.register(
 urlpatterns = [
     *router.urls,
     path("profile/", ProfileDetailView.as_view(), name="profile-detail"),
+    path("profile-preview/", ProfilePreviewView.as_view(), name="profile-preview"),
     path("analytics/", include(("api.v1.analytics.urls", "analytics"))),
     path("pdf/", include(("api.v1.pdf.urls", "pdf"))),
 ]

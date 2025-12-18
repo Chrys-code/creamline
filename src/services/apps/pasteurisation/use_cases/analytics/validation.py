@@ -1,4 +1,4 @@
-import logging 
+import logging
 import datetime as dt
 
 from typing import Optional
@@ -36,7 +36,7 @@ def _validate_date(
                 extra={
                     "reason": "Start date or end date was not provied",
                     "start_date": start_date,
-                    "end_date": end_date
+                    "end_date": end_date,
                 },
             )
 
@@ -64,6 +64,8 @@ def validate_pasteurisation_time_series_input(
     logger: Optional[logging.Logger] = None,
 ) -> None:
     if logger is None:
-        logger = logging.getLogger(f"{__name__}-pasteurisation_time_series_analytics_validation")
+        logger = logging.getLogger(
+            f"{__name__}-pasteurisation_time_series_analytics_validation"
+        )
 
     _validate_date(start_date=start_date, end_date=end_date, logger=logger)

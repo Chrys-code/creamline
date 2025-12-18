@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from api.v1.pdf.throttles import PDFGenerationRateThrottle
 from apps.pdf_exports.use_cases.generate_pasteurisation_time_series_pdf import (
-    GeneratePasteurisationTimeSeriesPdf
+    GeneratePasteurisationTimeSeriesPdf,
 )
 from common.has_group import HasGroup
 

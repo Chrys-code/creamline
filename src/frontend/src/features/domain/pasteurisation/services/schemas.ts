@@ -42,6 +42,7 @@ const Pasteurisation = BasePasteurisationSchema.extend({
 	source_storage_name: z.string(),
 	target_storage_name: z.string(),
 
+	created_by: z.string().uuid(),
 	created_at: z.string(),
 	updated_at: z.string(),
 	deleted_at: z.string().nullish(),

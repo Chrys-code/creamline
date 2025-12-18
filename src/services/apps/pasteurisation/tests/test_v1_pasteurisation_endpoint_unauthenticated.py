@@ -26,7 +26,9 @@ def test_pasteurisation_v1_detail_endpoint_unauthenticated_returns_403(
 def test_pasteurisation_v1_create_endpoint_unauthenticated_returns_403(
     api_client, pasteurisation_payload
 ):
-    url = reverse("api:v1:pasteurisation-list",)
+    url = reverse(
+        "api:v1:pasteurisation-list",
+    )
 
     response = api_client.post(url, pasteurisation_payload)
     assert response.status_code == status.HTTP_403_FORBIDDEN

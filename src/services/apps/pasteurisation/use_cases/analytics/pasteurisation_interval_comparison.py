@@ -7,7 +7,6 @@ from django.db.models import Sum
 from apps.pasteurisation.models import Pasteurisation
 
 
-
 def _sum_liters(qs: QuerySet):
     return qs.aggregate(total=Sum("volume_liters"))["total"] or 0
 

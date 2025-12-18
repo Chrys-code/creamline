@@ -20,6 +20,8 @@ class MilkSerializer(serializers.ModelSerializer):
     )
     storage_name = serializers.CharField(source="storage.name", required=False)
 
+    created_by = serializers.CharField(source="created_by.uuid", read_only=True)
+
     class Meta:
         model = Milk
         fields = [
@@ -34,6 +36,7 @@ class MilkSerializer(serializers.ModelSerializer):
             "aflatoxin",
             "inhibitory_residue",
             "temperature",
+            "created_by",
             "created_at",
             "updated_at",
             "deleted_at",

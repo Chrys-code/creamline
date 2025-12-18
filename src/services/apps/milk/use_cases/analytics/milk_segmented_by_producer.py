@@ -11,7 +11,7 @@ def get_milk_segmented_by_producer(interval: str = "day"):
     """
     Returns the total liters of milk collected from each producer in
     selected interval.
-    
+
     :param interval: time period back from current day
     :type interval: str, "day" | "week" | "month" or "year"
     """

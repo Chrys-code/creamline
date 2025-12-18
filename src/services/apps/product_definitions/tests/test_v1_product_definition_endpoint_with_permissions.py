@@ -15,9 +15,7 @@ def test_product_definition_v1_list_endpoint_with_perms_returns_200(
 def test_product_definition_v1_detail_endpoint_with_perms_returns_200(
     auth_client_with_perm, product_definition
 ):
-    client, _ = auth_client_with_perm(
-        "manager@manager.com", ["view_productdefinition"]
-    )
+    client, _ = auth_client_with_perm("manager@manager.com", ["view_productdefinition"])
     url = reverse("api:v1:product-definition-detail", args=[product_definition.uuid])
 
     response = client.get(url)
@@ -63,9 +61,7 @@ def test_product_definition_v1_delete_endpoint_with_perms_returns_204(
 def test_product_definition_v1_all_endpoint_with_perms_returns_200(
     auth_client_with_perm,
 ):
-    client, _ = auth_client_with_perm(
-        "manager@manager.com", ["view_productdefinition"]
-    )
+    client, _ = auth_client_with_perm("manager@manager.com", ["view_productdefinition"])
     url = reverse("api:v1:product-definition-list-no-pagination")
 
     response = client.get(url)
@@ -75,9 +71,7 @@ def test_product_definition_v1_all_endpoint_with_perms_returns_200(
 def test_product_definition_v1_types_endpoint_with_perms_returns_200(
     auth_client_with_perm,
 ):
-    client, _ = auth_client_with_perm(
-        "manager@manager.com", ["view_productdefinition"]
-    )
+    client, _ = auth_client_with_perm("manager@manager.com", ["view_productdefinition"])
     url = reverse("api:v1:product-definition-list-types")
 
     response = client.get(url)

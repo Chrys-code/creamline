@@ -13,7 +13,7 @@ from django.utils.dateparse import parse_date
 
 from apps.pasteurisation.models import Pasteurisation
 from apps.pasteurisation.use_cases.analytics.validation import (
-    validate_pasteurisation_time_series_input
+    validate_pasteurisation_time_series_input,
 )
 
 
@@ -72,6 +72,9 @@ def pasteurisation_time_series_analytics(
 
     # Convert period to ISO string for frontend
     return [
-        {"date": row["period"].isoformat(), "total_liters": round(row["total_liters"] or 0, 2)}
+        {
+            "date": row["period"].isoformat(),
+            "total_liters": round(row["total_liters"] or 0, 2),
+        }
         for row in data
     ]

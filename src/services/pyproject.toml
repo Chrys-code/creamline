@@ -16,7 +16,8 @@ dependencies = [
     "psycopg2-binary (>=2.9.10,<3.0.0)",
     "drf-spectacular (>=0.28.0,<0.29.0)",
     "python-dateutil (>=2.9.0.post0,<3.0.0)",
-    "weasyprint (>=67.0,<68.0)"
+    "weasyprint (>=67.0,<68.0)",
+    "boto3 (>=1.42.12,<2.0.0)"
 ]
 
 

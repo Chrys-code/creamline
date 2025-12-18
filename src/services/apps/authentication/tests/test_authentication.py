@@ -7,16 +7,14 @@ from rest_framework.reverse import reverse
 
 pytestmark = pytest.mark.django_db()
 
+
 def test_login_no_account_returns_message(api_client):
-    credentials = {
-        "email": "manager@manager.com",
-        "password": "testpass123"
-    }
+    credentials = {"email": "manager@manager.com", "password": "testpass123"}
     url = reverse("api:login")
 
     with override("hu"):
         response = api_client.post(url, credentials)
-        
+
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
     assert response.data == {"message": "Érvénytelen hitelesítő adatok"}
 

@@ -15,9 +15,7 @@ def test_milk_v1_list_endpoint_no_perms_returns_403(
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
 
-def test_milk_v1_detail_endpoint_no_perms_returns_403(
-    authenticated_client, milk
-):
+def test_milk_v1_detail_endpoint_no_perms_returns_403(authenticated_client, milk):
     client, _ = authenticated_client
     url = reverse("api:v1:milk-detail", args=[milk.uuid])
 
@@ -45,9 +43,7 @@ def test_milk_v1_update_endpoint_no_perms_returns_403(
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
 
-def test_milk_v1_delete_endpoint_no_perms_returns_403(
-    authenticated_client, milk
-):
+def test_milk_v1_delete_endpoint_no_perms_returns_403(authenticated_client, milk):
     client, _ = authenticated_client
     url = reverse("api:v1:milk-detail", args=[milk.uuid])
 

@@ -20,14 +20,18 @@ def test_v1_user_detail_endpoint_unauthenticated_returns_403(api_client, test_us
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
 
-def test_v1_user_create_endpoint_unauthenticated_returns_403(api_client, create_user_payload):
+def test_v1_user_create_endpoint_unauthenticated_returns_403(
+    api_client, create_user_payload
+):
     url = reverse("api:v1:users-list")
 
     response = api_client.post(url, create_user_payload)
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
 
-def test_v1_user_update_endpoint_unauthenticated_returns_403(api_client, test_user, update_user_payload):
+def test_v1_user_update_endpoint_unauthenticated_returns_403(
+    api_client, test_user, update_user_payload
+):
     url = reverse("api:v1:users-detail", args=[test_user.uuid])
 
     response = api_client.patch(url, update_user_payload)

@@ -41,7 +41,7 @@ const ListPasteurisation: React.FC = () => {
 					month: "long",
 					day: "numeric",
 				})}
-				temperature={result.temperature}
+				createdById={result.created_by}
 				onClick={() => navigate(NAVIGATION_ROUTES.pasteuriation.edit.path + result.uuid)}
 			/>
 		</li>

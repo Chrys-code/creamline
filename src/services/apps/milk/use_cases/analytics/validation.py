@@ -1,4 +1,4 @@
-import logging 
+import logging
 import datetime as dt
 
 from typing import Optional
@@ -36,7 +36,7 @@ def _validate_date(
                 extra={
                     "reason": "Start date or end date was not provied",
                     "start_date": start_date,
-                    "end_date": end_date
+                    "end_date": end_date,
                 },
             )
 

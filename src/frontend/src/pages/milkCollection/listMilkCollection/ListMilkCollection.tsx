@@ -40,6 +40,7 @@ const ListMilkCollection: React.FC = () => {
 					month: "long",
 					day: "numeric",
 				})}
+				createdById={result.created_by}
 				onClick={() => navigate(NAVIGATION_ROUTES.milkCollection.edit.path + result.uuid)}
 			/>
 		</li>

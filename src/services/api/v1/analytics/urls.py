@@ -8,7 +8,7 @@ from api.v1.analytics.milk.views import (
 from api.v1.analytics.pasteurisation.views import (
     PasteurisationSegmentedByPasteur,
     PasteurisationSummaryAnalyticsView,
-    PasteurisationTimeSeriesAnalyticsView
+    PasteurisationTimeSeriesAnalyticsView,
 )
 
 milkRoutes = [

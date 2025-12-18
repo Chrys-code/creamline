@@ -3,6 +3,6 @@ export interface PasteurisationCardProps {
 	source_storage: string;
 	target_storage: string;
 	datetime: string;
-	temperature: number;
+	createdById: string;
 	onClick: () => void;
 }

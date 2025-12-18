@@ -35,7 +35,7 @@ def test_producer_v1_create_endpoint_unauthenticated_client_returns_403(
 def test_producer_v1_update_endpoint_unauthenticated_client_returns_403(
     api_client, producer_payload, producer
 ):
-    url = reverse("api:v1:producer-detail",  args=[producer.uuid])
+    url = reverse("api:v1:producer-detail", args=[producer.uuid])
 
     response = api_client.patch(url, producer_payload)
     assert response.status_code == status.HTTP_403_FORBIDDEN

@@ -1,27 +1,53 @@
-import type React from "react";
 import type { PasteurisationCardProps } from "./PasteurisationCard.types";
-
 import styles from "./PasteurisationCard.module.scss";
+
+import React from "react";
+import IconButton from "../../../../../shared/components/base/iconButton";
+import UserAvatar from "../../../profile/components/userAvatar";
+
+const MdOutlineRemoveRedEye = React.lazy(() =>
+	import("react-icons/md").then((mod) => ({
+		default: mod.MdOutlineRemoveRedEye,
+	}))
+);
+
+// const MdOutlineDelete = React.lazy(() =>
+// 	import("react-icons/md").then((mod) => ({
+// 		default: mod.MdOutlineDelete,
+// 	}))
+// );
+
+const MdOutlineFileDownload = React.lazy(() =>
+	import("react-icons/md").then((mod) => ({
+		default: mod.MdOutlineFileDownload,
+	}))
+);
 
 const PasteurisedMilkCard: React.FC<PasteurisationCardProps> = ({
 	title,
-	source_storage,
-	target_storage,
 	datetime,
-	temperature,
+	createdById,
 	onClick,
 }: PasteurisationCardProps) => {
 	return (
-		<div className={styles.container} onClick={onClick}>
-			<p>{title}</p>
-			<div>
-				<p>{source_storage}</p> <p>{target_storage}</p>
+		<div className={styles.container}>
+			<div className={styles.content}>
+				<h3>{title}</h3>
+				<div>
+					<p>{datetime}</p>
+				</div>
 			</div>
-			<div>
-				<p>{datetime}</p>
-				<p>
-					{temperature} <sup>o</sup>C
-				</p>
+			<UserAvatar userId={createdById} width={"2.5rem"} height={"2.5rem"} />
+			<div className={styles.actionsWrapper}>
+				<IconButton style="secondary" onClick={onClick}>
+					<MdOutlineRemoveRedEye size={"1.5rem"} />
+				</IconButton>
+				<IconButton style="secondary" onClick={onClick}>
+					<MdOutlineFileDownload size={"1.5rem"} />
+				</IconButton>
+				{/* <IconButton style="secondary" onClick={onClick}>
+					<MdOutlineDelete size={"1.5rem"} />
+				</IconButton> */}
 			</div>
 		</div>
 	);

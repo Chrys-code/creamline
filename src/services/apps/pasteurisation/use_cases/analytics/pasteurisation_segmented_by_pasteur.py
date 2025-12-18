@@ -11,7 +11,7 @@ def get_pasteurisation_segmented_by_pasteur(interval: str = "day"):
     """
     Returns the total volume of liters pasteurised in each pasteur for
     selected interval.
-    
+
     :param interval: time period back from current day
     :type interval: str, "day" | "week" | "month" or "year"
     """

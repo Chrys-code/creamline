@@ -40,6 +40,7 @@ class PasteurisationSerializer(serializers.ModelSerializer):
     target_storage_name = serializers.CharField(
         source="target_storage.name", read_only=True
     )
+    created_by = serializers.CharField(source="created_by.uuid", read_only=True)
 
     class Meta:
         model = Pasteurisation
@@ -58,6 +59,7 @@ class PasteurisationSerializer(serializers.ModelSerializer):
             "temperature",
             "start_date",
             "end_date",
+            "created_by",
             "created_at",
             "updated_at",
             "deleted_at",

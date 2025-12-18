@@ -23,6 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
+# File storage keys
+DO_STORAGE_ENDPOINT = os.getenv("DO_STORAGE_ENDPOINT")
+DO_ACCESS_KEY = os.getenv("DO_ACCESS_KEY")
+DO_SECRET_ACCESS_KEY = os.getenv("DO_SECRET_ACCESS_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG_MODE")
@@ -165,10 +169,7 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.DjangoModelPermissions",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    "DEFAULT_THROTTLE_RATES": {
-        "login": "5/min",
-        "pdf_generation": "4/min"
-    }
+    "DEFAULT_THROTTLE_RATES": {"login": "5/min", "pdf_generation": "4/min"},
 }
 
 AUTH_USER_MODEL = "users.CustomUser"

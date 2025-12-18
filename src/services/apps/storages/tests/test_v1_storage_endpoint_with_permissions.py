@@ -15,9 +15,7 @@ def test_storage_v1_list_endpoint_with_perms_returns_200(
     assert response.status_code == status.HTTP_200_OK
 
 
-def test_storage_v1_get_endpoint_with_perms_returns_200(
-    auth_client_with_perm, storage
-):
+def test_storage_v1_get_endpoint_with_perms_returns_200(auth_client_with_perm, storage):
     client, _ = auth_client_with_perm("manager@manager.com", ["view_storage"])
     url = reverse("api:v1:storage-detail", args=[storage.uuid])
 
@@ -25,7 +23,9 @@ def test_storage_v1_get_endpoint_with_perms_returns_200(
     assert response.status_code == status.HTTP_200_OK
 
 
-def test_storage_v1_create_endpoint_with_perms_returns_201(auth_client_with_perm, storage_payload):
+def test_storage_v1_create_endpoint_with_perms_returns_201(
+    auth_client_with_perm, storage_payload
+):
     client, _ = auth_client_with_perm("manager@manager.com", ["add_storage"])
     url = reverse("api:v1:storage-list")
 
