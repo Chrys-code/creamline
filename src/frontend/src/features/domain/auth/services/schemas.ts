@@ -6,7 +6,7 @@ const tAuth = tTyped("auth");
 const LoginFormSchema = z.object({
 	email: z.string().email({ message: tAuth("login.errors.email") }),
 	password: z.string().min(1, { message: tAuth("login.errors.password") }),
-	message: z.string().optional(),
+	detail: z.string().optional(),
 });
 
 const RoleSchema = z.object({

@@ -1,7 +1,6 @@
 import { createBrowserRouter, redirect } from "react-router";
 
 import AppLayout from "../shared/layouts/appLayout";
-import AuthLayout from "../shared/layouts/authLayout";
 import ErrorLayout from "../shared/layouts/errorLayout";
 import Dashboard from "../pages/dashboard/Dashboard";
 
@@ -10,17 +9,19 @@ import pasteurisationRoutes from "./routes/processes/pasteurisation.routes";
 import userRoutes from "./routes/user.routes";
 import producerRoutes from "./routes/utilities/producer.routes";
 
-import { getProfile } from "../features/domain/profile/loaders/getProfile";
 import storageRoutes from "./routes/utilities/storage.routes";
 import pasteurRoutes from "./routes/utilities/pasteur.routes";
 import productDefinitionRoutes from "./routes/utilities/productDefinition.routes";
+import authRoutes from "./routes/auth.routes";
+import profileRoutes from "./routes/profile.routes";
+
+import { getProfile } from "../features/domain/profile/loaders/getProfile";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { authTranslationLoader } from "../features/domain/auth/loaders/translation";
-import { profileTranslationLoader } from "../features/domain/profile/loaders/translation";
 
 const queryClient = new QueryClient();
 
 const appRouter = createBrowserRouter([
+	authRoutes,
 	{
 		id: "app",
 		path: "/",
@@ -54,35 +55,7 @@ const appRouter = createBrowserRouter([
 			storageRoutes,
 			pasteurRoutes,
 			productDefinitionRoutes,
-			{
-				id: "profile",
-				path: "/",
-				loader: profileTranslationLoader,
-				children: [
-					{
-						path: "profile",
-						lazy: {
-							Component: async () =>
-								(await import("../pages/profile/Profile")).default,
-						},
-						loader: getProfile,
-					},
-				],
-			},
-		],
-	},
-	{
-		id: "login",
-		path: "/login",
-		element: <AuthLayout />,
-		loader: authTranslationLoader,
-		children: [
-			{
-				index: true,
-				lazy: {
-					Component: async () => (await import("../pages/login/Login")).default,
-				},
-			},
+			profileRoutes,
 		],
 	},
 ]);

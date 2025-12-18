@@ -16,8 +16,8 @@ const LoginForm: React.FC = () => {
 	const renderFormActions = () => {
 		return (
 			<div className={styles.formActions}>
-				{errors.message && (
-					<span className={styles.errorMessage}>{errors.message.message}</span>
+				{errors.detail && (
+					<span className={styles.errorMessage}>{errors.detail.message}</span>
 				)}
 				<Button style="primary" type="submit" disabled={isSubmitting}>
 					{tAuth("login.submit")}

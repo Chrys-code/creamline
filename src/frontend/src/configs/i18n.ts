@@ -9,12 +9,14 @@ i18n.use(LanguageDetector)
 		resources: {
 			en: {
 				common: translations.translationEn.common,
+				auth: translations.translationEn.auth,
 				navigation: translations.translationEn.navigation,
 				dashboard: translations.translationEn.dashboard,
 				errors: translations.translationEn.errors,
 			},
 			hu: {
 				common: translations.translationHu.common,
+				auth: translations.translationHu.auth,
 				navigation: translations.translationHu.navigation,
 				dashboard: translations.translationHu.dashboard,
 				errors: translations.translationHu.errors,
@@ -29,7 +31,6 @@ export const commonTranslations = translations.translationEn.common;
 export default i18n;
 
 import type * as TranslationTypes from "../shared/i18n/types";
-import type { AuthTranslations } from "../features/domain/auth/types";
 import type { MilkTranslations } from "../features/domain/milk/types";
 import type { PasterisationTranslations } from "../features/domain/pasteurisation/types";
 import type { PasteurTranslations } from "../features/domain/pasteur/types";
@@ -66,7 +67,7 @@ export type NamespaceMap = {
 	navigation: TranslationTypes.NavigationTranslations;
 	dashboard: TranslationTypes.DashboardTranslations;
 	errors: TranslationTypes.ErrorTranslations;
-	auth: AuthTranslations;
+	auth: TranslationTypes.AuthTranslations;
 	users: UserTranslations;
 	profile: ProfileTranslations;
 	producer: ProducerTranslations;

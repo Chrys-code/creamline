@@ -9,6 +9,7 @@
 		"401": "Jogosulatlan hozzéférés",
 		"403": "Hozzáférés megtagadva",
 		"404": "Nem található",
+		"429": "Túl gyakori lekérés",
 		"500": "Ismeretlen hiba"
 	}
 }

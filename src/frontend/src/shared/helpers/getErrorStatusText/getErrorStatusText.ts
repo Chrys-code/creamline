@@ -12,6 +12,8 @@ export const getErrorStatusText = (statusCode: number): string => {
 			return tNetworkErrors("error_codes.403");
 		case 404: // Not found
 			return tNetworkErrors("error_codes.404");
+		case 429: // Too many requests
+			return tNetworkErrors("error_codes.429");
 		case 500: // Internal server error
 			return tNetworkErrors("error_codes.500");
 		default:

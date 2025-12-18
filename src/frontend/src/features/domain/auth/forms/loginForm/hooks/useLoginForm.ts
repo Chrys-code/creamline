@@ -33,8 +33,8 @@ export const useLoginForm = () => {
 					setError("password", { message: responseData.password[0] });
 				}
 
-				if (responseData.message) {
-					setError("message", { message: responseData.message });
+				if (responseData.detail) {
+					setError("detail", { message: responseData.detail });
 				}
 			}
 		}

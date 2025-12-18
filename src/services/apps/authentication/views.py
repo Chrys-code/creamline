@@ -6,11 +6,14 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from apps.authentication.serializers import LoginSerializer
+from apps.authentication.throttles import LoginRateThrottle
 
 User = get_user_model()
 
 
 class LoginView(generics.GenericAPIView):
+    throttle_classes = [LoginRateThrottle]
+
     serializer_class = LoginSerializer
     permission_classes = [AllowAny]
 
@@ -29,7 +32,7 @@ class LoginView(generics.GenericAPIView):
             return Response(status=status.HTTP_200_OK)
 
         return Response(
-            {"message": _("Invalid credentials")}, status=status.HTTP_401_UNAUTHORIZED
+            {"detail": _("Invalid credentials")}, status=status.HTTP_401_UNAUTHORIZED
         )
 
 

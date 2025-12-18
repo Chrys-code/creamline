@@ -165,6 +165,10 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.DjangoModelPermissions",
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_THROTTLE_RATES": {
+        "login": "5/min",
+        "pdf_generation": "4/min"
+    }
 }
 
 AUTH_USER_MODEL = "users.CustomUser"
