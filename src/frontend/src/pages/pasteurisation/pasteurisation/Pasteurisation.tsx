@@ -45,12 +45,6 @@ const Pasteurisation: React.FC = () => {
 			/>
 			<div className={styles.row}>
 				<TrendCard
-					title={tCommon("intervals.day")}
-					value={pasteurisationSummaryData?.today_total || 0}
-					unit={tCommon("units.liter")}
-					percentageChange={pasteurisationSummaryData?.today_change}
-				/>
-				<TrendCard
 					title={tCommon("intervals.week")}
 					value={pasteurisationSummaryData?.last_week_total || 0}
 					unit={tCommon("units.liter")}
@@ -61,6 +55,12 @@ const Pasteurisation: React.FC = () => {
 					value={pasteurisationSummaryData?.last_month_total || 0}
 					unit={tCommon("units.liter")}
 					percentageChange={pasteurisationSummaryData?.last_month_change}
+				/>
+				<TrendCard
+					title={tCommon("intervals.year")}
+					value={pasteurisationSummaryData?.last_year_total || 0}
+					unit={tCommon("units.liter")}
+					percentageChange={pasteurisationSummaryData?.last_year_change}
 				/>
 			</div>
 

@@ -10,6 +10,7 @@ from django.db.models.functions import (
 )
 from django.db.models import Sum
 from django.utils.dateparse import parse_date
+from django.utils.timezone import now
 
 from apps.milk.models import Milk
 from apps.milk.use_cases.analytics.validation import validate_milk_time_series_input
@@ -37,7 +38,7 @@ def milk_time_series_analytics(
     end_date_parsed = parse_date(end_date) if end_date else None
 
     # Set a week date range from today as default
-    default_end_date = datetime.now().date()
+    default_end_date = now()
     default_start_date = default_end_date - timedelta(days=7)
 
     start_date_final = start_date_parsed or default_start_date

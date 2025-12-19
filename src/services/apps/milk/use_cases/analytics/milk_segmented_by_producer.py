@@ -1,5 +1,7 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
+
 from django.db.models import Sum
+from django.utils.timezone import now
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -16,16 +18,22 @@ def get_milk_segmented_by_producer(interval: str = "day"):
     :type interval: str, "day" | "week" | "month" or "year"
     """
 
-    now = datetime.now()
+    today = now()
 
     if interval == "day":
-        start = now - timedelta(days=1)
+        start = today.replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(
+            days=1
+        )
     elif interval == "week":
-        start = now - timedelta(weeks=1)
+        start = today.replace(
+            day=today.day, hour=0, minute=0, second=0, microsecond=0
+        ) - timedelta(days=today.weekday())
     elif interval == "month":
-        start = now - timedelta(days=30)
+        start = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
     elif interval == "year":
-        start = now - timedelta(days=365)
+        start = today.replace(
+            year=today.year, month=1, day=1, hour=0, minute=0, second=0, microsecond=0
+        )
     else:
         return Response(
             {"error": "Invalid interval. Use day, week, month, or year."},
@@ -34,7 +42,7 @@ def get_milk_segmented_by_producer(interval: str = "day"):
 
     # Query milk grouped by producer
     results = (
-        Milk.objects.filter(created_at__range=(start, now))
+        Milk.objects.filter(created_at__range=(start, today))
         .values("producer__name")
         .annotate(total=Sum("volume_liters"))
         .order_by("producer__name")

@@ -49,12 +49,6 @@ const MilkCollection: React.FC = () => {
 			/>
 			<div className={styles.row}>
 				<TrendCard
-					title={tCommon("intervals.day")}
-					value={milkSummaryData?.today_total || 0}
-					unit={tCommon("units.liter")}
-					percentageChange={milkSummaryData?.today_change}
-				/>
-				<TrendCard
 					title={tCommon("intervals.week")}
 					value={milkSummaryData?.last_week_total || 0}
 					unit={tCommon("units.liter")}
@@ -65,6 +59,12 @@ const MilkCollection: React.FC = () => {
 					value={milkSummaryData?.last_month_total || 0}
 					unit={tCommon("units.liter")}
 					percentageChange={milkSummaryData?.last_month_change}
+				/>
+				<TrendCard
+					title={tCommon("intervals.year")}
+					value={milkSummaryData?.last_year_total || 0}
+					unit={tCommon("units.liter")}
+					percentageChange={milkSummaryData?.last_year_change}
 				/>
 			</div>
 
