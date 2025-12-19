@@ -1,8 +1,8 @@
-import type { IntervalTypes } from "../../../../shared/types";
+import i18n from "@/configs/i18n";
+import type { IntervalTypes } from "@/shared/types";
 import type { PasteurisationTimeSeries } from "../types";
 
-import i18n from "../../../../configs/i18n";
-import { getLocaleDateFormatForChart } from "../../../../shared/helpers/getLocaleDateFormat/getLocaleDateFormatForCharts";
+import { getLocaleDateFormatForChart } from "@/shared/helpers/getLocaleDateFormat/getLocaleDateFormatForCharts";
 
 /**
  * Used to adapt PasteurisationTimeSeries data by replacing the date with langeuage formatted dates using i18n.

@@ -6,13 +6,14 @@ import type {
 } from "../../../types";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-toastify";
+
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 import { productDefinitionClient } from "../../../services/client";
 import schemas from "../../../services/schemas";
-import { toast } from "react-toastify";
 
 export const useProductDefinitionForm = (productDefinition: ProductDefinition | null) => {
 	const navigate = useNavigate();

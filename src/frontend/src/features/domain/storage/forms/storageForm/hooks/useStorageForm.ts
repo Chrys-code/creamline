@@ -5,14 +5,15 @@ import type {
 	UpdateStorageFormSchema,
 } from "../../../types";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-toastify";
+
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 import { storageClient } from "../../../services/client";
 import schemas from "../../../services/schemas";
-import { toast } from "react-toastify";
 
 export const useStorageForm = (storage: Storage | null) => {
 	const navigate = useNavigate();

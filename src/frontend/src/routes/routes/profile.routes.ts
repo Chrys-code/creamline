@@ -1,6 +1,6 @@
 import type { RouteObject } from "react-router";
-import { profileTranslationLoader } from "../../features/domain/profile/loaders/translation";
-import { getProfile } from "../../features/domain/profile/loaders/getProfile";
+import { profileTranslationLoader } from "@/features/domain/user/features/profile/loaders/translation";
+import { getProfile } from "@/features/domain/user/features/profile/loaders/getProfile";
 
 const profileRoutes: RouteObject = {
 	id: "profile",

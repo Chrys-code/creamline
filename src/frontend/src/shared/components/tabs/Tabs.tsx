@@ -1,8 +1,8 @@
 import type React from "react";
-import type { TabsProps } from "./Tabs.types.ts";
-import { v4 as uuid } from "uuid";
-
+import type { TabsProps } from "./Tabs.types";
 import styles from "./Tabs.module.scss";
+
+import { v4 as uuid } from "uuid";
 
 const Tabs: React.FC<TabsProps> = ({ pages }: TabsProps) => {
 	if (!pages || !pages.length) return null;

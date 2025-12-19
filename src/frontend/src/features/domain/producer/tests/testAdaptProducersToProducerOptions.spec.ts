@@ -1,6 +1,7 @@
+import type { Producer } from "../types";
+
 import { describe, it, expect } from "vitest";
 
-import type { Producer } from "../types";
 import { adaptProducersToProducerOptions } from "../adapters";
 
 describe("adaptProducersToProducerOptions", () => {

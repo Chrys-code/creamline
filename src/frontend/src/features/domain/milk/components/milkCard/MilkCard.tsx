@@ -2,8 +2,9 @@ import type { MilkCardProps } from "./MilkCard.types";
 import styles from "./MilkCard.module.scss";
 
 import React from "react";
-import UserAvatar from "../../../profile/components/userAvatar";
-import IconButton from "../../../../../shared/components/base/iconButton";
+
+import UserAvatar from "@/features/domain/user/features/profile/components/userAvatar";
+import IconButton from "@/shared/components/base/iconButton";
 
 const MdOutlineRemoveRedEye = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

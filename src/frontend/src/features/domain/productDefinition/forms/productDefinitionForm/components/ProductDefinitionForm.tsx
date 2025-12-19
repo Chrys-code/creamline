@@ -1,15 +1,16 @@
 import type React from "react";
 import type { ProductDefinitionFormProps } from "./ProductDefinitionForm.types";
 
-import Button from "../../../../../../shared/components/base/button";
-import Form from "../../../../../../shared/components/base/form";
-import InputField from "../../../../../../shared/components/base/inputField";
-import Dropdown from "../../../../../../shared/components/base/dropdown";
+import Form from "@/shared/components/base/form";
+import InputField from "@/shared/components/base/inputField";
+import Dropdown from "@/shared/components/base/dropdown";
+import Button from "@/shared/components/base/button";
+
+import { v4 as uuid } from "uuid";
 
 import { useNavigate } from "react-router";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 import { useProductDefinitionForm } from "../hooks/useProductDefinitionForm";
-import { v4 as uuid } from "uuid";
 
 const ProductDefinitionForm: React.FC<ProductDefinitionFormProps> = ({
 	productDefinition,

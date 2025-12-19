@@ -1,3 +1,4 @@
+import path from "path";
 import type { UserConfig } from "vite";
 import { defineConfig, loadEnv } from "vite";
 
@@ -9,6 +10,11 @@ export default defineConfig(({ mode }) => {
 		build: {
 			outDir: "dist",
 			target: "esnext",
+		},
+		resolve: {
+			alias: {
+				"@": path.resolve(__dirname, "./src"),
+			},
 		},
 	};
 

@@ -1,5 +1,6 @@
 import z from "zod";
 import { makeApi, makeEndpoint, Zodios, type ZodiosOptions } from "@zodios/core";
+
 import schemas from "./schemas";
 
 const PaginatedMilkListEndpoint = makeEndpoint({

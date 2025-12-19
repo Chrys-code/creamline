@@ -1,9 +1,9 @@
+import { tTyped } from "@/configs/i18n";
 import type { LoaderFunctionArgs } from "react-router";
 
 import { userClient } from "../services/client";
 
-import { getErrorStatusText } from "../../../../shared/helpers/getErrorStatusText/getErrorStatusText";
-import { tTyped } from "../../../../configs/i18n";
+import { getErrorStatusText } from "@/shared/helpers/getErrorStatusText/getErrorStatusText";
 
 const getPaginatedUserList = async ({ request }: LoaderFunctionArgs) => {
 	try {

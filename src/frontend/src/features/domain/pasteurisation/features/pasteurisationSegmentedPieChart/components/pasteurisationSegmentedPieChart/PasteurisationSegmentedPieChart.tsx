@@ -1,15 +1,15 @@
 import type React from "react";
-import type { IntervalTypes } from "../../../../../../../shared/types";
+import type { IntervalTypes } from "@/shared/types";
 import styles from "./PasteurisationSegmentedPieChart.module.scss";
 
-import Loader from "../../../../../../../shared/components/base/loader";
-import ChartHeader from "../../../../../../../shared/components/charts/chartHeader";
-import SegmentedPieChart from "../../../../../../../shared/components/charts/segmentedPieChart";
 import PasteurisationSegmentedPieChartFooter from "../pasteurisationSegmentedPieChartFooter";
+import Loader from "@/shared/components/base/loader";
+import ChartHeader from "@/shared/components/charts/chartHeader";
+import SegmentedPieChart from "@/shared/components/charts/segmentedPieChart";
 
 import { useState } from "react";
-import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { usePasteurisationSegmentedByProducers } from "../../hooks";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const PasteurisationSegmentedPieChart: React.FC = () => {
 	const tCommon = useTypedTranslation("common");

@@ -1,17 +1,19 @@
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
+
 import type React from "react";
 import type { CreatePasteurisationFormSchema, Pasteurisation } from "../../../types";
 
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { toast } from "react-toastify";
+
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 import pasteurisationClient from "../../../services/client";
 import schemas from "../../../services/schemas";
 
-import convertMilkLiterAndKg from "../../../../../../shared/helpers/literToKg/literToKg";
-import { NAVIGATION_ROUTES } from "../../../../../../configs/navigation";
+import convertMilkLiterAndKg from "@/shared/helpers/literToKg/literToKg";
 
 export const usePasteurisationForm = (pasteurisation: Pasteurisation | null) => {
 	const navigate = useNavigate();

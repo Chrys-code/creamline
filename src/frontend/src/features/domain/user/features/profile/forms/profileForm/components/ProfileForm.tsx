@@ -2,13 +2,14 @@ import type React from "react";
 import type { ProfileFormProps } from "./ProfileForm.types";
 import styles from "./ProfileForm.module.scss";
 
-import Form from "../../../../../../shared/components/base/form";
-import InputField from "../../../../../../shared/components/base/inputField";
-import Button from "../../../../../../shared/components/base/button";
+import Form from "@/shared/components/base/form";
+import InputField from "@/shared/components/base/inputField";
+import Button from "@/shared/components/base/button";
+
+import { v4 as uuid } from "uuid";
 
 import { useProfileForm } from "../hooks/useProfileForm";
-import { v4 as uuid } from "uuid";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const ProfileForm: React.FC<ProfileFormProps> = ({ profile }: ProfileFormProps) => {
 	const tCommon = useTypedTranslation("common");

@@ -1,16 +1,16 @@
 import type React from "react";
-import type { IntervalTypes } from "../../../../../../../shared/types";
+import type { IntervalTypes } from "@/shared/types";
 import styles from "./MilkSegmentedPieChart.module.scss";
 
-import ChartHeader from "../../../../../../../shared/components/charts/chartHeader";
-import SegmentedPieChart from "../../../../../../../shared/components/charts/segmentedPieChart";
 import MilkSegmentedPieChartFooter from "../milkSegmentedPieChartFooter";
 
-import { useState } from "react";
-import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import ChartHeader from "@/shared/components/charts/chartHeader";
+import SegmentedPieChart from "@/shared/components/charts/segmentedPieChart";
+import Loader from "@/shared/components/base/loader";
 
+import { useState } from "react";
 import { useMilkSegmentedByProducers } from "../../hooks";
-import Loader from "../../../../../../../shared/components/base/loader";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const MilkSegmentedPieChart: React.FC = () => {
 	const tCommon = useTypedTranslation("common");

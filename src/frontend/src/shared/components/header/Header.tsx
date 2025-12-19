@@ -1,14 +1,16 @@
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
+import i18n from "@/configs/i18n";
+
 import type { HeaderProps } from "./Header.types";
 import styles from "./Header.module.scss";
 
 import React from "react";
+import { toast } from "react-toastify";
 import LanguageSelector from "../languageSelector";
 
-import i18n from "../../../configs/i18n";
-import { authClient } from "../../../features/domain/auth/services/client";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
+
+import { authClient } from "@/features/domain/auth/services/client";
 
 const MdCheckBoxOutlineBlank = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -47,7 +49,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }: HeaderProps) => {
 		try {
 			// @ts-expect-error no body required on post request
 			await authClient.logout();
-			navigate(NAVIGATION_ROUTES.login);
+			navigate(NAVIGATION_ROUTES.login.path);
 		} catch {
 			toast.error("Someting went wrong");
 		}

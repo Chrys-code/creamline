@@ -1,5 +1,5 @@
 import { useTranslation as useTranslationBase } from "react-i18next";
-import type { NamespaceKey, TypedTFunction } from "../../../configs/i18n";
+import type { NamespaceKey, TypedTFunction } from "@/configs/i18n";
 
 /**
  * Used to hint & auto complete translations using i18n.

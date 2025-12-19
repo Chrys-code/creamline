@@ -1,3 +1,5 @@
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
+
 import type {
 	CreateUserFormSchema,
 	PatchUserFormSchema,
@@ -5,16 +7,16 @@ import type {
 	UserFormSchema,
 } from "../../../types";
 
-import { useNavigate } from "react-router";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
+
+import { useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
 
 import { userClient } from "../../../services/client";
 import userSchemas from "../../../services/schemas";
 
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { NAVIGATION_ROUTES } from "../../../../../../configs/navigation";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 export const useUserForm = (user: User) => {
 	const navigate = useNavigate();

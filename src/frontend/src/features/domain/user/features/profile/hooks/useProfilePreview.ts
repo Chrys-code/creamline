@@ -1,6 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import { tTyped } from "../../../../configs/i18n";
+import { tTyped } from "@/configs/i18n";
+
 import { toast } from "react-toastify";
+
+import { useQuery } from "@tanstack/react-query";
+
 import { profileClient } from "../services/client";
 
 export const useProfilePreview = (userId: string) => {

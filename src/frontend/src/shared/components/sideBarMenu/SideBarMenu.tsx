@@ -1,12 +1,13 @@
-import type React from "react";
 import type { NAVIGATION_ROUTE } from "../../types";
 import type { MobileNavProps } from "./SideBarMenu.types";
+import type React from "react";
 import styles from "./SideBarMenu.module.scss";
 
-import { NavLink } from "react-router";
 import { Fragment } from "react";
-import { useTypedTranslation } from "../../hooks/useTypedTranslation/useTypedTranslation.js";
+import { NavLink } from "react-router";
 import { v4 as uuid } from "uuid";
+
+import { useTypedTranslation } from "../../hooks/useTypedTranslation/useTypedTranslation.js";
 
 const SideBarMenu: React.FC<MobileNavProps> = ({ options, isOpen, setIsOpen }: MobileNavProps) => {
 	const tNavigation = useTypedTranslation("navigation");

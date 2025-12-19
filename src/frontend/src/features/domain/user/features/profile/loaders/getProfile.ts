@@ -1,7 +1,8 @@
+import { tTyped } from "@/configs/i18n";
+
 import { profileClient } from "../services/client";
 
-import { getErrorStatusText } from "../../../../shared/helpers/getErrorStatusText/getErrorStatusText";
-import { tTyped } from "../../../../configs/i18n";
+import { getErrorStatusText } from "@/shared/helpers/getErrorStatusText/getErrorStatusText";
 
 export const getProfile = async () => {
 	try {

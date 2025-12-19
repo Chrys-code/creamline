@@ -1,4 +1,4 @@
-import type { Pasteurisation } from "../../../domain/pasteurisation/types";
+import type { Pasteurisation } from "../../../types";
 
 export interface PasteurisationFormProps {
 	pasteurisation: Pasteurisation | null;

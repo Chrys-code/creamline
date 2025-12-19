@@ -1,7 +1,7 @@
 import type React from "react";
-import type { Profile } from "../../features/domain/profile/types";
+import type { Profile } from "@/features/domain/user/features/profile/types";
 
-import ProfileForm from "../../features/domain/profile/forms/profileForm";
+import ProfileForm from "@/features/domain/user/features/profile/forms/profileForm";
 
 import { useLoaderData } from "react-router";
 

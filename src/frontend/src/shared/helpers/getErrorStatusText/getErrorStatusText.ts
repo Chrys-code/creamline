@@ -1,4 +1,4 @@
-import { tTyped } from "../../../configs/i18n";
+import { tTyped } from "@/configs/i18n";
 
 export const getErrorStatusText = (statusCode: number): string => {
 	const tNetworkErrors = tTyped("errors");

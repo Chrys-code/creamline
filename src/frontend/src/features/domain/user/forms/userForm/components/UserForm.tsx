@@ -2,16 +2,17 @@ import type React from "react";
 import type { UserFormProps } from "./UserForm.types";
 import styles from "./UserForm.module.scss";
 
-import Form from "../../../../../../shared/components/base/form/Form";
-import Dropdown from "../../../../../../shared/components/base/dropdown/Dropdown";
-import InputField from "../../../../../../shared/components/base/inputField/InputField";
-import Button from "../../../../../../shared/components/base/button/Button";
-import Chip from "../../../../../../shared/components/base/chip/Chip";
+import Form from "@/shared/components/base/form/Form";
+import Dropdown from "@/shared/components/base/dropdown/Dropdown";
+import InputField from "@/shared/components/base/inputField/InputField";
+import Button from "@/shared/components/base/button/Button";
+import Chip from "@/shared/components/base/chip/Chip";
+
+import { v4 as uuid } from "uuid";
 
 import { useNavigate } from "react-router";
 import { useUserForm } from "../hooks/useUserForm";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { v4 as uuid } from "uuid";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const UserForm: React.FC<UserFormProps> = ({ user, userGroups }: UserFormProps) => {
 	const navigate = useNavigate();

@@ -2,8 +2,9 @@ import type { PasteurisationCardProps } from "./PasteurisationCard.types";
 import styles from "./PasteurisationCard.module.scss";
 
 import React from "react";
-import IconButton from "../../../../../shared/components/base/iconButton";
-import UserAvatar from "../../../profile/components/userAvatar";
+
+import UserAvatar from "@/features/domain/user/features/profile/components/userAvatar";
+import IconButton from "@/shared/components/base/iconButton";
 
 const MdOutlineRemoveRedEye = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

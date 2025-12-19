@@ -1,14 +1,14 @@
 import type React from "react";
 import type { PasteurisationTimeSeriesChartFilterFormProps } from "./PasteurisationTimeSeriesChartFilterForm.types";
-import type { IntervalTypes } from "../../../../../../../shared/types";
+import type { IntervalTypes } from "@/shared/types";
 
-import Form from "../../../../../../../shared/components/base/form";
-import Button from "../../../../../../../shared/components/base/button";
-import Dropdown from "../../../../../../../shared/components/base/dropdown";
-import InputField from "../../../../../../../shared/components/base/inputField";
+import Form from "@/shared/components/base/form";
+import Dropdown from "@/shared/components/base/dropdown";
+import InputField from "@/shared/components/base/inputField";
+import Button from "@/shared/components/base/button";
 
 import { v4 as uuid } from "uuid";
-import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const PasteurisationTimeSeriesChartFilterForm: React.FC<
 	PasteurisationTimeSeriesChartFilterFormProps

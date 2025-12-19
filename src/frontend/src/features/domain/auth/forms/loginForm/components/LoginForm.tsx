@@ -1,13 +1,14 @@
 import type React from "react";
 import styles from "./LoginForm.module.scss";
 
-import Form from "../../../../../../shared/components/base/form/Form";
-import Button from "../../../../../../shared/components/base/button/Button";
-import InputField from "../../../../../../shared/components/base/inputField/InputField";
+import Form from "@/shared/components/base/form/Form";
+import Button from "@/shared/components/base/button/Button";
+import InputField from "@/shared/components/base/inputField/InputField";
+
+import { v4 as uuidv4 } from "uuid";
 
 import { useLoginForm } from "../hooks/useLoginForm";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { v4 as uuidv4 } from "uuid";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const LoginForm: React.FC = () => {
 	const { errors, isSubmitting, register, handleSubmit, onSubmit, clearErrors } = useLoginForm();

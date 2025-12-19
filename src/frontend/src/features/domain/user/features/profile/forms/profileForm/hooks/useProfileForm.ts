@@ -1,12 +1,15 @@
-import { useForm } from "react-hook-form";
 import type { PatchProfileFormSchema, Profile } from "../../../types";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import schemas from "../../../services/schemas";
-import { profileClient } from "../../../services/client";
 import { toast } from "react-toastify";
+
 import { useState } from "react";
 import { useRevalidator } from "react-router";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { useForm } from "react-hook-form";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
+
+import { profileClient } from "../../../services/client";
+import schemas from "../../../services/schemas";
 
 export const useProfileForm = (profile: Profile) => {
 	const revalidator = useRevalidator();

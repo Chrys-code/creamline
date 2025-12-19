@@ -15,7 +15,7 @@ import productDefinitionRoutes from "./routes/utilities/productDefinition.routes
 import authRoutes from "./routes/auth.routes";
 import profileRoutes from "./routes/profile.routes";
 
-import { getProfile } from "../features/domain/profile/loaders/getProfile";
+import { getProfile } from "@/features/domain/user/features/profile/loaders/getProfile";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();

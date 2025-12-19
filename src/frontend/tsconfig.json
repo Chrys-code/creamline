@@ -8,6 +8,10 @@
 		"moduleResolution": "node",
 		"jsx": "react-jsx",
 		"rootDirs": ["."],
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"]
+		},
 		"esModuleInterop": true,
 		"verbatimModuleSyntax": true,
 		"noEmit": true,

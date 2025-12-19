@@ -1,9 +1,11 @@
+import type { LoginFormSchema } from "../../../types";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import schemas from "../../../services/schemas";
-import type { LoginFormSchema } from "../../../types";
-import { authClient } from "../../../services/client";
 import { useNavigate } from "react-router";
+
+import schemas from "../../../services/schemas";
+import { authClient } from "../../../services/client";
 
 export const useLoginForm = () => {
 	const navigate = useNavigate();

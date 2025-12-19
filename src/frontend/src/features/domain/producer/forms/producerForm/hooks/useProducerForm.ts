@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router";
 import type {
 	CreateProducerFormSchema,
 	Producer,
@@ -6,13 +5,15 @@ import type {
 	UpdateProducerFormSchema,
 } from "../../../types";
 
-import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+
+import { useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 import { producerClient } from "../../../services/client";
 import schemas from "../../../services/schemas";
-import { toast } from "react-toastify";
 
 export const useProducerForm = (producer: Producer | null) => {
 	const navigate = useNavigate();

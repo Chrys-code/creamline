@@ -1,5 +1,5 @@
 import type React from "react";
-import type { LanguageSelectorProps } from "./LanguageSelector.types.ts";
+import type { LanguageSelectorProps } from "./LanguageSelector.types";
 
 const LanguageSelector: React.FC<LanguageSelectorProps> = ({
 	languageOptions,

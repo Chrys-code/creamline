@@ -1,8 +1,9 @@
-import type { DialogProps } from "./Dialog.types.ts";
+import type { DialogProps } from "./Dialog.types";
 import styles from "./Dialog.module.scss";
 
 import React, { useEffect, useRef } from "react";
-import IconButton from "../base/iconButton/IconButton.js";
+
+import IconButton from "../base/iconButton/IconButton";
 
 const MdClose = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

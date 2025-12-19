@@ -1,14 +1,15 @@
 import type React from "react";
 import type { ProducerFormProps } from "./ProducerForm.types.ts";
 
-import Form from "../../../../../../shared/components/base/form";
-import InputField from "../../../../../../shared/components/base/inputField";
-import Button from "../../../../../../shared/components/base/button";
+import Form from "@/shared/components/base/form";
+import InputField from "@/shared/components/base/inputField";
+import Button from "@/shared/components/base/button";
+
+import { v4 as uuid } from "uuid";
 
 import { useNavigate } from "react-router";
 import { useProducerForm } from "../hooks/useProducerForm";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { v4 as uuid } from "uuid";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const ProducerForm: React.FC<ProducerFormProps> = ({ producer }: ProducerFormProps) => {
 	const navigate = useNavigate();

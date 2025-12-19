@@ -1,14 +1,15 @@
 import type React from "react";
 import type { PasteurFormProps } from "./PasteurForm.types.ts";
 
-import Form from "../../../../../../shared/components/base/form";
-import Button from "../../../../../../shared/components/base/button";
-import InputField from "../../../../../../shared/components/base/inputField";
+import Form from "@/shared/components/base/form";
+import Button from "@/shared/components/base/button";
+import InputField from "@/shared/components/base/inputField";
+
+import { v4 as uuid } from "uuid";
 
 import { useNavigate } from "react-router";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { usePasteurForm } from "../hooks/usePasteurForm";
-import { v4 as uuid } from "uuid";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const PasteurForm: React.FC<PasteurFormProps> = ({ pasteur }: PasteurFormProps) => {
 	const navigate = useNavigate();

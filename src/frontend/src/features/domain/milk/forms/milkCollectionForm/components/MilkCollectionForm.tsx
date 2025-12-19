@@ -1,18 +1,20 @@
-import type { MilkCollectionFormProps } from "./MilkCollectionForm.types.ts";
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
+
+import type { MilkCollectionFormProps } from "./MilkCollectionForm.types";
 import styles from "./MilkCollectionForm.module.scss";
 
-import Form from "../../../../../../shared/components/base/form";
-import Dropdown from "../../../../../../shared/components/base/dropdown";
-import IconButton from "../../../../../../shared/components/base/iconButton";
-import InputField from "../../../../../../shared/components/base/inputField";
-import Button from "../../../../../../shared/components/base/button";
+import Form from "@/shared/components/base/form";
+import Dropdown from "@/shared/components/base/dropdown";
+import IconButton from "@/shared/components/base/iconButton";
+import InputField from "@/shared/components/base/inputField";
+import Button from "@/shared/components/base/button";
 
 import React from "react";
+import { v4 as uuid } from "uuid";
+
 import { useNavigate } from "react-router";
 import { useMilkCollectionForm } from "../hooks/useMilkCollectionForm";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation.js";
-import { v4 as uuid } from "uuid";
-import { NAVIGATION_ROUTES } from "../../../../../../configs/navigation.js";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

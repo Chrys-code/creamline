@@ -1,15 +1,16 @@
 import type React from "react";
 import type { StorageFormProps } from "./StorageForm.types.ts";
 
-import Form from "../../../../../../shared/components/base/form";
-import InputField from "../../../../../../shared/components/base/inputField";
-import Dropdown from "../../../../../../shared/components/base/dropdown";
-import Button from "../../../../../../shared/components/base/button";
+import Form from "@/shared/components/base/form";
+import InputField from "@/shared/components/base/inputField";
+import Dropdown from "@/shared/components/base/dropdown";
+import Button from "@/shared/components/base/button";
+
+import { v4 as uuid } from "uuid";
 
 import { useNavigate } from "react-router";
 import { useStorageForm } from "../hooks/useStorageForm";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { v4 as uuid } from "uuid";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const StorageForm: React.FC<StorageFormProps> = ({
 	storage,

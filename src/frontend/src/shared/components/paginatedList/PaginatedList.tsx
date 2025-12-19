@@ -1,10 +1,11 @@
-import type { PaginatedListProps } from "./PaginatedList.types.ts";
+import type { PaginatedListProps } from "./PaginatedList.types";
 import styles from "./PaginatedList.module.scss";
 
 import Pagination from "../pagination/";
+import Loader from "../base/loader/Loader";
+
 import { useNavigate } from "react-router";
 import { useDelayedLoader } from "../../hooks/useDelayedLoader/useDelayedLoader";
-import Loader from "../base/loader/Loader";
 
 function PaginatedList<T>({
 	items,

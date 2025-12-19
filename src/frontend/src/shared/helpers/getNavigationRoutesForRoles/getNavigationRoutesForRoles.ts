@@ -1,4 +1,4 @@
-import type { NAVIGATION_ROUTES } from "../../../configs/navigation";
+import type { NAVIGATION_ROUTES } from "@/configs/navigation";
 import type { NAVIGATION_ROUTE } from "../../types";
 
 interface GetRoutesForRolesProps {

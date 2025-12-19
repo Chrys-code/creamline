@@ -1,5 +1,6 @@
+import { tTyped } from "@/configs/i18n";
+
 import z from "zod";
-import { tTyped } from "../../../../configs/i18n";
 
 const tCommon = tTyped("common");
 

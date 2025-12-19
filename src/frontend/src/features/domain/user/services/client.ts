@@ -1,6 +1,8 @@
+import i18n from "@/configs/i18n";
+
 import { createApiClient } from "./endpoints";
-import { getCookie } from "../../../../shared/helpers/getCookie/getCookie";
-import i18n from "../../../../configs/i18n";
+
+import { getCookie } from "@/shared/helpers/getCookie/getCookie";
 
 export const userClient = createApiClient("/", {
 	axiosConfig: {

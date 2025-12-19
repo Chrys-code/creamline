@@ -5,11 +5,12 @@ import type {
 	UpdatePasteurFormSchema,
 } from "../../../types";
 
-import { useNavigate } from "react-router";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
+
+import { useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 import { pasteurClient } from "../../../services/client";
 import schemas from "../../../services/schemas";

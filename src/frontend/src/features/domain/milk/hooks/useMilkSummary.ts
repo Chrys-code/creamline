@@ -1,7 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { milkClient } from "../services/client";
+import { tTyped } from "@/configs/i18n";
+
 import { toast } from "react-toastify";
-import { tTyped } from "../../../../configs/i18n";
+
+import { useQuery } from "@tanstack/react-query";
+
+import { milkClient } from "../services/client";
 
 export function useMilkSummary() {
 	return useQuery({

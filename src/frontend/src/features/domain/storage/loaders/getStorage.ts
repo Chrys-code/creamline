@@ -1,10 +1,11 @@
+import { tTyped } from "@/configs/i18n";
+
 import type { LoaderFunctionArgs } from "react-router";
 import type { Storage } from "../types";
 
 import { storageClient } from "../services/client";
 
-import { getErrorStatusText } from "../../../../shared/helpers/getErrorStatusText/getErrorStatusText";
-import { tTyped } from "../../../../configs/i18n";
+import { getErrorStatusText } from "@/shared/helpers/getErrorStatusText/getErrorStatusText";
 
 export const getStorage = async ({ params }: LoaderFunctionArgs): Promise<Storage | null> => {
 	try {

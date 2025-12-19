@@ -1,19 +1,19 @@
 import styles from "./MilkTimeSeriesChart.module.scss";
 import type { FilterState } from "../../types";
-import type { IntervalTypes } from "../../../../../../../shared/types";
+import type { IntervalTypes } from "@/shared/types";
 
 import MilkTimeSeriesChartFilterForm from "../milkTimeSeriesChartFilterForm";
-import ChartHeader from "../../../../../../../shared/components/charts/chartHeader";
-import IconButton from "../../../../../../../shared/components/base/iconButton";
-import TimeSeriesChart from "../../../../../../../shared/components/charts/timeSeriesChart";
-import Loader from "../../../../../../../shared/components/base/loader";
-import Dialog from "../../../../../../../shared/components/dialog";
+import ChartHeader from "@/shared/components/charts/chartHeader";
+import IconButton from "@/shared/components/base/iconButton";
+import TimeSeriesChart from "@/shared/components/charts/timeSeriesChart";
+import Loader from "@/shared/components/base/loader";
+import Dialog from "@/shared/components/dialog";
 
 import React, { useState } from "react";
 import { useMilkTimeSeries } from "../../hooks";
-import { getOffsetDate } from "../../../../../../../shared/helpers/getDate/getDate";
-import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { useExportMilkTimeSeries } from "../../../../../../../services/pdfExport/hooks/useMilkTimeSeriesDownload";
+import { getOffsetDate } from "@/shared/helpers/getDate/getDate";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
+import { useExportMilkTimeSeries } from "@/services/pdfExport/hooks/useMilkTimeSeriesDownload";
 
 type ProducerOptions = { id: string; value: string }[];
 

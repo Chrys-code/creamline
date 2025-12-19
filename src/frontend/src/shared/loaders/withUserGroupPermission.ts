@@ -1,5 +1,5 @@
 import { redirect, type LoaderFunctionArgs } from "react-router";
-import { getProfile } from "../../features/domain/profile/loaders/getProfile";
+import { getProfile } from "@/features/domain/user/features/profile/loaders/getProfile";
 
 /**
  * Used to run userGroup check before calling loaders in router.

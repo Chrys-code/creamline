@@ -1,9 +1,10 @@
+import { tTyped } from "@/configs/i18n";
+
 import type { LoaderFunctionArgs } from "react-router";
 
 import pasteurisationClient from "../services/client";
 
-import { getErrorStatusText } from "../../../../shared/helpers/getErrorStatusText/getErrorStatusText";
-import { tTyped } from "../../../../configs/i18n";
+import { getErrorStatusText } from "@/shared/helpers/getErrorStatusText/getErrorStatusText";
 
 export const getPasteurisation = async ({ params }: LoaderFunctionArgs) => {
 	try {

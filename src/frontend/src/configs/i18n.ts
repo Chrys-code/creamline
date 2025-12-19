@@ -1,7 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-import * as translations from "../shared/i18n";
+
+import * as translations from "@/shared/i18n";
 
 i18n.use(LanguageDetector)
 	.use(initReactI18next)
@@ -30,15 +31,15 @@ i18n.use(LanguageDetector)
 export const commonTranslations = translations.translationEn.common;
 export default i18n;
 
-import type * as TranslationTypes from "../shared/i18n/types";
-import type { MilkTranslations } from "../features/domain/milk/types";
-import type { PasterisationTranslations } from "../features/domain/pasteurisation/types";
-import type { PasteurTranslations } from "../features/domain/pasteur/types";
-import type { ProducerTranslations } from "../features/domain/producer/types";
-import type { ProductDefinitionTranslations } from "../features/domain/productDefinition/types";
-import type { ProfileTranslations } from "../features/domain/profile/types";
-import type { StorageTranslations } from "../features/domain/storage/types";
-import type { UserTranslations } from "../features/domain/user/types";
+import type * as TranslationTypes from "@/shared/i18n/types";
+import type { MilkTranslations } from "@/features/domain/milk/types";
+import type { PasterisationTranslations } from "@/features/domain/pasteurisation/types";
+import type { PasteurTranslations } from "@/features/domain/pasteur/types";
+import type { ProducerTranslations } from "@/features/domain/producer/types";
+import type { ProductDefinitionTranslations } from "@/features/domain/productDefinition/types";
+import type { ProfileTranslations } from "@/features/domain/user/features/profile/types";
+import type { StorageTranslations } from "@/features/domain/storage/types";
+import type { UserTranslations } from "@/features/domain/user/types";
 import i18next from "i18next";
 
 export const namespaces = [

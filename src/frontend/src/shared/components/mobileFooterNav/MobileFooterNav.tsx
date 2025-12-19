@@ -1,8 +1,9 @@
 import styles from "./MobileFooterNav.module.scss";
 
 import React from "react";
-import { useTypedTranslation } from "../../hooks/useTypedTranslation/useTypedTranslation";
 import { NavLink } from "react-router";
+
+import { useTypedTranslation } from "../../hooks/useTypedTranslation/useTypedTranslation";
 
 const MdOutlineAccountCircle = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

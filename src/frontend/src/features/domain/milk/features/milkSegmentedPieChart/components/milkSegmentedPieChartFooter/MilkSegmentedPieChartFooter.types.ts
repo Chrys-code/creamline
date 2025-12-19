@@ -1,4 +1,4 @@
-import type { IntervalTypes } from "../../../../../../../shared/types";
+import type { IntervalTypes } from "@/shared/types";
 
 export interface MilkSegmentedPieChartFooterProps {
 	intervalOptions: { id: string; value: string }[];

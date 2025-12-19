@@ -1,9 +1,12 @@
+import { tTyped } from "@/configs/i18n";
+import type { UsePasteurisationTimeSeriesProps } from "./types";
+
+import { toast } from "react-toastify";
+
 import { useQuery } from "@tanstack/react-query";
+
 import pasteurisationClient from "../../services/client";
 import { adaptPasteurisationTimeSeriesDateToLanguage } from "../../adapters";
-import { tTyped } from "../../../../../configs/i18n";
-import { toast } from "react-toastify";
-import type { UsePasteurisationTimeSeriesProps } from "./types";
 
 export function usePasteurisationTimeSeries({
 	interval,

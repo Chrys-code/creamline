@@ -1,4 +1,4 @@
-import type { ChartHeaderProps } from "./ChartHeader.types.js";
+import type { ChartHeaderProps } from "./ChartHeader.types";
 import styles from "./ChartHeader.module.scss";
 
 import React from "react";

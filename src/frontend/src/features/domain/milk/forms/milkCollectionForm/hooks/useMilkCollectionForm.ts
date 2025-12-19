@@ -1,17 +1,19 @@
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
+
 import type React from "react";
 import type { CreateMilkFormSchema, Milk } from "../../../types";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-toastify";
+
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { toast } from "react-toastify";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 import { milkClient } from "../../../services/client";
 import schemas from "../../../services/schemas";
 
-import convertMilkLiterAndKg from "../../../../../../shared/helpers/literToKg/literToKg";
-import { NAVIGATION_ROUTES } from "../../../../../../configs/navigation";
+import convertMilkLiterAndKg from "@/shared/helpers/literToKg/literToKg";
 
 export const useMilkCollectionForm = (milk: Milk | null) => {
 	const navigate = useNavigate();

@@ -1,6 +1,7 @@
 import type { Pasteur } from "../types";
 
 import { describe, it, expect } from "vitest";
+
 import { adaptPasteursToPasteurOptions } from "../adapters";
 
 describe("adaptPasteursToPasteurOptions", () => {

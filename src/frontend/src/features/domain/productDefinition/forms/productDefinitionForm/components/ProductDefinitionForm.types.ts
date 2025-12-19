@@ -1,4 +1,4 @@
-import type { ProductDefinition } from "../../../domain/productDefinition/types";
+import type { ProductDefinition } from "../../../types";
 
 export interface ProductDefinitionFormProps {
 	productDefinition: ProductDefinition | null;

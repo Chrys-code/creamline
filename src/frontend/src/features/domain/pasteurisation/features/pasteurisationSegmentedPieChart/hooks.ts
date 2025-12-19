@@ -1,8 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import type { IntervalTypes } from "../../../../../shared/types";
-import pasteurisationClient from "../../services/client";
-import { tTyped } from "../../../../../configs/i18n";
+import { tTyped } from "@/configs/i18n";
+
+import type { IntervalTypes } from "@/shared/types";
+
 import { toast } from "react-toastify";
+
+import { useQuery } from "@tanstack/react-query";
+
+import pasteurisationClient from "../../services/client";
 
 export function usePasteurisationSegmentedByProducers(interval: IntervalTypes = "day") {
 	return useQuery({

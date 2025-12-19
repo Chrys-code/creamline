@@ -1,17 +1,19 @@
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
+
 import type React from "react";
-import type { PasteurisationFormProps } from "./PasteurisationForm.types.ts";
+import type { PasteurisationFormProps } from "./PasteurisationForm.types";
 import styles from "./PasteurisationForm.module.scss";
 
-import Form from "../../../../../../shared/components/base/form";
-import Dropdown from "../../../../../../shared/components/base/dropdown";
-import InputField from "../../../../../../shared/components/base/inputField";
-import Button from "../../../../../../shared/components/base/button";
+import Form from "@/shared/components/base/form";
+import Dropdown from "@/shared/components/base/dropdown";
+import InputField from "@/shared/components/base/inputField";
+import Button from "@/shared/components/base/button";
+
+import { v4 as uuid } from "uuid";
 
 import { useNavigate } from "react-router";
-import { v4 as uuid } from "uuid";
-import { useTypedTranslation } from "../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { usePasteurisationForm } from "../hooks/usePasteurisationForm.js";
-import { NAVIGATION_ROUTES } from "../../../../../../configs/navigation.js";
+import { usePasteurisationForm } from "../hooks/usePasteurisationForm";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const PasteurisationForm: React.FC<PasteurisationFormProps> = ({
 	pasteurisation,

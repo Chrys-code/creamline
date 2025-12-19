@@ -1,9 +1,10 @@
-import type { IntervalTypes } from "../../../../../shared/types";
+import type { IntervalTypes } from "@/shared/types";
 
 import { useQuery } from "@tanstack/react-query";
-import { milkClient } from "../../services/client";
-import { tTyped } from "../../../../../configs/i18n";
 import { toast } from "react-toastify";
+import { tTyped } from "@/configs/i18n";
+
+import { milkClient } from "../../services/client";
 
 export function useMilkSegmentedByProducers(interval: IntervalTypes = "day") {
 	return useQuery({

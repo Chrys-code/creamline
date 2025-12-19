@@ -1,5 +1,6 @@
-import type { TrendCardProps } from "./TrendCard.types.ts";
+import type { TrendCardProps } from "./TrendCard.types";
 import styles from "./TrendCard.module.scss";
+
 import { GoDash } from "react-icons/go";
 import { MdArrowDropUp, MdArrowDropDown } from "react-icons/md";
 

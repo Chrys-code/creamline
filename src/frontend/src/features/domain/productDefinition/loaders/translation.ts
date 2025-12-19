@@ -1,4 +1,4 @@
-import i18n from "../../../../configs/i18n";
+import i18n from "@/configs/i18n";
 
 export async function productDefinitionTranslationLoader() {
 	const translations = (await import("../i18n")).default;

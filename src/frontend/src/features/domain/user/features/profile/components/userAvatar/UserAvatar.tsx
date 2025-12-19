@@ -1,7 +1,8 @@
 import type React from "react";
 import type { UserAvatarProps } from "./UserAvatar.types";
 
-import Avatar from "../../../../../shared/components/base/avatar";
+import Avatar from "@/shared/components/base/avatar";
+
 import { useProfilePreview } from "../../hooks/useProfilePreview";
 
 const UserAvatar: React.FC<UserAvatarProps> = ({ userId, width, height }: UserAvatarProps) => {

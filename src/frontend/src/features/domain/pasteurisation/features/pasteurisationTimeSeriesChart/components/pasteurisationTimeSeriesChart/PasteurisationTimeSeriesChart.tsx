@@ -1,19 +1,20 @@
 import styles from "./PasteurisationTimeSeriesChart.module.scss";
-import type { IntervalTypes } from "../../../../../../../shared/types";
+import type { IntervalTypes } from "@/shared/types";
 import type { FilterState } from "../../types";
 
 import PasteurisationTimeSeriesChartFilters from "../pasteurisationTimeSeriesChartFilterForm";
-import ChartHeader from "../../../../../../../shared/components/charts/chartHeader";
-import IconButton from "../../../../../../../shared/components/base/iconButton";
-import TimeSeriesChart from "../../../../../../../shared/components/charts/timeSeriesChart";
-import Dialog from "../../../../../../../shared/components/dialog";
-import Loader from "../../../../../../../shared/components/base/loader";
+import TimeSeriesChart from "@/shared/components/charts/timeSeriesChart";
+import ChartHeader from "@/shared/components/charts/chartHeader";
+import Dialog from "@/shared/components/dialog";
+import Loader from "@/shared/components/base/loader";
+import IconButton from "@/shared/components/base/iconButton";
 
 import React, { useState } from "react";
-import { getOffsetDate } from "../../../../../../../shared/helpers/getDate/getDate";
-import { useTypedTranslation } from "../../../../../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { usePasteurisationTimeSeries } from "../../hooks";
-import { useExportPasteurisationTimeSeries } from "../../../../../../../services/pdfExport/hooks/usePasteurisationTimeSeriesDownload";
+import { useExportPasteurisationTimeSeries } from "@/services/pdfExport/hooks/usePasteurisationTimeSeriesDownload";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
+
+import { getOffsetDate } from "@/shared/helpers/getDate/getDate";
 
 type PasteurOptions = { id: string; value: string }[];
 

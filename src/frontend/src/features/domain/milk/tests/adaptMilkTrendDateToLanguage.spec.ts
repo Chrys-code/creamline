@@ -1,8 +1,9 @@
+import i18n from "@/configs/i18n";
 import type { MilkTrend } from "../types";
 
 import { describe, it, expect } from "vitest";
+
 import { adaptMilkTrendDateToLanguage } from "../adapters";
-import i18n from "../../../../configs/i18n";
 
 describe("adaptMilkTrendDateToLanguage", () => {
 	it("should return empty array if args missing", () => {

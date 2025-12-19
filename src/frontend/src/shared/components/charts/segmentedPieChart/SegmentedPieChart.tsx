@@ -1,5 +1,5 @@
 import type React from "react";
-import type { SegmentedPieChartProps } from "./SegmentedPieChart.types.ts";
+import type { SegmentedPieChartProps } from "./SegmentedPieChart.types";
 
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
