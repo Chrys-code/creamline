@@ -31,7 +31,7 @@ const MilkCard: React.FC<MilkCardProps> = ({
 	onClick,
 }: MilkCardProps) => {
 	return (
-		<div className={styles.container} onClick={onClick}>
+		<div className={styles.container}>
 			<div className={styles.content}>
 				<h3>{title}</h3>
 				<div>
