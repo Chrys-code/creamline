@@ -1,16 +1,14 @@
-import type { ListMilkCollectionProps } from "./ListMilkCollection.types";
-import type { Milk } from "../../../features/domain/milk/types";
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
 
-import PageHeader from "../../../shared/components/pageHeader";
-import PaginatedList from "../../../shared/components/paginatedList";
-import MilkCard from "../../../features/domain/milk/components/milkCard";
-import IconButton from "../../../shared/components/base/iconButton";
+import type { ListMilkCollectionProps } from "./ListMilkCollection.types";
+
+import PageHeader from "@/shared/components/pageHeader";
+import IconButton from "@/shared/components/base/iconButton";
+import PaginatedMilkList from "@/features/domain/milk/features/paginatedMilkList/PaginatedMilkList";
 
 import React from "react";
-import { useTranslation } from "react-i18next";
-import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
 import { useLoaderData, useNavigate } from "react-router";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({
@@ -20,7 +18,6 @@ const MdOutlineAddCircleOutline = React.lazy(() =>
 
 const ListMilkCollection: React.FC = () => {
 	const navigate = useNavigate();
-	const { i18n } = useTranslation();
 	const mct = useTypedTranslation("milkCollection");
 	const { data, page } = useLoaderData<ListMilkCollectionProps>();
 
@@ -30,22 +27,6 @@ const ListMilkCollection: React.FC = () => {
 		</IconButton>
 	);
 
-	const milkListItem = (result: Milk) => (
-		<li key={result.uuid} tabIndex={0}>
-			<MilkCard
-				title={result.producer_name}
-				storages={result.storage_name}
-				datetime={new Date(result.created_at).toLocaleString(i18n.language, {
-					year: "numeric",
-					month: "long",
-					day: "numeric",
-				})}
-				createdById={result.created_by}
-				onClick={() => navigate(NAVIGATION_ROUTES.milkCollection.edit.path + result.uuid)}
-			/>
-		</li>
-	);
-
 	return (
 		<>
 			<PageHeader
@@ -53,15 +34,7 @@ const ListMilkCollection: React.FC = () => {
 				onNavigateBack={() => navigate("/")}
 				actionElement={headerActionElement}
 			/>
-
-			<PaginatedList
-				items={data.results}
-				itemCount={data.count}
-				currentPage={page}
-				nextPage={data.next}
-				previousPage={data.previous}
-				itemRenderer={milkListItem}
-			/>
+			<PaginatedMilkList paginatedData={data} currentPage={page} />
 		</>
 	);
 };

@@ -18,11 +18,11 @@ const MdOutlineRemoveRedEye = React.lazy(() =>
 // 	}))
 // );
 
-const MdOutlineFileDownload = React.lazy(() =>
-	import("react-icons/md").then((mod) => ({
-		default: mod.MdOutlineFileDownload,
-	}))
-);
+// const MdOutlineFileDownload = React.lazy(() =>
+// 	import("react-icons/md").then((mod) => ({
+// 		default: mod.MdOutlineFileDownload,
+// 	}))
+// );
 
 const PasteurisedMilkCard: React.FC<PasteurisationCardProps> = ({
 	title,
@@ -43,9 +43,9 @@ const PasteurisedMilkCard: React.FC<PasteurisationCardProps> = ({
 				<IconButton style="secondary" onClick={onClick}>
 					<MdOutlineRemoveRedEye size={"1.5rem"} />
 				</IconButton>
-				<IconButton style="secondary" onClick={onClick}>
+				{/* <IconButton style="secondary" onClick={onClick}>
 					<MdOutlineFileDownload size={"1.5rem"} />
-				</IconButton>
+				</IconButton> */}
 				{/* <IconButton style="secondary" onClick={onClick}>
 					<MdOutlineDelete size={"1.5rem"} />
 				</IconButton> */}
