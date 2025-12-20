@@ -1,4 +1,33 @@
 GROUPS_AND_PERMISSIONS = {
+    ("owner", "Owner"): [
+        "add_milk",
+        "change_milk",
+        "view_milk",
+        "add_pasteurisation",
+        "change_pasteurisation",
+        "view_pasteurisation",
+        "add_pasteur",
+        "change_pasteur",
+        "view_pasteur",
+        "delete_pasteur",
+        "add_producer",
+        "change_producer",
+        "view_producer",
+        "add_productdefinition",
+        "change_productdefinition",
+        "view_productdefinition",
+        "add_profile",
+        "change_profile",
+        "view_profile",
+        "add_storage",
+        "change_storage",
+        "view_storage",
+        "add_customuser",
+        "change_customuser",
+        "view_customuser",
+        "view_groupmetadata",
+        "view_group",
+    ],
     ("manager", "Manager"): [
         "add_milk",
         "change_milk",
@@ -41,4 +70,12 @@ GROUPS_AND_PERMISSIONS = {
         "view_productdefinition",
         "view_storage",
     ],
+}
+
+# Higher number = higher permission
+PERMISSION_LEVELS = {
+    "owner": 3,
+    "manager": 2,
+    "milk_collector": 0,
+    "pasteuriser": 0,
 }

@@ -26,7 +26,9 @@ def milk_interval_comparison_data():
 
     # Main periods
     today = now()
-    this_week_start = today.replace(day=today.day, hour=0, minute=0, second=0, microsecond=0) - timedelta(days=today.weekday())
+    this_week_start = today.replace(
+        day=today.day, hour=0, minute=0, second=0, microsecond=0
+    ) - timedelta(days=today.weekday())
     this_month_start = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
     this_year_start = today.replace(
         year=today.year, month=1, day=1, hour=0, minute=0, second=0, microsecond=0

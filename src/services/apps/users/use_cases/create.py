@@ -1,12 +1,9 @@
 import logging
 
-from uuid import UUID
 from typing import cast
 
 from django.contrib.auth import get_user_model
 
-from apps.users.features.profiles.use_cases.create import create_profile
-from apps.users.features.user_groups.use_cases.set_groups import set_user_groups
 from apps.users.models import CustomUser
 
 User = get_user_model()
@@ -33,7 +30,7 @@ def _create(
     return user
 
 
-def _create_user(email: str, password: str) -> "CustomUser":
+def create_user(email: str, password: str) -> "CustomUser":
     created_user = _create(email=email, password=password)
 
     logger.info(
@@ -42,24 +39,3 @@ def _create_user(email: str, password: str) -> "CustomUser":
     )
 
     return created_user
-
-
-def create_user_workflow(
-    email: str,
-    password: str,
-    profile_image: str | None,
-    first_name: str,
-    last_name: str,
-    group_metadata_uuids: list[UUID],
-):
-    user = _create_user(email=email, password=password)
-    create_profile(
-        profile_image=profile_image,
-        email=email,
-        first_name=first_name,
-        last_name=last_name,
-        user=user,
-    )
-    set_user_groups(user=user, group_metadata_uuids=group_metadata_uuids)
-
-    return user

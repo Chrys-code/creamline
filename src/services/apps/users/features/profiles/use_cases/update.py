@@ -12,16 +12,20 @@ def _update(instance: Profile) -> Profile:
 
 
 def update_profile(
-    instance: Profile, email: str | None, first_name: str | None, last_name: str | None
+    instance: Profile,
+    profile_image: str | None,
+    email: str | None,
+    first_name: str | None,
+    last_name: str | None,
 ) -> Profile:
     if email is not None:
         instance.email = email
-
     if first_name is not None:
         instance.first_name = first_name
-
     if last_name is not None:
         instance.last_name = last_name
+    if profile_image is not None:
+        instance.profile_image = profile_image
 
     updated_profile = _update(instance=instance)
 
