@@ -29,6 +29,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, userGroups }: UserFormProps) 
 		clearErrors,
 		addGroup,
 		removeGroup,
+		deactivate,
 	} = useUserForm(user);
 
 	const handleRoleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -56,9 +57,20 @@ const UserForm: React.FC<UserFormProps> = ({ user, userGroups }: UserFormProps) 
 				<Button type="button" style="secondary" onClick={() => navigate(-1)}>
 					{tCommon("common.back")}
 				</Button>
-				<Button type="submit" disabled={isSubmitting}>
-					{tCommon("common.save")}
-				</Button>
+				<div className={styles.actionsWrapper}>
+					<Button
+						type="button"
+						style="secondary"
+						actionType="negative"
+						disabled={isSubmitting}
+						onClick={() => deactivate()}
+					>
+						{tCommon("common.deactivate")}
+					</Button>
+					<Button type="submit" disabled={isSubmitting}>
+						{tCommon("common.save")}
+					</Button>
+				</div>
 			</>
 		);
 	};

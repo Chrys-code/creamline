@@ -126,6 +126,18 @@ export const useUserForm = (user: User) => {
 		setValue("groups", updatedGroups);
 	};
 
+	const deactivate = async () => {
+		try {
+			await userClient.deleteUser(undefined, { params: { uuid: user.uuid } });
+		} catch (err: any) {
+			if (err.response?.status !== 500 && err.response?.data.detail) {
+				toast.error(err.response?.data.detail);
+			} else {
+				toast.error(tUser("edit_user.notifications.error"));
+			}
+		}
+	};
+
 	return {
 		errors,
 		isSubmitting,
@@ -136,5 +148,6 @@ export const useUserForm = (user: User) => {
 		clearErrors,
 		addGroup,
 		removeGroup,
+		deactivate,
 	};
 };

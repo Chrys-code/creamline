@@ -31,6 +31,7 @@ const BaseUserSchema = z.object({
 
 const UserSchema = BaseUserSchema.extend({
 	uuid: z.string().uuid(),
+	is_active: z.boolean(),
 });
 
 const ListUserSchema = z

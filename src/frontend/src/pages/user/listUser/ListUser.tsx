@@ -48,8 +48,10 @@ const ListUser: React.FC = () => {
 		return (
 			<li key={result.uuid} tabIndex={0}>
 				<UserCard
+					userId={result.uuid}
 					name={`${result.profile?.first_name} ${result.profile?.last_name}`}
 					groups={getUserGroupNames(userGroups, result.groups)}
+					isActive={result.is_active}
 					onClick={() => navigate(NAVIGATION_ROUTES.user.edit.path + result.uuid)}
 				/>
 			</li>

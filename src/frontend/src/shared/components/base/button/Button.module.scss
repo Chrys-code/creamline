@@ -58,6 +58,19 @@
 	}
 }
 
+.secondary.negative {
+	color: var(--color-system-error);
+
+	&::after {
+		border: 2px solid var(--color-system-error);
+	}
+
+	&:hover {
+		color: var(--color-neutral-50);
+		background-color: var(--color-system-error);
+	}
+}
+
 .disabled {
 	cursor: default;
 	pointer-events: none;

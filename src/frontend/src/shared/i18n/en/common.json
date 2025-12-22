@@ -10,7 +10,8 @@
 		"yes": "Yes",
 		"no": "No",
 		"filters": "Filters",
-		"retry": "Retry"
+		"retry": "Retry",
+		"deactivate": "Deactivate"
 	},
 	"qualities": {
 		"temperature": "Temperature",

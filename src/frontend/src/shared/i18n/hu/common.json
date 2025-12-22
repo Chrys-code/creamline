@@ -10,7 +10,8 @@
 		"yes": "Igen",
 		"no": "Nem",
 		"filters": "Filters",
-		"retry": "Újra"
+		"retry": "Újra",
+		"deactivate": "Deaktiválás"
 	},
 	"utilities": {
 		"storage": "Raktár",
