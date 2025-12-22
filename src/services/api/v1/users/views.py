@@ -26,7 +26,12 @@ class UserViewSet(viewsets.ModelViewSet):
     }
 
     def get_queryset(self):
-        return User.objects.all().filter(is_staff=False)
+        return (
+            User.objects.all()
+            .filter(is_staff=False)
+            .select_related("profile")
+            .order_by("profile__first_name")
+        )
 
     def get_serializer_class(self):
         return self.serializer_classes.get(self.action, serialisers.UserReadSerializer)

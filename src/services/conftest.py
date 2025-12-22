@@ -1,6 +1,7 @@
 import pytest
 
 from django.contrib.auth.models import Permission
+from django.utils.translation import activate, deactivate_all
 
 from rest_framework.test import APIClient
 
@@ -17,6 +18,13 @@ pytest_plugins = [
     "apps.milk.tests.fixtures",
     "apps.pasteurisation.tests.fixtures",
 ]
+
+
+@pytest.fixture(autouse=True)
+def activate_language():
+    activate("en")
+    yield
+    deactivate_all()
 
 
 @pytest.fixture

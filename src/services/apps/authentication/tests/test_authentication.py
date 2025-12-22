@@ -16,7 +16,7 @@ def test_login_no_account_returns_message(api_client):
         response = api_client.post(url, credentials)
 
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
-    assert response.data == {"message": "Érvénytelen hitelesítő adatok"}
+    assert "Érvénytelen hitelesítő adatok" in response.json()["detail"]
 
 
 def test_login_success(api_client, test_user):

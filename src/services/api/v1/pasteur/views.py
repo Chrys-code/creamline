@@ -22,7 +22,7 @@ class PasteurViewSet(ModelViewSet):
     lookup_field = "uuid"
 
     def get_queryset(self):
-        return Pasteur.objects.all().filter(deleted_at=None)
+        return Pasteur.objects.all().filter(deleted_at=None).order_by("name")
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()

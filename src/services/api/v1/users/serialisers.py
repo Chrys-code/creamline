@@ -120,5 +120,5 @@ class UserWriteSerializer(serializers.ModelSerializer):
 
         except RoleAssignmentError as e:
             raise serializers.ValidationError({"detail": str(e)})
-        # except MissingRolesError as e:
-        #     raise serializers.ValidationError({"detail": str(e)})
+        except MissingRolesError as e:
+            raise serializers.ValidationError({"detail": str(e)})
