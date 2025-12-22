@@ -1,7 +1,7 @@
 import type { Storage } from "../types";
 
 import { describe, it, expect } from "vitest";
-import { adaptStorageToEditorForm } from "../adapters";
+import { adaptStorageToEditorForm } from "../adapters/storageAdapters";
 
 describe("adaptStorageToEditorForm", () => {
 	it("should return null if args missing", () => {

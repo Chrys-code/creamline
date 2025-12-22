@@ -1,6 +1,6 @@
 import type { AxiosInstance } from "axios";
 import axios from "axios";
-import { getCookie } from "../../../shared/helpers/getCookie/getCookie";
+import { getCookie } from "@/shared/helpers/getCookie/getCookie";
 
 class PdfClient {
 	private axiosInstance: AxiosInstance;

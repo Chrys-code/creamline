@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { tTyped } from "@/configs/i18n";
 
-import { milkClient } from "../../services/client";
+import { milkClient } from "../../services/milkClient";
 
 export function useMilkSegmentedByProducers(interval: IntervalTypes = "day") {
 	return useQuery({

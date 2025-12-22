@@ -13,8 +13,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 
-import { userClient } from "../../../services/client";
-import userSchemas from "../../../services/schemas";
+import { userClient } from "../../../services/userClient";
+import userSchemas from "../../../services/userSchemas";
 
 import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 

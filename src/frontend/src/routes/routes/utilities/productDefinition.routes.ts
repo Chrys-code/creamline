@@ -1,11 +1,11 @@
 import type { LoaderFunctionArgs, RouteObject } from "react-router";
-import { listPaginatedProductDefinitions } from "../../../features/domain/productDefinition/loaders/listProductDefinitions";
-import { getProductDefinition } from "../../../features/domain/productDefinition/loaders/getProductDefinition";
-import { getProductDefinitionOptions } from "../../../features/domain/productDefinition/loaders/getProductDefinitionOptions";
-import { adaptProductDefinitionsOptionsToProductDefinitionOptions } from "../../../features/domain/productDefinition/adapters";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
-import { productDefinitionTranslationLoader } from "../../../features/domain/productDefinition/loaders/translation";
-import { withUserGroupPermission } from "../../../shared/loaders/withUserGroupPermission";
+import { listPaginatedProductDefinitions } from "@/features/domain/productDefinition/loaders/listProductDefinitions";
+import { getProductDefinition } from "@/features/domain/productDefinition/loaders/getProductDefinition";
+import { getProductDefinitionOptions } from "@/features/domain/productDefinition/loaders/getProductDefinitionOptions";
+import { adaptProductDefinitionsOptionsToProductDefinitionOptions } from "@/features/domain/productDefinition/adapters/productDefinitionAdapters";
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
+import { productDefinitionTranslationLoader } from "@/features/domain/productDefinition/loaders/productDefinitionTranslation";
+import { withUserGroupPermission } from "@/shared/loaders/withUserGroupPermission";
 
 const productDefinitionRoutes: RouteObject = {
 	id: "productDefinition",
@@ -18,7 +18,7 @@ const productDefinitionRoutes: RouteObject = {
 				Component: async () =>
 					(
 						await import(
-							"../../../pages/productDefinition/listProductDefinitions/ListProductDefinitions"
+							"@/pages/productDefinition/listProductDefinitions/ListProductDefinitions"
 						)
 					).default,
 			},
@@ -35,7 +35,7 @@ const productDefinitionRoutes: RouteObject = {
 				Component: async () =>
 					(
 						await import(
-							"../../../pages/productDefinition/editProductDefinition/EditProductDefinition"
+							"@/pages/productDefinition/editProductDefinition/EditProductDefinition"
 						)
 					).default,
 			},
@@ -56,7 +56,7 @@ const productDefinitionRoutes: RouteObject = {
 				Component: async () =>
 					(
 						await import(
-							"../../../pages/productDefinition/editProductDefinition/EditProductDefinition"
+							"@/pages/productDefinition/editProductDefinition/EditProductDefinition"
 						)
 					).default,
 			},

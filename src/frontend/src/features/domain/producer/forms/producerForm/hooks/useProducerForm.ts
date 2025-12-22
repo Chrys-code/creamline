@@ -12,8 +12,8 @@ import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
-import { producerClient } from "../../../services/client";
-import schemas from "../../../services/schemas";
+import { producerClient } from "../../../services/producerClient";
+import schemas from "../../../services/producerSchemas";
 
 export const useProducerForm = (producer: Producer | null) => {
 	const navigate = useNavigate();

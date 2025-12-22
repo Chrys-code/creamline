@@ -1,6 +1,6 @@
 import z from "zod";
 import { makeApi, makeEndpoint, Zodios, type ZodiosOptions } from "@zodios/core";
-import schemas from "./schemas";
+import schemas from "./producerSchemas";
 
 const PaginatedListProducerEndpoint = makeEndpoint({
 	method: "get",

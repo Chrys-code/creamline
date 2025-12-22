@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 
 import { useQuery } from "@tanstack/react-query";
 
-import pasteurisationClient from "../../services/client";
-import { adaptPasteurisationTimeSeriesDateToLanguage } from "../../adapters";
+import pasteurisationClient from "../../services/pasteurisationClient";
+import { adaptPasteurisationTimeSeriesDateToLanguage } from "../../adapters/pasteurisation_adapters";
 
 export function usePasteurisationTimeSeries({
 	interval,

@@ -1,7 +1,7 @@
 import type { ProductDefinitionOptions } from "../types";
 
 import { describe, it, expect } from "vitest";
-import { adaptProductDefinitionsOptionsToProductDefinitionOptions } from "../adapters";
+import { adaptProductDefinitionsOptionsToProductDefinitionOptions } from "../adapters/productDefinitionAdapters";
 
 describe("adaptProductDefinitionsOptionsToProductDefinitionOptions", () => {
 	it("should return empty array if args missing", () => {

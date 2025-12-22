@@ -1,7 +1,7 @@
 import type { StorageType } from "../types";
 
 import { describe, it, expect } from "vitest";
-import { adaptStorageTypesForStorageTypeOptions } from "../adapters";
+import { adaptStorageTypesForStorageTypeOptions } from "../adapters/storageAdapters";
 
 describe("adaptStorageTypesForStorageTypeOptions", () => {
 	it("should return empty array if args missing", () => {

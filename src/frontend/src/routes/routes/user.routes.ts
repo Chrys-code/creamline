@@ -1,13 +1,13 @@
 import type { LoaderFunctionArgs, RouteObject } from "react-router";
-import { NAVIGATION_ROUTES } from "../../configs/navigation";
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
 
-import { getUser } from "../../features/domain/user/loaders/getUser";
-import { listUserGroups } from "../../features/domain/user/features/userGroups/loaders/listUserGroups";
-import { userTranslationLoader } from "../../features/domain/user/loaders/translation";
-import getPaginatedUserList from "../../features/domain/user/loaders/listUsers";
+import { getUser } from "@/features/domain/user/loaders/getUser";
+import { listUserGroups } from "@/features/domain/user/features/userGroups/loaders/listUserGroups";
+import { userTranslationLoader } from "@/features/domain/user/loaders/userTranslation";
+import getPaginatedUserList from "@/features/domain/user/loaders/listUsers";
 
-import { adaptUserGroupsForUserGroupOptions } from "../../features/domain/user/features/userGroups/adapters";
-import { withUserGroupPermission } from "../../shared/loaders/withUserGroupPermission";
+import { adaptUserGroupsForUserGroupOptions } from "@/features/domain/user/features/userGroups/adapters/userGroupAdapters";
+import { withUserGroupPermission } from "@/shared/loaders/withUserGroupPermission";
 
 const userManagementRoutes: RouteObject = {
 	id: "user",
@@ -17,7 +17,7 @@ const userManagementRoutes: RouteObject = {
 		{
 			path: NAVIGATION_ROUTES.user.list.path,
 			lazy: {
-				Component: async () => (await import("../../pages/user/listUser/ListUser")).default,
+				Component: async () => (await import("@/pages/user/listUser/ListUser")).default,
 			},
 			loader: withUserGroupPermission(
 				async (args: LoaderFunctionArgs) => ({
@@ -30,7 +30,7 @@ const userManagementRoutes: RouteObject = {
 		{
 			path: NAVIGATION_ROUTES.user.create.path,
 			lazy: {
-				Component: async () => (await import("../../pages/user/editUser/EditUser")).default,
+				Component: async () => (await import("@/pages/user/editUser/EditUser")).default,
 			},
 			loader: withUserGroupPermission(
 				async () => ({
@@ -43,7 +43,7 @@ const userManagementRoutes: RouteObject = {
 		{
 			path: NAVIGATION_ROUTES.user.edit.path + ":id",
 			lazy: {
-				Component: async () => (await import("../../pages/user/editUser/EditUser")).default,
+				Component: async () => (await import("@/pages/user/editUser/EditUser")).default,
 			},
 			loader: withUserGroupPermission(
 				async (args: LoaderFunctionArgs) => ({

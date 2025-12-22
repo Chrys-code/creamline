@@ -3,7 +3,7 @@ import { tTyped } from "@/configs/i18n";
 import type { LoaderFunctionArgs } from "react-router";
 import type { User } from "../types";
 
-import { userClient } from "../services/client";
+import { userClient } from "../services/userClient";
 
 import { getErrorStatusText } from "@/shared/helpers/getErrorStatusText/getErrorStatusText";
 

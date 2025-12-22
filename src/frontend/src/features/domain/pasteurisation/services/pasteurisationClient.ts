@@ -1,16 +1,16 @@
 import i18n from "@/configs/i18n";
 
-import { createApiClient } from "./endpoints";
+import { createApiClient } from "./pasteurisationEndpoints";
 
 import { getCookie } from "@/shared/helpers/getCookie/getCookie";
 
-export const pasteurClient = createApiClient("/", {
+const pasteurisationClient = createApiClient("/", {
 	axiosConfig: {
 		withCredentials: true,
 	},
 });
 
-pasteurClient.axios.interceptors.request.use((config: any) => {
+pasteurisationClient.axios.interceptors.request.use((config: any) => {
 	const csrfToken = getCookie({ name: "csrftoken", cookies: document.cookie });
 	if (csrfToken && ["post", "patch", "put", "delete"].includes(config.method || "")) {
 		config.headers["X-CSRFToken"] = csrfToken;
@@ -21,3 +21,5 @@ pasteurClient.axios.interceptors.request.use((config: any) => {
 
 	return config;
 });
+
+export default pasteurisationClient;

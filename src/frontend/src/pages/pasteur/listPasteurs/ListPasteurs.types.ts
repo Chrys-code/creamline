@@ -1,4 +1,4 @@
-import type { PaginatedPasteurList } from "../../../features/domain/pasteur/types";
+import type { PaginatedPasteurList } from "@/features/domain/pasteur/types";
 
 export interface ListPasteursProps {
 	data: {

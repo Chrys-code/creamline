@@ -12,8 +12,8 @@ import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
-import { productDefinitionClient } from "../../../services/client";
-import schemas from "../../../services/schemas";
+import { productDefinitionClient } from "../../../services/productDefinitionClient";
+import schemas from "../../../services/productDefinitionSchemas";
 
 export const useProductDefinitionForm = (productDefinition: ProductDefinition | null) => {
 	const navigate = useNavigate();

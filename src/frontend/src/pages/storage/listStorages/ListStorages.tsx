@@ -1,15 +1,15 @@
 import type { ListStoragesProps } from "./ListStorages.types";
-import type { Storage } from "../../../features/domain/storage/types";
+import type { Storage } from "@/features/domain/storage/types";
 
-import PageHeader from "../../../shared/components/pageHeader";
-import IconButton from "../../../shared/components/base/iconButton";
-import PaginatedList from "../../../shared/components/paginatedList";
+import PageHeader from "@/shared/components/pageHeader";
+import IconButton from "@/shared/components/base/iconButton";
+import PaginatedList from "@/shared/components/paginatedList";
 
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
-import StorageCard from "../../../features/domain/storage/components/storageCard";
-import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
+import StorageCard from "@/features/domain/storage/components/storageCard";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

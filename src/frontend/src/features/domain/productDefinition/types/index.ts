@@ -1,5 +1,5 @@
 import type z from "zod";
-import type schemas from "../services/schemas";
+import type schemas from "../services/productDefinitionSchemas";
 
 export type ProductDefinition = z.infer<typeof schemas.ProductDefinitionSchema>;
 export type ListProductDefinition = z.infer<typeof schemas.ListProductDefinitionSchema>;

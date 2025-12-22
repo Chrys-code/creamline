@@ -3,7 +3,7 @@ import type { MilkTrend } from "../types";
 
 import { describe, it, expect } from "vitest";
 
-import { adaptMilkTrendDateToLanguage } from "../adapters";
+import { adaptMilkTrendDateToLanguage } from "../adapters/milk_adapters";
 
 describe("adaptMilkTrendDateToLanguage", () => {
 	it("should return empty array if args missing", () => {

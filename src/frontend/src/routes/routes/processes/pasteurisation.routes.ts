@@ -1,16 +1,16 @@
 import type { LoaderFunctionArgs, RouteObject } from "react-router";
 
-import { getPasteurisation } from "../../../features/domain/pasteurisation/loaders/getPasteurisation";
-import { getPaginatedPasteuriationList } from "../../../features/domain/pasteurisation/loaders/listPasteuriations";
-import { listStorages } from "../../../features/domain/storage/loaders/listStorages";
-import { listPasteurs } from "../../../features/domain/pasteur/loaders/listPasteurs";
-import { listProductDefinitions } from "../../../features/domain/productDefinition/loaders/listProductDefinitions";
-import { adaptStoragesToStorageOptions } from "../../../features/domain/storage/adapters";
-import { adaptProductDefinitionsToProductDefinitionOptions } from "../../../features/domain/productDefinition/adapters";
-import { adaptPasteursToPasteurOptions } from "../../../features/domain/pasteur/adapters";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
-import { pasterisationTranslationLoader } from "../../../features/domain/pasteurisation/loaders/translation";
-import { withUserGroupPermission } from "../../../shared/loaders/withUserGroupPermission";
+import { getPasteurisation } from "@/features/domain/pasteurisation/loaders/getPasteurisation";
+import { getPaginatedPasteuriationList } from "@/features/domain/pasteurisation/loaders/listPasteuriations";
+import { listStorages } from "@/features/domain/storage/loaders/listStorages";
+import { listPasteurs } from "@/features/domain/pasteur/loaders/listPasteurs";
+import { listProductDefinitions } from "@/features/domain/productDefinition/loaders/listProductDefinitions";
+import { adaptStoragesToStorageOptions } from "@/features/domain/storage/adapters/storageAdapters";
+import { adaptProductDefinitionsToProductDefinitionOptions } from "@/features/domain/productDefinition/adapters/productDefinitionAdapters";
+import { adaptPasteursToPasteurOptions } from "@/features/domain/pasteur/adapters/pasteur_adapters";
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
+import { pasterisationTranslationLoader } from "@/features/domain/pasteurisation/loaders/pasteurisationTranslation";
+import { withUserGroupPermission } from "@/shared/loaders/withUserGroupPermission";
 
 const pasteurisationRoutes: RouteObject = {
 	id: "pasteurisation",
@@ -22,8 +22,7 @@ const pasteurisationRoutes: RouteObject = {
 			path: NAVIGATION_ROUTES.pasteuriation.root.path,
 			lazy: {
 				Component: async () =>
-					(await import("../../../pages/pasteurisation/pasteurisation/Pasteurisation"))
-						.default,
+					(await import("@/pages/pasteurisation/pasteurisation/Pasteurisation")).default,
 			},
 			loader: withUserGroupPermission(
 				async () => adaptPasteursToPasteurOptions(await listPasteurs()),
@@ -34,11 +33,8 @@ const pasteurisationRoutes: RouteObject = {
 			path: NAVIGATION_ROUTES.pasteuriation.list.path,
 			lazy: {
 				Component: async () =>
-					(
-						await import(
-							"../../../pages/pasteurisation/listPasteurisation/ListPasteurisation"
-						)
-					).default,
+					(await import("@/pages/pasteurisation/listPasteurisation/ListPasteurisation"))
+						.default,
 			},
 			loader: withUserGroupPermission(
 				getPaginatedPasteuriationList,
@@ -49,11 +45,8 @@ const pasteurisationRoutes: RouteObject = {
 			path: NAVIGATION_ROUTES.pasteuriation.create.path,
 			lazy: {
 				Component: async () =>
-					(
-						await import(
-							"../../../pages/pasteurisation/editPasteurisation/EditPasteurisation"
-						)
-					).default,
+					(await import("@/pages/pasteurisation/editPasteurisation/EditPasteurisation"))
+						.default,
 			},
 			loader: withUserGroupPermission(
 				async () => ({
@@ -70,11 +63,8 @@ const pasteurisationRoutes: RouteObject = {
 			path: NAVIGATION_ROUTES.pasteuriation.edit.path + ":id",
 			lazy: {
 				Component: async () =>
-					(
-						await import(
-							"../../../pages/pasteurisation/editPasteurisation/EditPasteurisation"
-						)
-					).default,
+					(await import("@/pages/pasteurisation/editPasteurisation/EditPasteurisation"))
+						.default,
 			},
 			loader: withUserGroupPermission(
 				async (args: LoaderFunctionArgs) => ({

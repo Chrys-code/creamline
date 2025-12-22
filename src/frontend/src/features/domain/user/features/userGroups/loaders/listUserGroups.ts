@@ -1,6 +1,6 @@
 import { tTyped } from "@/configs/i18n";
 
-import { userGroupClient } from "../services/client";
+import { userGroupClient } from "../services/userGroupClient";
 
 import { getErrorStatusText } from "@/shared/helpers/getErrorStatusText/getErrorStatusText";
 

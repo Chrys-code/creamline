@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { milkClient } from "../services/client";
+import { milkClient } from "../services/milkClient";
 
 export function useMilkSummary() {
 	return useQuery({

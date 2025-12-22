@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { profileClient } from "../services/client";
+import { profileClient } from "../services/profileClient";
 
 export const useProfilePreview = (userId: string) => {
 	return useQuery({

@@ -1,6 +1,6 @@
 import i18n from "@/configs/i18n";
 
-import { createApiClient } from "./endpoints";
+import { createApiClient } from "./userGroupEndpoints";
 
 import { getCookie } from "@/shared/helpers/getCookie/getCookie";
 

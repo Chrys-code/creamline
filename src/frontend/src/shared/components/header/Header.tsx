@@ -10,7 +10,7 @@ import LanguageSelector from "../languageSelector";
 
 import { useNavigate } from "react-router";
 
-import { authClient } from "@/features/domain/auth/services/client";
+import { authClient } from "@/features/domain/auth/services/authClient";
 
 const MdCheckBoxOutlineBlank = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

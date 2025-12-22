@@ -1,15 +1,15 @@
 import type { ListProducersProps } from "./ListProducers.types";
-import type { Producer } from "../../../features/domain/producer/types";
+import type { Producer } from "@/features/domain/producer/types";
 
 import React from "react";
-import PageHeader from "../../../shared/components/pageHeader";
-import PaginatedList from "../../../shared/components/paginatedList";
-import ProducerCard from "../../../features/domain/producer/components/producerCard";
-import IconButton from "../../../shared/components/base/iconButton";
+import ProducerCard from "@/features/domain/producer/components/producerCard";
+import PageHeader from "@/shared/components/pageHeader";
+import PaginatedList from "@/shared/components/paginatedList";
+import IconButton from "@/shared/components/base/iconButton";
 
 import { useLoaderData, useNavigate } from "react-router";
-import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

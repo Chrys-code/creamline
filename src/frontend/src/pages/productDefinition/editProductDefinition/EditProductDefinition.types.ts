@@ -1,4 +1,4 @@
-import type { ProductDefinition } from "../../../features/domain/productDefinition/types";
+import type { ProductDefinition } from "@/features/domain/productDefinition/types";
 
 export interface EditProductDefinitionProps {
 	productDefinition: ProductDefinition;

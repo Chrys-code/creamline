@@ -1,5 +1,5 @@
 import type z from "zod";
-import type schemas from "../services/schemas";
+import type schemas from "../services/storageSchemas";
 
 export type Storage = z.infer<typeof schemas.StorageSchema>;
 export type PaginatedStorageList = z.infer<typeof schemas.PaginatedListStorageSchema>;

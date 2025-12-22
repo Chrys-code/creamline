@@ -1,5 +1,5 @@
-import en from "./en.json";
-import hu from "./hu.json";
+import en from "./milkEn.json";
+import hu from "./milkHu.json";
 
 const milkTranslations = { en, hu };
 

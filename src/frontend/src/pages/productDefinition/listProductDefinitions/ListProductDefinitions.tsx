@@ -1,15 +1,15 @@
 import type { ListProductDefinitionsProps } from "./ListProductDefinitions.types";
-import type { ProductDefinition } from "../../../features/domain/productDefinition/types";
+import type { ProductDefinition } from "@/features/domain/productDefinition/types";
 
-import IconButton from "../../../shared/components/base/iconButton";
-import PageHeader from "../../../shared/components/pageHeader";
-import PaginatedList from "../../../shared/components/paginatedList";
-import ProductDefinitionCard from "../../../features/domain/productDefinition/components/productDefinitionCard";
+import IconButton from "@/shared/components/base/iconButton";
+import PageHeader from "@/shared/components/pageHeader";
+import PaginatedList from "@/shared/components/paginatedList";
+import ProductDefinitionCard from "@/features/domain/productDefinition/components/productDefinitionCard";
 
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
-import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

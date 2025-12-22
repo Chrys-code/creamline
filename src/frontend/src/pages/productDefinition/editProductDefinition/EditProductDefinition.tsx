@@ -1,11 +1,11 @@
 import type React from "react";
 import type { EditProductDefinitionProps } from "./EditProductDefinition.types";
 
-import PageHeader from "../../../shared/components/pageHeader";
-import ProductDefinitionForm from "../../../features/domain/productDefinition/forms/productDefinitionForm";
+import PageHeader from "@/shared/components/pageHeader";
+import ProductDefinitionForm from "@/features/domain/productDefinition/forms/productDefinitionForm";
 
 import { useLoaderData } from "react-router";
-import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const EditProductDefinition: React.FC = () => {
 	const { productDefinition, productDefinitionTypeOptions } =

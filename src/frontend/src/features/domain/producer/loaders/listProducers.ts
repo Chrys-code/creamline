@@ -2,7 +2,7 @@ import { tTyped } from "@/configs/i18n";
 
 import type { LoaderFunctionArgs } from "react-router";
 
-import { producerClient } from "../services/client";
+import { producerClient } from "../services/producerClient";
 
 import { getErrorStatusText } from "@/shared/helpers/getErrorStatusText/getErrorStatusText";
 

@@ -1,4 +1,4 @@
-import type { Pasteurisation } from "../../../features/domain/pasteurisation/types";
+import type { Pasteurisation } from "@/features/domain/pasteurisation/types";
 
 export interface EditPasteurisationProps {
 	pasteurOptions: {

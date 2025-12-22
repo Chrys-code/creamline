@@ -1,11 +1,11 @@
 import type React from "react";
-import type { Storage } from "../../../features/domain/storage/types";
+import type { Storage } from "@/features/domain/storage/types";
 
-import PageHeader from "../../../shared/components/pageHeader";
-import StorageForm from "../../../features/domain/storage/forms/storageForm";
+import PageHeader from "@/shared/components/pageHeader";
+import StorageForm from "@/features/domain/storage/forms/storageForm";
 
 import { useLoaderData } from "react-router";
-import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
 const EditStorage: React.FC = () => {
 	const { storage, storageTypeOptions } = useLoaderData<{

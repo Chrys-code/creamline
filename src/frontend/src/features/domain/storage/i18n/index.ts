@@ -1,5 +1,5 @@
-import en from "./en.json";
-import hu from "./hu.json";
+import en from "./storageEn.json";
+import hu from "./storageHu.json";
 
 const storageTranslations = { en, hu };
 

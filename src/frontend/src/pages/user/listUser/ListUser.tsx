@@ -1,16 +1,16 @@
 import type { UserListProps } from "./ListUser.types";
-import type { User } from "../../../features/domain/user/types";
+import type { User } from "@/features/domain/user/types";
 
-import PageHeader from "../../../shared/components/pageHeader";
-import PaginatedList from "../../../shared/components/paginatedList";
-import UserCard from "../../../features/domain/user/components/userCard";
-import IconButton from "../../../shared/components/base//iconButton";
+import PageHeader from "@/shared/components/pageHeader";
+import PaginatedList from "@/shared/components/paginatedList";
+import UserCard from "@/features/domain/user/components/userCard";
+import IconButton from "@/shared/components/base//iconButton";
 
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
-import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
-import type { UserGroup } from "../../../features/domain/user/features/userGroups/types";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
+import type { UserGroup } from "@/features/domain/user/features/userGroups/types";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

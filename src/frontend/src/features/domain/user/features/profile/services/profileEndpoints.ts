@@ -1,5 +1,5 @@
 import { makeApi, makeEndpoint, Zodios, type ZodiosOptions } from "@zodios/core";
-import schemas from "./schemas";
+import schemas from "./profileSchemas";
 import z from "zod";
 
 const GetProfileEndpoint = makeEndpoint({

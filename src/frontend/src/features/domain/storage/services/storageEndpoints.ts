@@ -1,5 +1,5 @@
 import z from "zod";
-import schemas from "./schemas";
+import schemas from "./storageSchemas";
 import { makeApi, makeEndpoint, Zodios, type ZodiosOptions } from "@zodios/core";
 
 const PaginatedListStorageEndpoint = makeEndpoint({

@@ -1,5 +1,5 @@
 import type z from "zod";
-import type schemas from "../services/schemas";
+import type schemas from "../services/milkSchemas";
 
 export type Milk = z.infer<typeof schemas.MilkSchema>;
 export type PaginatedMilkListSchema = z.infer<typeof schemas.PaginatedListMilkSchema>;

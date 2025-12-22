@@ -1,15 +1,15 @@
 import type { LoaderFunctionArgs, RouteObject } from "react-router";
 
-import { getPaginatedMilkList } from "../../../features/domain/milk/loaders/listMilk";
-import { listProducers } from "../../../features/domain/producer/loaders/listProducers";
-import { getMilk } from "../../../features/domain/milk/loaders/getMilk";
-import { listStorages } from "../../../features/domain/storage/loaders/listStorages";
+import { getPaginatedMilkList } from "@/features/domain/milk/loaders/listMilk";
+import { listProducers } from "@/features/domain/producer/loaders/listProducers";
+import { getMilk } from "@/features/domain/milk/loaders/getMilk";
+import { listStorages } from "@/features/domain/storage/loaders/listStorages";
 
-import { adaptStoragesToStorageOptions } from "../../../features/domain/storage/adapters";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
-import { milkTranslationLoader } from "../../../features/domain/milk/loaders/translation";
-import { adaptProducersToProducerOptions } from "../../../features/domain/producer/adapters";
-import { withUserGroupPermission } from "../../../shared/loaders/withUserGroupPermission";
+import { adaptStoragesToStorageOptions } from "@/features/domain/storage/adapters/storageAdapters";
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
+import { milkTranslationLoader } from "@/features/domain/milk/loaders/milkTranslation";
+import { adaptProducersToProducerOptions } from "@/features/domain/producer/adapters/producerAdapters";
+import { withUserGroupPermission } from "@/shared/loaders/withUserGroupPermission";
 
 const milkCollectionRoutes: RouteObject = {
 	id: "milk",
@@ -20,8 +20,7 @@ const milkCollectionRoutes: RouteObject = {
 			path: NAVIGATION_ROUTES.milkCollection.root.path,
 			lazy: {
 				Component: async () =>
-					(await import("../../../pages/milkCollection/milkCollection/MilkCollection"))
-						.default,
+					(await import("@/pages/milkCollection/milkCollection/MilkCollection")).default,
 			},
 			loader: withUserGroupPermission(
 				async () => adaptProducersToProducerOptions(await listProducers()),
@@ -32,11 +31,8 @@ const milkCollectionRoutes: RouteObject = {
 			path: NAVIGATION_ROUTES.milkCollection.list.path,
 			lazy: {
 				Component: async () =>
-					(
-						await import(
-							"../../../pages/milkCollection/listMilkCollection/ListMilkCollection"
-						)
-					).default,
+					(await import("@/pages/milkCollection/listMilkCollection/ListMilkCollection"))
+						.default,
 			},
 			loader: withUserGroupPermission(
 				getPaginatedMilkList,
@@ -47,11 +43,8 @@ const milkCollectionRoutes: RouteObject = {
 			path: NAVIGATION_ROUTES.milkCollection.create.path,
 			lazy: {
 				Component: async () =>
-					(
-						await import(
-							"../../../pages/milkCollection/editMilkCollection/EditMilkCollection"
-						)
-					).default,
+					(await import("@/pages/milkCollection/editMilkCollection/EditMilkCollection"))
+						.default,
 			},
 			loader: withUserGroupPermission(
 				async () => ({
@@ -65,11 +58,8 @@ const milkCollectionRoutes: RouteObject = {
 			path: NAVIGATION_ROUTES.milkCollection.edit.path + ":id",
 			lazy: {
 				Component: async () =>
-					(
-						await import(
-							"../../../pages/milkCollection/editMilkCollection/EditMilkCollection"
-						)
-					).default,
+					(await import("@/pages/milkCollection/editMilkCollection/EditMilkCollection"))
+						.default,
 			},
 			loader: withUserGroupPermission(
 				async (args: LoaderFunctionArgs) => ({

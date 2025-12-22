@@ -1,15 +1,15 @@
 import type { ListPasteursProps } from "./ListPasteurs.types.ts";
-import type { Pasteur } from "../../../features/domain/pasteur/types";
+import type { Pasteur } from "@/features/domain/pasteur/types";
 
-import PageHeader from "../../../shared/components/pageHeader";
-import IconButton from "../../../shared/components/base/iconButton";
-import PaginatedList from "../../../shared/components/paginatedList";
+import PageHeader from "@/shared/components/pageHeader";
+import IconButton from "@/shared/components/base/iconButton";
+import PaginatedList from "@/shared/components/paginatedList";
 
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router";
-import { useTypedTranslation } from "../../../shared/hooks/useTypedTranslation/useTypedTranslation";
-import PasteurCard from "../../../features/domain/pasteur/components/pasteurCard/PasteurCard";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation.js";
+import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
+import PasteurCard from "@/features/domain/pasteur/components/pasteurCard/PasteurCard";
+import { NAVIGATION_ROUTES } from "@/configs/navigation.js";
 
 const MdOutlineAddCircleOutline = React.lazy(() =>
 	import("react-icons/md").then((mod) => ({

@@ -1,7 +1,7 @@
 import { tTyped } from "@/configs/i18n";
 import type { LoaderFunctionArgs } from "react-router";
 
-import { milkClient } from "../services/client";
+import { milkClient } from "../services/milkClient";
 
 import { getErrorStatusText } from "@/shared/helpers/getErrorStatusText/getErrorStatusText";
 

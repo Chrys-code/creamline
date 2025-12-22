@@ -1,5 +1,5 @@
-import en from "./en.json";
-import hu from "./hu.json";
+import en from "./pasteurisationEn.json";
+import hu from "./pasteurisationHu.json";
 
 const pasteurisationTranslations = { en, hu };
 

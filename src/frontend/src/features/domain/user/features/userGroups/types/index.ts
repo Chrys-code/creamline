@@ -1,4 +1,4 @@
 import type z from "zod";
-import type schemas from "../services/schemas";
+import type schemas from "../services/userGroupSchemas";
 
 export type UserGroup = z.infer<typeof schemas.UserGroupBaseSchema>;

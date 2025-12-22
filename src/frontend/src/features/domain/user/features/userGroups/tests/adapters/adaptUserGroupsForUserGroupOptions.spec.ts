@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { adaptUserGroupsForUserGroupOptions } from "../../adapters/index";
+import { adaptUserGroupsForUserGroupOptions } from "../../adapters/userGroupAdapters";
 
 describe("adaptUserGroupsForOptions", () => {
 	const userGroupsResponse = [

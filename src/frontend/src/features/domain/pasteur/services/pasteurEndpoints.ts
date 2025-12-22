@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { makeApi, makeEndpoint, Zodios, type ZodiosOptions } from "@zodios/core";
-import schemas from "./schemas";
+import schemas from "./pasteurSchemas";
 
 const ListPasteurEndpoint = makeEndpoint({
 	method: "get",

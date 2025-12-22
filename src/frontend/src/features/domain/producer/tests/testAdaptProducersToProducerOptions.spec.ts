@@ -2,7 +2,7 @@ import type { Producer } from "../types";
 
 import { describe, it, expect } from "vitest";
 
-import { adaptProducersToProducerOptions } from "../adapters";
+import { adaptProducersToProducerOptions } from "../adapters/producerAdapters";
 
 describe("adaptProducersToProducerOptions", () => {
 	it("should return empty array if args missing", () => {

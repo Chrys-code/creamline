@@ -1,4 +1,4 @@
-import type { PaginatedMilkListSchema } from "../../../features/domain/milk/types";
+import type { PaginatedMilkListSchema } from "@/features/domain/milk/types";
 
 export interface ListMilkCollectionProps {
 	data: PaginatedMilkListSchema;

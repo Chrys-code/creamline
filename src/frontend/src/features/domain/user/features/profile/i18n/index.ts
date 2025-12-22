@@ -1,5 +1,5 @@
-import en from "./en.json";
-import hu from "./hu.json";
+import en from "./profileEn.json";
+import hu from "./profileHu.json";
 
 const profileTranslations = { en, hu };
 

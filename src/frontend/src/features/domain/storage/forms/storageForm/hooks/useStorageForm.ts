@@ -12,8 +12,8 @@ import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
-import { storageClient } from "../../../services/client";
-import schemas from "../../../services/schemas";
+import { storageClient } from "../../../services/storageClient";
+import schemas from "../../../services/storageSchemas";
 
 export const useStorageForm = (storage: Storage | null) => {
 	const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import { tTyped } from "@/configs/i18n";
 
-import { profileClient } from "../services/client";
+import { profileClient } from "../services/profileClient";
 
 import { getErrorStatusText } from "@/shared/helpers/getErrorStatusText/getErrorStatusText";
 

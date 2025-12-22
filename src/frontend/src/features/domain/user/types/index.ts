@@ -1,5 +1,5 @@
 import type z from "zod";
-import type schemas from "../services/schemas";
+import type schemas from "../services/userSchemas";
 
 export type User = z.infer<typeof schemas.UserSchema>;
 export type PaginatedUserList = z.infer<typeof schemas.ListUserSchema>;

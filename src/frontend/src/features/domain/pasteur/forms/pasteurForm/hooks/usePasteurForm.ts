@@ -12,8 +12,8 @@ import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
-import { pasteurClient } from "../../../services/client";
-import schemas from "../../../services/schemas";
+import { pasteurClient } from "../../../services/pasteurClient";
+import schemas from "../../../services/pasteurSchemas";
 
 export const usePasteurForm = (pasteur: Pasteur | null) => {
 	const navigate = useNavigate();

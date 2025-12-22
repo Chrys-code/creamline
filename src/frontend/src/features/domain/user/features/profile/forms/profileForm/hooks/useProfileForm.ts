@@ -8,8 +8,8 @@ import { useRevalidator } from "react-router";
 import { useForm } from "react-hook-form";
 import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
-import { profileClient } from "../../../services/client";
-import schemas from "../../../services/schemas";
+import { profileClient } from "../../../services/profileClient";
+import schemas from "../../../services/profileSchemas";
 
 export const useProfileForm = (profile: Profile) => {
 	const revalidator = useRevalidator();

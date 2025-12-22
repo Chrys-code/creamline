@@ -10,8 +10,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
-import pasteurisationClient from "../../../services/client";
-import schemas from "../../../services/schemas";
+import pasteurisationClient from "../../../services/pasteurisationClient";
+import schemas from "../../../services/pasteurisationSchemas";
 
 import convertMilkLiterAndKg from "@/shared/helpers/literToKg/literToKg";
 

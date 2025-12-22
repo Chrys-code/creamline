@@ -1,9 +1,9 @@
 import type { LoaderFunctionArgs, RouteObject } from "react-router";
-import { listPaginatedProducers } from "../../../features/domain/producer/loaders/listProducers";
-import { getProducer } from "../../../features/domain/producer/loaders/getProducer";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
-import { producerTranslationLoader } from "../../../features/domain/producer/loaders/translation";
-import { withUserGroupPermission } from "../../../shared/loaders/withUserGroupPermission";
+import { listPaginatedProducers } from "@/features/domain/producer/loaders/listProducers";
+import { getProducer } from "@/features/domain/producer/loaders/getProducer";
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
+import { producerTranslationLoader } from "@/features/domain/producer/loaders/producerTranslation";
+import { withUserGroupPermission } from "@/shared/loaders/withUserGroupPermission";
 
 const producerRoutes: RouteObject = {
 	id: "producer",
@@ -14,7 +14,7 @@ const producerRoutes: RouteObject = {
 			path: NAVIGATION_ROUTES.producer.list.path,
 			lazy: {
 				Component: async () =>
-					(await import("../../../pages/producer/listProducers/ListProducers")).default,
+					(await import("@/pages/producer/listProducers/ListProducers")).default,
 			},
 			loader: withUserGroupPermission(
 				async (args: LoaderFunctionArgs) => ({
@@ -27,7 +27,7 @@ const producerRoutes: RouteObject = {
 			path: NAVIGATION_ROUTES.producer.create.path,
 			lazy: {
 				Component: async () =>
-					(await import("../../../pages/producer/editProducer/EditProducer")).default,
+					(await import("@/pages/producer/editProducer/EditProducer")).default,
 			},
 			loader: withUserGroupPermission(
 				getProducer,
@@ -38,7 +38,7 @@ const producerRoutes: RouteObject = {
 			path: NAVIGATION_ROUTES.producer.edit.path + ":id",
 			lazy: {
 				Component: async () =>
-					(await import("../../../pages/producer/editProducer/EditProducer")).default,
+					(await import("@/pages/producer/editProducer/EditProducer")).default,
 			},
 			loader: withUserGroupPermission(
 				getProducer,

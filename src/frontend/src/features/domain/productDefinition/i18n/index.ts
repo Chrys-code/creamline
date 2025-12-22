@@ -1,5 +1,5 @@
-import en from "./en.json";
-import hu from "./hu.json";
+import en from "./productDefinitionEn.json";
+import hu from "./productDefinitionHu.json";
 
 const productDefinitionTranslations = { en, hu };
 

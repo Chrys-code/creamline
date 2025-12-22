@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import { useQuery } from "@tanstack/react-query";
 
-import pasteurisationClient from "../services/client";
+import pasteurisationClient from "../services/pasteurisationClient";
 
 export function usePasteurisationSummary() {
 	return useQuery({

@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { tTyped } from "../../../configs/i18n";
+import { tTyped } from "@/configs/i18n";
 import pdfClient from "../services";
 import type { PasteurisationTimeSeriesExportParams } from "../types";
 

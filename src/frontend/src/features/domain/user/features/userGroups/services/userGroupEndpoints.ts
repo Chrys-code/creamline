@@ -1,7 +1,7 @@
 import { makeApi, makeEndpoint, Zodios, type ZodiosOptions } from "@zodios/core";
 import z from "zod";
 
-import schemas from "./schemas";
+import schemas from "./userGroupSchemas";
 
 const ListUserGroupEndpoint = makeEndpoint({
 	method: "get",

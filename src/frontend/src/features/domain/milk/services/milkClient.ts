@@ -1,16 +1,16 @@
 import i18n from "@/configs/i18n";
 
-import { createApiClient } from "./endpoints";
+import { createApiClient } from "./milkEndpoints";
 
 import { getCookie } from "@/shared/helpers/getCookie/getCookie";
 
-export const authClient = createApiClient("/", {
+export const milkClient = createApiClient("/", {
 	axiosConfig: {
 		withCredentials: true,
 	},
 });
 
-authClient.axios.interceptors.request.use((config: any) => {
+milkClient.axios.interceptors.request.use((config: any) => {
 	const csrfToken = getCookie({ name: "csrftoken", cookies: document.cookie });
 	if (csrfToken && ["post", "patch", "put", "delete"].includes(config.method || "")) {
 		config.headers["X-CSRFToken"] = csrfToken;

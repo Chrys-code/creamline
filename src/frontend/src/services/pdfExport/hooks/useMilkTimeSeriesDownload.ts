@@ -1,7 +1,7 @@
 import type { MilkTimeSeriesExportParams } from "../types";
 import pdfClient from "../services";
 import { toast } from "react-toastify";
-import { tTyped } from "../../../configs/i18n";
+import { tTyped } from "@/configs/i18n";
 
 export const useExportMilkTimeSeries = async (params: MilkTimeSeriesExportParams) => {
 	try {

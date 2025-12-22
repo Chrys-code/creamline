@@ -1,14 +1,14 @@
 import type { LoaderFunctionArgs, RouteObject } from "react-router";
-import { listPaginatedStorages } from "../../../features/domain/storage/loaders/listStorages";
-import { getStorage } from "../../../features/domain/storage/loaders/getStorage";
+import { listPaginatedStorages } from "@/features/domain/storage/loaders/listStorages";
+import { getStorage } from "@/features/domain/storage/loaders/getStorage";
 import {
 	adaptStorageToEditorForm,
 	adaptStorageTypesForStorageTypeOptions,
-} from "../../../features/domain/storage/adapters";
-import { NAVIGATION_ROUTES } from "../../../configs/navigation";
-import { listStorageTypes } from "../../../features/domain/storage/loaders/getStorageTypes";
-import { storageTranslationLoader } from "../../../features/domain/storage/loaders/translation";
-import { withUserGroupPermission } from "../../../shared/loaders/withUserGroupPermission";
+} from "@/features/domain/storage/adapters/storageAdapters";
+import { NAVIGATION_ROUTES } from "@/configs/navigation";
+import { listStorageTypes } from "@/features/domain/storage/loaders/getStorageTypes";
+import { storageTranslationLoader } from "@/features/domain/storage/loaders/storageTranslation";
+import { withUserGroupPermission } from "@/shared/loaders/withUserGroupPermission";
 
 const storageRoutes: RouteObject = {
 	id: "storage",
@@ -19,7 +19,7 @@ const storageRoutes: RouteObject = {
 			path: NAVIGATION_ROUTES.storage.list.path,
 			lazy: {
 				Component: async () =>
-					(await import("../../../pages/storage/listStorages/ListStorages")).default,
+					(await import("@/pages/storage/listStorages/ListStorages")).default,
 			},
 			loader: withUserGroupPermission(
 				async (args: LoaderFunctionArgs) => ({
@@ -32,7 +32,7 @@ const storageRoutes: RouteObject = {
 			path: NAVIGATION_ROUTES.storage.create.path,
 			lazy: {
 				Component: async () =>
-					(await import("../../../pages/storage/editStorage/EditStorage")).default,
+					(await import("@/pages/storage/editStorage/EditStorage")).default,
 			},
 			loader: withUserGroupPermission(
 				async () => ({
@@ -48,7 +48,7 @@ const storageRoutes: RouteObject = {
 			path: NAVIGATION_ROUTES.storage.edit.path + ":id",
 			lazy: {
 				Component: async () =>
-					(await import("../../../pages/storage/editStorage/EditStorage")).default,
+					(await import("@/pages/storage/editStorage/EditStorage")).default,
 			},
 			loader: withUserGroupPermission(
 				async (args: LoaderFunctionArgs) => ({

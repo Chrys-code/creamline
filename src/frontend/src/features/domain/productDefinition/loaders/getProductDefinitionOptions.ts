@@ -1,6 +1,6 @@
 import { tTyped } from "@/configs/i18n";
 
-import { productDefinitionClient } from "../services/client";
+import { productDefinitionClient } from "../services/productDefinitionClient";
 
 import { getErrorStatusText } from "@/shared/helpers/getErrorStatusText/getErrorStatusText";
 

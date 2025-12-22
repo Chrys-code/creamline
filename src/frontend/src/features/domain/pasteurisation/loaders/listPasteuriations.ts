@@ -2,7 +2,7 @@ import { tTyped } from "@/configs/i18n";
 
 import type { LoaderFunctionArgs } from "react-router";
 
-import pasteurisationClient from "../services/client";
+import pasteurisationClient from "../services/pasteurisationClient";
 
 import { getErrorStatusText } from "@/shared/helpers/getErrorStatusText/getErrorStatusText";
 

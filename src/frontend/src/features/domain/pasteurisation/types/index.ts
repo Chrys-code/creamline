@@ -1,5 +1,5 @@
 import type z from "zod";
-import type schemas from "../services/schemas";
+import type schemas from "../services/pasteurisationSchemas";
 
 export type Pasteurisation = z.infer<typeof schemas.Pasteurisation>;
 export type PaginatedPasteurisationListSchema = z.infer<

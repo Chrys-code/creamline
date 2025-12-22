@@ -1,4 +1,4 @@
-import type { PaginatedListProductDefinition } from "../../../features/domain/productDefinition/types";
+import type { PaginatedListProductDefinition } from "@/features/domain/productDefinition/types";
 
 export interface ListProductDefinitionsProps {
 	data: {

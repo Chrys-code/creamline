@@ -1,7 +1,7 @@
 import z from "zod";
 import { makeApi, makeEndpoint, Zodios, type ZodiosOptions } from "@zodios/core";
 
-import schemas from "./schemas";
+import schemas from "./authSchemas";
 
 const LoginEndpoint = makeEndpoint({
 	method: "post",

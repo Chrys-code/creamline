@@ -2,7 +2,7 @@ import type { Pasteur } from "../types";
 
 import { describe, it, expect } from "vitest";
 
-import { adaptPasteursToPasteurOptions } from "../adapters";
+import { adaptPasteursToPasteurOptions } from "../adapters/pasteur_adapters";
 
 describe("adaptPasteursToPasteurOptions", () => {
 	it("should return empty array if args missing", () => {

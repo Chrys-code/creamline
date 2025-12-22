@@ -1,4 +1,4 @@
-import type { Milk } from "../../../features/domain/milk/types";
+import type { Milk } from "@/features/domain/milk/types";
 
 export interface EditMilkCollectionProps {
 	producerOptions: {

@@ -2,7 +2,7 @@ import { tTyped } from "@/configs/i18n";
 
 import type { LoaderFunctionArgs } from "react-router";
 
-import { storageClient } from "../services/client";
+import { storageClient } from "../services/storageClient";
 
 import { getErrorStatusText } from "@/shared/helpers/getErrorStatusText/getErrorStatusText";
 

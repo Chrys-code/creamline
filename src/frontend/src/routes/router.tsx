@@ -1,8 +1,8 @@
 import { createBrowserRouter, redirect } from "react-router";
 
-import AppLayout from "../shared/layouts/appLayout";
-import ErrorLayout from "../shared/layouts/errorLayout";
-import Dashboard from "../pages/dashboard/Dashboard";
+import AppLayout from "@/shared/layouts/appLayout";
+import ErrorLayout from "@/shared/layouts/errorLayout";
+import Dashboard from "@/pages/dashboard/Dashboard";
 
 import milkCollectionRoutes from "./routes/processes/milkCollection.routes";
 import pasteurisationRoutes from "./routes/processes/pasteurisation.routes";

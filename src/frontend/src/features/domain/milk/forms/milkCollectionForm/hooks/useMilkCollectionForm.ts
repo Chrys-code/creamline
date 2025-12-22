@@ -10,8 +10,8 @@ import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { useTypedTranslation } from "@/shared/hooks/useTypedTranslation/useTypedTranslation";
 
-import { milkClient } from "../../../services/client";
-import schemas from "../../../services/schemas";
+import { milkClient } from "../../../services/milkClient";
+import schemas from "../../../services/milkSchemas";
 
 import convertMilkLiterAndKg from "@/shared/helpers/literToKg/literToKg";
 

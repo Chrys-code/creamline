@@ -5,8 +5,8 @@ import type { UseMilkTimeSeriesProps } from "./types";
 import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
 
-import { milkClient } from "../../services/client";
-import { adaptMilkTrendDateToLanguage } from "../../adapters";
+import { milkClient } from "../../services/milkClient";
+import { adaptMilkTrendDateToLanguage } from "../../adapters/milk_adapters";
 
 export function useMilkTimeSeries({
 	interval = "week",
