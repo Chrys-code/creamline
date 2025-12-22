@@ -11,7 +11,7 @@ from api.v1.pasteur import seralizers
 from api.v1.permissions import StrictDjangoModelPermissions
 
 from apps.pasteurs.models import Pasteur
-from apps.pasteurs.use_cases.delete import delete_pasteur
+from apps.pasteurs.use_cases.delete_pasteur import delete_pasteur
 
 
 class PasteurViewSet(ModelViewSet):

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.pasteurisation.use_cases.validation import (
+from apps.pasteurisation.use_cases.validate_pasteurisation import (
     InvalidDatesError,
     PasteurisationException,
 )
@@ -9,8 +9,8 @@ from apps.storages.models import Storage
 from apps.pasteurs.models import Pasteur
 
 from apps.pasteurisation.models import Pasteurisation
-from apps.pasteurisation.use_cases.create import create_pasteurisation
-from apps.pasteurisation.use_cases.update import update_pasteurisation
+from apps.pasteurisation.use_cases.create_pasteurisation import create_pasteurisation
+from apps.pasteurisation.use_cases.update_pasteurisation import update_pasteurisation
 
 
 class PasteurisationSerializer(serializers.ModelSerializer):

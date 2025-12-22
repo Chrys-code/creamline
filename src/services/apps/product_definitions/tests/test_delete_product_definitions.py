@@ -1,7 +1,7 @@
 import pytest
 
 from apps.product_definitions.models import ProductDefinition
-from apps.product_definitions.use_cases.delete import delete_product_definition
+from apps.product_definitions.use_cases.delete_product_definition import delete_product_definition
 
 pytestmark = pytest.mark.django_db()
 

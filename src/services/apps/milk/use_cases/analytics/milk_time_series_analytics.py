@@ -13,7 +13,7 @@ from django.utils.dateparse import parse_date
 from django.utils.timezone import now
 
 from apps.milk.models import Milk
-from apps.milk.use_cases.analytics.validation import validate_milk_time_series_input
+from apps.milk.use_cases.analytics.validate_milk_analytics import validate_milk_time_series_input
 
 TRUNC_MAP = {
     "day": TruncDate("created_at"),

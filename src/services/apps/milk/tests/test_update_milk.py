@@ -1,7 +1,7 @@
 import pytest
 
 from apps.milk.models import Milk
-from apps.milk.use_cases.update import update_milk
+from apps.milk.use_cases.update_milk import update_milk
 
 pytestmark = pytest.mark.django_db()
 

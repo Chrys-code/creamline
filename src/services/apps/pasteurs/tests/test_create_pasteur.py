@@ -3,7 +3,7 @@ import pytest
 from django.db import IntegrityError
 
 from apps.pasteurs.models import Pasteur
-from apps.pasteurs.use_cases.create import create_pasteur
+from apps.pasteurs.use_cases.create_pasteur import create_pasteur
 
 pytestmark = pytest.mark.django_db()
 

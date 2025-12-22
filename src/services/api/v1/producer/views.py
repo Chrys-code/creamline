@@ -8,7 +8,7 @@ from api.v1.permissions import StrictDjangoModelPermissions
 from api.v1.producer import serializers
 
 from apps.producers.models import Producer
-from apps.producers.use_cases.delete import delete_producer
+from apps.producers.use_cases.delete_producer import delete_producer
 
 
 class ProducerViewSet(viewsets.ModelViewSet):

@@ -1,7 +1,7 @@
 import pytest
 import datetime as dt
 
-from apps.pasteurisation.use_cases.validation import (
+from apps.pasteurisation.use_cases.validate_pasteurisation import (
     InvalidDatesError,
     validate_create_pasteurisation,
     validate_update_pasteurisation,

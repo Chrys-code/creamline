@@ -9,7 +9,7 @@ from apps.pasteurisation.use_cases.analytics.pasteurisation_interval_comparison 
 from apps.pasteurisation.use_cases.analytics.pasteurisation_segmented_by_pasteur import (
     get_pasteurisation_segmented_by_pasteur,
 )
-from apps.pasteurisation.use_cases.analytics.validation import (
+from apps.pasteurisation.use_cases.analytics.validate_pasteurisation_analytics import (
     InvalidDateError,
     PasteurisationAnalyticsException,
 )

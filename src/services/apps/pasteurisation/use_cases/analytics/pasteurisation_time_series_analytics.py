@@ -13,7 +13,7 @@ from django.utils.dateparse import parse_date
 from django.utils.timezone import now
 
 from apps.pasteurisation.models import Pasteurisation
-from apps.pasteurisation.use_cases.analytics.validation import (
+from apps.pasteurisation.use_cases.analytics.validate_pasteurisation_analytics import (
     validate_pasteurisation_time_series_input,
 )
 

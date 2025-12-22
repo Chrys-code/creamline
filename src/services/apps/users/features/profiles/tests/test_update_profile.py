@@ -1,7 +1,7 @@
 import pytest
 
 from apps.users.features.profiles.models import Profile
-from apps.users.features.profiles.use_cases.update import update_profile
+from apps.users.features.profiles.use_cases.update_profile import update_profile
 
 pytestmark = pytest.mark.django_db()
 

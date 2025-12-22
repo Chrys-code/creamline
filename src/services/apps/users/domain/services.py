@@ -8,13 +8,13 @@ from apps.users.domain.invariants import (
     cannot_modify_user_with_equal_or_higher_permissions,
     cannot_set_permissions_to_empty_list,
 )
-from apps.users.features.profiles.use_cases.create import create_profile
-from apps.users.features.profiles.use_cases.update import update_profile
+from apps.users.features.profiles.use_cases.create_profile import create_profile
+from apps.users.features.profiles.use_cases.update_profile import update_profile
 from apps.users.features.user_groups.models import GroupMetadata
 from apps.users.features.user_groups.use_cases.set_groups import set_user_groups
-from apps.users.use_cases.create import create_user
-from apps.users.use_cases.deactivate import deactivate_user
-from apps.users.use_cases.update import update_user
+from apps.users.use_cases.create_user import create_user
+from apps.users.use_cases.deactivate_user import deactivate_user
+from apps.users.use_cases.update_user import update_user
 
 
 if TYPE_CHECKING:

@@ -1,6 +1,6 @@
 import pytest
 
-from apps.users.use_cases.update import update_user
+from apps.users.use_cases.update_user import update_user
 
 pytestmark = pytest.mark.django_db()
 

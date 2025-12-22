@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
 from apps.producers.models import Producer
-from apps.producers.use_cases.create import create_producer
-from apps.producers.use_cases.update import update_producer
+from apps.producers.use_cases.create_producer import create_producer
+from apps.producers.use_cases.update_producer import update_producer
 
 
 class ProducerSerializer(serializers.ModelSerializer):

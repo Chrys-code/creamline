@@ -1,7 +1,7 @@
 import pytest
 
 from apps.producers.models import Producer
-from apps.producers.use_cases.update import update_producer
+from apps.producers.use_cases.update_producer import update_producer
 
 pytestmark = pytest.mark.django_db()
 

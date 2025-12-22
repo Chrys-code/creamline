@@ -1,7 +1,7 @@
 import pytest
 
 from apps.product_definitions.models import ProductDefinition
-from apps.product_definitions.use_cases.update import update_product_definition
+from apps.product_definitions.use_cases.update_product_definition import update_product_definition
 
 pytestmark = pytest.mark.django_db()
 

@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
 from apps.pasteurs.models import Pasteur
-from apps.pasteurs.use_cases.create import create_pasteur
-from apps.pasteurs.use_cases.update import update_pasteur
+from apps.pasteurs.use_cases.create_pasteur import create_pasteur
+from apps.pasteurs.use_cases.update_pasteur import update_pasteur
 
 
 class PasteurSerializer(serializers.ModelSerializer):

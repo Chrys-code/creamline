@@ -2,7 +2,7 @@ import pytest
 from django.db.utils import IntegrityError
 
 from apps.milk.models import Milk
-from apps.milk.use_cases.create import create_milk
+from apps.milk.use_cases.create_milk import create_milk
 
 pytestmark = pytest.mark.django_db()
 

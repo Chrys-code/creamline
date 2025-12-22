@@ -1,7 +1,7 @@
 import pytest
 
 from apps.pasteurisation.models import Pasteurisation
-from apps.pasteurisation.use_cases.create import create_pasteurisation
+from apps.pasteurisation.use_cases.create_pasteurisation import create_pasteurisation
 
 pytestmark = pytest.mark.django_db()
 

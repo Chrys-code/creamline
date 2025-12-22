@@ -1,7 +1,7 @@
 import pytest
 
 from apps.users.features.profiles.models import Profile
-from apps.users.features.profiles.use_cases.create import create_profile
+from apps.users.features.profiles.use_cases.create_profile import create_profile
 
 pytestmark = pytest.mark.django_db()
 

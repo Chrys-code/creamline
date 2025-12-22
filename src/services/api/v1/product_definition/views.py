@@ -11,7 +11,7 @@ from api.v1.permissions import StrictDjangoModelPermissions
 from api.v1.product_definition import serializers
 
 from apps.product_definitions.models import ProductDefinition
-from apps.product_definitions.use_cases.delete import delete_product_definition
+from apps.product_definitions.use_cases.delete_product_definition import delete_product_definition
 
 
 class ProductDefinitionViewSet(ModelViewSet):

@@ -1,7 +1,7 @@
 import logging
 from typing import TypedDict, TYPE_CHECKING
 
-from apps.milk.use_cases.validation import validate_create_milk
+from apps.milk.use_cases.validate_milk import validate_create_milk
 from apps.storages.models import Storage
 from apps.milk.models import Milk
 from apps.producers.models import Producer

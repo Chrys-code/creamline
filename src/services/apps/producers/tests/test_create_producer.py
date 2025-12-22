@@ -3,7 +3,7 @@ import pytest
 from django.db import IntegrityError
 
 from apps.producers.models import Producer
-from apps.producers.use_cases.create import create_producer
+from apps.producers.use_cases.create_producer import create_producer
 
 pytestmark = pytest.mark.django_db()
 

@@ -1,7 +1,7 @@
 import pytest
 
 from apps.storages.models import Storage
-from apps.storages.use_cases.update import update_storage
+from apps.storages.use_cases.update_storage import update_storage
 
 pytestmark = pytest.mark.django_db()
 

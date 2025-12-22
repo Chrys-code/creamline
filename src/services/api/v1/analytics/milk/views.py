@@ -9,7 +9,7 @@ from apps.milk.use_cases.analytics.milk_interval_comparison import (
 from apps.milk.use_cases.analytics.milk_segmented_by_producer import (
     get_milk_segmented_by_producer,
 )
-from apps.milk.use_cases.analytics.validation import (
+from apps.milk.use_cases.analytics.validate_milk_analytics import (
     InvalidDateError,
     MilkAnalyticsException,
 )

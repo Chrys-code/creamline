@@ -1,7 +1,7 @@
 import pytest
 
 from apps.producers.models import Producer
-from apps.producers.use_cases.delete import delete_producer
+from apps.producers.use_cases.delete_producer import delete_producer
 
 pytestmark = pytest.mark.django_db()
 

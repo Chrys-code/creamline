@@ -1,6 +1,6 @@
 import pytest
 
-from apps.milk.use_cases.validation import (
+from apps.milk.use_cases.validate_milk import (
     InvalidVolumePairError,
     validate_create_milk,
     validate_update_milk,

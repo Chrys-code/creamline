@@ -2,7 +2,7 @@ import logging
 from typing import Dict
 
 from apps.milk.models import Milk
-from apps.milk.use_cases.validation import validate_update_milk
+from apps.milk.use_cases.validate_milk import validate_update_milk
 
 
 logger = logging.getLogger(__name__)

@@ -3,7 +3,7 @@ import pytest
 from django.db import IntegrityError
 
 from apps.storages.models import Storage
-from apps.storages.use_cases.create import create_storage
+from apps.storages.use_cases.create_storage import create_storage
 
 pytestmark = pytest.mark.django_db()
 

@@ -1,7 +1,7 @@
 import pytest
 
 from apps.pasteurs.models import Pasteur
-from apps.pasteurs.use_cases.update import update_pasteur
+from apps.pasteurs.use_cases.update_pasteur import update_pasteur
 
 pytestmark = pytest.mark.django_db()
 

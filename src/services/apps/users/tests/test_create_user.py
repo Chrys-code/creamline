@@ -1,7 +1,7 @@
 import pytest
 
 from apps.users.models import CustomUser
-from apps.users.use_cases.create import create_user
+from apps.users.use_cases.create_user import create_user
 
 
 pytestmark = pytest.mark.django_db()

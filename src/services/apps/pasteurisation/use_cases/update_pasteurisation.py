@@ -2,7 +2,7 @@ import logging
 from typing import Dict
 
 from apps.pasteurisation.models import Pasteurisation
-from apps.pasteurisation.use_cases.validation import validate_update_pasteurisation
+from apps.pasteurisation.use_cases.validate_pasteurisation import validate_update_pasteurisation
 
 logger = logging.getLogger(__name__)
 

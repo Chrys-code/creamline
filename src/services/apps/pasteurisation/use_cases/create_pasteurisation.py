@@ -3,7 +3,7 @@ import datetime as dt
 from typing import TypedDict, TYPE_CHECKING
 
 from apps.pasteurisation.models import Pasteurisation
-from apps.pasteurisation.use_cases.validation import validate_create_pasteurisation
+from apps.pasteurisation.use_cases.validate_pasteurisation import validate_create_pasteurisation
 
 from apps.storages.models import Storage
 from apps.pasteurs.models import Pasteur

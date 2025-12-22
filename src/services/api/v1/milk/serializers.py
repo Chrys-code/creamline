@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from apps.milk.use_cases.validation import InvalidVolumePairError, MilkException
+from apps.milk.use_cases.validate_milk import InvalidVolumePairError, MilkException
 from apps.storages.models import Storage
 from apps.producers.models import Producer
 
 from apps.milk.models import Milk
-from apps.milk.use_cases.create import create_milk
-from apps.milk.use_cases.update import update_milk
+from apps.milk.use_cases.create_milk import create_milk
+from apps.milk.use_cases.update_milk import update_milk
 
 
 class MilkSerializer(serializers.ModelSerializer):

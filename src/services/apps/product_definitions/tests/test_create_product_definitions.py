@@ -3,7 +3,7 @@ import pytest
 from django.db import IntegrityError
 
 from apps.product_definitions.models import ProductDefinition
-from apps.product_definitions.use_cases.create import create_product_definition
+from apps.product_definitions.use_cases.create_product_definition import create_product_definition
 
 pytestmark = pytest.mark.django_db()
 

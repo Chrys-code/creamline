@@ -1,7 +1,7 @@
 import pytest
 
 from apps.storages.models import Storage
-from apps.storages.use_cases.delete import delete_storage
+from apps.storages.use_cases.delete_storage import delete_storage
 
 pytestmark = pytest.mark.django_db()
 

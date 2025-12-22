@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from api.v1.permissions import StrictDjangoModelPermissions
 from apps.storages.models import Storage
-from apps.storages.use_cases.delete import delete_storage
+from apps.storages.use_cases.delete_storage import delete_storage
 
 from api.v1.pagination import StandardPagePagination
 from api.v1.storage import serializers
