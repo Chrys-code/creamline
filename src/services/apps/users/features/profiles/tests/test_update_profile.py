@@ -13,6 +13,7 @@ def test_update_profile_saves(profile, profile_payload, test_user):
     updated = update_profile(
         instance=profile,
         email=test_user.email,
+        profile_image=None,
         first_name=profile_payload["first_name"],
         last_name=profile_payload["last_name"],
     )

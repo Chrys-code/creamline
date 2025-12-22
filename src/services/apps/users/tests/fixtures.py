@@ -8,7 +8,7 @@ def create_user_payload():
         "profile.last_name": "User",
         "email": "test@user.com",
         "password": "testpass123",
-        "position": [],
+        "groups": [],
     }
 
 
@@ -18,5 +18,5 @@ def update_user_payload():
         "profile.first_name": "Test Edited",
         "profile.last_name": "User Edited",
         "email": "test@user.com",
-        "position": [],
+        "groups": [],
     }

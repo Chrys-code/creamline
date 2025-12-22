@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
 
-from apps.users.domain.errors import RoleAssignmentError
+from apps.users.domain.errors import MissingRolesError, RoleAssignmentError
 from apps.users.domain.services import ProfileData, UserData, UserService
 from apps.users.features.profiles.models import Profile
 from apps.users.features.user_groups.models import GroupMetadata
@@ -74,7 +74,7 @@ class UserWriteSerializer(serializers.ModelSerializer):
 
             profile_data: ProfileData = {
                 "email": email,
-                "profile_image": None,
+                "profile_image": profile.get("profile_image", None),
                 "first_name": profile["first_name"],
                 "last_name": profile["last_name"],
             }
@@ -91,6 +91,8 @@ class UserWriteSerializer(serializers.ModelSerializer):
 
         except RoleAssignmentError as e:
             raise serializers.ValidationError({"detail": str(e)})
+        except MissingRolesError as e:
+            raise serializers.ValidationError({"detail": str(e)})
 
     def update(self, instance, validated_data):
         try:
@@ -100,7 +102,7 @@ class UserWriteSerializer(serializers.ModelSerializer):
 
             profile_data: ProfileData = {
                 "email": email,
-                "profile_image": None,
+                "profile_image": profile.get("profile_image", None),
                 "first_name": profile["first_name"],
                 "last_name": profile["last_name"],
             }
@@ -118,3 +120,5 @@ class UserWriteSerializer(serializers.ModelSerializer):
 
         except RoleAssignmentError as e:
             raise serializers.ValidationError({"detail": str(e)})
+        # except MissingRolesError as e:
+        #     raise serializers.ValidationError({"detail": str(e)})

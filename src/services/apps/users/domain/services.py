@@ -4,14 +4,16 @@ from uuid import UUID
 from django.db import transaction
 
 from apps.users.domain.invariants import (
-    cannot_alter_permissions_of_user_with_equal_or_higher_permissions_than_self,
     cannot_assign_equal_or_greater_permission_than_self,
+    cannot_modify_user_with_equal_or_higher_permissions,
+    cannot_set_permissions_to_empty_list,
 )
 from apps.users.features.profiles.use_cases.create import create_profile
 from apps.users.features.profiles.use_cases.update import update_profile
 from apps.users.features.user_groups.models import GroupMetadata
 from apps.users.features.user_groups.use_cases.set_groups import set_user_groups
 from apps.users.use_cases.create import create_user
+from apps.users.use_cases.deactivate import deactivate_user
 from apps.users.use_cases.update import update_user
 
 
@@ -58,12 +60,14 @@ class UserService:
         update_user_uc=None,
         create_profile_uc=None,
         update_profile_uc=None,
+        deactivate_user_uc=None,
         assign_user_groups_uc=None,
     ):
         self.create_user_uc = create_user_uc or create_user
         self.update_user_uc = update_user_uc or update_user
         self.create_profile_uc = create_profile_uc or create_profile
         self.update_profile_uc = update_profile_uc or update_profile
+        self.deactivate_user_uc = deactivate_user_uc or deactivate_user
         self.assign_user_groups_uc = assign_user_groups_uc or set_user_groups
 
     @transaction.atomic
@@ -111,6 +115,8 @@ class UserService:
         target_group_metas = group_metadatas.filter(uuid__in=user_group_uuids)
         target_group_codes = [gm.code_name for gm in target_group_metas]
 
+        cannot_set_permissions_to_empty_list(target_user_groups=target_group_codes)
+
         cannot_assign_equal_or_greater_permission_than_self(
             assigner_user_groups=assigner_group_codes,
             target_user_groups=target_group_codes,
@@ -130,6 +136,7 @@ class UserService:
 
         return user
 
+    @transaction.atomic
     def update_user(
         self,
         user: "CustomUser",
@@ -178,13 +185,15 @@ class UserService:
         target_user_group_metas = group_metadatas.filter(group__in=user.groups.all())
         target_user_group_codes = [gm.code_name for gm in target_user_group_metas]
 
-        cannot_alter_permissions_of_user_with_equal_or_higher_permissions_than_self(
-            assigner_user_groups=assigner_group_codes,
-            target_user_groups=target_user_group_codes,
+        cannot_modify_user_with_equal_or_higher_permissions(
+            acting_user_user_groups=assigner_group_codes,
+            target_user_user_groups=target_user_group_codes,
         )
 
         target_group_metas = group_metadatas.filter(uuid__in=user_group_uuids)
         target_group_codes = [gm.code_name for gm in target_group_metas]
+
+        cannot_set_permissions_to_empty_list(target_user_groups=target_group_codes)
 
         cannot_assign_equal_or_greater_permission_than_self(
             assigner_user_groups=assigner_group_codes,
@@ -204,3 +213,25 @@ class UserService:
         )
 
         return user
+
+    def deactivate_user(self, user: "CustomUser", updated_by: "CustomUser") -> None:
+        """
+        Used to deactviate the user
+        """
+
+        group_metadatas = GroupMetadata.objects.all()
+
+        assigner_groups_metas = group_metadatas.filter(
+            group__in=updated_by.groups.all()
+        )
+        assigner_group_codes = [gm.code_name for gm in assigner_groups_metas]
+
+        target_user_group_metas = group_metadatas.filter(group__in=user.groups.all())
+        target_user_group_codes = [gm.code_name for gm in target_user_group_metas]
+
+        cannot_modify_user_with_equal_or_higher_permissions(
+            acting_user_user_groups=assigner_group_codes,
+            target_user_user_groups=target_user_group_codes,
+        )
+
+        self.deactivate_user_uc(user)

@@ -56,3 +56,25 @@ def user_groups(db):
     )
 
     return g1, g2, g3, gm1, gm2, gm3
+
+
+@pytest.fixture
+def manager_group(db):
+    mg = Group.objects.create(name="Manager")
+
+    mgmeta = GroupMetadata.objects.create(
+        group=mg, display_name="Manager", code_name="manager"
+    )
+
+    return mg, mgmeta
+
+
+@pytest.fixture
+def owner_group(db):
+    og = Group.objects.create(name="Owner")
+
+    ogMeta = GroupMetadata.objects.create(
+        group=og, display_name="Owner", code_name="owner"
+    )
+
+    return og, ogMeta

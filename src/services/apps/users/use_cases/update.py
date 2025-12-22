@@ -1,10 +1,9 @@
+from typing import TYPE_CHECKING
 import logging
 
-from django.contrib.auth import get_user_model
+if TYPE_CHECKING:
+    from ..models import CustomUser
 
-from apps.users.models import CustomUser
-
-User = get_user_model()
 
 logger = logging.getLogger(__name__)
 

@@ -1,15 +1,14 @@
-from django.contrib.auth import get_user_model
-
-from rest_framework import viewsets, status
+from rest_framework import viewsets, serializers, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 from api.v1.pagination import StandardPagePagination
 from api.v1.permissions import StrictDjangoModelPermissions
 from api.v1.users import serialisers
+from apps.users.domain.errors import RoleAssignmentError
+from apps.users.domain.services import UserService
 
-
-User = get_user_model()
+from apps.users.models import CustomUser as User
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -65,3 +64,16 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(
             serialisers.UserReadSerializer(instance).data, status=status.HTTP_200_OK
         )
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            user = User.objects.get(uuid=kwargs["uuid"])
+            updated_by = request.user
+
+            user_service = UserService()
+            user_service.deactivate_user(user=user, updated_by=updated_by)
+
+            return super().destroy(request, *args, **kwargs)
+
+        except RoleAssignmentError as e:
+            raise serializers.ValidationError({"detail": str(e)})
