@@ -1,33 +1,35 @@
-# HiveFive
+# Creamline
 
-A block-based email template editor. Email templates are built on a block-by-block basis, supporting various block types such as rich text, images, and complex layouts. Features include ordering, image sizing, color selection, and more.
+Creamline is an administrative application for the milk industries. This application aims to save time in administration and to reduce effort to gain insights in form of analytics and data exports.
 
 
 ## Requirements
 
+Running with docker:
 - Docker desktop
 - Poetry
 
+- Node 24.2.0
+- Python 3.13
 
-## Overview
 
-There are two main build:
+## Technical Overview
 
-- **Production Backend app**: Django backend & Nginx that serves the frontend and assets.
-- **Development Backend app & Frontend app**: Django backend & React frontend app with hot-reload support for development.
+- **Production Stack**: Dockerized Django backend & Nginx that serves the React frontend and as zipped assets which also helps with caching.
+- **Development Stack**: Separate Dockerized Django backend & React frontend. This is due to hot-reload support for development mode.
+- **Design Patterns**: The application uses Layered architecture with Domain Driven Design (DDD). 
+- **Additional Note**: Currently the front-end and back-end applications are built and ran in a single Docker container in order to make development faster with considerations to make it easy to split the domains onto separate infrastructure as the project scales.
 
 
 ## Installation & Setup
-
 
 ### Development environment
 - Development build is exposed at:
 	- Backend: 8000
 	- Frontend: 3000	
 
-Ideally you can just use localhost:3000. 
-Shared container network & Vite frontend setup should take care of the routes and proxying requests.
-Development container stack also provides hot reload and better error feedback.
+Shared container network & Vite frontend setup takes care of the routes and proxying requests from front-end to back-end.
+Development container stack also provides hot reload and improved error feedback.
 
 
 #### Start development container stack
@@ -35,13 +37,16 @@ Development container stack also provides hot reload and better error feedback.
 # Start Docker Desktop
 make setup
 
+# Build container stack
+make build
 make start
 make migrate
 ```
 
+
 ### Production environment
-- Development build is exposed at:
-	- Backend: 8080 (internally)
+- Production build is exposed at:
+	- Backend: 8080 (internally to Docker)
 	- Nginx: 80 - serves frontend(s)
 
 #### Steps:
@@ -51,7 +56,7 @@ make migrate
 This is required as apps are set up to be exposed on subdomains by Nginx.
 
 List of [appname]:
-- HiveFive
+- Creamline
 
 Alternatively check on root/dockerfiles/docker-compose.yml and look for a service name you want to check out in production environment.
 
@@ -82,16 +87,17 @@ make start-prod
 make migrate-prod
 ```
 
-This setup does not provide hot reload.
+Note: This setup does not provide hot reload!
 
 
 ## Migration:
 
 ### Steps:
-Follow the commands in terminal:
+Follow the commands in terminal at project root:
 
 - make make-migrations
 - make migrate
+
 
 
 ## Commands Reference
@@ -99,10 +105,38 @@ Follow the commands in terminal:
 | Command               | Description                                          |
 |-----------------------|------------------------------------------------------|
 | `make setup`          | Create `.env` file from example if not present       |
+| `make build`          | Build the docker images                              |
 | `make start`          | Start & build backend & front end Docker container with hot reload        |
+| `make test`           | Runs pytest on services                              |
+| `make test-app`           | Runs pytest on selected service                  |
+| `make run-black-formatter`| Runs black formatter on services                 |
+| `make deps-export`    | Export Poetry dependencies to `requirements.txt`     |
+| `make start-app`    | Start a new app in services                            |
+| `make make-translations` | Initialize translation ".po" in a specific app    |
+| `make compile-translations` | Compile ".po" translation files                |
 | `make make-migrations`| Generate Django migrations                           |
 | `make migrate`        | Apply Django migrations                              |
-| `make deps-export`    | Export Poetry dependencies to `requirements.txt`     |
 | `make build-prod`     | Build backend Docker container with Nginx            |
 | `make start-prod`     | Start backend container with Nginx                   |
 | `make migrate-prod`   | Apply Django migrations                              |
+
+
+## Considerations before hosting demo
+This is not a production ready application yet as some factors below still need consideration: 
+
+- Adding Husky to BE & FE pre-commit to run tests and formatter
+- Re-visit setup considering hosting on Digital Ocean App Platform (Cookies + auto SSL)
+- Planned CI/CD (ideal): 
+	1. Push to "main" branch
+		1. Triggers Github action
+		2. Build image, run, test, flags image for "dev"
+		3. Save Artefact
+		4. Pushes to DO Container Registry
+		5. App Platform Builds
+	2. Promote to Prod
+		1. Promote Github Action's Artefact to Prod
+		2. re-test?
+		3. Flags image for "prod"
+		4. Pushes to DO Container Registry
+		5. App Platform Builds
+- Setting up Github Actions should avoid Artefact generation. Ideally it would be preferred not to build the docker image twice (just promote from DEV to PROD) but strage's free allowance is limited.
