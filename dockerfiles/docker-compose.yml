@@ -3,6 +3,7 @@ services:
     build:
       context: ../.
       dockerfile: dockerfiles/Dockerfile.nginx
+    image: nginx:ci-${COMMIT_SHA} # Dynamic tag for CI/CD Flows
     ports:
       - "80:80"
       # Remove when used live
@@ -19,6 +20,7 @@ services:
     build:
       context: ../.
       dockerfile: dockerfiles/Dockerfile
+    image: backend:ci-${COMMIT_SHA} # Dynamic tag for CI/CD Flows
     command: |
       sh -c "
       django-admin compilemessages &&

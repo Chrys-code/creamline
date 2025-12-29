@@ -1,0 +1,54 @@
+# name: Deploy Production
+
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       commit_sha:
+#         description: "Commit SHA to deploy from staging"
+#         required: True
+
+
+# jobs:
+#   deploy-prod:
+#     runs-on: ubuntu-latest
+
+#     env:
+#       ENV: production
+#       COMMIT_SHA: ${{ github.sha }}
+#       POSTGRES_DB: mydb
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+#       POSTGRES_HOST: db
+#       POSTGRES_PORT: 5432
+#       DJANGO_SECRET_KEY: django-secret-key
+#       DEBUG_MODE: False
+#       REGISTRY_NAME: ${{ secrets.REGISTRY_NAME }}
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Install doctl
+#         uses: digitalocean/action-doctl@v2
+#         with:
+#           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+#       - name: DOCR Login
+#         run: doctl registry login --expiry-seconds 600
+
+#       - name: Pull staging images
+#         run: |
+#           echo "Pulling backend image..."
+#           docker pull ${{ secrets.REGISTRY_NAME }}/backend:staging
+#           echo "Pulling nginx image..."
+#           docker pull ${{ secrets.REGISTRY_NAME }}/nginx:staging
+
+#       - name: Tag images as prod
+#         run: |
+#           docker tag ${{ secrets.REGISTRY_NAME }}/backend:staging ${{ secrets.REGISTRY_NAME }}/backend:prod
+#           docker tag ${{ secrets.REGISTRY_NAME }}/nginx:staging ${{ secrets.REGISTRY_NAME }}/nginx:prod
+      
+#       - name: Push production images
+#         run: |
+#           docker push ${{ secrets.REGISTRY_NAME }}/backend:prod
+#           docker push ${{ secrets.REGISTRY_NAME }}/nginx:prod

@@ -137,14 +137,12 @@ This is not a production ready application yet as some factors below still need 
 - Planned CI/CD (ideal): 
 	1. Push to "main" branch
 		1. Triggers Github action
-		2. Build image, run, test, flags image for "dev"
-		3. Save Artefact
-		4. Pushes to DO Container Registry
-		5. App Platform Builds
+		2. Build image, run, test, flags image for "staging"
+		3. Pushes to Container Registry
+		4. App Platform Builds
 	2. Promote to Prod
-		1. Promote Github Action's Artefact to Prod
-		2. re-test?
-		3. Flags image for "prod"
-		4. Pushes to DO Container Registry
-		5. App Platform Builds
-- Setting up Github Actions should avoid Artefact generation. Ideally it would be preferred not to build the docker image twice (just promote from DEV to PROD) but strage's free allowance is limited.
+		1. In github actions trigger prod deploy via button click
+		2. Pull docker images from Container Registry
+		2. Flag image for "prod"
+		3. Pushes back to Container Registry
+		4. App Platform Builds
