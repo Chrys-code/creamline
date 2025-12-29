@@ -50,7 +50,8 @@ class MilkSerializer(serializers.ModelSerializer):
             return milk
         except MilkException as e:
             if isinstance(e, InvalidVolumePairError):
-                raise serializers.ValidationError({"message": e.default_detail})
+                raise serializers.ValidationError({"detail": e.default_detail})
+
 
     def update(self, instance, validated_data):
         try:
@@ -59,4 +60,4 @@ class MilkSerializer(serializers.ModelSerializer):
 
         except MilkException as e:
             if isinstance(e, InvalidVolumePairError):
-                raise serializers.ValidationError({"message": e.default_detail})
+                raise serializers.ValidationError({"detail": e.default_detail})

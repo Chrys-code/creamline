@@ -75,10 +75,8 @@ class PasteurisationSerializer(serializers.ModelSerializer):
 
         except PasteurisationException as e:
             if isinstance(e, InvalidDatesError):
-                raise e
+                raise serializers.ValidationError({"detail": e.default_detail})
 
-        except Exception as e:
-            raise e
 
     def update(self, instance, validated_data):
         try:
@@ -89,4 +87,4 @@ class PasteurisationSerializer(serializers.ModelSerializer):
 
         except PasteurisationException as e:
             if isinstance(e, InvalidDatesError):
-                raise e
+                raise serializers.ValidationError({"detail": e.default_detail})

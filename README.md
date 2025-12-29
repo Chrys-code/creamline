@@ -2,6 +2,14 @@
 
 Creamline is an administrative application for the milk industries. This application aims to save time in administration and to reduce effort to gain insights in form of analytics and data exports.
 
+**Key features**:
+- Multilingual support: HU & EN
+- Auth (Django built-in)
+- Permissing handling by User Groups
+- User Management
+- Milk Collection administration, time series and pie chart analytics, pdf export
+- Pasteurisation administration, time series and pie chart analytics, pdf export
+- Other models to support the above administrative processes
 
 ## Requirements
 
