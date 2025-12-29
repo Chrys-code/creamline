@@ -22,6 +22,8 @@ export default defineConfig(({ mode }) => {
 		baseConfig["server"] = {
 			proxy: {
 				"/api": {
+					// This domain name is the name of the running container image of back-end in development mode.
+					// This static "domain" is available thanks to docker containers running on the same network
 					target: "http://creamline-dev-backend-1:8000", // Local only
 					secure: false,
 					changeOrigin: true,

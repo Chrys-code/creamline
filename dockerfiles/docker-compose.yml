@@ -10,7 +10,7 @@ services:
     volumes: 
       - static_volume:/app/staticfiles
     networks:
-      - hive-net
+      - creamline-net
     depends_on:
       - backend
 
@@ -36,7 +36,7 @@ services:
     volumes: 
       - static_volume:/app/staticfiles
     networks:
-      - hive-net
+      - creamline-net
     depends_on:
       - db   
 
@@ -49,11 +49,11 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
-      - hive-net
+      - creamline-net
 
 volumes:
   pgdata:
   static_volume:
 
 networks:
-  hive-net:
+  creamline-net:
