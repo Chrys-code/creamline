@@ -10,6 +10,11 @@
 			"position": "Position",
 			"password": "Password"
 		},
+		"confirmation_dialog": {
+			"title": "Deactivate user",
+			"content_title": "Are you sure?",
+			"content_message": "This action cannot be undone!"
+		},
 		"notifications": {
 			"success": "User saved!",
 			"error": "Could not save user!"

@@ -10,6 +10,11 @@
 			"position": "Pozició",
 			"password": "Jelszó"
 		},
+		"confirmation_dialog": {
+			"title": "Deaktiválás",
+			"content_title": "Biztos vagy benne?",
+			"content_message": "Ezt a műveletet nem lehet visszafordítani!"
+		},
 		"notifications": {
 			"success": "Felhasználó elmentve!",
 			"error": "Felhasználót nem tudtuk elmenteni!"

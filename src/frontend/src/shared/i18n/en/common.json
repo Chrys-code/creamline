@@ -11,7 +11,8 @@
 		"no": "No",
 		"filters": "Filters",
 		"retry": "Retry",
-		"deactivate": "Deactivate"
+		"deactivate": "Deactivate",
+		"deactivated": "Deactivated"
 	},
 	"qualities": {
 		"temperature": "Temperature",

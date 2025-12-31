@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-24 14:37+0000\n"
+"POT-Creation-Date: 2025-12-31 14:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: common/translation_keys.py:7
+
+#: features/user_groups/models.py:15
 msgid "manager"
 msgstr "menedzser"
 
-#: common/translation_keys.py:8
+#: features/user_groups/models.py:16
 msgid "milk collector"
 msgstr "tejátváteles"
 
-#: common/translation_keys.py:9
+#: features/user_groups/models.py:17
 msgid "pasteuriser"
 msgstr "pasztőrös"

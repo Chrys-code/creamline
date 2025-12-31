@@ -80,4 +80,4 @@ def cannot_modify_user_with_equal_or_higher_permissions(
         target_user_levels = [0]
 
     if max(target_user_levels) >= max(acting_user_levels):
-        raise RoleAssignmentError(gettext_lazy("Cannot modify user with higher role"))
+        raise RoleAssignmentError(gettext_lazy("Cannot modify user with equal or higher role"))

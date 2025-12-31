@@ -78,7 +78,7 @@ class UserViewSet(viewsets.ModelViewSet):
             user_service = UserService()
             user_service.deactivate_user(user=user, updated_by=updated_by)
 
-            return super().destroy(request, *args, **kwargs)
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
         except RoleAssignmentError as e:
             raise serializers.ValidationError({"detail": str(e)})

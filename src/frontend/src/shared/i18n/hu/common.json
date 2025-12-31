@@ -11,7 +11,8 @@
 		"no": "Nem",
 		"filters": "Filters",
 		"retry": "Újra",
-		"deactivate": "Deaktiválás"
+		"deactivate": "Deaktiválás",
+		"deactivated": "Deaktivált"
 	},
 	"utilities": {
 		"storage": "Raktár",
